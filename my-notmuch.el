@@ -20,4 +20,6 @@
 ;; Notmuch loads notmuch-address automatically
 ;; (require 'notmuch-address)
 (setq notmuch-address-command "uw-email-search")
-(notmuch-address-message-insinuate)
+(eval-after-load "notmuch"
+  '(progn
+     (notmuch-address-message-insinuate)))
