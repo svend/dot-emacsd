@@ -1,5 +1,7 @@
 ;; Notmuch settings
 
+(autoload 'notmuch "notmuch" "notmuch mail" t)
+
 ;; notmuch-always-prompt-for-sender requires ido-mode
 ;; Add (ido-mode t) to emacs configuration
 (setq notmuch-always-prompt-for-sender t)
