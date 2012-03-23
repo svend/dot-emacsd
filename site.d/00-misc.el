@@ -27,8 +27,22 @@
 ;; Display clock in the status bar
 (display-time-mode t)
 
-;; Disable menu bar
-(menu-bar-mode -1)
+;; Disable menu bar for text consoles
+;;
+;; This requires two hooks
+;;
+;; http://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode/5801740#5801740
+(add-hook 'after-make-frame-functions
+  (lambda ()
+    (if (not window-system)
+      (menu-bar-mode -1))))
+(add-hook 'after-init-hook
+  (lambda ()
+    (if (not window-system)
+      (menu-bar-mode -1))))
+
+;; Disable tool bar
+(tool-bar-mode 0)
 
 ;; Enable disabled commands
 (put 'dired-find-alternate-file 'disabled nil)
