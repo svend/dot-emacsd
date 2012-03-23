@@ -2,8 +2,6 @@
 ;; Emacs settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
-
 (defvar emacs-conf-path
   "~/.emacs.d/site.d"
   "The full path to the emacs config directory")
