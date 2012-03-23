@@ -32,14 +32,17 @@
 ;; This requires two hooks
 ;;
 ;; http://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode/5801740#5801740
-(add-hook 'after-make-frame-functions
-  (lambda ()
-    (if (not window-system)
-      (menu-bar-mode -1))))
-(add-hook 'after-init-hook
-  (lambda ()
-    (if (not window-system)
-      (menu-bar-mode -1))))
+;;
+;; TODO: This throws an error when emacsclient is run
+
+;; (add-hook 'after-make-frame-functions
+;;   (lambda ()
+;;     (if (not window-system)
+;;       (menu-bar-mode -1))))
+;; (add-hook 'after-init-hook
+;;   (lambda ()
+;;     (if (not window-system)
+;;       (menu-bar-mode -1))))
 
 ;; Disable tool bar
 (tool-bar-mode 0)
