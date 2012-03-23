@@ -27,25 +27,18 @@
 ;; Display clock in the status bar
 (display-time-mode t)
 
-;; Disable menu bar for text consoles
-;;
-;; This requires two hooks
-;;
-;; http://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode/5801740#5801740
-;;
-;; TODO: This throws an error when emacsclient is run
-
-;; (add-hook 'after-make-frame-functions
-;;   (lambda ()
-;;     (if (not window-system)
-;;       (menu-bar-mode -1))))
-;; (add-hook 'after-init-hook
-;;   (lambda ()
-;;     (if (not window-system)
-;;       (menu-bar-mode -1))))
-
 ;; Disable tool bar
-(tool-bar-mode 0)
+(tool-bar-mode -1)
+
+;; Disable the menu bar in text consoles
+;; Enable menubar for new GUI frames
+;;
+;; http://darcsden.com/lyro/config/browse/+.emacs
+(menu-bar-mode (if (window-system) 1 -1))
+(defun my-show-x-menu-bar (&optional frame)
+  (if (window-system frame)
+      (modify-frame-parameters frame '((menu-bar-lines . 1)))))
+(add-hook 'after-make-frame-functions 'my-show-x-menu-bar)
 
 ;; Enable disabled commands
 (put 'dired-find-alternate-file 'disabled nil)
