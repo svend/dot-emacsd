@@ -17,6 +17,9 @@
 	      ("term" (mode . term-mode))
 	      )))
 
+     ;; Hide empty groups
+     (setq ibuffer-show-empty-filter-groups nil)
+
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-switch-to-saved-filter-groups "default")))
