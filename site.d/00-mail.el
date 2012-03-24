@@ -6,6 +6,11 @@
 ;; http://notmuchmail.org/emacstips/#index3h2
 (setq message-kill-buffer-on-exit t)
 
+;; Send mail using sendmail (msmtp)
+;;
+;; Defaults to using mail command (message-send-mail-with-mailclient).
+(setq message-send-mail-function 'message-send-mail-with-sendmail)
+
 ;; Use MSMTP with auto-smtp selection
 ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
 ;;
