@@ -1,3 +1,6 @@
+;; cl is required for git-commit-mode to work
+(require 'cl)
+
 ;; Load libraries from .emacs.d
 (add-to-list 'load-path "~/.emacs.d/")
 
