@@ -31,13 +31,13 @@
 (display-time-mode t)
 
 ;; Disable tool bar
-(tool-bar-mode nil)
+(tool-bar-mode 0)
 
 ;; Disable the menu bar in text consoles
 ;; Enable menubar for new GUI frames
 ;;
 ;; http://darcsden.com/lyro/config/browse/+.emacs
-(menu-bar-mode (if (window-system) t nil))
+(menu-bar-mode (if (window-system) t 0))
 (defun my-show-x-menu-bar (&optional frame)
   (if (window-system frame)
       (modify-frame-parameters frame '((menu-bar-lines . 1)))))
