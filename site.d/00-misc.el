@@ -33,9 +33,7 @@
 ;; Disable tool bar
 (tool-bar-mode 0)
 
-;; Disable the menu bar in text consoles
-;; Enable menubar for new GUI frames
-;;
+;; Enable/disable menubar in GUI/text frames
 ;; http://darcsden.com/lyro/config/browse/+.emacs
 (menu-bar-mode (if (window-system) t 0))
 (defun my-show-x-menu-bar (&optional frame)

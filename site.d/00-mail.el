@@ -1,14 +1,15 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mail/message-mode settings
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Close mail buffer after sending
-;; http://notmuchmail.org/emacstips/#index3h2
 (setq message-kill-buffer-on-exit t)
 
-;; Send mail using sendmail (msmtp)
+;; Send mail using sendmail (actually msmtp)
 ;;
-;; Defaults to using mail command (message-send-mail-with-mailclient).
+;; message-send-mail-function's default value should be
+;; message-send-mail-with-sendmail but it was
+;; message-send-mail-with-mailclient on one of my systems.
+;;
+;; TODO: Coudn't reproduce the problem when I ran 'emacs -q'.
 (setq message-send-mail-function 'message-send-mail-with-sendmail)
 
 ;; Use MSMTP with auto-smtp selection
@@ -25,7 +26,10 @@
 ;; http://www.gnus.org/manual/big-message.html#SEC32
 (add-hook 'message-setup-hook (lambda() (flyspell-mode t)))
 
-;; Gnome terminal seems to translate M-RET to C-M-j
+;; Bind C-M-j to message-newline-and-reformat
+;;
+;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
+;; have this problem.
 (add-hook 'message-setup-hook
 	  (lambda ()
 	    (if window-system
