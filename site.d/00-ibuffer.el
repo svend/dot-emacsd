@@ -13,6 +13,10 @@
 	      ("irc" (mode . erc-mode))
 	      ("mail" (or
 		       (mode . message-mode)
+		       (mode . gnus-article-mode)
+		       (mode . gnus-group-mode)
+		       (mode . gnus-server-mode)
+		       (mode . gnus-summary-mode)
 		       (mode . notmuch-hello-mode)
 		       (mode . notmuch-search-mode)
 		       (mode . notmuch-show-mode)))
