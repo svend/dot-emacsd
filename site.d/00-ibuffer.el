@@ -14,6 +14,7 @@
 	      ("mail" (or
 		       (mode . message-mode)
 		       (mode . gnus-article-mode)
+		       (mode . gnus-browse-mode)
 		       (mode . gnus-group-mode)
 		       (mode . gnus-server-mode)
 		       (mode . gnus-summary-mode)
