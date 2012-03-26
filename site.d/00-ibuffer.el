@@ -9,7 +9,8 @@
 	   '(("default"
 	      ("emacs-config" (or
 			(filename . "/\.emacs$")
-			(filename . "/\.emacs\.d/")))
+			(filename . "/\.emacs\.d/")
+			(filename . "/\.gnus.el$")))
 	      ("irc" (mode . erc-mode))
 	      ("mail" (or
 		       (mode . message-mode)
