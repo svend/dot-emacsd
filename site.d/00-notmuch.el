@@ -25,4 +25,12 @@
      (setq notmuch-address-command "uw-email-search")
      (notmuch-address-message-insinuate)
 
+     ;; Notmuch remote setup (on all hosts except garnet)
+     (when (not (string= system-name "garnet.ciffer.net"))
+       (setq notmuch-command "notmuch-remote")
+       ;; We do not have direct access to mail folders
+       ;;
+       ;; TODO: Need a configure Bcc in this case.
+       (setq notmuch-fcc-dirs nil))
+
      ))
