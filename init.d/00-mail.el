@@ -26,6 +26,18 @@
 ;; http://www.gnus.org/manual/big-message.html#SEC32
 (add-hook 'message-setup-hook (lambda() (flyspell-mode t)))
 
+;; Bcc myself on UW mail if there is no Fcc header
+(defun my-message-header-setup-hook ()
+  (when (and (not (message-fetch-field "Bcc"))
+	     (or (string-match "svends@uw.edu" (message-fetch-field "From"))
+		 (string-match "svends@u.washington.edu" (message-fetch-field "From"))
+		 (string-match "svends@washington.edu" (message-fetch-field "From")))
+	     (not (message-fetch-field "Fcc")))
+    (insert "Bcc: svends@uw.edu\n")))
+
+(add-hook 'message-header-setup-hook
+	  'my-message-header-setup-hook)
+
 ;; Bind C-M-j to message-newline-and-reformat
 ;;
 ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
