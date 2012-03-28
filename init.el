@@ -1,10 +1,9 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs settings
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar emacs-conf-path
+(defvar emacs-user-init-path
   "~/.emacs.d/init.d"
-  "The full path to the emacs config directory")
+  "The full path to user init directory")
 
-(dolist (file (directory-files emacs-conf-path t "^[0-9]+.*\\.el$"))
+;; Load all n*.el files under user init directory
+(dolist (file (directory-files emacs-user-init-path t "^[0-9]+.*\\.el$"))
   (load file))
