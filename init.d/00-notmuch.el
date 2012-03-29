@@ -13,6 +13,7 @@
 
      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
 				    ("UW Inbox" . "tag:uw and tag:inbox and not tag:lists and not from:root")
+				    ("CIRG Lists" . "tag:cirg-adm and tag:inbox or tag:cirg-core and tag:inbox")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
