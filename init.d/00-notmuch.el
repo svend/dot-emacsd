@@ -7,9 +7,7 @@
      ;; Add (ido-mode t) to emacs configuration
      (setq notmuch-always-prompt-for-sender t)
 
-     (setq notmuch-fcc-dirs '(("svends@uw.edu" . "uw")
-			      ("svends@u.washington.edu" . "uw")
-			      ("svends@washington.edu" . "uw")))
+     (setq notmuch-fcc-dirs '(("svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" . "uw")))
 
      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
 				    ("UW Inbox" . "tag:uw and tag:inbox and not tag:lists and not from:root")
