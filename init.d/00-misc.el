@@ -29,3 +29,9 @@
 (global-set-key (kbd "C-4") 'ctl-x-4-prefix)
 (global-set-key (kbd "C-5") 'ctl-x-5-prefix)
 (global-set-key (kbd "C-0") 'delete-window)
+
+;; Use GUI web browser if it is available
+(if (executable-find "x-www-browser")
+    (progn
+      (setq browse-url-generic-program "x-www-browser")
+      (setq browse-url-browser-function 'browse-url-generic)))
