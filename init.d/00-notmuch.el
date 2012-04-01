@@ -2,7 +2,6 @@
 
 (eval-after-load "notmuch"
   '(progn
-
      ;; notmuch-always-prompt-for-sender requires ido-mode
      ;; Add (ido-mode t) to emacs configuration
      (setq notmuch-always-prompt-for-sender t)
@@ -30,6 +29,4 @@
        ;; We do not have direct access to mail folders
        ;;
        ;; TODO: Need a configure Bcc in this case.
-       (setq notmuch-fcc-dirs nil))
-
-     ))
+       (setq notmuch-fcc-dirs nil))))
