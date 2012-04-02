@@ -27,6 +27,7 @@
 			 (mode . puppet-mode)
 			 (filename . "src/[^/]*/puppet/")))
 	      ("term" (mode . term-mode))
+	      ("tramp" (name . "\*tramp"))
 	      )))
 
      ;; Hide empty groups
