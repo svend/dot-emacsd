@@ -26,6 +26,8 @@
 	      ("puppet" (or
 			 (mode . puppet-mode)
 			 (filename . "src/[^/]*/puppet/")))
+	      ("root" (filename . "^/su\\(do\\)?:"))
+	      ("remote" (filename . "^/[^/]+:/"))
 	      ("term" (mode . term-mode))
 	      ("tramp" (name . "\*tramp"))
 	      )))
