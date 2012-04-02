@@ -1,5 +1,8 @@
 (eval-after-load "tramp"
   '(progn
+     ;; Put tramp history file under ~/.cache
+     (setq tramp-persistency-file-name "~/.cache/emacs/tramp")
+
      ;; Set default connection method to scpc (scp with ControlMaster)
      ;;
      ;; TODO: What is the best method (scpc, scp, ssh)?

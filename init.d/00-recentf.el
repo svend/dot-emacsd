@@ -2,6 +2,9 @@
 ;;
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
 
+;; Put recentf save file under ~/.cache
+(setq recentf-save-file "~/.cache/emacs")
+
 ;; get rid of `find-file-read-only' and replace it with something
 ;; more useful.
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
