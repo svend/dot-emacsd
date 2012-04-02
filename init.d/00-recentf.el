@@ -5,6 +5,9 @@
 ;; Put recentf save file under ~/.cache
 (setq recentf-save-file "~/.cache/emacs")
 
+;; Ignore git commit messages
+(add-to-list 'recentf-exclude "^COMMIT_EDITMSG$")
+
 ;; get rid of `find-file-read-only' and replace it with something
 ;; more useful.
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
