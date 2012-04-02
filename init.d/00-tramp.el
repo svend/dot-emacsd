@@ -32,4 +32,16 @@
                   '(nil "\\`root\\'" "/ssh:%h:"))
      (add-to-list 'tramp-default-proxies-alist
                   '((regexp-quote (system-name)) nil nil))
+
+     ;; Use warning font in modeline when working as root
+     ;;
+     ;; http://www.gnu.org/software/emacs/manual/html_mono/tramp.html#Frequently-Asked-Questions
+     ;; (I'ld like to get a Visual Warning when working in a sudo:ed
+     ;; context)
+     (defun my-mode-line-warn-when-root ()
+       (when (string-match "^/su\\(do\\)?:" default-directory)
+	 (setq mode-line-format
+	       (format-mode-line mode-line-format 'font-lock-warning-face))))
+     (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
+     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)
      ))
