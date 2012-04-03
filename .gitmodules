@@ -1,3 +1,6 @@
 [submodule "vendor/magit"]
 	path = vendor/magit
 	url = https://github.com/magit/magit.git
+[submodule "vendor/ibuffer-vc"]
+	path = vendor/ibuffer-vc
+	url = https://github.com/purcell/ibuffer-vc.git
