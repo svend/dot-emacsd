@@ -42,18 +42,4 @@
 		 ;; Add ibuffer-vc filter groups and update list
 		 (ibuffer-vc-add-vc-filter-groups)
 		 (ibuffer-update nil t)))
-
-     ;; Filter dired along with files
-     ;;
-     ;; Filename filtering doesn't match dired buffers by default.
-     ;;
-     ;; See http://www.emacswiki.org/emacs/IbufferMode#toc10
-     (eval-after-load "ibuf-ext"
-       '(define-ibuffer-filter filename
-	    "Toggle current view to buffers with file or directory name matching QUALIFIER."
-	  (:description "filename"
-			:reader (read-from-minibuffer "Filter by file/directory name (regexp): "))
-	  (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
-			     (buffer-local-value 'dired-directory buf))
-	    (string-match qualifier it))))
      ))
