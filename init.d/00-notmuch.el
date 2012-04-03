@@ -9,8 +9,9 @@
      (setq notmuch-fcc-dirs '(("svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" . "uw")))
 
      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
-				    ("UW Inbox" . "tag:uw and tag:inbox and not tag:lists and not from:root")
-				    ("CIRG Lists" . "tag:cirg-adm and tag:inbox or tag:cirg-core and tag:inbox")
+				    ("UW Inbox" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios")
+				    ("CIRG Lists" . "tag:inbox and tag:cirg-adm or tag:cirg-core and tag:inbox")
+				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
