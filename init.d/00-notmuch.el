@@ -17,13 +17,6 @@
      ;; Show newest mail first
      (setq notmuch-search-oldest-first nil)
 
-     ;; Address completion
-     ;; http://notmuchmail.org/emacstips/#index13h2
-     ;; Notmuch loads notmuch-address automatically
-     ;; (require 'notmuch-address)
-     (setq notmuch-address-command "uw-email-search")
-     (notmuch-address-message-insinuate)
-
      ;; Notmuch remote setup (on all hosts except garnet)
      (when (not (string= system-name "garnet.ciffer.net"))
        (setq notmuch-command "notmuch-remote")
@@ -31,3 +24,23 @@
        ;;
        ;; TODO: Need a configure Bcc in this case.
        (setq notmuch-fcc-dirs nil))))
+
+;; notmuch-address is useful in message-mode even if we are not using
+;; notmuch
+(eval-after-load 'message
+  '(progn
+     ;; Notmuch address completion
+     ;;
+     ;; http://notmuchmail.org/emacstips/#index13h2
+     ;;
+     ;; Notmuch loads notmuch-address automatically, but we may use
+     ;; notmuch-address without loading notmuch.
+     (require 'notmuch-address)
+     (setq notmuch-address-command "uw-email-search")
+     ;; notmuch-address.el automatically calls
+     ;; notmuch-message-insinuate, but notmuch-address-command might
+     ;; not be set yet
+     ;;
+     ;; http://git.notmuchmail.org/git/notmuch/blob/f38bc44653ad910abb95add6b09321da11f50581:/emacs/notmuch-address.el#l93
+     (notmuch-address-message-insinuate)
+     ))
