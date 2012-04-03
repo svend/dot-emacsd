@@ -5,7 +5,7 @@
 ;; enable recent files mode.
 (recentf-mode t)
 
-(eval-after-load "recentf"
+(eval-after-load 'recentf
   '(progn
      ;; Put recentf save file under ~/.cache and reload
      (setq recentf-save-file "~/.cache/emacs/.recentf")

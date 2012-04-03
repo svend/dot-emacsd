@@ -1,7 +1,7 @@
 ;; Run ibuffer instead of standard list-buffers
 (defalias 'list-buffers 'ibuffer)
 
-(eval-after-load "ibuffer"
+(eval-after-load 'ibuffer
   '(progn
      ;; Define ibuffer groups
      (setq ibuffer-saved-filter-groups

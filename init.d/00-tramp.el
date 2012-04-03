@@ -1,4 +1,4 @@
-(eval-after-load "tramp"
+(eval-after-load 'tramp
   '(progn
      ;; Put tramp history file under ~/.cache
      (setq tramp-persistency-file-name "~/.cache/emacs/tramp")
