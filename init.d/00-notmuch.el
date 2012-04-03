@@ -1,6 +1,6 @@
 ;; Notmuch settings
 
-(eval-after-load "notmuch"
+(eval-after-load 'notmuch
   '(progn
      ;; notmuch-always-prompt-for-sender requires ido-mode
      ;; Add (ido-mode t) to emacs configuration
