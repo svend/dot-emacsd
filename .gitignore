@@ -1,0 +1,7 @@
+# Ignore session files
+#
+# Session files are written under ~/.emacs.d. There doesn't seem to be
+# any way to configure this.
+#
+# http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term/x-win.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n117
+/session.*
