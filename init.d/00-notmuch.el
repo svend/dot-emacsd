@@ -22,12 +22,12 @@
        (setq notmuch-command "notmuch-remote")
        ;; We do not have direct access to mail folders
        ;;
-       ;; TODO: Need a configure Bcc in this case.
+       ;; Bcc is setup in message-mode configuration.
        (setq notmuch-fcc-dirs nil))))
 
 ;; notmuch-address is useful in message-mode even if we are not using
 ;; notmuch
-(eval-after-load 'message
+(eval-after-load 'notmuch-address
   '(progn
      ;; Notmuch address completion
      ;;
@@ -35,7 +35,6 @@
      ;;
      ;; Notmuch loads notmuch-address automatically, but we may use
      ;; notmuch-address without loading notmuch.
-     (require 'notmuch-address)
      (setq notmuch-address-command "uw-email-search")
      ;; notmuch-address.el automatically calls
      ;; notmuch-message-insinuate, but notmuch-address-command might
@@ -43,4 +42,9 @@
      ;;
      ;; http://git.notmuchmail.org/git/notmuch/blob/f38bc44653ad910abb95add6b09321da11f50581:/emacs/notmuch-address.el#l93
      (notmuch-address-message-insinuate)
+     ))
+
+(eval-after-load 'message
+  '(progn
+     (require 'notmuch-address)
      ))
