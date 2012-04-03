@@ -22,10 +22,6 @@
 		       (mode . notmuch-search-mode)
 		       (mode . notmuch-show-mode)
 		       (name . "\*[Nn]otmuch")))
-	      ("magit" (name . "\*magit"))
-	      ("puppet" (or
-			 (mode . puppet-mode)
-			 (filename . "src/[^/]*/puppet/")))
 	      ("root" (filename . "^/su\\(do\\)?:"))
 	      ("remote" (filename . "^/[^/]+:/"))
 	      ("term" (mode . term-mode))
@@ -35,9 +31,17 @@
      ;; Hide empty groups
      (setq ibuffer-show-empty-filter-groups nil)
 
-     (add-hook 'ibuffer-mode-hook
+     (defun ibuffer-vc-add-vc-filter-groups ()
+       (interactive)
+       (dolist (group (ibuffer-vc-generate-filter-groups-by-vc-root))
+	 (add-to-list 'ibuffer-filter-groups group t)))
+
+     (add-hook 'ibuffer-hook
 	       (lambda ()
-		 (ibuffer-switch-to-saved-filter-groups "default")))
+		 (ibuffer-switch-to-saved-filter-groups "default")
+		 ;; Add ibuffer-vc filter groups and update list
+		 (ibuffer-vc-add-vc-filter-groups)
+		 (ibuffer-update nil t)))
 
      ;; Filter dired along with files
      ;;
