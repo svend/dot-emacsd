@@ -13,5 +13,6 @@
 ;; User keybindings (C-c letter)
 ;;
 ;; Press "C-c C-h" to list all of these.
+(global-set-key (kbd "C-c f") 'follow-delete-other-windows-and-split)
 (global-set-key (kbd "C-c l") 'linum-mode)
 (global-set-key (kbd "C-c k") 'my-clear-kill-ring)
