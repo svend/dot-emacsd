@@ -1,4 +1,5 @@
 ;; Add some convenient window mangement bindings
+;;
 ;; Make C-tab act like C-x o
 (global-set-key (kbd "C-<tab>") 'other-window)
 ;; Make C-n act like C-x n
@@ -10,4 +11,7 @@
 (global-set-key (kbd "C-0") 'delete-window)
 
 ;; User keybindings (C-c letter)
+;;
+;; Press "C-c C-h" to list all of these.
+(global-set-key (kbd "C-c l") 'linum-mode)
 (global-set-key (kbd "C-c k") 'my-clear-kill-ring)
