@@ -20,7 +20,6 @@
 		       (name . "\*[Nn]otmuch")))
 	      ("root" (filename . "^/su\\(do\\)?:"))
 	      ("remote" (filename . "^/[^/]+:/"))
-	      ("term" (mode . term-mode))
 	      ("tramp" (name . "\*tramp"))
 	      )))
 
