@@ -8,3 +8,6 @@
 (global-set-key (kbd "C-4") 'ctl-x-4-prefix)
 (global-set-key (kbd "C-5") 'ctl-x-5-prefix)
 (global-set-key (kbd "C-0") 'delete-window)
+
+;; User keybindings (C-c letter)
+(global-set-key (kbd "C-c k") 'my-clear-kill-ring)
