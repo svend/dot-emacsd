@@ -11,7 +11,7 @@
      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
 				    ("UW Inbox" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios")
 				    ("CIRG Lists" . "tag:inbox and tag:cirg-adm or tag:cirg-core and tag:inbox")
-				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios")
+				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios and not tag:lists")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
