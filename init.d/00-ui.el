@@ -11,12 +11,15 @@
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 
+;; Display clock in the status bar
+(display-time-mode t)
+
 ;; Display line number and column number in status bar
 (line-number-mode t)
 (column-number-mode t)
 
-;; Display clock in the status bar
-(display-time-mode t)
+;; Hilight the current line
+(hl-line-mode t)
 
 ;; Disable tool bar
 (tool-bar-mode 0)
