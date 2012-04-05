@@ -16,13 +16,24 @@
 
 	     ;; Make term mode more term-like
 
+	     ;; Set term-escape to C-q (default is C-c)
+	     ;;
+	     ;; Use this escape to send the next keypress directly to
+	     ;; the terminal.
+	     ;;
+	     ;; TODO: This is supposed to set the existing
+	     ;; term-escape-char to term-send-raw, but from the
+	     ;; term.el code, it doesn't look like term-escape-char is
+	     ;; ever set.
+	     (term-set-escape-char ?\C-q)
+
+	     ;; Send C-c to the terminal
+	     (define-key term-raw-map (kbd "C-c") 'term-send-raw)
+
 	     ;; Send ESC to the terminal
 	     ;;
 	     ;; TODO: Sending ESC raw causes M-. to be processed by emacs
 	     ;; (define-key term-raw-map "\e" 'term-send-raw)
-
-	     ;; Send C-c to the terminal
-	     (define-key term-raw-map (kbd "C-c") 'term-send-raw)
 
 	     ;; Allow pasting in term mode
 	     ;;
