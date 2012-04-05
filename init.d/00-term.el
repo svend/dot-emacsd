@@ -3,7 +3,7 @@
 	     ;; Disable transient mark mode
 	     ;;
 	     ;; This is advised in the term.el source. See
-	     ;; http://bzr.savannah.gnu.org/lh/emacs/emacs-23/annotate/head:/lisp/term.el
+	     ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
 	     (make-local-variable 'transient-mark-mode)
 	     (setq transient-mark-mode nil)
 
@@ -25,6 +25,8 @@
 	     ;; term-escape-char to term-send-raw, but from the
 	     ;; term.el code, it doesn't look like term-escape-char is
 	     ;; ever set.
+	     ;;
+	     ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n879
 	     (term-set-escape-char ?\C-q)
 
 	     ;; Send C-c to the terminal
@@ -42,8 +44,13 @@
 	     ;; (define-key term-raw-map (kbd "C-y") 'term-paste)
 
 	     ;; Toogle between line and char mode in term-mode
-	     (define-key term-raw-map  (kbd "C-'") 'term-line-mode)
+	     (define-key term-raw-map (kbd "C-'") 'term-line-mode)
 	     (define-key term-mode-map (kbd "C-'") 'term-char-mode)
+
+	     ;; Enable M-x in term mode
+	     ;;
+	     ;; TODO: Check if this conflicts with anything in term mode.
+	     (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
 
 	     ;; Use configured color theme
 	     (setq term-default-bg-color (frame-parameter nil 'background-color))
