@@ -4,3 +4,6 @@
 [submodule "vendor/ibuffer-vc"]
 	path = vendor/ibuffer-vc
 	url = https://github.com/purcell/ibuffer-vc.git
+[submodule "vendor/color-theme-solarized"]
+	path = vendor/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
