@@ -14,6 +14,7 @@
 				    ("UW Inbox" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios")
 				    ("CIRG Lists" . "tag:inbox and tag:cirg-adm or tag:cirg-core and tag:inbox")
 				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios and not tag:lists")
+				    ("Notmuch Inbox" . "tag:inbox and tag:notmuch")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
