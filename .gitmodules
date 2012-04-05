@@ -9,4 +9,4 @@
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "vendor/git-commit-mode"]
 	path = vendor/git-commit-mode
-	url = https://github.com/rafl/git-commit-mode.git
+	url = https://github.com/svend/git-commit-mode.git
