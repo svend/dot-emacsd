@@ -19,6 +19,8 @@
 (column-number-mode t)
 
 ;; Hilight the current line
+;;
+;; TODO: How to disable this for certain modes, like term-mode?
 (global-hl-line-mode t)
 
 ;; Disable tool bar
