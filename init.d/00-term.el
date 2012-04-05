@@ -21,4 +21,7 @@
 	     ;;
 	     ;; This is needed when loading a color-theme.
 	     (setq term-default-bg-color (frame-parameter nil 'background-color))
-	     (setq term-default-fg-color (frame-parameter nil 'foreground-color))))
+	     (setq term-default-fg-color (frame-parameter nil 'foreground-color))
+
+	     ;; Disable hl-line-mode in term buffers
+	     (set (make-local-variable 'global-hl-line-mode) nil)))
