@@ -19,7 +19,7 @@
 (column-number-mode t)
 
 ;; Hilight the current line
-(hl-line-mode t)
+(global-hl-line-mode t)
 
 ;; Disable tool bar
 (tool-bar-mode 0)
