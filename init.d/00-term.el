@@ -14,4 +14,11 @@
 	     ;; (define-key term-raw-map "\e" 'term-send-raw)
 
 	     ;; Send C-c to the terminal
-	     (define-key term-raw-map "\C-c" 'term-send-raw)))
+	     (define-key term-raw-map "\C-c" 'term-send-raw)
+
+	     ;; Make the terminal forground and background colors
+	     ;; match the other windows
+	     ;;
+	     ;; This is needed when loading a color-theme.
+	     (setq term-default-bg-color (frame-parameter nil 'background-color))
+	     (setq term-default-fg-color (frame-parameter nil 'foreground-color))))
