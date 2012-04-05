@@ -6,7 +6,7 @@
      (color-theme-initialize)
      ))
 
-;; Trying the solarized (light) color theme
+;; Load the solarized (light) color theme
 ;;
 ;; TODO: Getting neon colors when running emacsclient. This only
 ;; happens with the solarized theme. Loading the theme again fixes the
