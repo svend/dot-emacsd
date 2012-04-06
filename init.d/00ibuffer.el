@@ -36,5 +36,4 @@
 		 (ibuffer-switch-to-saved-filter-groups "default")
 		 ;; Add ibuffer-vc filter groups and update list
 		 (ibuffer-vc-add-vc-filter-groups)
-		 (ibuffer-update nil t)))
-     ))
+		 (ibuffer-update nil t)))))

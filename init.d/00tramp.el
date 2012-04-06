@@ -46,5 +46,4 @@
 	 (setq mode-line-format
 	       (format-mode-line mode-line-format 'font-lock-warning-face))))
      (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
-     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)
-     ))
+     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)))
