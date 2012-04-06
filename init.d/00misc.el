@@ -1,6 +1,3 @@
-;; cl is required for git-commit-mode to work
-(require 'cl)
-
 ;; Require an EOL at end of files
 (setq require-final-newline t)
 

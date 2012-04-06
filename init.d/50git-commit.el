@@ -1,3 +1,6 @@
+;; cl is required for git-commit-mode to work
+(require 'cl)
+
 (autoload 'git-commit-mode "git-commit" "Major mode for editing git commit messages" t)
 
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG" . git-commit-mode))
