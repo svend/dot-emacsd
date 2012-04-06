@@ -14,8 +14,9 @@
 ;; Display clock in the status bar
 (display-time-mode t)
 
-;; Display line number and column number in status bar
-(line-number-mode t)
+;; Display column number in mode-line
+;;
+;; (Line number is displayed by default.)
 (column-number-mode t)
 
 ;; Hilight the current line
