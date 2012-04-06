@@ -3,15 +3,6 @@
 ;; Close mail buffer after sending
 (setq message-kill-buffer-on-exit t)
 
-;; Send mail using sendmail (actually msmtp)
-;;
-;; message-send-mail-function's default value should be
-;; message-send-mail-with-sendmail but it was
-;; message-send-mail-with-mailclient on one of my systems.
-;;
-;; TODO: Coudn't reproduce the problem when I ran 'emacs -q'.
-(setq message-send-mail-function 'message-send-mail-with-sendmail)
-
 ;; Use MSMTP with auto-smtp selection
 ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
 ;;
