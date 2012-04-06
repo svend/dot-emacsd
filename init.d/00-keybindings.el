@@ -19,6 +19,7 @@
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key (kbd "C-c l") 'linum-mode)
 (global-set-key (kbd "C-c w") 'toggle-truncate-lines)
+(global-set-key (kbd "C-c t") 'ansi-term)
 
 ;; Cycle through buffers
 (global-set-key (kbd "C-c n") 'next-buffer)
