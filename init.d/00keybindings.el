@@ -10,7 +10,9 @@
 (global-set-key (kbd "C-5") 'ctl-x-5-prefix)
 (global-set-key (kbd "C-0") 'delete-window)
 
-;; User keybindings (C-c letter)
+;; User keybindings (C-c letter and <F5> through <F-9>)
+;;
+;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 ;;
 ;; Press "C-c C-h" to list all of these.
 
