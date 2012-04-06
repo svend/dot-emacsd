@@ -1,5 +1,10 @@
-;; Keybindings that are not reserved for user use (not C-c letter and
-;; <F5> through <F-9>)
+;; Non-user reserved keybindings
+;;
+;; These may conflict or get overridden by modes.
+;;
+;; C-c letter and <F5> through <F-9> are reserved for user use.
+;;
+;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 ;; Add some convenient window mangement bindings
 ;;
