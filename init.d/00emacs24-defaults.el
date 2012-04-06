@@ -3,9 +3,13 @@
 ;; Put the scroll bar on the right side
 (set-scroll-bar-mode 'right)
 
-;; Do not copy text selected with the mouse to the kill ring
+;; Mouse drag does not copy to the kill ring
 (setq mouse-drag-copy-region nil)
 
+;; More responsive
+(setq redisplay-dont-pause t)
+
+;; Active region sets primary selection
 (setq select-active-regions t)
 
 ;; Copy and paste using the clipboard not the primary selection
