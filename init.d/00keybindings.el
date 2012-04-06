@@ -23,6 +23,10 @@
 (global-set-key (kbd "C-c w") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c t") 'ansi-term)
 
+;; TODO: Temporary key to reload solarized theme. Remove when I have
+;; found out why theme colors are wrong with emacsclient.
+(global-set-key (kbd "C-c z") 'color-theme-solarized-light)
+
 ;; Cycle through buffers
 (global-set-key (kbd "C-c n") 'next-buffer)
 (global-set-key (kbd "C-c p") 'previous-buffer)
