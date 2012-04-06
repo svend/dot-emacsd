@@ -1,15 +1,6 @@
 ;; cl is required for git-commit-mode to work
 (require 'cl)
 
-;; Put all backups and auto-saves under ~/.cache
-(setq backup-directory-alist
-      `((".*" . ,"~/.cache/emacs/backup/")))
-(setq auto-save-file-name-transforms
-      `((".*" ,"~/.cache/emacs/backup/" t)))
-
-;; Put auto-save list file under ~/.cache
-(setq auto-save-list-file-prefix "~/.cache/emacs/auto-save-list/.saves-")
-
 ;; Require an EOL at end of files
 (setq require-final-newline t)
 
