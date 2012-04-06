@@ -27,28 +27,6 @@
 ;; Disable tool bar
 (tool-bar-mode 0)
 
-;; Copy and paste using the clipboard not the primary selection
-;;
-;; The default behavior is to only use the primary selection
-;; (hilighted text).
-;;
-;; These settings are the default in Emacs 24.
-(setq x-select-enable-clipboard t)
-(setq x-select-enable-primary nil)
-
-;; Do not copy text selected with the mouse to the kill ring
-;;
-;; These settings are the default in Emacs 24.
-(setq mouse-drag-copy-region nil)
-
-;; This setting is the default in Emacs 24.
-(setq select-active-regions t)
-
-;; Put the scroll bar on the right side
-;;
-;; This setting is the default in Emacs 24.
-(set-scroll-bar-mode 'right)
-
 ;; Enable/disable menubar in GUI/text frames
 ;; http://darcsden.com/lyro/config/browse/+.emacs
 (menu-bar-mode (if (window-system) t 0))
