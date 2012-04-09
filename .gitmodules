@@ -10,3 +10,6 @@
 [submodule "vendor/git-commit-mode"]
 	path = vendor/git-commit-mode
 	url = https://github.com/svend/git-commit-mode.git
+[submodule "vendor/ibuffer-tramp"]
+	path = vendor/ibuffer-tramp
+	url = https://git.ciffer.net/svend/ibuffer-tramp.git
