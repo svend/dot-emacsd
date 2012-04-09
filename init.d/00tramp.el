@@ -41,6 +41,8 @@
      ;; http://www.gnu.org/software/emacs/manual/html_mono/tramp.html#Frequently-Asked-Questions
      ;; (I'ld like to get a Visual Warning when working in a sudo:ed
      ;; context)
+     ;;
+     ;; TODO: Background color is wrong with color-theme-solarized.
      (defun my-mode-line-warn-when-root ()
        (when (string-match "^/su\\(do\\)?:" default-directory)
 	 (setq mode-line-format
