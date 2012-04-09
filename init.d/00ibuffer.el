@@ -18,13 +18,15 @@
 		       (mode . notmuch-search-mode)
 		       (mode . notmuch-show-mode)
 		       (name . "\*[Nn]otmuch")))
-	      ("root" (filename . "^/su\\(do\\)?:"))
-	      ("remote" (filename . "^/[^/]+:/"))
-	      ("tramp" (name . "\*tramp"))
 	      )))
 
      ;; Hide empty groups
      (setq ibuffer-show-empty-filter-groups nil)
+
+     (defun ibuffer-tramp-add-tramp-filter-groups ()
+       (interactive)
+       (dolist (group (ibuffer-tramp-generate-filter-groups-by-tramp-connection))
+	 (add-to-list 'ibuffer-filter-groups group t)))
 
      (defun ibuffer-vc-add-vc-filter-groups ()
        (interactive)
@@ -35,5 +37,6 @@
 	       (lambda ()
 		 (ibuffer-switch-to-saved-filter-groups "default")
 		 ;; Add ibuffer-vc filter groups and update list
+		 (ibuffer-tramp-add-tramp-filter-groups)
 		 (ibuffer-vc-add-vc-filter-groups)
 		 (ibuffer-update nil t)))))
