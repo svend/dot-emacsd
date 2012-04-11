@@ -18,7 +18,13 @@
 		(nnimap-expunge-on-close 'never)
 		(nnimap-list-pattern ("INBOX" "mail/*")))))
 
+;; x-identity is for gnus-identities
+;; https://github.com/renard/gnus-identities
 (setq gnus-posting-styles
-      '(("uw"
+      '((".*"
+	 (x-identity "default")
+	 (address user-mail-address))
+	("uw"
+	 (x-identity "uw")
          (address "svends@uw.edu")
          ("Bcc" "svends@uw.edu"))))
