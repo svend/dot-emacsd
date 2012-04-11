@@ -37,20 +37,9 @@
 	     ;; TODO: Sending ESC raw causes M-. to be processed by emacs
 	     ;; (define-key term-raw-map "\e" 'term-send-raw)
 
-	     ;; Allow pasting in term mode
-	     ;;
-	     ;; TODO: Disabled. This conflicts with readline C-y,
-	     ;; which is useful.
-	     ;; (define-key term-raw-map (kbd "C-y") 'term-paste)
-
 	     ;; Toogle between line and char mode in term-mode
 	     (define-key term-raw-map (kbd "C-'") 'term-line-mode)
 	     (define-key term-mode-map (kbd "C-'") 'term-char-mode)
-
-	     ;; Enable M-x in term mode
-	     ;;
-	     ;; TODO: Check if this conflicts with anything in term mode.
-	     (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
 
 	     ;; Use configured color theme
 	     (setq term-default-bg-color (frame-parameter nil 'background-color))
