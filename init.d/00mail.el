@@ -1,5 +1,10 @@
 ;; Mail/message-mode settings
 
+(eval-after-load 'message
+  '(progn
+     ;; Load gnus-identities
+     (require 'gnus-identities)))
+	      
 ;; Close mail buffer after sending
 (setq message-kill-buffer-on-exit t)
 
