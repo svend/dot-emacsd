@@ -13,3 +13,6 @@
 [submodule "vendor/ibuffer-tramp"]
 	path = vendor/ibuffer-tramp
 	url = https://git.ciffer.net/svend/ibuffer-tramp.git
+[submodule "vendor/gnus-identities"]
+	path = vendor/gnus-identities
+	url = https://github.com/renard/gnus-identities.git
