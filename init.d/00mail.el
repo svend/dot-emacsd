@@ -26,17 +26,7 @@
   ;; Canonicalize my UW email address
   (when (string-match "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)"
 		      (message-fetch-field "From"))
-    (message-remove-header "From")
-    (message-delete-line)
-    (insert "From: " (let ((user-mail-address "svends@uw.edu")) (message-make-from))
-	    "\n"))
-
-  ;; Bcc myself on UW mail if there is no Fcc header
-  (when (and (not (message-fetch-field "Bcc"))
-	     (string-match "svends@uw\.edu"
-			   (message-fetch-field "From"))
-	     (not (message-fetch-field "Fcc")))
-    (insert "Bcc: svends@uw.edu\n")))
+    (gnus-identities-change "uw")))
 
 (add-hook 'message-header-setup-hook
 	  'my-message-header-setup-hook)
