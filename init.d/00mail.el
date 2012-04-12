@@ -1,5 +1,3 @@
-;; Mail/message-mode settings
-
 (eval-after-load 'message
   '(progn
      (define-key message-mode-map "\C-c\C-p" 'gnus-identities-change)
