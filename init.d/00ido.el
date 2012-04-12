@@ -1,5 +1,7 @@
 ;; Enable ido-mode
 (ido-mode t)
 
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
+(eval-after-load 'ido
+  '(progn
+     (setq ido-enable-flex-matching t)
+     (setq ido-everywhere t)))
