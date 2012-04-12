@@ -23,7 +23,7 @@
 (setq gnus-posting-styles
       '((".*"
 	 (x-identity "default")
-	 (address user-mail-address))
+	 (address "svend@ciffer.net"))
 	("uw"
 	 (x-identity "uw")
          (address "svends@uw.edu")
