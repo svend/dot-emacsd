@@ -6,8 +6,6 @@
      ;; Add (ido-mode t) to emacs configuration
      (setq notmuch-always-prompt-for-sender t)
 
-     (setq notmuch-fcc-dirs '(("svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" . "uw")))
-
      (setq notmuch-saved-searches '(("Personal Inbox (unread)" . "tag:inbox and not tag:uw and not tag:lists and tag:unread")
 				    ("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
 				    ("UW Inbox (unread)" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios and tag:unread")
@@ -23,11 +21,7 @@
 
      ;; Notmuch remote setup (on all hosts except garnet)
      (when (not (string= system-name "garnet.ciffer.net"))
-       (setq notmuch-command "notmuch-remote")
-       ;; We do not have direct access to mail folders
-       ;;
-       ;; Bcc is setup in message-mode configuration.
-       (setq notmuch-fcc-dirs nil))))
+       (setq notmuch-command "notmuch-remote"))))
 
 ;; notmuch-address is useful in message-mode even if we are not using
 ;; notmuch
