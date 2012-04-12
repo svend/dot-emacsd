@@ -38,4 +38,3 @@
 		     nil
 		   (progn
 		     (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat)))))))
-
