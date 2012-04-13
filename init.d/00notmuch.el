@@ -7,7 +7,7 @@
      (setq notmuch-always-prompt-for-sender t)
 
      ;; Use Bcc instead of Fcc
-     (setq notmuch-fcc-dir nil)
+     (setq notmuch-fcc-dirs nil)
 
      (setq notmuch-saved-searches '(("Personal Inbox (unread)" . "tag:inbox and not tag:uw and not tag:lists and tag:unread")
 				    ("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
