@@ -17,6 +17,7 @@
 				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios and not tag:lists")
 				    ("Notmuch Inbox" . "tag:inbox and tag:notmuch")
 				    ("Wallop Inbox" . "tag:inbox and tag:wallop_2012")
+				    ("Debian Security Inbox" . "tag:inbox and tag:debian-security-announce")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
