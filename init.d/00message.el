@@ -17,24 +17,9 @@
      ;; http://www.gnus.org/manual/big-message.html#SEC32
      (add-hook 'message-setup-hook (lambda() (flyspell-mode t)))
 
-     (defun my-message-header-setup-hook ()
-       ;; Canonicalize my UW email address
-       (when (string-match "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)"
-			   (message-fetch-field "From"))
-	 (message-remove-header "From")
-	 (message-delete-line)
-	 (insert "From: " (let ((user-mail-address "svends@uw.edu")) (message-make-from))
-		 "\n"))
-
-       ;; Bcc myself on UW mail if there is no Fcc header
-       (when (and (not (message-fetch-field "Bcc"))
-		  (string-match "svends@uw\.edu"
-				(message-fetch-field "From"))
-		  (not (message-fetch-field "Fcc")))
-	 (insert "Bcc: svends@uw.edu\n")))
-
-     (add-hook 'message-header-setup-hook
-	       'my-message-header-setup-hook)
+     ;; Enable gnus-alias
+     (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+     (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
      ;; Bind C-M-j to message-newline-and-reformat
      ;;
