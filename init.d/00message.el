@@ -21,6 +21,9 @@
      (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
      (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
+     ;; Enable notmuch-address completion
+     (notmuch-address-message-insinuate)
+
      ;; Bind C-M-j to message-newline-and-reformat
      ;;
      ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't

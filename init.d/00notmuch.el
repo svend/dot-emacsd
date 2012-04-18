@@ -37,14 +37,4 @@
      ;;
      ;; Notmuch loads notmuch-address automatically, but we may use
      ;; notmuch-address without loading notmuch.
-     (setq notmuch-address-command "uw-email-search")
-     ;; notmuch-address.el automatically calls
-     ;; notmuch-message-insinuate, but notmuch-address-command might
-     ;; not be set yet
-     ;;
-     ;; http://git.notmuchmail.org/git/notmuch/blob/f38bc44653ad910abb95add6b09321da11f50581:/emacs/notmuch-address.el#l93
-     (notmuch-address-message-insinuate)))
-
-(eval-after-load 'message
-  '(progn
-     (require 'notmuch-address)))
+     (setq notmuch-address-command "uw-email-search")))
