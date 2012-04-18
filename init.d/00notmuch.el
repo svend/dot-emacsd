@@ -27,14 +27,3 @@
      (when (not (string= system-name "garnet.ciffer.net"))
        (setq notmuch-command "notmuch-remote"))))
 
-;; notmuch-address is useful in message-mode even if we are not using
-;; notmuch
-(eval-after-load 'notmuch-address
-  '(progn
-     ;; Notmuch address completion
-     ;;
-     ;; http://notmuchmail.org/emacstips/#index13h2
-     ;;
-     ;; Notmuch loads notmuch-address automatically, but we may use
-     ;; notmuch-address without loading notmuch.
-     (setq notmuch-address-command "uw-email-search")))
