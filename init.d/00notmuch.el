@@ -24,4 +24,3 @@
      ;; Notmuch remote setup (on all hosts except garnet)
      (when (not (string= system-name "garnet.ciffer.net"))
        (setq notmuch-command "notmuch-remote"))))
-
