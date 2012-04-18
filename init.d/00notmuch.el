@@ -1,5 +1,3 @@
-;; Notmuch settings
-
 (eval-after-load 'notmuch
   '(progn
      ;; notmuch-always-prompt-for-sender requires ido-mode
