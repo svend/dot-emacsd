@@ -16,3 +16,6 @@
 [submodule "vendor/gnus-identities"]
 	path = vendor/gnus-identities
 	url = https://github.com/renard/gnus-identities.git
+[submodule "vendor/gnus-alias"]
+	path = vendor/gnus-alias
+	url = https://github.com/emacsmirror/gnus-alias.git
