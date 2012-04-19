@@ -18,4 +18,4 @@
 	url = https://github.com/emacsmirror/gnus-alias.git
 [submodule "vendor/puppet-syntax-emacs"]
 	path = vendor/puppet-syntax-emacs
-	url = https://github.com/puppetlabs/puppet-syntax-emacs.git
+	url = https://github.com/lurdan/puppet-syntax-emacs.git
