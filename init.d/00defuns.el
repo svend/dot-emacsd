@@ -4,7 +4,19 @@
   (setq kill-ring nil)
   (message "Cleared the kill ring"))
 
-(defun my-term ()
-  "Run bash in ansi-term"
+(defun my-switch-to-term ()
+  "Switch to term running in the default-directory,
+otherwise start a new term"
   (interactive)
-  (ansi-term "bash"))
+  (let (found-buffer (directory default-directory) (buffers (cdr (buffer-list))))
+    (while buffers
+      (with-current-buffer (car buffers)
+	(when (and (string= major-mode "term-mode") (string= default-directory directory))
+	  (setq found-buffer (car buffers))
+	  ;; Stop looking
+	  (setq buffers nil))
+	(setq buffers (cdr buffers))))
+    ;; If we found a term, switch to it, otherwise start a term
+    (if found-buffer
+	(switch-to-buffer found-buffer)
+      (ansi-term "bash"))))

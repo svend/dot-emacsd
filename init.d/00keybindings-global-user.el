@@ -11,7 +11,7 @@
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key (kbd "C-c l") 'linum-mode)
 (global-set-key (kbd "C-c w") 'toggle-truncate-lines)
-(global-set-key (kbd "C-c t") 'my-term)
+(global-set-key (kbd "C-c t") 'my-switch-to-term)
 
 ;; TODO: Temporary key to reload solarized theme. Remove when I have
 ;; found out why theme colors are wrong with emacsclient.
