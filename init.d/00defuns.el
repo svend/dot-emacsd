@@ -8,7 +8,9 @@
   "Switch to term running in the default-directory,
 otherwise start a new ansi-term"
   (interactive)
-  (let (found-buffer (directory default-directory) (buffers (cdr (buffer-list))))
+  (let (found-buffer
+	(directory default-directory)
+	(buffers (buffer-list)))
     (while buffers
       (with-current-buffer (car buffers)
 	(when (and (string= major-mode "term-mode") (string= default-directory directory))
