@@ -6,7 +6,7 @@
 
 (defun my-switch-to-term ()
   "Switch to term running in the default-directory,
-otherwise start a new term"
+otherwise start a new ansi-term"
   (interactive)
   (let (found-buffer (directory default-directory) (buffers (cdr (buffer-list))))
     (while buffers
