@@ -9,7 +9,7 @@
 otherwise start a new ansi-term"
   (interactive)
   (let (found-buffer
-	(directory (expand-file-name))
+	(directory (expand-file-name default-directory))
 	(buffers (buffer-list)))
     (while buffers
       (with-current-buffer (car buffers)
