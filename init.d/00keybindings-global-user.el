@@ -6,6 +6,7 @@
 ;;
 ;; Press "C-c C-h" to list all of these.
 
+(global-set-key (kbd "C-c a") 'align-current)
 (global-set-key (kbd "C-c c") 'my-clear-kill-ring)
 (global-set-key (kbd "C-c f") 'follow-delete-other-windows-and-split)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
