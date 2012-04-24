@@ -12,3 +12,6 @@
     (progn
       (setq browse-url-generic-program "x-www-browser")
       (setq browse-url-browser-function 'browse-url-generic)))
+
+;; Make buffer names unique
+(toggle-uniquify-buffer-names)
