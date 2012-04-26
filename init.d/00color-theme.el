@@ -2,3 +2,5 @@
   '(progn
      ;; Initialize color theme after it loads
      (color-theme-initialize)))
+
+(color-theme-initialize)
