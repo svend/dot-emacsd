@@ -47,6 +47,9 @@
 
        ;; Use configured color theme
        (setq term-default-bg-color (frame-parameter nil 'background-color))
-       (setq term-default-fg-color (frame-parameter nil 'foreground-color)))
+       (setq term-default-fg-color (frame-parameter nil 'foreground-color))
+
+       (make-local-variable 'mouse-drag-copy-region)
+       (setq mouse-drag-copy-region t))
 
      (add-hook 'term-mode-hook 'my-setup-term-mode)))
