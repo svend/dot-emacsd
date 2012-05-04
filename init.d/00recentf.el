@@ -17,9 +17,6 @@
      ;; Ignore ephemeral git commit message files
      (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
 
-     ;; Bind 'C-c r' to open ido-recentf-open
-     (global-set-key (kbd "C-c r") 'ido-recentf-open)
-
      (defun ido-recentf-open ()
        "Use `ido-completing-read' to \\[find-file] a recent file"
        (interactive)
