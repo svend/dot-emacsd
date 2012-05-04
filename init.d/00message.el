@@ -13,10 +13,6 @@
 	   mail-envelope-from 'header
 	   message-sendmail-envelope-from 'header)
 
-     ;; Enable flyspell for composing mail
-     ;; http://www.gnus.org/manual/big-message.html#SEC32
-     (add-hook 'message-setup-hook (lambda() (flyspell-mode t)))
-
      ;; Enable gnus-alias
      (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
      (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
@@ -24,13 +20,20 @@
      ;; Enable notmuch-address completion
      (notmuch-address-message-insinuate)
 
-     ;; Bind C-M-j to message-newline-and-reformat
-     ;;
-     ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
-     ;; have this problem.
-     (add-hook 'message-setup-hook
-	       (lambda ()
-		 (if window-system
-		     nil
-		   (progn
-		     (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat)))))))
+     (defun my-setup-message-mode ()
+       "My preferences for message mode"
+       (interactive)
+       ;; Enable flyspell for composing mail
+       ;; http://www.gnus.org/manual/big-message.html#SEC32
+       (flyspell-mode t)
+
+       ;; Bind C-M-j to message-newline-and-reformat
+       ;;
+       ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
+       ;; have this problem.
+       (if window-system
+	   nil
+	 (progn
+	   (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat))))
+
+     (add-hook 'message-setup-hook 'my-setup-message-mode)))
