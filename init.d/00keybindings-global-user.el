@@ -13,6 +13,7 @@
 (global-set-key (kbd "C-c l") 'linum-mode)
 (global-set-key (kbd "C-c n") 'next-buffer)
 (global-set-key (kbd "C-c p") 'previous-buffer)
+(global-set-key (kbd "C-c r") 'org-remember)
 (global-set-key (kbd "C-c s") 'follow-delete-other-windows-and-split)
 (global-set-key (kbd "C-c t") 'my-switch-to-term)
 (global-set-key (kbd "C-c w") 'toggle-truncate-lines)
