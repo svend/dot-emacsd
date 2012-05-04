@@ -33,10 +33,14 @@
        (dolist (group (ibuffer-vc-generate-filter-groups-by-vc-root))
 	 (add-to-list 'ibuffer-filter-groups group t)))
 
-     (add-hook 'ibuffer-hook
-	       (lambda ()
-		 (ibuffer-switch-to-saved-filter-groups "default")
-		 ;; Add ibuffer-vc filter groups and update list
-		 (ibuffer-tramp-add-tramp-filter-groups)
-		 (ibuffer-vc-add-vc-filter-groups)
-		 (ibuffer-update nil t)))))
+     (defun my-setup-ibuffer-mode ()
+       "My preferences for ibuffer mode"
+       (interactive)
+       (ibuffer-switch-to-saved-filter-groups "default")
+
+       ;; Add ibuffer-vc filter groups and update list
+       (ibuffer-tramp-add-tramp-filter-groups)
+       (ibuffer-vc-add-vc-filter-groups)
+       (ibuffer-update nil t))
+
+     (add-hook 'ibuffer-hook 'my-setup-ibuffer-mode)))
