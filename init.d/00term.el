@@ -3,7 +3,6 @@
      (defun my-setup-term-mode ()
        "My preferences for term mode"
        (interactive)
-
        ;; Disable transient mark mode
        ;;
        ;; This is advised in the term.el source. See
@@ -49,6 +48,7 @@
        (setq term-default-bg-color (frame-parameter nil 'background-color))
        (setq term-default-fg-color (frame-parameter nil 'foreground-color))
 
+       ;; Copy on select with mouse
        (make-local-variable 'mouse-drag-copy-region)
        (setq mouse-drag-copy-region t))
 
