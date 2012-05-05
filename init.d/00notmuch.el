@@ -11,11 +11,11 @@
 				    ("Personal Inbox" . "tag:inbox and not tag:uw and not tag:lists")
 				    ("UW Inbox (unread)" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios and tag:unread")
 				    ("UW Inbox" . "tag:inbox and tag:uw and not tag:lists and not from:root and not tag:nagios")
-				    ("CIRG Lists" . "tag:inbox and tag:cirg-adm or tag:cirg-core and tag:inbox")
+				    ("CIRG Lists" . "tag:inbox and tag:lists::cirg-adm or tag:lists::cirg-core and tag:inbox")
 				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios and not tag:lists")
-				    ("Notmuch Inbox" . "tag:inbox and tag:notmuch")
-				    ("Wallop Inbox" . "tag:inbox and tag:wallop_2012")
-				    ("Debian Security Inbox" . "tag:inbox and tag:debian-security-announce")
+				    ("Notmuch Inbox" . "tag:inbox and tag:lists::notmuch")
+				    ("Wallop Inbox" . "tag:inbox and tag:lists::wallop_2012")
+				    ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")
 				    ("waiting" . "tag:waiting")))
 
      ;; Show newest mail first
