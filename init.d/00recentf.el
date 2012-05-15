@@ -16,6 +16,8 @@
 
      ;; Ignore ephemeral git commit message files
      (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
+     ;; Ignore temporary notmuch ical files
+     (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
 
      (defun ido-recentf-open ()
        "Use `ido-completing-read' to \\[find-file] a recent file"
