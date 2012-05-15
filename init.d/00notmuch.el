@@ -7,7 +7,7 @@
       ;; Use Bcc instead of Fcc
       (setq notmuch-fcc-dirs nil)
 
-      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012))")
+      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
 				     ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-core)) and not from:root and not tag:nagios")
 				     ("Action" . "tag:action")
 				     ("Wating" . "tag:waiting")
