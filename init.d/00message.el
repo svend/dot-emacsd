@@ -13,6 +13,9 @@
 	   mail-envelope-from 'header
 	   message-sendmail-envelope-from 'header)
 
+     ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+     (setq send-mail-function 'sendmail-send-it)
+
      ;; Enable gnus-alias
      (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
      (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
