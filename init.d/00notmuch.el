@@ -12,7 +12,7 @@
 				    ("Action" . "tag:action")
 				    ("Waiting" . "tag:waiting")
 				    ("CIRG Nagios" . "tag:inbox and tag:uw and tag:nagios and not tag:lists")
-				    ("Notmuch Inbox" . "tag:inbox and tag:lists::notmuch")
+				    ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
 				    ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
 
      ;; Show newest mail first
