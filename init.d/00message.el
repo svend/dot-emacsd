@@ -21,7 +21,7 @@
      (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
      ;; Enable notmuch-address completion
-     (notmuch-address-message-insinuate)
+     ;; (notmuch-address-message-insinuate)
 
      (defun my-setup-message-mode ()
        "My preferences for message mode"
@@ -29,6 +29,9 @@
        ;; Enable flyspell for composing mail
        ;; http://www.gnus.org/manual/big-message.html#SEC32
        (flyspell-mode t)
+
+       ;; Enable bbdb completion
+       bbdb-define-all-aliases
 
        ;; Bind C-M-j to message-newline-and-reformat
        ;;
