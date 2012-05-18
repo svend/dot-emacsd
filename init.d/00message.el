@@ -31,7 +31,7 @@
        (flyspell-mode t)
 
        ;; Enable bbdb completion
-       bbdb-define-all-aliases
+       (bbdb-insinuate-message)
 
        ;; Bind C-M-j to message-newline-and-reformat
        ;;
