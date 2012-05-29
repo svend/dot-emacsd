@@ -7,6 +7,7 @@
 ;; Press "C-c C-h" to list all of these.
 
 (global-set-key (kbd "C-c a") 'align-current)
+(global-set-key (kbd "C-c b") 'bbdb)
 (global-set-key (kbd "C-c c") 'my-clear-kill-ring)
 (global-set-key (kbd "C-c f") 'ido-recentf-open)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
