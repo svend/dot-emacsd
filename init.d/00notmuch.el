@@ -41,4 +41,8 @@
 	 (apply 'notmuch-show-tag-message (cdr macro))))
 
      (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-     (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)))
+     (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
+
+     ;; Work around bug with notmuch and emacs-snapshot
+     ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
+     (require 'gnus-art)))
