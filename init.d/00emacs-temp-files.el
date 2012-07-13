@@ -14,3 +14,6 @@
 ;; know of any way to disable this feature.
 ;;
 ;; http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
+
+;; Put url cache file under ~/.cache
+(setq url-cache-directory "~/.cache/emacs/url")
