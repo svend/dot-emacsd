@@ -4,7 +4,7 @@
 (set-scroll-bar-mode 'right)
 
 ;; Mouse drag does not copy to the kill ring
-(setq mouse-drag-copy-region nil)
+;; (setq mouse-drag-copy-region nil)
 
 ;; More responsive
 (setq redisplay-dont-pause t)

@@ -11,6 +11,11 @@
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 
+;; Copy test selected by the mouse to the kill ring
+;;
+;; This was turned off in Emacs 24
+(setq mouse-drag-copy-region t)
+
 ;; Display clock in the status bar
 (display-time-mode t)
 
