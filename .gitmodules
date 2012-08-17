@@ -22,3 +22,6 @@
 [submodule "vendor/nxhtml"]
 	path = vendor/nxhtml
 	url = https://github.com/emacsmirror/nxhtml.git
+[submodule "vendor/yaml-mode"]
+	path = vendor/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode
