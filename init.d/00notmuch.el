@@ -38,7 +38,7 @@
      (defun notmuch-show-apply-tag-macro (key)
        (interactive "k")
        (let ((macro (assoc key notmuch-tag-macro-alist)))
-	 (apply 'notmuch-show-tag-message (cdr macro))))
+	 (notmuch-show-tag (cdr macro))))
 
      (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
      (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
