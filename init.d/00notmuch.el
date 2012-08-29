@@ -33,7 +33,7 @@
      (defun notmuch-search-apply-tag-macro (key)
        (interactive "k")
        (let ((macro (assoc key notmuch-tag-macro-alist)))
-	 (apply 'notmuch-search-tag-thread (cdr macro))))
+	 (notmuch-search-tag (cdr macro))))
 
      (defun notmuch-show-apply-tag-macro (key)
        (interactive "k")
