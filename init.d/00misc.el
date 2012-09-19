@@ -15,3 +15,6 @@
 
 ;; Make buffer names unique
 (toggle-uniquify-buffer-names)
+
+;; Start emacs server
+(server-start)
