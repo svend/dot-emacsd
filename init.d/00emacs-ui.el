@@ -40,3 +40,12 @@
       (menu-bar-mode t)
       (modify-frame-parameters frame '((menu-bar-lines . 1)))))
 (add-hook 'after-make-frame-functions 'my-show-x-menu-bar)
+
+;; Enable ido-mode
+(ido-mode t)
+
+;; Run ibuffer instead of standard list-buffers
+(defalias 'list-buffers 'ibuffer)
+
+;; Enable recent files mode
+(recentf-mode t)

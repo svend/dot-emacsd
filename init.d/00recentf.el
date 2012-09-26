@@ -1,6 +1,3 @@
-;; Enable recent files mode
-(recentf-mode t)
-
 (eval-after-load 'recentf
   '(progn
      ;; Enable recentf mode with ido-mode support
