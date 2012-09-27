@@ -41,6 +41,9 @@
       (modify-frame-parameters frame '((menu-bar-lines . 1)))))
 (add-hook 'after-make-frame-functions 'my-show-x-menu-bar)
 
+;; Enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; Enable ido-mode
 (ido-mode t)
 
