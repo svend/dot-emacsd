@@ -22,3 +22,6 @@
 [submodule "vendor/yaml-mode"]
 	path = vendor/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode
+[submodule "themes/color-theme-solarized"]
+	path = themes/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
