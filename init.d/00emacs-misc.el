@@ -21,5 +21,6 @@
 (unless (server-running-p)
   (server-start))
 
-;; Turn on flyspell for all text modes
-(add-hook 'text-mode-hook 'turn-on-flyspell)
+;; Turn on flyspell for all text and prog modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
