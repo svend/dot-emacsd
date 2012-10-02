@@ -26,9 +26,6 @@
      (defun my-setup-message-mode ()
        "My preferences for message mode"
        (interactive)
-       ;; Enable flyspell for composing mail
-       ;; http://www.gnus.org/manual/big-message.html#SEC32
-       (flyspell-mode t)
 
        ;; Enable bbdb completion
        (bbdb-insinuate-message)
