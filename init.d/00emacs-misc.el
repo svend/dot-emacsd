@@ -20,3 +20,6 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+;; Turn on flyspell for all text modes
+(add-hook 'text-mode-hook 'turn-on-flyspell)
