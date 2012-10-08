@@ -1,5 +1,8 @@
 (eval-after-load 'message
   '(progn
+     ;; Save drafts under ~/.cache/emacs
+     (setq message-auto-save-directory "~/.cache/emacs/mail/drafts")
+
      ;; Close mail buffer after sending
      (setq message-kill-buffer-on-exit t)
 
