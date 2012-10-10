@@ -1,4 +1,4 @@
-(eval-after-load 'erc
+(eval-after-load 'erc-track
   '(progn
      ;; Do not notify for join, part, or quit
      (add-to-list 'erc-track-exclude-types "JOIN")
