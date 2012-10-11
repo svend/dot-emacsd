@@ -16,8 +16,13 @@
 (global-set-key (kbd "C-3") 'split-window-horizontally)
 (global-set-key (kbd "C-4") 'ctl-x-4-prefix)
 (global-set-key (kbd "C-5") 'ctl-x-5-prefix)
-(global-set-key (kbd "C-0") 'delete-window)
+;;(global-set-key (kbd "C-0") 'delete-window)
 
-;; Resize font using the mouse scroll wheel
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+;; Resize font
+
+(global-set-key (kbd "C-0") 'global-text-scale-disable)
+(global-set-key (kbd "C--") 'global-text-scale-decrease)
+(global-set-key (kbd "C-=") 'global-text-scale-increase)
+
+(global-set-key (kbd "<C-mouse-4>") 'global-text-scale-increase)
+(global-set-key (kbd "<C-mouse-5>") 'global-text-scale-decrease)
