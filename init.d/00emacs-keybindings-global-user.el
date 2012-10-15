@@ -10,6 +10,7 @@
 (global-set-key (kbd "C-c b")	'bbdb)
 (global-set-key (kbd "C-c c")	'my-clear-kill-ring)
 (global-set-key (kbd "C-c f")	'ido-recentf-open)
+(global-set-key (kbd "C-c i")	'imenu)
 (global-set-key (kbd "C-c k")	'kill-this-buffer)
 (global-set-key (kbd "C-c l")	'linum-mode)
 (global-set-key (kbd "C-c n")	'next-buffer)
