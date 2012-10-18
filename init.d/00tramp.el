@@ -30,6 +30,9 @@
      ;; Enable editing of remote files as root using sudo using the
      ;; address /sudo:host.example.org:.
      ;;
+     ;; Note that only "inline" methods (e.g. ssh) are supported, not
+     ;; external methods like scpc.
+     ;;
      ;; http://www.gnu.org/software/tramp/#Multi_002dhops
      (add-to-list 'tramp-default-proxies-alist
                   '(nil "\\`root\\'" "/ssh:%h:"))

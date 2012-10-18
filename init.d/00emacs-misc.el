@@ -21,6 +21,8 @@
 (unless (server-running-p)
   (server-start))
 
-;; Turn on flyspell for all text and prog modes
+;; Turn on flyspell and goto-address for all text and prog modes
 (add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'goto-address-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'goto-address-prog-mode)
