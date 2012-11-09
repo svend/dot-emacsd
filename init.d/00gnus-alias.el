@@ -6,4 +6,4 @@
      (setq gnus-alias-default-identity "default")
      (setq gnus-alias-identity-rules
 	   '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
-	     ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+	     ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")))))
