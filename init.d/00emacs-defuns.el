@@ -4,6 +4,12 @@
   (setq kill-ring nil)
   (message "Cleared the kill ring"))
 
+(defun my-insert-date ()
+  "Insert date string"
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S"))
+)
+
 (defun my-switch-to-term ()
   "Switch to term running in the default-directory,
 otherwise start a new ansi-term"
@@ -25,7 +31,7 @@ otherwise start a new ansi-term"
 
 ;; From http://www.emacswiki.org/emacs/GlobalTextScaleMode
 
-(define-globalized-minor-mode 
+(define-globalized-minor-mode
   global-text-scale-mode
   text-scale-mode
   (lambda () (text-scale-mode 1)))

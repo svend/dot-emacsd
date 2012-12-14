@@ -1,4 +1,4 @@
-;; User-reserved keybindings 
+;; User-reserved key bindings
 ;;
 ;; C-c letter and <F5> through <F-9> are reserved for user use.
 ;;
@@ -9,6 +9,7 @@
 (global-set-key (kbd "C-c a")	'align-current)
 (global-set-key (kbd "C-c b")	'bbdb)
 (global-set-key (kbd "C-c c")	'my-clear-kill-ring)
+(global-set-key (kbd "C-c d")   'my-insert-date)
 (global-set-key (kbd "C-c f")	'ido-recentf-open)
 (global-set-key (kbd "C-c i")	'imenu)
 (global-set-key (kbd "C-c k")	'kill-this-buffer)
