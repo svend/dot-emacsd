@@ -27,4 +27,4 @@
 (global-set-key (kbd "C-c w")	'toggle-truncate-lines)
 (global-set-key (kbd "C-c x")	'nxhtml-menu-mode)
 
-(global-set-key (kbd "<f5>")	'helm-mini)
+(global-set-key (kbd "<f5>")	'helm-for-files)
