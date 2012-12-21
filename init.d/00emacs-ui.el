@@ -44,8 +44,8 @@
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Enable ido-mode
-(ido-mode t)
+;; Enable helm-mode
+(helm-mode 1)
 
 ;; Run ibuffer instead of standard list-buffers
 (defalias 'list-buffers 'ibuffer)
