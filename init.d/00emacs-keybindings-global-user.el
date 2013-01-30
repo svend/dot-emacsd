@@ -8,7 +8,7 @@
 
 (global-set-key (kbd "C-c a")	'align-current)
 (global-set-key (kbd "C-c b")	'bbdb)
-(global-set-key (kbd "C-c c")	'my-clear-kill-ring)
+(global-set-key (kbd "C-c c")	'comment-or-uncomment-region)
 (global-set-key (kbd "C-c d")   'my-insert-date)
 (global-set-key (kbd "C-c f")	'ido-recentf-open)
 (global-set-key (kbd "C-c h")	'helm-mini)
