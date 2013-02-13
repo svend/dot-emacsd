@@ -8,7 +8,7 @@
      (setq notmuch-fcc-dirs nil)
 
      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-				    ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core)) and not from:root")
+				    ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core)) and not (from:root or  tag:nagios)")
 				    ("Action" . "tag:action")
 				    ("Waiting" . "tag:waiting")
 				    ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
