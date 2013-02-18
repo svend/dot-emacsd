@@ -13,8 +13,8 @@
 ;;
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
 ;;
-;; TODO: Lock are created in the same directory as the file being
-;; edited. I don't know of any way to disable this feature.
+;; Locks are created in the same directory as the file being
+;; edited. There is no way to disable this.
 ;;
 ;; http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 

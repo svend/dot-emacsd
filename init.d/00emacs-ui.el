@@ -26,7 +26,10 @@
 
 ;; Hilight the current line
 ;;
-;; TODO: How to disable this for certain modes, like term-mode?
+;; To disable for a mode, add this to the mode hook
+;;	
+;; (make-local-variable 'global-hl-line-mode)
+;; (setq global-hl-line-mode nil)
 (global-hl-line-mode t)
 
 ;; Disable tool bar
