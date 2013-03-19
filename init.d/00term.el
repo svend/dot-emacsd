@@ -44,6 +44,9 @@
        (define-key term-raw-map (kbd "C-'") 'term-line-mode)
        (define-key term-mode-map (kbd "C-'") 'term-char-mode)
 
+       ;; Enable Emacs M-x keybinding in terminal
+       (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
+
        ;; Use configured color theme
        (setq term-default-bg-color (frame-parameter nil 'background-color))
        (setq term-default-fg-color (frame-parameter nil 'foreground-color))
