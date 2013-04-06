@@ -9,7 +9,7 @@
 	url = https://github.com/svend/git-commit-mode.git
 [submodule "vendor/ibuffer-tramp"]
 	path = vendor/ibuffer-tramp
-	url = https://git.ciffer.net/svend/ibuffer-tramp.git
+	url = https://github.com/svend/ibuffer-tramp.git
 [submodule "vendor/gnus-alias"]
 	path = vendor/gnus-alias
 	url = https://github.com/emacsmirror/gnus-alias.git
