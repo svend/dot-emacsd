@@ -28,3 +28,4 @@
 (global-set-key (kbd "C-c x")	'nxhtml-menu-mode)
 
 (global-set-key (kbd "<f5>")	'helm-for-files)
+(global-set-key (kbd "<f5>")	'helm-find-files)
