@@ -34,3 +34,6 @@
 [submodule "vendor/markdown-mode"]
 	path = vendor/markdown-mode
 	url = https://github.com/emacsmirror/markdown-mode.git
+[submodule "vendor/csv-mode"]
+	path = vendor/csv-mode
+	url = https://github.com/emacsmirror/csv-mode.git
