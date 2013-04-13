@@ -16,9 +16,6 @@
 [submodule "vendor/puppet-syntax-emacs"]
 	path = vendor/puppet-syntax-emacs
 	url = https://github.com/lurdan/puppet-syntax-emacs.git
-[submodule "vendor/nxhtml"]
-	path = vendor/nxhtml
-	url = https://github.com/emacsmirror/nxhtml.git
 [submodule "vendor/yaml-mode"]
 	path = vendor/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode
