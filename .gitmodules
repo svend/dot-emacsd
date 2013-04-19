@@ -37,3 +37,12 @@
 [submodule "themes/solarized-theme"]
 	path = themes/solarized-theme
 	url = https://github.com/bbatsov/solarized-emacs.git
+[submodule "vendor/flycheck"]
+	path = vendor/flycheck
+	url = https://github.com/emacsmirror/flycheck.git
+[submodule "vendor/s"]
+	path = vendor/s
+	url = https://github.com/emacsmirror/s.git
+[submodule "vendor/dash"]
+	path = vendor/dash
+	url = https://github.com/emacsmirror/dash.git
