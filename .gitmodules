@@ -34,3 +34,6 @@
 [submodule "vendor/csv-mode"]
 	path = vendor/csv-mode
 	url = https://github.com/emacsmirror/csv-mode.git
+[submodule "themes/solarized-theme"]
+	path = themes/solarized-theme
+	url = https://github.com/bbatsov/solarized-emacs.git
