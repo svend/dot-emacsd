@@ -1,0 +1,1 @@
+../../themes/solarized-theme/solarized.el
