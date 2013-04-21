@@ -24,7 +24,6 @@
 (global-set-key (kbd "C-c s")	'follow-delete-other-windows-and-split)
 (global-set-key (kbd "C-c t")	'my-switch-to-term)
 (global-set-key (kbd "C-c w")	'toggle-truncate-lines)
-(global-set-key (kbd "C-c x")	'nxhtml-menu-mode)
 
 (global-set-key (kbd "<f5>")	'helm-for-files)
 (global-set-key (kbd "<f6>")	'helm-find-files)
