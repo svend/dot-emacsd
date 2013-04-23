@@ -2,3 +2,4 @@
 (projectile-global-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (require 'helm-config)
+(add-hook 'after-init-hook #'global-flycheck-mode)
