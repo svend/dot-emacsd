@@ -47,8 +47,5 @@
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Run ibuffer instead of standard list-buffers
-(defalias 'list-buffers 'ibuffer)
-
 ;; Enable recent files mode
 (recentf-mode t)
