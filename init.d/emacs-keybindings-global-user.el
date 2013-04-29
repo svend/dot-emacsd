@@ -13,7 +13,7 @@
 (global-set-key (kbd "C-c h")	'helm-mini)
 (global-set-key (kbd "C-c i")	'imenu)
 (global-set-key (kbd "C-c k")	'kill-this-buffer)
-(global-set-key (kbd "C-c l")	'linum-mode)
+(global-set-key (kbd "C-c n")	'linum-mode)
 (global-set-key (kbd "C-c o a") 'org-agenda)
 (global-set-key (kbd "C-c o b") 'org-iswitchb)
 (global-set-key (kbd "C-c o c") 'org-capture)
