@@ -1,4 +1,2 @@
-(eval-after-load 'dns-mode
-  '(progn
-     ;; Do not auto increment serial (C-c C-s to increment)
-     (setq dns-mode-soa-auto-increment-serial nil)))
+;; Do not auto increment serial (C-c C-s to increment)
+(setq dns-mode-soa-auto-increment-serial nil)
