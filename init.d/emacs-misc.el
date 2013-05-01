@@ -17,6 +17,7 @@
 (toggle-uniquify-buffer-names)
 
 ;; Start emacs server
+;; (server-running-p requires server)
 (require 'server)
 (unless (server-running-p)
   (server-start))
