@@ -5,5 +5,9 @@
   ;; fix the PATH variable
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "GPG_AGENT_INFO"))
+    (exec-path-from-shell-copy-env "ALTERNATE_EDITOR")
+    (exec-path-from-shell-copy-env "EDITOR")
+    (exec-path-from-shell-copy-env "GPG_AGENT_INFO")
+    (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+    (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
   )
