@@ -50,6 +50,9 @@
   (setq mouse-drag-copy-region t)
 
   ;; Projectile mode map (C-c p) breaks C-c in terminal
-  (setq minor-mode-overriding-map-alist '((projectile-mode . nil))))
+  (setq minor-mode-overriding-map-alist '(
+					  (projectile-mode . nil)
+					  (erc-track . nil)
+					  )))
 
 (add-hook 'term-mode-hook 'my-setup-term-mode)
