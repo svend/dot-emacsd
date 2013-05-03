@@ -12,9 +12,6 @@
   (make-local-variable 'global-hl-line-mode)
   (setq global-hl-line-mode nil)
 
-  ;; Disable line wrapping
-  (setq truncate-lines t)
-
   ;; Make term mode more term-like
 
   ;; Set term-escape to C-q (default is C-c)
