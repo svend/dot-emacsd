@@ -47,6 +47,9 @@
 
   ;; Copy on select with mouse
   (make-local-variable 'mouse-drag-copy-region)
-  (setq mouse-drag-copy-region t))
+  (setq mouse-drag-copy-region t)
+
+  ;; Projectile mode map (C-c p) breaks C-c in terminal
+  (setq minor-mode-overriding-map-alist '((projectile-mode . nil))))
 
 (add-hook 'term-mode-hook 'my-setup-term-mode)
