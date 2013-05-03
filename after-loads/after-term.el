@@ -32,7 +32,8 @@
 
   ;; Send C-c to the terminal
   (define-key term-raw-map (kbd "C-c") 'term-send-raw)
-  (define-key term-raw-map (kbd "C-backspace") 'term-send-raw)
+  (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
+  (define-key term-raw-map (kbd "<C-S-backspace>") 'term-send-raw)
 
   ;; Send ESC to the terminal
   ;;
