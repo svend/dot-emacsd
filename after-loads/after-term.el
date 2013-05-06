@@ -48,6 +48,9 @@
   (make-local-variable 'mouse-drag-copy-region)
   (setq mouse-drag-copy-region t)
 
+  ;; Paste keybinding for keyboards with no insert
+  (define-key term-raw-map (kbd "C-S-v") 'term-paste)
+
   ;; Projectile mode map (C-c p) breaks C-c in terminal
   (setq minor-mode-overriding-map-alist '(
 					  (projectile-mode . nil)
