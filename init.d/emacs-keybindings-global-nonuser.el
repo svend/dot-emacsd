@@ -13,9 +13,8 @@
 
 ;; Resize font
 
-(global-set-key (kbd "C-0") 'global-text-scale-disable)
-(global-set-key (kbd "C--") 'global-text-scale-decrease)
-(global-set-key (kbd "C-=") 'global-text-scale-increase)
+(global-set-key (kbd "C--") 'er/contract-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 (global-set-key (kbd "<C-mouse-4>") 'global-text-scale-increase)
 (global-set-key (kbd "<C-mouse-5>") 'global-text-scale-decrease)
