@@ -27,7 +27,7 @@
 ;; Hilight the current line
 ;;
 ;; To disable for a mode, add this to the mode hook
-;;	
+;;
 ;; (make-local-variable 'global-hl-line-mode)
 ;; (setq global-hl-line-mode nil)
 (global-hl-line-mode t)
