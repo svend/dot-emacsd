@@ -8,7 +8,7 @@
   "Insert date string"
   (interactive)
   (insert (format-time-string "%Y-%m-%d %H:%M:%S"))
-)
+  )
 
 (defun my-switch-to-term ()
   "Switch to term running in the default-directory,
