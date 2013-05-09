@@ -27,3 +27,4 @@
 (add-hook 'text-mode-hook 'goto-address-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
