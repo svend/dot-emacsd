@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-c o l") 'org-store-link)
 (global-set-key (kbd "C-c o r") 'org-remember)
 (global-set-key (kbd "C-c r")   'revert-buffer)
-(Global-set-key (kbd "C-c s")   'toggle-truncate-lines)
+(global-set-key (kbd "C-c s")   'toggle-truncate-lines)
 (global-set-key (kbd "C-c t")   'my-switch-to-term)
 (global-set-key (kbd "C-c w")   'whitespace-mode)
 
