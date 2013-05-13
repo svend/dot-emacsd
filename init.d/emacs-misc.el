@@ -18,7 +18,7 @@
 
 ;; Start emacs server
 ;; (server-running-p requires server)
-(require 'server)
+(autoload 'server-running-p "server")
 (unless (server-running-p)
   (server-start))
 
