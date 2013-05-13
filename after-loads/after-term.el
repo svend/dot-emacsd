@@ -54,7 +54,7 @@
   ;; Projectile mode map (C-c p) breaks C-c in terminal
   (setq minor-mode-overriding-map-alist '(
 					  (projectile-mode . nil)
-					  (erc-track . nil)
+					  (erc-track-minor-mode . nil)
 					  )))
 
 (add-hook 'term-mode-hook 'my-setup-term-mode)
