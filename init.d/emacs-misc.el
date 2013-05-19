@@ -22,6 +22,9 @@
 (unless (server-running-p)
   (server-start))
 
+;; Do not clobber text copied from the clipboard
+(setq save-interprogram-paste-before-kill t)
+
 ;; Turn on flyspell and goto-address for all text and prog modes
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'text-mode-hook 'goto-address-mode)
