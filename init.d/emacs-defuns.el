@@ -29,6 +29,14 @@ otherwise start a new ansi-term"
 	(switch-to-buffer found-buffer)
       (ansi-term "bash"))))
 
+(defun my-rotate-windows ()
+  (interactive)
+  (let* ((windows (window-list))
+         (buffers (mapcar 'window-buffer windows))
+         (windows (nconc (cdr windows) (list (car windows)))))
+    (mapcar* (lambda (w b) (set-window-buffer w b))
+             windows buffers)))
+
 ;; From http://www.emacswiki.org/emacs/GlobalTextScaleMode
 
 (define-globalized-minor-mode
