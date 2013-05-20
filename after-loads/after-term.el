@@ -14,21 +14,6 @@
 
   ;; Make term mode more term-like
 
-  ;; Set term-escape to C-q (default is C-c)
-  ;;
-  ;; Use this escape to send the next keypress directly to
-  ;; the terminal.
-  ;;
-  ;; TODO: This is supposed to set the existing
-  ;; term-escape-char to term-send-raw, but from the
-  ;; term.el code, it doesn't look like term-escape-char is
-  ;; ever set.
-  ;;
-  ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n879
-  (term-set-escape-char ?\C-q)
-
-  ;; Send C-c to the terminal
-  (define-key term-raw-map (kbd "C-c") 'term-send-raw)
   (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
   (define-key term-raw-map (kbd "<C-S-backspace>") 'term-send-raw)
 
