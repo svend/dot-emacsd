@@ -3,10 +3,6 @@
 ;; Hide welcome screen
 (setq inhibit-splash-screen t)
 
-;; Show trailing whitespace
-;; This can be an annoyting default
-;; (setq-default show-trailing-whitespace t)
-
 ;; Display date and time in 24 hour format
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
