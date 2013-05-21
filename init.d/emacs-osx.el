@@ -1,7 +1,7 @@
 ;; Set Mac keyboard
 (when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta)
-  (setq mac-command-modifier 'control))
+  (setq mac-command-modifier 'control)
+  (setq mac-option-modifier 'meta))
 
 ;; fix the PATH variable
 (when (eq window-system 'ns)
