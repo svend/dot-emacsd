@@ -12,6 +12,9 @@
 ;; This was turned off in Emacs 24
 (setq mouse-drag-copy-region t)
 
+;; Scroll one line at a time with mouse
+(setq mouse-wheel-scroll-amount '(1))
+
 ;; Display clock in the status bar
 (display-time-mode t)
 
