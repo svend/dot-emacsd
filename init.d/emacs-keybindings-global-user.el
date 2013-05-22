@@ -9,6 +9,7 @@
 (global-set-key (kbd "C-c a")   'align-current)
 (global-set-key (kbd "C-c b")   'bbdb)
 (global-set-key (kbd "C-c d")   'my-insert-date)
+(global-set-key (kbd "C-c f")   'flycheck-mode)
 (global-set-key (kbd "C-c h")   'helm-mini)
 (global-set-key (kbd "C-c k")   'kill-this-buffer)
 (global-set-key (kbd "C-c n")   'linum-mode)
