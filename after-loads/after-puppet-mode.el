@@ -1,5 +1,3 @@
-(add-hook 'puppet-mode-hook 'flymake-puppet-load)
-
 ; puppet-mode rebinds RET to newline-and-indent. Remove this
 ; keybinding.
 (define-key puppet-mode-map "\C-m" nil)
