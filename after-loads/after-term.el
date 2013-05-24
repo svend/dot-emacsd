@@ -30,7 +30,7 @@
   (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
 
   ;; Paste keybinding for keyboards with no insert
-  (define-key term-raw-map (kbd "C-S-v") 'term-paste)
+  (define-key term-raw-map (kbd "C-M-y") 'term-paste)
 
   ;; Enable address links in term mode
   (goto-address-mode))
