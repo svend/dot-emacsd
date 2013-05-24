@@ -11,3 +11,7 @@
 (global-set-key (kbd "C--") 'er/contract-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-x 7") 'my-rotate-windows)
+
+;; Bind C-h to backspace
+;; http://david.rothlis.net/emacs/ergonomics.html
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
