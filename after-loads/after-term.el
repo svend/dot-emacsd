@@ -29,8 +29,8 @@
   ;; Enable Emacs M-x keybinding in terminal
   (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
 
-  ;; Paste keybinding for keyboards with no insert
-  (define-key term-raw-map (kbd "C-M-y") 'term-paste)
+  ;; Paste keybinding for Mac keyboards with no insert
+  (define-key term-raw-map (kbd "s-v") 'term-paste)
 
   ;; Enable address links in term mode
   (goto-address-mode))
