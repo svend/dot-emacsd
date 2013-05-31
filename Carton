@@ -24,10 +24,3 @@
 (depends-on "puppet-mode")
 (depends-on "solarized-theme")
 (depends-on "yaml-mode")
-
-;; Dependencies (are these required?)
-(depends-on "dash")
-(depends-on "pcache")
-(depends-on "s")
-(depends-on "logito")
-(depends-on "gh")
