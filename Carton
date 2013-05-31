@@ -1,5 +1,6 @@
 ;; -*- mode: Lisp -*-
 (source "melpa" "http://melpa.milkbox.net/packages/")
+(source "org" "http://orgmode.org/elpa/")
 
 (depends-on "solarized-theme")
 (depends-on "bbdb")
@@ -18,7 +19,7 @@
 (depends-on "inf-ruby")
 (depends-on "magit")
 (depends-on "markdown-mode")
-(depends-on "org")
+(depends-on "org-plus-contrib")
 (depends-on "projectile")
 (depends-on "puppet-mode")
 (depends-on "solarized-theme")
