@@ -2,6 +2,7 @@
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mdwn$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
+(add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
 
 ;; From https://github.com/bbatsov/prelude/blob/master/modules/prelude-ruby.el
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
