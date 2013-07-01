@@ -1,5 +1,3 @@
-# Ignore package directory
-/elpa/
 # Ignore session files
 #
 # Session files are written under ~/.emacs.d. There doesn't seem to be
