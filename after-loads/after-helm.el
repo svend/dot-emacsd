@@ -1,6 +1,4 @@
 (require 'helm-ls-git)
-(setq helm-idle-delay 0.1)
-(setq helm-input-idle-delay 0.1)
 (add-to-list 'helm-for-files-preferred-list 'helm-source-ls-git t)
 (delete 'helm-source-locate helm-for-files-preferred-list)
 (helm-attrset 'follow 1 helm-source-buffers-list)
