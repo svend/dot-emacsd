@@ -1,6 +1,7 @@
 (add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
+(add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
 
 ;; From https://github.com/bbatsov/prelude/blob/master/modules/prelude-ruby.el
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
