@@ -9,8 +9,6 @@
 ;; transfer methods, giving better performance." (ssh is inline,
 ;; scp and scpc is external.)
 ;;
-;; http://www.xemacs.org/Documentation/packages/html/tramp_4.html#SEC10
-;;
 ;; "My suggestion is to use an inline method. For large files,
 ;; out-of-band methods might be more efficient, but I guess that
 ;; most people will want to edit mostly small files.
@@ -19,9 +17,11 @@
 ;; machine by using ssh. So I suggest that you use the `ssh'
 ;; method."
 ;;
-;; http://www.xemacs.org/Documentation/packages/html/tramp_4.html#SEC11
+;; http://www.gnu.org/software/emacs/manual/html_node/tramp/Default-Method.html#Default-Method
 ;;
-(setq tramp-default-method "scpc")
+(if (< emacs-major-version 24)
+    ;; scpc is deprecated in emacs 24
+    (setq tramp-default-method "scpc"))
 
 ;; Edit remote files via sudo
 ;;
@@ -43,7 +43,6 @@
 ;; (I'ld like to get a Visual Warning when working in a sudo:ed
 ;; context)
 ;;
-;; TODO: Background color is wrong with color-theme-solarized.
 (defun my-mode-line-warn-when-root ()
   (when (string-match "^/su\\(do\\)?:" default-directory)
     (setq mode-line-format
