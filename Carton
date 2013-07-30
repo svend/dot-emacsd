@@ -2,7 +2,6 @@
 (source "melpa" "http://melpa.milkbox.net/packages/")
 (source "org" "http://orgmode.org/elpa/")
 
-(depends-on "solarized-theme")
 (depends-on "bbdb")
 (depends-on "coffee-mode")
 (depends-on "csv-mode")
