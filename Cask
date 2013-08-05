@@ -14,6 +14,7 @@
 (depends-on "git-commit-mode")
 (depends-on "haskell-mode")
 (depends-on "helm")
+(depends-on "helm-git-grep")
 (depends-on "helm-ls-git")
 (depends-on "helm-projectile")
 (depends-on "inf-ruby")
