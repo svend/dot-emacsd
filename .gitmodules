@@ -3,4 +3,4 @@
 	url = https://github.com/svend/emacsd-elpa.git
 [submodule "emacs-carton"]
 	path = emacs-carton
-	url = https://github.com/rejeep/carton.git
+	url = https://github.com/rejeep/cask.el.git
