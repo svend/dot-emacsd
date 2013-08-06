@@ -1,4 +1,5 @@
 (add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
+(add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
 (add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
