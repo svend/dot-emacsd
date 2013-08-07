@@ -5,5 +5,3 @@
 #
 # http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term/x-win.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n117
 /session.*
-# Cask v0.4-wip creates a .cask directory
-/.cask/
