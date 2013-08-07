@@ -1,5 +1,5 @@
 [submodule "elpa"]
-	path = elpa
+	path = .cask/24.3.50.1/elpa
 	url = https://github.com/svend/emacsd-elpa.git
 [submodule "emacs-carton"]
 	path = emacs-carton
