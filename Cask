@@ -4,8 +4,8 @@
 
 (depends-on "bbdb")
 (depends-on "buffer-move")
-(depends-on "coffee-mode")
 (depends-on "calfw")
+(depends-on "coffee-mode")
 (depends-on "csv-mode")
 (depends-on "easy-after-load")
 (depends-on "exec-path-from-shell")
