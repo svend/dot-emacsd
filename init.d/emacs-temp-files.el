@@ -7,7 +7,7 @@
       `((".*" ,"~/.cache/emacs/backup/" t)))
 
 (setq desktop-path '("~/.cache/emacs/"))
-(desktop-save-mode t)
+(desktop-save-mode 1)
 
 ;; Auto-save list files
 (setq auto-save-list-file-prefix "~/.cache/emacs/auto-save-list/.saves-")
