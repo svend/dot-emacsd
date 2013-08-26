@@ -21,6 +21,7 @@
 (depends-on "inf-ruby")
 (depends-on "magit")
 (depends-on "markdown-mode")
+(depends-on "mmm-mode")
 (depends-on "org-plus-contrib")
 (depends-on "projectile")
 (depends-on "puppet-mode")
