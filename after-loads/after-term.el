@@ -11,10 +11,6 @@
   (make-local-variable 'global-hl-line-mode)
   (setq global-hl-line-mode nil)
 
-  ;; Copy on select with mouse
-  (make-local-variable 'mouse-drag-copy-region)
-  (setq mouse-drag-copy-region t)
-
   ;; Make term mode more term-like
 
   (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
