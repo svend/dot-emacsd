@@ -24,3 +24,5 @@
 
 ;; URL cache
 (setq url-cache-directory "~/.cache/emacs/url")
+
+(setq save-place-file "~/.cache/emacs/places")
