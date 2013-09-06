@@ -10,6 +10,7 @@
 (depends-on "easy-after-load")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
+(depends-on "elfeed")
 (depends-on "flycheck")
 (depends-on "gist")
 (depends-on "git-commit-mode")
