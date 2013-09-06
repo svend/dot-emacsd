@@ -4,9 +4,7 @@
   ;; Settings recommended in term.el
   ;;
   ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
-  (make-local-variable 'transient-mark-mode)
   (make-local-variable 'mouse-yank-at-point)
-  (setq transient-mark-mode nil)
   (setq mouse-yank-at-point t)
 
   ;; Disable hl-line-mode in term buffers
