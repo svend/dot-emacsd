@@ -1,3 +1,3 @@
-[submodule "emacs-carton"]
-	path = emacs-carton
-	url = https://github.com/rejeep/cask.el.git
+[submodule "emacs-cask"]
+	path = emacs-cask
+	url = https://github.com/cask/cask.git
