@@ -3,4 +3,5 @@
 
 (setq erc-prompt-for-nickserv-password nil)
 (setq erc-nickserv-passwords
-      `((BitlBee ((,bitlbee-username . ,bitlbee-password)))))
+      `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+	((freenode ((,freenode-username . ,freenode-password))))))
