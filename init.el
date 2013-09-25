@@ -6,5 +6,5 @@
     "The full path to user init directory")
 
   ;; Load all *.el files under user init directory
-  (dolist (file (directory-files user-emacs-init-path t "\\.el$"))
+  (dolist (file (directory-files user-emacs-init-path t "\\.el\\(\\.gpg\\)?$"))
     (load file)))
