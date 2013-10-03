@@ -1,5 +1,4 @@
 (erc-services-mode 1)
-(erc-scrolltobottom-mode 1)
 (erc-spelling-mode 1)
 
 (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
