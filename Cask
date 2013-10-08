@@ -12,6 +12,7 @@
 (depends-on "expand-region")
 (depends-on "elfeed")
 (depends-on "flycheck")
+(depends-on "flx-ido")
 (depends-on "gist")
 (depends-on "git-commit-mode")
 (depends-on "haskell-mode")
