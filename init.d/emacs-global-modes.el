@@ -14,7 +14,7 @@
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-max-prospects 10
-      ido-save-directory-list-file (expand-file-name "ido.hist" "~/.cache/emacs/")
+      ido-save-directory-list-file (expand-file-name "ido.hist" emacs-cache-dir)
       ido-default-file-method 'selected-window
       ido-auto-merge-work-directories-length -1)
 (ido-mode +1)

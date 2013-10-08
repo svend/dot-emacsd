@@ -1,5 +1,5 @@
 ;; Put tramp history file under ~/.cache
-(setq tramp-persistency-file-name "~/.cache/emacs/tramp")
+(setq tramp-persistency-file-name (expand-file-name "tramp" emacs-cache-dir))
 
 ;; Set default connection method to scpc (scp with ControlMaster)
 ;;

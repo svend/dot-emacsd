@@ -2,15 +2,15 @@
 
 ;; Backup and auto-saves
 (setq backup-directory-alist
-      `((".*" . ,"~/.cache/emacs/backup/")))
+      `((".*" . ,(expand-file-name "backup/" emacs-cache-dir))))
 (setq auto-save-file-name-transforms
-      `((".*" ,"~/.cache/emacs/backup/" t)))
+      `((".*" ,(expand-file-name "backup/" emacs-cache-dir) t)))
 
-(setq desktop-path '("~/.cache/emacs/"))
+(setq desktop-path `(,emacs-cache-dir))
 (desktop-save-mode 1)
 
 ;; Auto-save list files
-(setq auto-save-list-file-prefix "~/.cache/emacs/auto-save-list/.saves-")
+(setq auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" emacs-cache-dir))
 
 ;; Lock files
 ;;
@@ -23,6 +23,6 @@
 (setq create-lockfiles nil)
 
 ;; URL cache
-(setq url-cache-directory "~/.cache/emacs/url")
+(setq url-cache-directory (expand-file-name "url" emacs-cache-dir))
 
-(setq save-place-file "~/.cache/emacs/places")
+(setq save-place-file (expand-file-name "places" emacs-cache-dir))

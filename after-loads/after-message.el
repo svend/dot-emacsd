@@ -1,5 +1,5 @@
 ;; Save drafts under ~/.cache/emacs
-(setq message-auto-save-directory "~/.cache/emacs/mail/drafts")
+(setq message-auto-save-directory (expand-file-name "mail/drafts" emacs-cache-dir))
 
 ;; Use MSMTP with auto-smtp selection
 ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3

@@ -3,7 +3,7 @@
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
 
 ;; Put recentf save file under ~/.cache and reload
-(setq recentf-save-file "~/.cache/emacs/.recentf")
+(setq recentf-save-file (expand-file-name ".recentf" emacs-cache-dir))
 (recentf-load-list)
 
 ;; Increase size of recent file list

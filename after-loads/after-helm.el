@@ -3,5 +3,5 @@
 (delete 'helm-source-locate helm-for-files-preferred-list)
 (helm-attrset 'follow 1 helm-source-buffers-list)
 
-(setq helm-adaptive-history-file "~/.cache/emacs/helm-adaptive-history")
+(setq helm-adaptive-history-file (expand-file-name "helm-adaptive-history" emacs-cache-dir))
 (helm-adaptative-mode 1)

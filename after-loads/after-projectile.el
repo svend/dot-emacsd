@@ -1,4 +1,4 @@
-(setq projectile-known-projects-file "~/.cache/emacs/projectile-bookmarks.eld")
+(setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" emacs-cache-dir))
 (projectile-load-known-projects)
 
 ;; Use my default (helm) instead of projectile default (ido)
