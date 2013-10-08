@@ -20,6 +20,7 @@
 (depends-on "helm-git-grep")
 (depends-on "helm-ls-git")
 (depends-on "helm-projectile")
+(depends-on "ido-ubiquitous")
 (depends-on "inf-ruby")
 (depends-on "magit")
 (depends-on "markdown-mode")
