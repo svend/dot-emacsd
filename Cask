@@ -2,6 +2,7 @@
 (source "melpa" "http://melpa.milkbox.net/packages/")
 (source "org" "http://orgmode.org/elpa/")
 
+(depends-on "bash-completion")
 (depends-on "bbdb")
 (depends-on "buffer-move")
 (depends-on "calfw")
