@@ -4,6 +4,7 @@
 ;; (add-hook 'after-init-hook 'ido-mode)
 ;; (add-hook 'after-init-hook 'ido-ubiquitous)
 (add-hook 'after-init-hook 'projectile-global-mode)
+(add-hook 'after-init-hook 'bash-completion-setup)
 
 ;; ido-mode
 (require 'ido)
