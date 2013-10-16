@@ -1,28 +1,6 @@
 ;; Put tramp history file under ~/.cache
 (setq tramp-persistency-file-name (expand-file-name "tramp" emacs-cache-dir))
 
-;; Set default connection method to scpc (scp with ControlMaster)
-;;
-;; TODO: What is the best method (scpc, scp, ssh)?
-;;
-;; "External transfer methods are normally preferable to inline
-;; transfer methods, giving better performance." (ssh is inline,
-;; scp and scpc is external.)
-;;
-;; "My suggestion is to use an inline method. For large files,
-;; out-of-band methods might be more efficient, but I guess that
-;; most people will want to edit mostly small files.
-;;
-;; I guess that these days, most people can access a remote
-;; machine by using ssh. So I suggest that you use the `ssh'
-;; method."
-;;
-;; http://www.gnu.org/software/emacs/manual/html_node/tramp/Default-Method.html#Default-Method
-;;
-(if (< emacs-major-version 24)
-    ;; scpc is deprecated in emacs 24
-    (setq tramp-default-method "scpc"))
-
 ;; Edit remote files via sudo
 ;;
 ;; Enable editing of remote files as root using sudo using the
