@@ -23,6 +23,7 @@
 (depends-on "helm-projectile")
 (depends-on "ido-ubiquitous")
 (depends-on "inf-ruby")
+(depends-on "json-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
@@ -32,3 +33,4 @@
 (depends-on "smex")
 (depends-on "solarized-theme")
 (depends-on "yaml-mode")
+(depends-on "zenburn-theme")
