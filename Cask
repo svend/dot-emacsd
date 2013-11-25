@@ -16,6 +16,7 @@
 (depends-on "flycheck")
 (depends-on "gist")
 (depends-on "git-commit-mode")
+(depends-on "go-mode")
 (depends-on "haskell-mode")
 (depends-on "helm")
 (depends-on "helm-git-grep")
