@@ -37,15 +37,6 @@
 ;; Disable tool bar
 (tool-bar-mode 0)
 
-;; Enable/disable menubar in GUI/text frames
-;; http://darcsden.com/lyro/config/browse/+.emacs
-(menu-bar-mode (if (window-system) t 0))
-(defun my-show-x-menu-bar (&optional frame)
-  (if (window-system frame)
-      (menu-bar-mode t)
-      (modify-frame-parameters frame '((menu-bar-lines . 1)))))
-(add-hook 'after-make-frame-functions 'my-show-x-menu-bar)
-
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
