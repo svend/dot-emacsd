@@ -31,6 +31,9 @@
 ;; (setq global-hl-line-mode nil)
 (global-hl-line-mode t)
 
+;; Disable menu bar
+(menu-bar-mode 0)
+
 ;; Disable tool bar
 (tool-bar-mode 0)
 
