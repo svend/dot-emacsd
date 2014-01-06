@@ -25,6 +25,7 @@
 (depends-on "ido-ubiquitous")
 (depends-on "inf-ruby")
 (depends-on "json-mode")
+(depends-on "ledger-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
