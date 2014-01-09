@@ -26,3 +26,8 @@
 (setq url-cache-directory (expand-file-name "url" emacs-cache-dir))
 
 (setq save-place-file (expand-file-name "places" emacs-cache-dir))
+
+;; Minibuffer history
+(setq history-length 10000)
+(setq savehist-file (expand-file-name "history" emacs-cache-dir))
+(setq savehist-mode t)
