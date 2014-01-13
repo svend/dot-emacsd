@@ -27,6 +27,9 @@
   (define-key term-raw-map (kbd "s-v") 'term-paste)
 
   ;; Enable address links in term mode
-  (goto-address-mode))
+  (goto-address-mode)
+
+  ;; Do not wrap
+  (setq truncate-lines t))
 
 (add-hook 'term-mode-hook 'my-setup-term-mode)
