@@ -18,12 +18,13 @@
 
 ** UI
 
+Hide welcome screen.
+
 #+BEGIN_SRC emacs-lisp
-;; UI settings
-
-;; Hide welcome screen
 (setq inhibit-splash-screen t)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 ;; Display date and time in 24 hour format
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
@@ -63,7 +64,6 @@
 
 ;; Enable recent files mode
 (recentf-mode t)
-
 #+END_SRC
 
 *** Themes
