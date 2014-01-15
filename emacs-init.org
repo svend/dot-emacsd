@@ -128,6 +128,19 @@ Press =C-c C-h= to show all of these.
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 #+END_SRC
 
+** OS X specific configuration
+
+Fix environment, including PATH, using =exec-path-from-shell= package.
+
+Use Adobe's Source Code Pro font.
+
+#+BEGIN_SRC emacs-lisp
+(when (eq window-system 'ns)
+  (exec-path-from-shell-initialize)
+  (menu-bar-mode 1)
+  (set-face-attribute 'default nil :font "Source Code Pro" :height 140))
+#+END_SRC
+
 ** Load individual configuration snippets
 
 #+BEGIN_SRC emacs-lisp
