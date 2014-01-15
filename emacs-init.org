@@ -78,8 +78,8 @@ Load Solarized Light theme.
 
 ** User-reserved
 
-C-c letter and <F5> through <F9> are reserved for user use. Press "C-c
-C-h" to show all of these.
+=C-c letter= and =<F5>= through =<F9>= are reserved for user use.
+Press =C-c C-h= to show all of these.
 
 - [[info:elisp#Key Binding Conventions][Key Binding Conventions]]
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
