@@ -1,3 +1,5 @@
+** Set cache directory
+
 #+BEGIN_SRC emacs-lisp
 (defvar emacs-cache-dir "~/.cache/emacs"
   "Path to store temporary emacs files.")
