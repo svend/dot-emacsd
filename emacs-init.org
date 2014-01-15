@@ -1,0 +1,8 @@
+#+BEGIN_SRC emacs-lisp
+(defvar user-emacs-init-path
+  "~/.emacs.d/init.d"
+  "The full path to user init directory")
+
+(dolist (file (directory-files user-emacs-init-path t "\\.el\\(\\.gpg\\)?$"))
+  (load file))
+#+END_SRC
