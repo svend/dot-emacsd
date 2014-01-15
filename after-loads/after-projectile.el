@@ -3,5 +3,5 @@
 
 ;; ;; Use my default (helm) instead of projectile default (ido)
 ;; (setq projectile-completion-system 'default)
-(setq projectile-switch-project-action 'projectile-vc-dir)
+(setq projectile-switch-project-action 'projectile-vc)
 (setq projectile-use-git-grep t)
