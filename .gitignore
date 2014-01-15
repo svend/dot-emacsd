@@ -7,3 +7,5 @@
 /session.*
 # Ignore .cask
 /.cask/
+# Ignore .el generated from .org
+/emacs-init.el
