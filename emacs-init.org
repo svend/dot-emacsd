@@ -218,7 +218,7 @@ Use Adobe's Source Code Pro font.
 (add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
 #+END_SRC
 
-Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/master/modules/prelude-ruby.el][prelude]].
+Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
 #+BEGIN_SRC 
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
@@ -233,6 +233,22 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/master
 (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
+#+END_SRC
+
+** Languages
+
+*** Shell script
+
+#+BEGIN_SRC 
+(defun my-setup-sh-mode ()
+  "My preferences for sh-mode"
+  (interactive)
+  (setq sh-basic-offset 8)
+  (setq sh-indentation 8)
+  (setq sh-indent-for-case-alt '+)
+  (setq sh-indent-for-case-label 0))
+
+(add-hook 'sh-mode-hook 'my-setup-sh-mode)
 #+END_SRC
 
 ** Load individual configuration snippets
