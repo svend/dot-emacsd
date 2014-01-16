@@ -210,7 +210,7 @@ Use Adobe's Source Code Pro font.
 
 ** Auto modes
 
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
@@ -220,7 +220,7 @@ Use Adobe's Source Code Pro font.
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
@@ -239,7 +239,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 *** Shell script
 
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 (defun my-setup-sh-mode ()
   "My preferences for sh-mode"
   (interactive)
@@ -249,6 +249,42 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
   (setq sh-indent-for-case-label 0))
 
 (add-hook 'sh-mode-hook 'my-setup-sh-mode)
+#+END_SRC
+
+** Miscellaneous settings
+
+#+BEGIN_SRC emacs-lisp
+;; Require an EOL at end of files
+(setq require-final-newline t)
+
+;; One space after sentences
+(setq sentence-end-double-space nil)
+
+;; Enable disabled commands
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; Use GUI web browser if it is available
+(if (executable-find "x-www-browser")
+    (progn
+      (setq browse-url-generic-program "x-www-browser")
+      (setq browse-url-browser-function 'browse-url-generic)))
+
+;; Start emacs server
+;; (server-running-p requires server)
+(autoload 'server-running-p "server")
+(unless (server-running-p)
+  (server-start))
+
+;; Do not clobber text copied from the clipboard
+(setq save-interprogram-paste-before-kill t)
+
+;; Turn on flyspell and goto-address for all text and prog modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'goto-address-mode)
+
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+END_SRC
 
 ** Load individual configuration snippets
