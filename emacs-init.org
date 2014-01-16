@@ -363,13 +363,10 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+END_SRC
 
-** Load individual configuration snippets
+** Load secrets file
+
+TODO: Check if file exists.
 
 #+BEGIN_SRC emacs-lisp
-(defvar user-emacs-init-path
-  "~/.emacs.d/init.d"
-  "The full path to user init directory")
-
-(dolist (file (directory-files user-emacs-init-path t "\\.el\\(\\.gpg\\)?$"))
-  (load file))
+(load-file "secrets.el.gpg")
 #+END_SRC
