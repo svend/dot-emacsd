@@ -131,6 +131,13 @@ Press =C-c C-h= to show all of these.
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 #+END_SRC
 
+** Emacs paths
+
+#+BEGIN_SRC emacs-lisp
+(defvar emacs-cache-dir "~/.cache/emacs"
+  "Path to store temporary emacs files.")
+#+END_SRC
+
 ** User defined functions
 
 #+BEGIN_SRC emacs-lisp
