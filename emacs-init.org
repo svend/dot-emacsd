@@ -138,6 +138,75 @@ Press =C-c C-h= to show all of these.
   "Path to store temporary emacs files.")
 #+END_SRC
 
+** Emacs global modes
+
+#+BEGIN_SRC emacs-lisp
+(winner-mode 1)
+(windmove-default-keybindings)
+(add-hook 'after-init-hook 'global-flycheck-mode)
+;; (add-hook 'after-init-hook 'ido-mode)
+;; (add-hook 'after-init-hook 'ido-ubiquitous)
+(add-hook 'after-init-hook 'projectile-global-mode)
+(add-hook 'after-init-hook 'bash-completion-setup)
+
+;; ido-mode
+(require 'ido)
+(require 'ido-ubiquitous)
+(require 'flx-ido)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-max-prospects 10
+      ido-save-directory-list-file (expand-file-name "ido.hist" emacs-cache-dir)
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
+(ido-mode +1)
+(ido-ubiquitous-mode +1)
+;; smarter fuzzy matching for ido
+(flx-ido-mode +1)
+;; disable ido faces to see flx highlights
+(setq ido-use-faces nil)
+#+END_SRC
+
+** Emacs temporary files
+
+Put temporary files under =~/.cache/emacs=.
+
+#+BEGIN_SRC emacs-lisp
+;; Backup and auto-saves
+(setq backup-directory-alist
+      `((".*" . ,(expand-file-name "backup/" emacs-cache-dir))))
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name "backup/" emacs-cache-dir) t)))
+
+(setq desktop-path `(,emacs-cache-dir))
+(desktop-save-mode 1)
+
+;; Auto-save list files
+(setq auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" emacs-cache-dir))
+
+;; Lock files
+;;
+;; http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
+;;
+;; Locks are created in the same directory as the file being
+;; edited. They can be disabled as of 24.3.
+;;
+;; http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
+(setq create-lockfiles nil)
+
+;; URL cache
+(setq url-cache-directory (expand-file-name "url" emacs-cache-dir))
+
+(setq save-place-file (expand-file-name "places" emacs-cache-dir))
+
+;; Minibuffer history
+(setq history-length 10000)
+(setq savehist-file (expand-file-name "history" emacs-cache-dir))
+(setq savehist-mode t)
+#+END_SRC
+
 ** User defined functions
 
 #+BEGIN_SRC emacs-lisp
