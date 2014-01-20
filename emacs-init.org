@@ -330,6 +330,8 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 ** Miscellaneous settings
 
 #+BEGIN_SRC emacs-lisp
+(setq safe-local-variable-values '((encoding . utf-8)))
+
 ;; Require an EOL at end of files
 (setq require-final-newline t)
 
