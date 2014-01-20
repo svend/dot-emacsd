@@ -374,5 +374,5 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 TODO: Check if file exists.
 
 #+BEGIN_SRC emacs-lisp
-;; (load-file "secrets.el.gpg")
+(load-file "secrets.el.gpg")
 #+END_SRC
