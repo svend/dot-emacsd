@@ -21,10 +21,11 @@
   (define-key term-mode-map (kbd "C-'") 'term-char-mode)
 
   ;; Enable Emacs M-x keybinding in terminal
-  (define-key term-raw-map (kbd "M-x") 'execute-extended-command)
+  (define-key term-raw-map (kbd "M-x") nil)
 
   ;; Paste keybinding for Mac keyboards with no insert
   (define-key term-raw-map (kbd "s-v") 'term-paste)
+  (define-key term-raw-map (kbd "C-c y") 'term-paste)
 
   ;; Enable address links in term mode
   (goto-address-mode)
