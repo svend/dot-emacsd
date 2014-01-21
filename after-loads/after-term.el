@@ -20,17 +20,16 @@
   (define-key term-raw-map (kbd "C-'") 'term-line-mode)
   (define-key term-mode-map (kbd "C-'") 'term-char-mode)
 
-  ;; Enable Emacs M-x keybinding in terminal
+  ;; Enable Emacs key bindings in term mode
+  (define-key term-raw-map (kbd "M-!") nil)
+  (define-key term-raw-map (kbd "M-&") nil)
   (define-key term-raw-map (kbd "M-x") nil)
 
-  ;; Paste keybinding for Mac keyboards with no insert
-  (define-key term-raw-map (kbd "s-v") 'term-paste)
+  ;; Paste key bindings for Mac keyboards with no insert
   (define-key term-raw-map (kbd "C-c y") 'term-paste)
+  (define-key term-raw-map (kbd "s-v") 'term-paste)
 
   ;; Enable address links in term mode
-  (goto-address-mode)
-
-  ;; Do not wrap
-  (setq truncate-lines t))
+  (goto-address-mode))
 
 (add-hook 'term-mode-hook 'my-setup-term-mode)
