@@ -115,25 +115,26 @@ Press =C-c C-h= to show all of these.
 *** Non-user
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "<C-wheel-down>") 'zoom-out)
-(global-set-key (kbd "<C-wheel-up>")   'zoom-in)
-(global-set-key (kbd "C-c C-=")	       'zoom-in)
-(global-set-key (kbd "C-c C--")	       'zoom-out)
-(global-set-key (kbd "C-c C-0")	       'toggle-zoom-frame)
+;; zoom-frm
+(autoload 'zoom-in/out "zoom-frm")
+(define-key ctl-x-map (kbd "C-+")   'zoom-in/out)
+(define-key ctl-x-map (kbd "C--")   'zoom-in/out)
+(define-key ctl-x-map (kbd "C-0")   'zoom-in/out)
+(define-key ctl-x-map (kbd "C-=")   'zoom-in/out)
 
 ; expand-region
-(global-set-key (kbd "C--")            'er/contract-region)
-(global-set-key (kbd "C-=")            'er/expand-region)
-(global-set-key (kbd "C-`")            'helm-for-files)
+(global-set-key (kbd "C--")         'er/contract-region)
+(global-set-key (kbd "C-=")         'er/expand-region)
+(global-set-key (kbd "C-`")         'helm-for-files)
 
 ; buffer-move
-(global-set-key (kbd "<C-S-up>")       'buf-move-up)
-(global-set-key (kbd "<C-S-down>")     'buf-move-down)
-(global-set-key (kbd "<C-S-left>")     'buf-move-left)
-(global-set-key (kbd "<C-S-right>")    'buf-move-right)
+(global-set-key (kbd "<C-S-up>")    'buf-move-up)
+(global-set-key (kbd "<C-S-down>")  'buf-move-down)
+(global-set-key (kbd "<C-S-left>")  'buf-move-left)
+(global-set-key (kbd "<C-S-right>") 'buf-move-right)
 
-(global-set-key (kbd "M-x")	       'smex)
-(global-set-key (kbd "M-X")	       'smex-major-mode-commands)
+(global-set-key (kbd "M-x")	    'smex)
+(global-set-key (kbd "M-X")	    'smex-major-mode-commands)
 #+END_SRC
 
 ** Emacs paths
