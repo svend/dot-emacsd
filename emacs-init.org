@@ -1,4 +1,11 @@
 * Emacs configuration
+** User information
+
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name    "Svend Sorensen")
+(setq user-mail-address "svend@ciffer.net")
+#+END_SRC
+
 ** Set cache directory
 
 #+BEGIN_SRC emacs-lisp
@@ -247,18 +254,12 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 #+END_SRC
 
-** User information
-
-#+BEGIN_SRC emacs-lisp
-(setq user-full-name "Svend Sorensen")
-(setq user-mail-address "svend@ciffer.net")
-#+END_SRC
-
 ** OS X specific configuration
 
-Fix environment, including PATH, using =exec-path-from-shell= package.
-
-Use Adobe's Source Code Pro font.
+- Fix environment, including PATH, using =exec-path-from-shell=
+  package.
+- Turn on menu bar, since it does not use any extra space on OS X.
+- Use Adobe's Source Code Pro font.
 
 #+BEGIN_SRC emacs-lisp
 (when (eq window-system 'ns)
@@ -269,27 +270,29 @@ Use Adobe's Source Code Pro font.
 
 ** Auto modes
 
+=bash-fc-*= are bash command editing temporary files (=fc= built-in).
+
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
+(add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
-(add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
-(add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.pp$"		  . puppet-mode))
+(add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
+(add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
 #+END_SRC
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
 #+BEGIN_SRC emacs-lisp
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.thor\\'"	 . ruby-mode))
+(add-to-list 'auto-mode-alist '("Thorfile\\'"	 . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
 #+END_SRC
@@ -308,6 +311,17 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
   (setq sh-indent-for-case-label 0))
 
 (add-hook 'sh-mode-hook 'my-setup-sh-mode)
+#+END_SRC
+
+** Emacs server
+
+Start emacs server unless one is already running. ='server-running-p=
+requires =server=.
+
+#+BEGIN_SRC emacs-lisp
+(autoload 'server-running-p "server")
+(unless (server-running-p)
+  (server-start))
 #+END_SRC
 
 ** Miscellaneous settings
@@ -329,12 +343,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
     (progn
       (setq browse-url-generic-program "x-www-browser")
       (setq browse-url-browser-function 'browse-url-generic)))
-
-;; Start emacs server
-;; (server-running-p requires server)
-(autoload 'server-running-p "server")
-(unless (server-running-p)
-  (server-start))
 
 ;; Do not clobber text copied from the clipboard
 (setq save-interprogram-paste-before-kill t)
