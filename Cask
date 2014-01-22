@@ -38,3 +38,4 @@
 (depends-on "solarized-theme")
 (depends-on "yaml-mode")
 (depends-on "zenburn-theme")
+(depends-on "zoom-frm")
