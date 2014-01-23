@@ -6,24 +6,11 @@
 (setq user-mail-address "svend@ciffer.net")
 #+END_SRC
 
-** Set cache directory
-
-#+BEGIN_SRC emacs-lisp
-(defvar emacs-cache-dir "~/.cache/emacs"
-  "Path to store temporary emacs files.")
-#+END_SRC
-
 ** Initialize Cask
 
 #+BEGIN_SRC emacs-lisp
 (require 'cask "~/.emacs.d/emacs-cask/cask.el")
 (cask-initialize)
-#+END_SRC
-
-** After-loads
-
-#+BEGIN_SRC emacs-lisp
-(easy-after-load)
 #+END_SRC
 
 ** UI
@@ -78,7 +65,18 @@ Hide welcome screen.
 
 *** Themes
 
-Load Solarized Light theme.
+Solarized light theme.
+
+Disable variable width fonts. Disable variable font sizes.
+
+#+BEGIN_SRC emacs-lisp
+(setq solarized-use-variable-pitch nil)
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (load-theme 'solarized-light t)
@@ -151,6 +149,12 @@ Press =C-c C-h= to show all of these.
   "Path to store temporary emacs files.")
 #+END_SRC
 
+** After-loads
+
+#+BEGIN_SRC emacs-lisp
+(easy-after-load)
+#+END_SRC
+
 ** Emacs global modes
 
 #+BEGIN_SRC emacs-lisp
@@ -187,6 +191,9 @@ Press =C-c C-h= to show all of these.
 Put temporary files under =~/.cache/emacs=.
 
 #+BEGIN_SRC emacs-lisp
+(defvar emacs-cache-dir "~/.cache/emacs"
+  "Path to store temporary emacs files.")
+
 ;; Backup and auto-saves
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backup/" emacs-cache-dir))))
@@ -315,7 +322,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 ** Emacs server
 
-Start emacs server unless one is already running. ='server-running-p=
+Start emacs server unless one is already running. =server-running-p=
 requires =server=.
 
 #+BEGIN_SRC emacs-lisp
