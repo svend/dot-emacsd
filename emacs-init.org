@@ -110,7 +110,10 @@ Disable variable width fonts. Disable variable font sizes.
 "Clear password in kill-ring"
   (interactive)
   (if pass-kill-ring-pointer
-      (setcar pass-kill-ring-pointer "")))
+      (progn
+	(setcar pass-kill-ring-pointer "")
+	(setq pass-kill-ring-pointer nil)
+	(message "Password cleared"))))
 
 (defun pass-get (entry)
   "Return password for ENTRY"
@@ -125,7 +128,8 @@ stored in `pass-kill-ring-pointer'"
   (let ((password (pass-get entry)))
     (pass-clear)
     (kill-new password)
-    (setq pass-kill-ring-pointer kill-ring-yank-pointer)))
+    (setq pass-kill-ring-pointer kill-ring-yank-pointer)
+    (run-at-time "45 sec" nil 'pass-clear)))
 #+END_SRC
 
 ** Key bindings
