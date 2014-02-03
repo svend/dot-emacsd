@@ -85,6 +85,45 @@ Disable variable width fonts. Disable variable font sizes.
 (load-theme 'solarized-light t)
 #+END_SRC
 
+** Password-store
+
+#+BEGIN_SRC emacs-lisp
+(require 'f)
+(require 's)
+
+(defvar pass-dir "~/.password-store"
+  "Password store directory")
+
+(defvar pass-kill-ring-pointer nil
+  "The tail of of the kill ring ring whose car is the password")
+
+(defun pass-list (&optional subdir)
+  "List password entries under SUBDIR"
+  (unless subdir (setq subdir ""))
+  (let ((dir (f-join pass-dir subdir)))
+    (if (f-directory? dir)
+	(mapcar 'f-no-ext
+		(mapcar (lambda (file) (f-relative file pass-dir))
+			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t)))))))
+
+(defun pass-get (entry)
+  "Return password for ENTRY"
+  (s-chomp (shell-command-to-string (concat "pass " entry))))
+
+(defun pass-show (entry)
+  "Add password for ENTRY to kill ring
+
+Clear previous password from kill ring. Pointer to kill ring is
+stored in `pass-kill-ring-pointer'"
+  (interactive (list (completing-read "Password entry: " (pass-list))))
+  (let ((password (pass-get entry)))
+    ;; Clear previous password in kill-ring
+    (if pass-kill-ring-pointer
+	(setcar pass-kill-ring-pointer ""))
+    (kill-new password)
+    (setq pass-kill-ring-pointer kill-ring-yank-pointer)))
+#+END_SRC
+
 ** Key bindings
 
 *** User-reserved
