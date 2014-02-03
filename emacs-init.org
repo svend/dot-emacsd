@@ -106,6 +106,12 @@ Disable variable width fonts. Disable variable font sizes.
 		(mapcar (lambda (file) (f-relative file pass-dir))
 			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t)))))))
 
+(defun pass-clear ()
+"Clear password in kill-ring"
+  (interactive)
+  (if pass-kill-ring-pointer
+      (setcar pass-kill-ring-pointer "")))
+
 (defun pass-get (entry)
   "Return password for ENTRY"
   (s-chomp (shell-command-to-string (concat "pass " entry))))
@@ -117,9 +123,7 @@ Clear previous password from kill ring. Pointer to kill ring is
 stored in `pass-kill-ring-pointer'"
   (interactive (list (completing-read "Password entry: " (pass-list))))
   (let ((password (pass-get entry)))
-    ;; Clear previous password in kill-ring
-    (if pass-kill-ring-pointer
-	(setcar pass-kill-ring-pointer ""))
+    (pass-clear)
     (kill-new password)
     (setq pass-kill-ring-pointer kill-ring-yank-pointer)))
 #+END_SRC
