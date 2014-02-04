@@ -365,3 +365,9 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (eval-after-load 'flycheck '(require 'flycheck-ledger))
 #+END_SRC
+
+*** Load password store
+
+#+BEGIN_SRC emacs-lisp
+(load-file "~/.emacs.d/emacs-password-store/password-store.el")
+#+END_SRC
