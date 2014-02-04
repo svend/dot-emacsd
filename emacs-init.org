@@ -91,45 +91,45 @@ Disable variable width fonts. Disable variable font sizes.
 (require 'f)
 (require 's)
 
-(defvar pass-dir "~/.password-store"
+(defvar password-store-dir "~/.password-store"
   "Password store directory")
 
-(defvar pass-kill-ring-pointer nil
+(defvar password-store-kill-ring-pointer nil
   "The tail of of the kill ring ring whose car is the password")
 
-(defun pass-list (&optional subdir)
+(defun password-store-list (&optional subdir)
   "List password entries under SUBDIR"
   (unless subdir (setq subdir ""))
-  (let ((dir (f-join pass-dir subdir)))
+  (let ((dir (f-join password-store-dir subdir)))
     (if (f-directory? dir)
 	(mapcar 'f-no-ext
-		(mapcar (lambda (file) (f-relative file pass-dir))
+		(mapcar (lambda (file) (f-relative file password-store-dir))
 			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t)))))))
 
-(defun pass-clear ()
+(defun password-store-clear ()
 "Clear password in kill-ring"
   (interactive)
-  (if pass-kill-ring-pointer
+  (if password-store-kill-ring-pointer
       (progn
-	(setcar pass-kill-ring-pointer "")
-	(setq pass-kill-ring-pointer nil)
+	(setcar password-store-kill-ring-pointer "")
+	(setq password-store-kill-ring-pointer nil)
 	(message "Password cleared"))))
 
-(defun pass-get (entry)
+(defun password-store-get (entry)
   "Return password for ENTRY"
   (s-chomp (shell-command-to-string (concat "pass " entry))))
 
-(defun pass-show (entry)
+(defun password-store-show (entry)
   "Add password for ENTRY to kill ring
 
 Clear previous password from kill ring. Pointer to kill ring is
-stored in `pass-kill-ring-pointer'"
-  (interactive (list (completing-read "Password entry: " (pass-list))))
-  (let ((password (pass-get entry)))
-    (pass-clear)
+stored in `password-store-kill-ring-pointer'"
+  (interactive (list (completing-read "Password entry: " (password-store-list))))
+  (let ((password (password-store-get entry)))
+    (password-store-clear)
     (kill-new password)
-    (setq pass-kill-ring-pointer kill-ring-yank-pointer)
-    (run-at-time "45 sec" nil 'pass-clear)))
+    (setq password-store-kill-ring-pointer kill-ring-yank-pointer)
+    (run-at-time "45 sec" nil 'password-store-clear)))
 #+END_SRC
 
 ** Key bindings
