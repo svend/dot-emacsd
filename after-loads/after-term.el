@@ -6,6 +6,7 @@
   ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
   (make-local-variable 'mouse-yank-at-point)
   (setq mouse-yank-at-point t)
+  ;; End of recommended settings
 
   ;; Disable hl-line-mode in term buffers
   (make-local-variable 'global-hl-line-mode)
@@ -23,6 +24,7 @@
   ;; Enable Emacs key bindings in term mode
   (define-key term-raw-map (kbd "M-!") nil)
   (define-key term-raw-map (kbd "M-&") nil)
+  (define-key term-raw-map (kbd "M-:") nil)
   (define-key term-raw-map (kbd "M-x") nil)
 
   ;; Paste key bindings for Mac keyboards with no insert
