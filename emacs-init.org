@@ -87,6 +87,8 @@ Disable variable width fonts. Disable variable font sizes.
 
 ** Password-store
 
+[[http://www.zx2c4.com/projects/password-store/][pass]]
+
 #+BEGIN_SRC emacs-lisp
 (require 'f)
 (require 's)
