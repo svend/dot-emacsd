@@ -233,12 +233,6 @@ Put temporary files under =~/.cache/emacs=.
 ** User defined functions
 
 #+BEGIN_SRC emacs-lisp
-(defun my-clear-kill-ring ()
-  "Clear the kill ring"
-  (interactive)
-  (setq kill-ring nil)
-  (message "Cleared the kill ring"))
-
 (defun my-insert-date ()
   "Insert date string"
   (interactive)
