@@ -104,7 +104,7 @@ Disable variable width fonts. Disable variable font sizes.
     (if (f-directory? dir)
 	(mapcar 'f-no-ext
 		(mapcar (lambda (file) (f-relative file password-store-dir))
-			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t)))))))
+			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t))))))
 
 (defun password-store-clear ()
 "Clear password in kill-ring"
