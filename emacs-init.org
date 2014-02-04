@@ -85,58 +85,6 @@ Disable variable width fonts. Disable variable font sizes.
 (load-theme 'solarized-light t)
 #+END_SRC
 
-** Password-store
-
-[[http://www.zx2c4.com/projects/password-store/][pass]]
-
-#+BEGIN_SRC emacs-lisp
-(require 'f)
-(require 's)
-
-(defvar password-store-kill-ring-pointer nil
-  "The tail of of the kill ring ring whose car is the password")
-
-(defun password-store-dir ()
-  (or (getenv "PASSWORD_STORE_DIR")
-      "~/.password-store"))
-
-(defun password-store-list (&optional subdir)
-  "List password entries under SUBDIR"
-  (unless subdir (setq subdir ""))
-  (let ((dir (f-join (password-store-dir) subdir)))
-    (if (f-directory? dir)
-	(mapcar 'f-no-ext
-		(mapcar (lambda (file) (f-relative file (password-store-dir)))
-			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t))))))
-
-(defun password-store-clear ()
-"Clear password in kill-ring"
-  (interactive)
-  (if password-store-kill-ring-pointer
-      (progn
-	(setcar password-store-kill-ring-pointer "")
-	(setq password-store-kill-ring-pointer nil)
-	(message "Password cleared"))))
-
-(defun password-store-get (entry)
-  "Return password for ENTRY
-
-Returns the fist line of the password data."
-  (car (s-lines (shell-command-to-string (concat "pass " entry)))))
-
-(defun password-store-show (entry)
-  "Add password for ENTRY to kill ring
-
-Clear previous password from kill ring. Pointer to kill ring is
-stored in `password-store-kill-ring-pointer'"
-  (interactive (list (completing-read "Password entry: " (password-store-list))))
-  (let ((password (password-store-get entry)))
-    (password-store-clear)
-    (kill-new password)
-    (setq password-store-kill-ring-pointer kill-ring-yank-pointer)
-    (run-at-time "45 sec" nil 'password-store-clear)))
-#+END_SRC
-
 ** Key bindings
 
 *** User-reserved
