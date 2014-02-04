@@ -116,8 +116,10 @@ Disable variable width fonts. Disable variable font sizes.
 	(message "Password cleared"))))
 
 (defun password-store-get (entry)
-  "Return password for ENTRY"
-  (s-chomp (shell-command-to-string (concat "pass " entry))))
+  "Return password for ENTRY
+
+Returns the fist line of the password data."
+  (car (s-lines (shell-command-to-string (concat "pass " entry)))))
 
 (defun password-store-show (entry)
   "Add password for ENTRY to kill ring
