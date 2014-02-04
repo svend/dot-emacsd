@@ -93,19 +93,20 @@ Disable variable width fonts. Disable variable font sizes.
 (require 'f)
 (require 's)
 
-(defvar password-store-dir "~/.password-store"
-  "Password store directory")
-
 (defvar password-store-kill-ring-pointer nil
   "The tail of of the kill ring ring whose car is the password")
+
+(defun password-store-dir ()
+  (or (getenv "PASSWORD_STORE_DIR")
+      "~/.password-store"))
 
 (defun password-store-list (&optional subdir)
   "List password entries under SUBDIR"
   (unless subdir (setq subdir ""))
-  (let ((dir (f-join password-store-dir subdir)))
+  (let ((dir (f-join (password-store-dir) subdir)))
     (if (f-directory? dir)
 	(mapcar 'f-no-ext
-		(mapcar (lambda (file) (f-relative file password-store-dir))
+		(mapcar (lambda (file) (f-relative file (password-store-dir)))
 			(f-files dir (lambda (file) (equal (f-ext file) "gpg")) t))))))
 
 (defun password-store-clear ()
