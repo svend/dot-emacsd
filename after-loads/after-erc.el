@@ -3,10 +3,10 @@
 
 (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
 
-(setq bitlbee-username (password-store-copy "bitlbee-username"))
-(setq bitlbee-password (password-store-copy "bitlbee-password"))
-(setq freenode-username (password-store-copy "freenode/username"))
-(setq freenode-password (password-store-copy "freenode/password"))
+(setq bitlbee-username (password-store-get "bitlbee-username"))
+(setq bitlbee-password (password-store-get "bitlbee-password"))
+(setq freenode-username (password-store-get "freenode/username"))
+(setq freenode-password (password-store-get "freenode/password"))
 
 ;; Nickserv configuration
 (setq erc-prompt-for-nickserv-password nil)
