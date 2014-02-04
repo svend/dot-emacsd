@@ -371,11 +371,3 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (eval-after-load 'flycheck '(require 'flycheck-ledger))
 #+END_SRC
-
-** Load secrets file
-
-TODO: Check if file exists.
-
-#+BEGIN_SRC emacs-lisp
-(load-file (expand-file-name "secrets.el.gpg" user-emacs-directory))
-#+END_SRC
