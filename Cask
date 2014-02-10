@@ -34,6 +34,7 @@
 (depends-on "projectile")
 (depends-on "puppet-mode")
 (depends-on "robe")
+(depends-on "slime")
 (depends-on "smex")
 (depends-on "solarized-theme")
 (depends-on "yaml-mode")
