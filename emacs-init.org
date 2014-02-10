@@ -245,15 +245,16 @@ otherwise start a new ansi-term"
   (let (found-buffer
 	(directory (expand-file-name default-directory))
 	(buffers (buffer-list)))
-    (while buffers
+    (while (and (not found-buffer)
+		buffers)
       (with-current-buffer (car buffers)
-	(when (and (string= major-mode "term-mode") (string= default-directory directory))
-	  (setq found-buffer (car buffers))
-	  ;; Stop looking
-	  (setq buffers nil))
+	(when (and (string= major-mode "term-mode")
+		   (string= default-directory directory))
+	  (setq found-buffer (car buffers)))
 	(setq buffers (cdr buffers))))
     ;; If we found a term, switch to it, otherwise start a term
-    (if found-buffer
+    (if (and found-buffer
+	     (not (eq found-buffer (current-buffer))))
 	(switch-to-buffer found-buffer)
       (ansi-term "bash"))))
 #+END_SRC
