@@ -367,8 +367,10 @@ requires =server=.
 (eval-after-load 'flycheck '(require 'flycheck-ledger))
 #+END_SRC
 
-*** Load password store
+*** Slime
+
+[[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
 #+BEGIN_SRC emacs-lisp
-(load-file "~/.emacs.d/emacs-password-store/password-store.el")
+(setq inferior-lisp-program "sbcl")
 #+END_SRC
