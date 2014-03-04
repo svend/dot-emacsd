@@ -374,3 +374,15 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (setq inferior-lisp-program "sbcl")
 #+END_SRC
+
+*** exec-path-from-shell
+
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+	     :init
+	     (progn
+	       (mapc
+		(lambda (variable)
+		  (add-to-list 'exec-path-from-shell-variables variable))
+		'("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))))
+#+END_SRC
