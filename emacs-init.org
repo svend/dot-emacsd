@@ -361,28 +361,53 @@ requires =server=.
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+END_SRC
 
-*** Flycheck
+** Package settings
+
+*** use-package
 
 #+BEGIN_SRC emacs-lisp
-(eval-after-load 'flycheck '(require 'flycheck-ledger))
+(require 'use-package)
 #+END_SRC
 
-*** Slime
+*** ido
+
+#+BEGIN_SRC emacs-lisp
+(use-package ido
+  :init
+  (progn
+    (setq ido-save-directory-list-file (expand-file-name ".ido.last" emacs-cache-dir))
+    (setq ido-enable-flex-matching t)
+    (setq ido-everywhere t)
+    (setq ido-use-virtual-buffers t)))
+
+#+END_SRC
+
+*** flycheck
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :config
+  (require 'flycheck-ledger))
+#+END_SRC
+
+*** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
 #+BEGIN_SRC emacs-lisp
-(setq inferior-lisp-program "sbcl")
+(use-package slime
+  :init
+  (setq inferior-lisp-program "sbcl"))
 #+END_SRC
 
 *** exec-path-from-shell
 
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
-	     :init
-	     (progn
-	       (mapc
-		(lambda (variable)
-		  (add-to-list 'exec-path-from-shell-variables variable))
-		'("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))))
+  :init
+  (progn
+    (mapc
+     (lambda (variable)
+       (add-to-list 'exec-path-from-shell-variables variable))
+     '("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))))
 #+END_SRC
