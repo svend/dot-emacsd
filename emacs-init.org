@@ -261,14 +261,11 @@ otherwise start a new ansi-term"
 
 ** OS X specific configuration
 
-- Fix environment, including PATH, using =exec-path-from-shell=
-  package.
 - Turn on menu bar, since it does not use any extra space on OS X.
 - Use Adobe's Source Code Pro font.
 
 #+BEGIN_SRC emacs-lisp
 (when (eq window-system 'ns)
-  (exec-path-from-shell-initialize)
   (menu-bar-mode 1)
   (set-face-attribute 'default nil :font "Source Code Pro" :height 140))
 #+END_SRC
@@ -369,6 +366,44 @@ requires =server=.
 (require 'use-package)
 #+END_SRC
 
+*** exec-path-from-shell
+
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+  :if
+  (eq window-system 'ns)
+  :init
+  (progn
+    (mapc
+     (lambda (variable)
+       (add-to-list 'exec-path-from-shell-variables variable))
+     '("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))
+    (exec-path-from-shell-initialize)))
+#+END_SRC
+
+*** flycheck
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :config
+  (require 'flycheck-ledger))
+#+END_SRC
+
+*** helm
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :init
+  (progn
+    (require 'helm-ls-git)
+    (add-to-list 'helm-for-files-preferred-list 'helm-source-ls-git t)
+    (delete 'helm-source-locate helm-for-files-preferred-list)
+    (helm-attrset 'follow 1 helm-source-buffers-list)
+
+    (setq helm-adaptive-history-file (expand-file-name "helm-adaptive-history" emacs-cache-dir))
+    (helm-adaptative-mode 1)))
+#+END_SRC
+
 *** ido
 
 #+BEGIN_SRC emacs-lisp
@@ -381,15 +416,6 @@ requires =server=.
     (setq ido-use-virtual-buffers t)))
 
 #+END_SRC
-
-*** flycheck
-
-#+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :config
-  (require 'flycheck-ledger))
-#+END_SRC
-
 *** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
@@ -399,15 +425,46 @@ requires =server=.
   :init
   (setq inferior-lisp-program "sbcl"))
 #+END_SRC
-
-*** exec-path-from-shell
+*** term
 
 #+BEGIN_SRC emacs-lisp
-(use-package exec-path-from-shell
+(defun my-setup-term-mode ()
+  "My preferences for term mode"
+  (interactive)
+  ;; Settings recommended in term.el
+  ;;
+  ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
+  (make-local-variable 'mouse-yank-at-point)
+  (setq mouse-yank-at-point t)
+  ;; End of recommended settings
+
+  ;; Disable hl-line-mode in term buffers
+  (make-local-variable 'global-hl-line-mode)
+  (setq global-hl-line-mode nil)
+
+  ;; Make term mode more term-like
+
+  (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
+  (define-key term-raw-map (kbd "<C-S-backspace>") 'term-send-raw)
+
+  ;; Toogle between line and char mode in term-mode
+  (define-key term-raw-map (kbd "C-'") 'term-line-mode)
+  (define-key term-mode-map (kbd "C-'") 'term-char-mode)
+
+  ;; Enable Emacs key bindings in term mode
+  (define-key term-raw-map (kbd "M-!") nil)
+  (define-key term-raw-map (kbd "M-&") nil)
+  (define-key term-raw-map (kbd "M-:") nil)
+  (define-key term-raw-map (kbd "M-x") nil)
+
+  ;; Paste key bindings for Mac keyboards with no insert
+  (define-key term-raw-map (kbd "C-c y") 'term-paste)
+  (define-key term-raw-map (kbd "s-v") 'term-paste)
+
+  ;; Enable address links in term mode
+  (goto-address-mode))
+
+(use-package term
   :init
-  (progn
-    (mapc
-     (lambda (variable)
-       (add-to-list 'exec-path-from-shell-variables variable))
-     '("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))))
+  (add-hook 'term-mode-hook 'my-setup-term-mode))
 #+END_SRC
