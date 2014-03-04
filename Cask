@@ -38,6 +38,7 @@
 (depends-on "slime")
 (depends-on "smex")
 (depends-on "solarized-theme")
+(depends-on "use-package")
 (depends-on "yaml-mode")
 (depends-on "zenburn-theme")
 (depends-on "zoom-frm")
