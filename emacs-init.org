@@ -417,6 +417,22 @@ requires =server=.
     (setq ido-use-virtual-buffers t)))
 
 #+END_SRC
+
+*** projectile
+
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :init
+  (progn
+    (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" emacs-cache-dir))
+    (projectile-load-known-projects)
+
+    (setq projectile-switch-project-action 'projectile-vc)
+    (setq projectile-use-git-grep t)
+
+    (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
+#+END_SRC
+
 *** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
