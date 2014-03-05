@@ -338,7 +338,8 @@ requires =server=.
 (setq sentence-end-double-space nil)
 
 ;; Enable disabled commands
-(put 'dired-find-alternate-file 'disabled nil)
+(mapc (lambda (command) (put command 'disabled nil))
+      '(downcase-region upcase-region upcase-initials-region))
 
 ;; Use GUI web browser if it is available
 (if (executable-find "x-www-browser")
