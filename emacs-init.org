@@ -68,6 +68,12 @@ Hide welcome screen.
 
 *** Themes
 
+Treat all themes as safe.
+
+#+BEGIN_SRC emacs-lisp
+(setq custom-safe-themes t)
+#+END_SRC
+
 Solarized light theme.
 
 Disable variable width fonts. Disable variable font sizes.
