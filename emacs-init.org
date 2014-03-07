@@ -136,9 +136,6 @@ Press =C-c C-h= to show all of these.
 (define-key ctl-x-map (kbd "C-0")   'zoom-in/out)
 (define-key ctl-x-map (kbd "C-=")   'zoom-in/out)
 
-; expand-region
-(global-set-key (kbd "C--")         'er/contract-region)
-(global-set-key (kbd "C-=")         'er/expand-region)
 (global-set-key (kbd "C-`")         'helm-for-files)
 
 ; buffer-move
