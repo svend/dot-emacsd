@@ -1,6 +1,7 @@
 ;; -*- mode: Lisp -*-
-(source "melpa" "http://melpa.milkbox.net/packages/")
-(source "org" "http://orgmode.org/elpa/")
+(source gnu)
+(source melpa)
+(source org)
 
 (depends-on "bash-completion")
 (depends-on "bbdb")
