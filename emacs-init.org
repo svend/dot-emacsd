@@ -304,6 +304,12 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 ** Languages
 
+*** Ruby
+
+#+BEGIN_SRC
+(setq ruby-align-to-stmt-keywords t)
+#+END_SRC
+
 *** Shell script
 
 #+BEGIN_SRC emacs-lisp
