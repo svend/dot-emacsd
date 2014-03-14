@@ -352,6 +352,12 @@ requires =server=.
   (server-start))
 #+END_SRC
 
+** TRAMP
+
+#+BEGIN_SRC emacs-lisp
+(setq tramp-use-ssh-controlmaster-options nil)
+#+END_SRC
+
 ** Miscellaneous settings
 
 #+BEGIN_SRC emacs-lisp
