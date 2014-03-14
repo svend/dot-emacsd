@@ -62,9 +62,6 @@ Hide welcome screen.
 
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;; Enable recent files mode
-(recentf-mode t)
 #+END_SRC
 
 *** Themes
@@ -165,6 +162,7 @@ Press =C-c C-h= to show all of these.
 ** Emacs global modes
 
 #+BEGIN_SRC emacs-lisp
+(recentf-mode 1)
 (winner-mode 1)
 (windmove-default-keybindings)
 (add-hook 'after-init-hook 'global-flycheck-mode)
@@ -185,10 +183,10 @@ Press =C-c C-h= to show all of these.
       ido-save-directory-list-file (expand-file-name "ido.hist" emacs-cache-dir)
       ido-default-file-method 'selected-window
       ido-auto-merge-work-directories-length -1)
-(ido-mode +1)
-(ido-ubiquitous-mode +1)
+(ido-mode 1)
+(ido-ubiquitous-mode 1)
 ;; smarter fuzzy matching for ido
-(flx-ido-mode +1)
+(flx-ido-mode 1)
 ;; disable ido faces to see flx highlights
 (setq ido-use-faces nil)
 #+END_SRC
