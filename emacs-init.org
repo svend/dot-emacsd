@@ -91,7 +91,7 @@ Disable variable width fonts. Disable variable font sizes.
 
 ** Key bindings
 
-*** User-reserved
+*** User-reserved key bindings
 
 =C-c letter= and =<F5>= through =<F9>= are reserved for user use.
 Press =C-c C-h= to show all of these.
@@ -124,7 +124,7 @@ Press =C-c C-h= to show all of these.
 (global-set-key (kbd "C-c w")   'whitespace-mode)
 #+END_SRC
 
-*** Non-user
+*** Non-reserved key bindings
 
 #+BEGIN_SRC emacs-lisp
 ;; zoom-frm
