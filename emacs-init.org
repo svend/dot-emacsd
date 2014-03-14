@@ -304,6 +304,22 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 ** Languages
 
+*** Programming modes
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
+#+END_SRC
+
+*** Emacs lisp
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+	     (turn-on-eldoc-mode)))
+#+END_SRC
+
 *** Ruby
 
 #+BEGIN_SRC
@@ -362,10 +378,6 @@ requires =server=.
 ;; Turn on flyspell and goto-address for all text and prog modes
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'text-mode-hook 'goto-address-mode)
-
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'prog-mode-hook 'goto-address-prog-mode)
-(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+END_SRC
 
 ** Package settings
