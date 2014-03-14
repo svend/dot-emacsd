@@ -360,6 +360,19 @@ requires =server=.
 
 ** Miscellaneous settings
 
+Balance windows automatically.
+
+#+BEGIN_SRC emacs-lisp
+(defadvice split-window-below (after restore-balanace-below activate)
+  (balance-windows))
+
+(defadvice split-window-right (after restore-balance-right activate)
+  (balance-windows))
+
+(defadvice delete-window (after restore-balance activate)
+  (balance-windows))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (setq safe-local-variable-values '((encoding . utf-8)))
 
