@@ -171,7 +171,7 @@ Press =C-c C-h= to show all of these.
 ;; (add-hook 'after-init-hook 'ido-mode)
 ;; (add-hook 'after-init-hook 'ido-ubiquitous)
 (add-hook 'after-init-hook 'projectile-global-mode)
-(add-hook 'after-init-hook 'bash-completion-setup)
+;; (add-hook 'after-init-hook 'bash-completion-setup)
 
 ;; ido-mode
 (require 'ido)
@@ -343,7 +343,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 ** Emacs server
 
-Start emacs server unless one is already running. =server-running-p=
+Start Emacs server unless one is already running. =server-running-p=
 requires =server=.
 
 #+BEGIN_SRC emacs-lisp
