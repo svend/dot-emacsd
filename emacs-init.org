@@ -354,6 +354,16 @@ requires =server=.
 
 ** TRAMP
 
+Use SSH default control master settings. Add the following to
+=~/.ssh/config=.
+
+#+BEGIN_EXAMPLE
+Host *
+	ControlMaster auto
+	ControlPath ~/.ssh/control.%h_%p_%r
+	ControlPersist 60m
+#+END_EXAMPLE
+
 #+BEGIN_SRC emacs-lisp
 (setq tramp-use-ssh-controlmaster-options nil)
 #+END_SRC
