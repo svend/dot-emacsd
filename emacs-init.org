@@ -1,4 +1,5 @@
 * Emacs configuration
+
 ** User information
 
 #+BEGIN_SRC emacs-lisp
