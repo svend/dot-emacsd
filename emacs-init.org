@@ -34,15 +34,19 @@ Hide welcome screen.
 
 ;; Scroll one line at a time with mouse
 (setq mouse-wheel-scroll-amount '(1))
+#+END_SRC
 
-;; Display clock in the status bar
+*** Mode line
+
+- Display clock in the status bar
+- Display column number in mode-line (line number is displayed by default)
+
+#+BEGIN_SRC emacs-lisp
 (display-time-mode t)
-
-;; Display column number in mode-line
-;;
-;; (Line number is displayed by default.)
 (column-number-mode t)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 ;; Hilight the current line
 ;;
 ;; To disable for a mode, add this to the mode hook
