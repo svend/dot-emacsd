@@ -46,25 +46,31 @@ Hide welcome screen.
 (column-number-mode t)
 #+END_SRC
 
+Hilight the current line. To disable for a mode, add this to the mode
+hook:
+
+#+BEGIN_EXAMPLE
+(make-local-variable 'global-hl-line-mode)
+(setq global-hl-line-mode nil)
+#+END_EXAMPLE
+
 #+BEGIN_SRC emacs-lisp
-;; Hilight the current line
-;;
-;; To disable for a mode, add this to the mode hook
-;;
-;; (make-local-variable 'global-hl-line-mode)
-;; (setq global-hl-line-mode nil)
 (global-hl-line-mode t)
+#+END_SRC
 
-;; Disable menu bar
+- Disable menu bar
+- Disable scroll bar
+- Disable tool bar
+
+#+BEGIN_SRC emacs-lisp
 (menu-bar-mode 0)
-
-;; Disable scroll bar
 (scroll-bar-mode 0)
-
-;; Disable tool bar
 (tool-bar-mode 0)
+#+END_SRC
 
-;; Enable y/n answers
+Enable y/n answers.
+
+#+BEGIN_SRC emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
