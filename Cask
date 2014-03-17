@@ -33,6 +33,7 @@
 (depends-on "mmm-mode")
 (depends-on "org-plus-contrib")
 (depends-on "password-store")
+(depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "puppet-mode")
 (depends-on "robe")
