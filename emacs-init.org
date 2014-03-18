@@ -166,13 +166,6 @@ Press =C-c C-h= to show all of these.
 (global-set-key (kbd "M-X")	    'smex-major-mode-commands)
 #+END_SRC
 
-** Emacs paths
-
-#+BEGIN_SRC emacs-lisp
-(defvar emacs-cache-dir "~/.cache/emacs"
-  "Path to store temporary emacs files.")
-#+END_SRC
-
 ** After-loads
 
 #+BEGIN_SRC emacs-lisp
@@ -182,6 +175,7 @@ Press =C-c C-h= to show all of these.
 ** Emacs global modes
 
 #+BEGIN_SRC emacs-lisp
+(desktop-save-mode 1)
 (recentf-mode 1)
 (winner-mode 1)
 (windmove-default-keybindings)
@@ -200,7 +194,6 @@ Press =C-c C-h= to show all of these.
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-max-prospects 10
-      ido-save-directory-list-file (expand-file-name "ido.hist" emacs-cache-dir)
       ido-default-file-method 'selected-window
       ido-auto-merge-work-directories-length -1)
 (ido-mode 1)
@@ -225,30 +218,11 @@ Put temporary files under =~/.cache/emacs=.
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "backup/" emacs-cache-dir) t)))
 
-(setq desktop-path `(,emacs-cache-dir))
-(desktop-save-mode 1)
-
 ;; Auto-save list files
 (setq auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" emacs-cache-dir))
 
-;; Lock files
-;;
-;; http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
-;;
-;; Locks are created in the same directory as the file being
-;; edited. They can be disabled as of 24.3.
-;;
-;; http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
-(setq create-lockfiles nil)
-
-;; URL cache
-(setq url-cache-directory (expand-file-name "url" emacs-cache-dir))
-
-(setq save-place-file (expand-file-name "places" emacs-cache-dir))
-
 ;; Minibuffer history
 (setq history-length 10000)
-(setq savehist-file (expand-file-name "history" emacs-cache-dir))
 (setq savehist-mode t)
 #+END_SRC
 
@@ -385,9 +359,6 @@ Host *
 #+BEGIN_SRC emacs-lisp
 (setq tramp-use-ssh-controlmaster-options nil)
 
-;; Put tramp history file under ~/.cache
-(setq tramp-persistency-file-name (expand-file-name "tramp" emacs-cache-dir))
-
 ;; Edit remote files via sudo
 ;;
 ;; See
@@ -411,6 +382,19 @@ Host *
 #+END_SRC
 
 ** Miscellaneous settings
+
+Lock files
+
+http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
+
+Locks are created in the same directory as the file being
+edited. They can be disabled as of 24.3.
+
+http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
+
+#+BEGIN_SRC emacs-lisp
+(setq create-lockfiles nil)
+#+END_SRC
 
 Balance windows automatically.
 
@@ -600,7 +584,6 @@ Balance windows automatically.
     (delete 'helm-source-locate helm-for-files-preferred-list)
     (helm-attrset 'follow 1 helm-source-buffers-list)
 
-    (setq helm-adaptive-history-file (expand-file-name "helm-adaptive-history" emacs-cache-dir))
     (helm-adaptative-mode 1)))
 #+END_SRC
 
@@ -656,7 +639,6 @@ Balance windows automatically.
 (use-package ido
   :init
   (progn
-    (setq ido-save-directory-list-file (expand-file-name ".ido.last" emacs-cache-dir))
     (setq ido-enable-flex-matching t)
     (setq ido-everywhere t)
     (setq ido-use-virtual-buffers t)))
@@ -666,9 +648,6 @@ Balance windows automatically.
 *** message
 
 #+BEGIN_SRC emacs-lisp
-;; Save drafts under ~/.cache/emacs
-(setq message-auto-save-directory (expand-file-name "mail/drafts" emacs-cache-dir))
-
 ;; Use MSMTP with auto-smtp selection
 ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
 ;;
@@ -793,7 +772,6 @@ Balance windows automatically.
 (use-package projectile
   :init
   (progn
-    (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" emacs-cache-dir))
     (projectile-load-known-projects)
 
     (setq projectile-switch-project-action 'projectile-vc)
@@ -808,10 +786,6 @@ Balance windows automatically.
 ;; Enable recentf mode with ido-mode support
 ;;
 ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
-
-;; Put recentf save file under ~/.cache and reload
-(setq recentf-save-file (expand-file-name ".recentf" emacs-cache-dir))
-(recentf-load-list)
 
 ;; Increase size of recent file list
 (setq recentf-max-saved-items 50)
