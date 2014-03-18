@@ -171,11 +171,14 @@ Press =C-c C-h= to show all of these.
 #+BEGIN_SRC emacs-lisp
 (desktop-save-mode 1)
 (recentf-mode 1)
+
+;; Minibuffer history
+(setq history-length 10000)
+(savehist-mode 1)
+
 (winner-mode 1)
 (windmove-default-keybindings)
 (add-hook 'after-init-hook 'global-flycheck-mode)
-;; (add-hook 'after-init-hook 'ido-mode)
-;; (add-hook 'after-init-hook 'ido-ubiquitous)
 (add-hook 'after-init-hook 'projectile-global-mode)
 ;; (add-hook 'after-init-hook 'bash-completion-setup)
 
@@ -200,24 +203,12 @@ Press =C-c C-h= to show all of these.
 
 ** Emacs temporary files
 
-Put temporary files under =~/.cache/emacs=.
-
 #+BEGIN_SRC emacs-lisp
-(defvar emacs-cache-dir "~/.cache/emacs"
-  "Path to store temporary emacs files.")
-
 ;; Backup and auto-saves
 (setq backup-directory-alist
-      `((".*" . ,(expand-file-name "backup/" emacs-cache-dir))))
+      `((".*" . ,(expand-file-name "backup/" user-emacs-dir))))
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "backup/" emacs-cache-dir) t)))
-
-;; Auto-save list files
-(setq auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" emacs-cache-dir))
-
-;; Minibuffer history
-(setq history-length 10000)
-(setq savehist-mode t)
+      `((".*" ,(expand-file-name "backup/" user-emacs-dir) t)))
 #+END_SRC
 
 ** User defined functions
@@ -343,7 +334,7 @@ requires =server=.
 Use SSH default control master settings. Add the following to
 =~/.ssh/config=.
 
-#+BEGIN_EXAMPLE
+#+BEGIN_EXAMPLE conf
 Host *
 	ControlMaster auto
 	ControlPath ~/.ssh/control.%h_%p_%r
@@ -372,7 +363,6 @@ Host *
 	  (format-mode-line mode-line-format 'font-lock-warning-face))))
 (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
 (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)
-
 #+END_SRC
 
 ** Miscellaneous settings
