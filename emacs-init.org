@@ -166,12 +166,6 @@ Press =C-c C-h= to show all of these.
 (global-set-key (kbd "M-X")	    'smex-major-mode-commands)
 #+END_SRC
 
-** After-loads
-
-#+BEGIN_SRC emacs-lisp
-(easy-after-load)
-#+END_SRC
-
 ** Emacs global modes
 
 #+BEGIN_SRC emacs-lisp
