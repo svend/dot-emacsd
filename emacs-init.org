@@ -7,6 +7,16 @@
 (setq user-mail-address "svend@ciffer.net")
 #+END_SRC
 
+** Installing Emacs
+
+Install from homebrew on OS X.
+
+#+BEGIN_EXAMPLE sh
+HOMEBREW_KEEP_INFO=1 brew reinstall emacs --HEAD --cocoa --use-git-head
+rsync -a --delete /usr/local/Cellar/emacs/HEAD/Emacs.app ~/Applications
+tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
+#+END_EXAMPLE
+
 ** Initialize Cask
 
 #+BEGIN_SRC emacs-lisp
@@ -374,6 +384,30 @@ Host *
 
 #+BEGIN_SRC emacs-lisp
 (setq tramp-use-ssh-controlmaster-options nil)
+
+;; Put tramp history file under ~/.cache
+(setq tramp-persistency-file-name (expand-file-name "tramp" emacs-cache-dir))
+
+;; Edit remote files via sudo
+;;
+;; See
+;; http://www.gnu.org/software/emacs/manual/html_node/tramp/Ad_002dhoc-multi_002dhops.html
+;;
+;; /ssh:example.com|sudo:localhost:/file
+
+;; Use warning font in modeline when working as root
+;;
+;; http://www.gnu.org/software/emacs/manual/html_mono/tramp.html#Frequently-Asked-Questions
+;; (I'ld like to get a Visual Warning when working in a sudo:ed
+;; context)
+;;
+(defun my-mode-line-warn-when-root ()
+  (when (string-match "^/su\\(do\\)?:" default-directory)
+    (setq mode-line-format
+	  (format-mode-line mode-line-format 'font-lock-warning-face))))
+(add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
+(add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)
+
 #+END_SRC
 
 ** Miscellaneous settings
@@ -426,6 +460,61 @@ Balance windows automatically.
 (require 'use-package)
 #+END_SRC
 
+*** bbdb
+
+#+BEGIN_SRC emacs-lisp
+(setq bbdb-file "~/.config/bbdb/.bbdb")
+(setq bbdb-auto-revert-p t)
+#+END_SRC
+
+*** dns-mode
+
+#+BEGIN_SRC emacs-lisp
+;; Do not auto increment serial (C-c C-s to increment)
+(setq dns-mode-soa-auto-increment-serial nil)
+#+END_SRC
+
+*** elfeed
+
+#+BEGIN_SRC emacs-lisp
+(setq elfeed-feeds
+      '("http://git-annex.branchable.com/devblog/index.atom"
+	"http://planet.emacsen.org/atom.xml"
+	"http://www.reddit.com/r/emacs/.rss"
+	"http://www.reddit.com/r/ruby/.rss"
+	"http://planet.debian.org/atom.xml"))
+#+END_SRC
+
+*** erc
+
+#+BEGIN_SRC emacs-lisp
+(erc-services-mode 1)
+(erc-spelling-mode 1)
+
+(setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
+
+(setq bitlbee-username (password-store-get "bitlbee-username")
+      bitlbee-password (password-store-get "bitlbee-password")
+      freenode-username (password-store-get "freenode/username")
+      freenode-password (password-store-get "freenode/password"))
+
+;; Nickserv configuration
+(setq erc-prompt-for-nickserv-password nil)
+(setq erc-nickserv-passwords
+      `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+	((freenode ((,freenode-username . ,freenode-password))))))
+
+#+END_SRC
+
+*** erc-track
+
+#+BEGIN_SRC emacs-lisp
+;; Do not notify for join, part, or quit
+(add-to-list 'erc-track-exclude-types "JOIN")
+(add-to-list 'erc-track-exclude-types "PART")
+(add-to-list 'erc-track-exclude-types "QUIT")
+#+END_SRC
+
 *** exec-path-from-shell
 
 #+BEGIN_SRC emacs-lisp
@@ -449,6 +538,57 @@ Balance windows automatically.
   (require 'flycheck-ledger))
 #+END_SRC
 
+*** git-commit-mode
+
+#+BEGIN_SRC emacs-lisp
+;; Spell check git commit messages
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+#+END_SRC
+
+*** gnus
+
+#+BEGIN_SRC emacs-lisp
+;; Gmane
+(setq gnus-select-method
+      '(nntp "news.gmane.org"))
+
+;; Debugging
+;; (setq imap-log t)
+
+;; Other accounts, including IMAP
+(setq gnus-secondary-select-methods
+      '((nnimap "uw"
+		(nnimap-address "svends.deskmail.washington.edu")
+		(nnimap-server-port 993)
+		(nnimap-stream ssl)
+		;; This doesn't work
+		;; (nnimap-authenticator gssapi)
+		(nnimap-authenticator login)
+		;; TODO: Playing it safe. Is this required?
+		(nnimap-expunge-on-close 'never)
+		(nnimap-list-pattern ("INBOX" "mail/*")))))
+
+(setq gnus-posting-styles
+      '((".*"
+	 (address "svend@ciffer.net"))
+	("uw"
+	 (address "svends@uw.edu")
+	 ("Bcc" "svends@uw.edu"))))
+
+#+END_SRC
+
+*** gnus-alias
+
+#+BEGIN_SRC emacs-lisp
+(setq gnus-alias-identity-alist
+      '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
+	("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)))
+(setq gnus-alias-default-identity "default")
+(setq gnus-alias-identity-rules
+      '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
+	("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")))
+#+END_SRC
+
 *** helm
 
 #+BEGIN_SRC emacs-lisp
@@ -464,6 +604,52 @@ Balance windows automatically.
     (helm-adaptative-mode 1)))
 #+END_SRC
 
+*** ibuffer
+
+#+BEGIN_SRC emacs-lisp
+;; Define ibuffer groups
+(setq ibuffer-saved-filter-groups
+      '(("default"
+	 ("irc" (mode . erc-mode))
+	 ("mail" (or
+		  (mode . message-mode)
+		  (mode . gnus-article-mode)
+		  (mode . gnus-browse-mode)
+		  (mode . gnus-group-mode)
+		  (mode . gnus-server-mode)
+		  (mode . gnus-summary-mode)
+		  (mode . notmuch-hello-mode)
+		  (mode . notmuch-search-mode)
+		  (mode . notmuch-show-mode)
+		  (name . "\*[Nn]otmuch")))
+	 )))
+
+;; Hide empty groups
+(setq ibuffer-show-empty-filter-groups nil)
+
+(defun ibuffer-tramp-add-tramp-filter-groups ()
+  (interactive)
+  (dolist (group (ibuffer-tramp-generate-filter-groups-by-tramp-connection))
+    (add-to-list 'ibuffer-filter-groups group t)))
+
+(defun ibuffer-vc-add-vc-filter-groups ()
+  (interactive)
+  (dolist (group (ibuffer-vc-generate-filter-groups-by-vc-root))
+    (add-to-list 'ibuffer-filter-groups group t)))
+
+(defun my-setup-ibuffer-mode ()
+  "My preferences for ibuffer mode"
+  (interactive)
+  (ibuffer-switch-to-saved-filter-groups "default")
+
+  ;; Add ibuffer-vc filter groups and update list
+  (ibuffer-tramp-add-tramp-filter-groups)
+  (ibuffer-vc-add-vc-filter-groups)
+  (ibuffer-update nil t))
+
+(add-hook 'ibuffer-hook 'my-setup-ibuffer-mode)
+
+#+END_SRC
 *** ido
 
 #+BEGIN_SRC emacs-lisp
@@ -475,6 +661,130 @@ Balance windows automatically.
     (setq ido-everywhere t)
     (setq ido-use-virtual-buffers t)))
 
+#+END_SRC
+
+*** message
+
+#+BEGIN_SRC emacs-lisp
+;; Save drafts under ~/.cache/emacs
+(setq message-auto-save-directory (expand-file-name "mail/drafts" emacs-cache-dir))
+
+;; Use MSMTP with auto-smtp selection
+;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
+;;
+;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
+;; (emacs >= 23.2+1-5)
+(setq sendmail-program "/usr/bin/msmtp"
+      mail-specify-envelope-from t
+      mail-envelope-from 'header
+      message-sendmail-envelope-from 'header)
+
+;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+(setq send-mail-function 'sendmail-send-it)
+
+;; Enable gnus-alias
+(add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+(define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
+
+;; Enable notmuch-address completion
+;; (notmuch-address-message-insinuate)
+
+(defun my-setup-message-mode ()
+  "My preferences for message mode"
+  (interactive)
+
+  ;; Enable bbdb completion
+  (bbdb-insinuate-message)
+
+  ;; Bind C-M-j to message-newline-and-reformat
+  ;;
+  ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
+  ;; have this problem.
+  (if window-system
+      nil
+    (progn
+      (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat))))
+
+(add-hook 'message-setup-hook 'my-setup-message-mode)
+#+END_SRC
+
+*** notmuch
+
+#+BEGIN_SRC emacs-lisp
+;; notmuch-always-prompt-for-sender requires ido-mode
+;; Add (ido-mode t) to emacs configuration
+(setq notmuch-always-prompt-for-sender t)
+
+;; Use Bcc instead of Fcc
+(setq notmuch-fcc-dirs nil)
+
+(setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
+			       ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+			       ("Action" . "tag:action")
+			       ("Waiting" . "tag:waiting")
+			       ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+			       ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+
+;; Show newest mail first
+(setq notmuch-search-oldest-first nil)
+
+;; Notmuch remote setup (on all hosts except garnet)
+(when (not (string= system-name "garnet.ciffer.net"))
+  (setq notmuch-command "notmuch-remote"))
+
+;; Getting Things Done (GTD) keybindings
+
+(setq notmuch-tag-macro-alist
+      (list
+       '("a" "+action" "-waiting" "-inbox")
+       '("w" "-action" "+waiting" "-inbox")
+       '("d" "-action" "-waiting" "-inbox")))
+
+(defun notmuch-search-apply-tag-macro (key)
+  (interactive "k")
+  (let ((macro (assoc key notmuch-tag-macro-alist)))
+    (notmuch-search-tag (cdr macro))))
+
+(defun notmuch-show-apply-tag-macro (key)
+  (interactive "k")
+  (let ((macro (assoc key notmuch-tag-macro-alist)))
+    (notmuch-show-tag (cdr macro))))
+
+(define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
+(define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
+
+;; Work around bug with notmuch and emacs-snapshot
+;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
+(require 'gnus-art)
+#+END_SRC
+
+*** notmuch-address
+
+#+BEGIN_SRC emacs-lisp
+;; Notmuch address completion
+;;
+;; http://notmuchmail.org/emacstips/#index13h2
+;;
+;; Notmuch loads notmuch-address automatically, but we may use
+;; notmuch-address without loading notmuch.
+(setq notmuch-address-command "uw-email-search")
+#+END_SRC
+
+*** org
+
+#+BEGIN_SRC emacs-lisp
+(require 'org-notmuch)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+(setq org-replace-disputed-keys t)
+(setq org-src-fontify-natively t)
+(setq org-src-preserve-indentation t)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((perl . t)
+   (ruby . t)
+   (sh . t)
+   (python . t)
+   (emacs-lisp . t)))
 #+END_SRC
 
 *** projectile
@@ -490,6 +800,33 @@ Balance windows automatically.
     (setq projectile-use-git-grep t)
 
     (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
+#+END_SRC
+
+*** recentf
+
+#+BEGIN_SRC emacs-lisp
+;; Enable recentf mode with ido-mode support
+;;
+;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
+
+;; Put recentf save file under ~/.cache and reload
+(setq recentf-save-file (expand-file-name ".recentf" emacs-cache-dir))
+(recentf-load-list)
+
+;; Increase size of recent file list
+(setq recentf-max-saved-items 50)
+
+;; Ignore ephemeral git commit message files
+(add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
+;; Ignore temporary notmuch ical files
+(add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
+
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
 #+END_SRC
 
 *** slime
