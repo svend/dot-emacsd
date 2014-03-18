@@ -206,9 +206,9 @@ Press =C-c C-h= to show all of these.
 #+BEGIN_SRC emacs-lisp
 ;; Backup and auto-saves
 (setq backup-directory-alist
-      `((".*" . ,(expand-file-name "backup/" user-emacs-dir))))
+      `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "backup/" user-emacs-dir) t)))
+      `((".*" ,(expand-file-name "backup/" user-emacs-directory) t)))
 #+END_SRC
 
 ** User defined functions
