@@ -9,7 +9,6 @@
 (depends-on "calfw")
 (depends-on "coffee-mode")
 (depends-on "csv-mode")
-(depends-on "easy-after-load")
 (depends-on "elfeed")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
