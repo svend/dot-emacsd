@@ -481,7 +481,6 @@ Balance windows automatically.
 (setq erc-nickserv-passwords
       `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
 	((freenode ((,freenode-username . ,freenode-password))))))
-
 #+END_SRC
 
 *** erc-track
@@ -552,7 +551,6 @@ Balance windows automatically.
 	("uw"
 	 (address "svends@uw.edu")
 	 ("Bcc" "svends@uw.edu"))))
-
 #+END_SRC
 
 *** gnus-alias
@@ -625,8 +623,8 @@ Balance windows automatically.
   (ibuffer-update nil t))
 
 (add-hook 'ibuffer-hook 'my-setup-ibuffer-mode)
-
 #+END_SRC
+
 *** ido
 
 #+BEGIN_SRC emacs-lisp
@@ -636,111 +634,104 @@ Balance windows automatically.
     (setq ido-enable-flex-matching t)
     (setq ido-everywhere t)
     (setq ido-use-virtual-buffers t)))
-
 #+END_SRC
 
 *** message
 
 #+BEGIN_SRC emacs-lisp
-;; Use MSMTP with auto-smtp selection
-;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
-;;
-;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
-;; (emacs >= 23.2+1-5)
-(setq sendmail-program "/usr/bin/msmtp"
-      mail-specify-envelope-from t
-      mail-envelope-from 'header
-      message-sendmail-envelope-from 'header)
+(use-package message
+  :init
+  (progn
+    ;; Use MSMTP with auto-smtp selection
+    ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
+    ;;
+    ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
+    ;; (emacs >= 23.2+1-5)
+    (setq sendmail-program "/usr/bin/msmtp"
+	  mail-specify-envelope-from t
+	  mail-envelope-from 'header
+	  message-sendmail-envelope-from 'header)
 
-;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
-(setq send-mail-function 'sendmail-send-it)
+    ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+    (setq send-mail-function 'sendmail-send-it)
 
-;; Enable gnus-alias
-(add-hook 'message-setup-hook 'gnus-alias-determine-identity)
-(define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
+    ;; Enable gnus-alias
+    (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+    (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
-;; Enable notmuch-address completion
-;; (notmuch-address-message-insinuate)
+    ;; Enable notmuch-address completion
+    ;; (notmuch-address-message-insinuate)
 
-(defun my-setup-message-mode ()
-  "My preferences for message mode"
-  (interactive)
+    (defun my-setup-message-mode ()
+      "My preferences for message mode"
+      (interactive)
 
-  ;; Enable bbdb completion
-  (bbdb-insinuate-message)
+      ;; Enable bbdb completion
+      (bbdb-insinuate-message)
 
-  ;; Bind C-M-j to message-newline-and-reformat
-  ;;
-  ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
-  ;; have this problem.
-  (if window-system
-      nil
-    (progn
-      (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat))))
+      ;; Bind C-M-j to message-newline-and-reformat
+      ;;
+      ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
+      ;; have this problem.
+      (if window-system
+	  nil
+	(progn
+	  (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat))))
 
-(add-hook 'message-setup-hook 'my-setup-message-mode)
+    (add-hook 'message-setup-hook 'my-setup-message-mode)))
 #+END_SRC
 
 *** notmuch
 
 #+BEGIN_SRC emacs-lisp
-;; notmuch-always-prompt-for-sender requires ido-mode
-;; Add (ido-mode t) to emacs configuration
-(setq notmuch-always-prompt-for-sender t)
+(use-package notmuch
+  :init
+  (progn
+    ;; notmuch-always-prompt-for-sender requires ido-mode
+    ;; Add (ido-mode t) to emacs configuration
+    (setq notmuch-always-prompt-for-sender t)
 
-;; Use Bcc instead of Fcc
-(setq notmuch-fcc-dirs nil)
+    ;; Use Bcc instead of Fcc
+    (setq notmuch-fcc-dirs nil)
 
-(setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-			       ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
-			       ("Action" . "tag:action")
-			       ("Waiting" . "tag:waiting")
-			       ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-			       ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+    (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
+				   ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+				   ("Action" . "tag:action")
+				   ("Waiting" . "tag:waiting")
+				   ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+				   ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
 
-;; Show newest mail first
-(setq notmuch-search-oldest-first nil)
+    ;; Show newest mail first
+    (setq notmuch-search-oldest-first nil)
 
-;; Notmuch remote setup (on all hosts except garnet)
-(when (not (string= system-name "garnet.ciffer.net"))
-  (setq notmuch-command "notmuch-remote"))
+    ;; Notmuch remote setup (on all hosts except garnet)
+    (when (not (string= system-name "garnet.ciffer.net"))
+      (setq notmuch-command "notmuch-remote"))
 
-;; Getting Things Done (GTD) keybindings
+    ;; Getting Things Done (GTD) keybindings
 
-(setq notmuch-tag-macro-alist
-      (list
-       '("a" "+action" "-waiting" "-inbox")
-       '("w" "-action" "+waiting" "-inbox")
-       '("d" "-action" "-waiting" "-inbox")))
+    (setq notmuch-tag-macro-alist
+	  (list
+	   '("a" "+action" "-waiting" "-inbox")
+	   '("w" "-action" "+waiting" "-inbox")
+	   '("d" "-action" "-waiting" "-inbox")))
 
-(defun notmuch-search-apply-tag-macro (key)
-  (interactive "k")
-  (let ((macro (assoc key notmuch-tag-macro-alist)))
-    (notmuch-search-tag (cdr macro))))
+    (defun notmuch-search-apply-tag-macro (key)
+      (interactive "k")
+      (let ((macro (assoc key notmuch-tag-macro-alist)))
+	(notmuch-search-tag (cdr macro))))
 
-(defun notmuch-show-apply-tag-macro (key)
-  (interactive "k")
-  (let ((macro (assoc key notmuch-tag-macro-alist)))
-    (notmuch-show-tag (cdr macro))))
+    (defun notmuch-show-apply-tag-macro (key)
+      (interactive "k")
+      (let ((macro (assoc key notmuch-tag-macro-alist)))
+	(notmuch-show-tag (cdr macro))))
 
-(define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-(define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
+    (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
+    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
 
-;; Work around bug with notmuch and emacs-snapshot
-;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
-(require 'gnus-art)
-#+END_SRC
-
-*** notmuch-address
-
-#+BEGIN_SRC emacs-lisp
-;; Notmuch address completion
-;;
-;; http://notmuchmail.org/emacstips/#index13h2
-;;
-;; Notmuch loads notmuch-address automatically, but we may use
-;; notmuch-address without loading notmuch.
-(setq notmuch-address-command "uw-email-search")
+    ;; Work around bug with notmuch and emacs-snapshot
+    ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
+    (require 'gnus-art)))
 #+END_SRC
 
 *** org
