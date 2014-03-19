@@ -11,38 +11,40 @@
 
 Install from homebrew on OS X.
 
-#+BEGIN_EXAMPLE sh
+#+BEGIN_SRC sh
 HOMEBREW_KEEP_INFO=1 brew reinstall emacs --HEAD --cocoa --use-git-head
 rsync -a --delete /usr/local/Cellar/emacs/HEAD/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
-#+END_EXAMPLE
+#+END_SRC
 
 ** Initialize Cask
 
 #+BEGIN_SRC emacs-lisp
-(require 'cask "~/.emacs.d/emacs-cask/cask.el")
+(require 'cask (expand-file-name "emacs-cask/cask.el" user-emacs-directory))
 (cask-initialize)
 #+END_SRC
 
 ** UI
 
-Hide welcome screen.
-
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-splash-screen t)
+(setq safe-local-variable-values '((encoding . utf-8)))
+(setq require-final-newline t)
+(setq sentence-end-double-space nil)
+(setq history-length 10000)
 #+END_SRC
 
+*** Mouse
+
+Copy test selected by the mouse to the kill ring. This was turned off
+in Emacs 24.
+
 #+BEGIN_SRC emacs-lisp
-;; Display date and time in 24 hour format
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
-
-;; Copy test selected by the mouse to the kill ring
-;;
-;; This was turned off in Emacs 24
 (setq mouse-drag-copy-region t)
+#+END_SRC
 
-;; Scroll one line at a time with mouse
+Scroll one line at a time with mouse
+
+#+BEGIN_SRC emacs-lisp
 (setq mouse-wheel-scroll-amount '(1))
 #+END_SRC
 
@@ -56,6 +58,15 @@ Hide welcome screen.
 (column-number-mode t)
 #+END_SRC
 
+Display date in 24 hour format in mode line.
+
+#+BEGIN_SRC emacs-lisp
+(setq display-time-day-and-date t)
+(setq display-time-24hr-format t)
+#+END_SRC
+
+*** Hilight current line
+
 Hilight the current line. To disable for a mode, add this to the mode
 hook:
 
@@ -68,15 +79,21 @@ hook:
 (global-hl-line-mode t)
 #+END_SRC
 
+*** Chrome
+
+- Disable welcome screen
 - Disable menu bar
 - Disable scroll bar
 - Disable tool bar
 
 #+BEGIN_SRC emacs-lisp
+(setq inhibit-splash-screen t)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 #+END_SRC
+
+*** Y/N answers
 
 Enable y/n answers.
 
@@ -107,6 +124,21 @@ Disable variable width fonts. Disable variable font sizes.
 
 #+BEGIN_SRC emacs-lisp
 (load-theme 'solarized-light t)
+#+END_SRC
+
+*** Balance windows
+
+Balance windows automatically.
+
+#+BEGIN_SRC emacs-lisp
+(defadvice split-window-below (after restore-balanace-below activate)
+  (balance-windows))
+
+(defadvice split-window-right (after restore-balance-right activate)
+  (balance-windows))
+
+(defadvice delete-window (after restore-balance activate)
+  (balance-windows))
 #+END_SRC
 
 ** Key bindings
@@ -171,40 +203,28 @@ Press =C-c C-h= to show all of these.
 #+BEGIN_SRC emacs-lisp
 (desktop-save-mode 1)
 (recentf-mode 1)
-
-;; Minibuffer history
-(setq history-length 10000)
 (savehist-mode 1)
-
 (winner-mode 1)
-(windmove-default-keybindings)
-(add-hook 'after-init-hook 'global-flycheck-mode)
-(add-hook 'after-init-hook 'projectile-global-mode)
-;; (add-hook 'after-init-hook 'bash-completion-setup)
-
-;; ido-mode
-(require 'ido)
-(require 'ido-ubiquitous)
-(require 'flx-ido)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-max-prospects 10
-      ido-default-file-method 'selected-window
-      ido-auto-merge-work-directories-length -1)
-(ido-mode 1)
-(ido-ubiquitous-mode 1)
-;; smarter fuzzy matching for ido
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights
-(setq ido-use-faces nil)
 #+END_SRC
 
 ** Emacs temporary files
 
+*** Lock files
+
+http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
+
+Locks are created in the same directory as the file being
+edited. They can be disabled as of 24.3.
+
+http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
+
 #+BEGIN_SRC emacs-lisp
-;; Backup and auto-saves
+(setq create-lockfiles nil)
+#+END_SRC
+
+*** Backup and auto-saves
+
+#+BEGIN_SRC emacs-lisp
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
 (setq auto-save-file-name-transforms
@@ -258,31 +278,20 @@ otherwise start a new ansi-term"
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.pp$"		  . puppet-mode))
 (add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
 (add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
-#+END_SRC
-
-Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
-
-#+BEGIN_SRC emacs-lisp
-;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
-(add-to-list 'auto-mode-alist '("\\.rake\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Guardfile\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.thor\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Thorfile\\'"	 . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
 #+END_SRC
 
 ** Languages
 
 *** Programming modes
+
+Turn on flyspell and goto-address for all text buffers.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'goto-address-mode)
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
@@ -294,14 +303,8 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
+	  '(lambda ()
 	     (turn-on-eldoc-mode)))
-#+END_SRC
-
-*** Ruby
-
-#+BEGIN_SRC
-(setq ruby-align-to-stmt-keywords t)
 #+END_SRC
 
 *** Shell script
@@ -318,91 +321,14 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 (add-hook 'sh-mode-hook 'my-setup-sh-mode)
 #+END_SRC
 
-** Emacs server
+(use-package server
+  :init
+  (unless (server-running-p)
+    (server-start)))** Miscellaneous settings
 
-Start Emacs server unless one is already running. =server-running-p=
-requires =server=.
-
-#+BEGIN_SRC emacs-lisp
-(autoload 'server-running-p "server")
-(unless (server-running-p)
-  (server-start))
-#+END_SRC
-
-** TRAMP
-
-Use SSH default control master settings. Add the following to
-=~/.ssh/config=.
-
-#+BEGIN_EXAMPLE conf
-Host *
-	ControlMaster auto
-	ControlPath ~/.ssh/control.%h_%p_%r
-	ControlPersist 60m
-#+END_EXAMPLE
+*** Disabled commands
 
 #+BEGIN_SRC emacs-lisp
-(setq tramp-use-ssh-controlmaster-options nil)
-
-;; Edit remote files via sudo
-;;
-;; See
-;; http://www.gnu.org/software/emacs/manual/html_node/tramp/Ad_002dhoc-multi_002dhops.html
-;;
-;; /ssh:example.com|sudo:localhost:/file
-
-;; Use warning font in modeline when working as root
-;;
-;; http://www.gnu.org/software/emacs/manual/html_mono/tramp.html#Frequently-Asked-Questions
-;; (I'ld like to get a Visual Warning when working in a sudo:ed
-;; context)
-;;
-(defun my-mode-line-warn-when-root ()
-  (when (string-match "^/su\\(do\\)?:" default-directory)
-    (setq mode-line-format
-	  (format-mode-line mode-line-format 'font-lock-warning-face))))
-(add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
-(add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)
-#+END_SRC
-
-** Miscellaneous settings
-
-Lock files
-
-http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
-
-Locks are created in the same directory as the file being
-edited. They can be disabled as of 24.3.
-
-http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
-
-#+BEGIN_SRC emacs-lisp
-(setq create-lockfiles nil)
-#+END_SRC
-
-Balance windows automatically.
-
-#+BEGIN_SRC emacs-lisp
-(defadvice split-window-below (after restore-balanace-below activate)
-  (balance-windows))
-
-(defadvice split-window-right (after restore-balance-right activate)
-  (balance-windows))
-
-(defadvice delete-window (after restore-balance activate)
-  (balance-windows))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(setq safe-local-variable-values '((encoding . utf-8)))
-
-;; Require an EOL at end of files
-(setq require-final-newline t)
-
-;; One space after sentences
-(setq sentence-end-double-space nil)
-
-;; Enable disabled commands
 (mapc (lambda (command) (put command 'disabled nil))
       '(downcase-region upcase-region upcase-initials-region))
 
@@ -414,18 +340,23 @@ Balance windows automatically.
 
 ;; Do not clobber text copied from the clipboard
 (setq save-interprogram-paste-before-kill t)
-
-;; Turn on flyspell and goto-address for all text and prog modes
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'goto-address-mode)
 #+END_SRC
 
 ** Package settings
 
-*** use-package
+*** 00 use-package
 
 #+BEGIN_SRC emacs-lisp
 (require 'use-package)
+#+END_SRC
+
+*** bash-completion
+
+#+BEGIN_SRC emacs-lisp
+(use-pacakge bash-completon
+  :disabled t
+  :init
+  ('bash-completion-setup))
 #+END_SRC
 
 *** bbdb
@@ -456,21 +387,24 @@ Balance windows automatically.
 *** erc
 
 #+BEGIN_SRC emacs-lisp
-(erc-services-mode 1)
-(erc-spelling-mode 1)
+(use-package erc
+  :init
+  (progn
+    (erc-services-mode 1)
+    (erc-spelling-mode 1)
 
-(setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
+    (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
 
-(setq bitlbee-username (password-store-get "bitlbee-username")
-      bitlbee-password (password-store-get "bitlbee-password")
-      freenode-username (password-store-get "freenode/username")
-      freenode-password (password-store-get "freenode/password"))
+    (setq bitlbee-username (password-store-get "bitlbee-username")
+	  bitlbee-password (password-store-get "bitlbee-password")
+	  freenode-username (password-store-get "freenode/username")
+	  freenode-password (password-store-get "freenode/password"))
 
-;; Nickserv configuration
-(setq erc-prompt-for-nickserv-password nil)
-(setq erc-nickserv-passwords
-      `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
-	((freenode ((,freenode-username . ,freenode-password))))))
+    ;; Nickserv configuration
+    (setq erc-prompt-for-nickserv-password nil)
+    (setq erc-nickserv-passwords
+	  `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+	    ((freenode ((,freenode-username . ,freenode-password))))))))
 #+END_SRC
 
 *** erc-track
@@ -497,12 +431,21 @@ Balance windows automatically.
     (exec-path-from-shell-initialize)))
 #+END_SRC
 
+*** flx-ido
+
+#+BEGIN_SRC emacs-lisp
+(use-package flx-ido
+  :init (flx-ido-mode 1)
+  :config (setq ido-use-face nil))
+#+END_SRC
+
 *** flycheck
 
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :config
-  (require 'flycheck-ledger))
+  (require 'flycheck-ledger)
+  (add-hook 'after-init-hook 'global-flycheck-mode))
 #+END_SRC
 
 *** git-commit-mode
@@ -619,11 +562,26 @@ Balance windows automatically.
 
 #+BEGIN_SRC emacs-lisp
 (use-package ido
-  :init
+  :init (ido-mode 1)
+  :config
   (progn
-    (setq ido-enable-flex-matching t)
-    (setq ido-everywhere t)
-    (setq ido-use-virtual-buffers t)))
+    (setq ido-enable-prefix nil
+	  ido-enable-flex-matching t
+	  ido-everywhere t
+	  ido-create-new-buffer 'always
+	  ido-use-filename-at-point 'guess
+	  ido-max-prospects 10
+	  ido-default-file-method 'selected-window
+	  ido-auto-merge-work-directories-length -1
+	  ido-use-virtual-buffers t)))
+#+END_SRC
+
+*** ido-ubiquitous
+
+#+BEGIN_SRC emacs-lisp
+(use-package ido-ubiquitous
+  :init
+  (ido-ubiquitous-mode 1))
 #+END_SRC
 
 *** message
@@ -732,6 +690,7 @@ Balance windows automatically.
 (setq org-replace-disputed-keys t)
 (setq org-src-fontify-natively t)
 (setq org-src-preserve-indentation t)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((perl . t)
@@ -739,19 +698,23 @@ Balance windows automatically.
    (sh . t)
    (python . t)
    (emacs-lisp . t)))
+
+;; Make windmove work in org-mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
 #+END_SRC
 
 *** projectile
 
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
-  :init
+  :init (projectile-global-mode 1)
+  :config
   (progn
-    (projectile-load-known-projects)
-
     (setq projectile-switch-project-action 'projectile-vc)
     (setq projectile-use-git-grep t)
-
     (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
 #+END_SRC
 
@@ -778,6 +741,40 @@ Balance windows automatically.
     (message "Aborting")))
 #+END_SRC
 
+*** ruby-mode
+
+Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package ruby-mode
+  :config
+  (progn
+    (setq ruby-align-to-stmt-keywords t))
+  :mode
+  (("\\.rake\\'"     . ruby-mode)
+   ("Rakefile\\'"    . ruby-mode)
+   ("\\.gemspec\\'"  . ruby-mode)
+   ("\\.ru\\'"	     . ruby-mode)
+   ("Gemfile\\'"     . ruby-mode)
+   ("Guardfile\\'"   . ruby-mode)
+   ("Capfile\\'"     . ruby-mode)
+   ("\\.thor\\'"     . ruby-mode)
+   ("Thorfile\\'"    . ruby-mode)
+   ("Vagrantfile\\'" . ruby-mode)
+   ("\\.jbuilder\\'" . ruby-mode)))
+#+END_SRC
+
+*** server
+
+Start Emacs server unless one is already running. =server-running-p=
+requires =server=.
+
+#+BEGIN_SRC emacs-lisp
+(use-package server
+  :init
+  (unless (server-running-p)
+    (server-start)))
+#+END_SRC
 *** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
@@ -830,4 +827,50 @@ Balance windows automatically.
 (use-package term
   :init
   (add-hook 'term-mode-hook 'my-setup-term-mode))
+#+END_SRC
+
+*** tramp
+
+Use SSH default control master settings. Add the following to
+=~/.ssh/config=.
+
+#+BEGIN_EXAMPLE conf
+Host *
+	ControlMaster auto
+	ControlPath ~/.ssh/control.%h_%p_%r
+	ControlPersist 60m
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+(use-package tramp
+  :config
+  (progn
+    (setq tramp-use-ssh-controlmaster-options nil)
+
+    ;; Edit remote files via sudo
+    ;;
+    ;; See
+    ;; http://www.gnu.org/software/emacs/manual/html_node/tramp/Ad_002dhoc-multi_002dhops.html
+    ;;
+    ;; /ssh:example.com|sudo:localhost:/file
+
+    ;; Use warning font in modeline when working as root
+    ;;
+    ;; http://www.gnu.org/software/emacs/manual/html_mono/tramp.html#Frequently-Asked-Questions
+    ;; (I'ld like to get a Visual Warning when working in a sudo:ed
+    ;; context)
+    ;;
+    (defun my-mode-line-warn-when-root ()
+      (when (string-match "^/su\\(do\\)?:" default-directory)
+	(setq mode-line-format
+	      (format-mode-line mode-line-format 'font-lock-warning-face))))
+    (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
+    (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)))
+#+END_SRC
+
+*** windmove
+
+#+BEGIN_SRC emacs-lisp
+(use-package windmove
+  :config (windmove-default-keybindings))
 #+END_SRC
