@@ -715,6 +715,14 @@ Turn on flyspell and goto-address for all text buffers.
 	(message "Aborting"))))
 #+END_SRC
 
+*** recentf
+
+#+BEGIN_SRC emacs-lisp
+(use-package recenf
+  :init
+  (recentf-mode 1))
+#+END_SRC
+
 *** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
@@ -879,17 +887,7 @@ Host *
   (winner-mode 1))
 #+END_SRC
 
-*** recentf
-
-#+BEGIN_SRC emacs-lisp
-(use-package recenf
-  :init
-  (recentf-mode 1))
-#+END_SRC
-
-*** TODO zoom-frm
-
-Not working.
+*** zoom-frm
 
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
