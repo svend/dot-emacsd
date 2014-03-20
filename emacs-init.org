@@ -141,6 +141,22 @@ Balance windows automatically.
   (balance-windows))
 #+END_SRC
 
+*** Disabled commands
+
+#+BEGIN_SRC emacs-lisp
+(mapc (lambda (command) (put command 'disabled nil))
+      '(downcase-region upcase-region upcase-initials-region))
+
+;; Use GUI web browser if it is available
+(if (executable-find "x-www-browser")
+    (progn
+      (setq browse-url-generic-program "x-www-browser")
+      (setq browse-url-browser-function 'browse-url-generic)))
+
+;; Do not clobber text copied from the clipboard
+(setq save-interprogram-paste-before-kill t)
+#+END_SRC
+
 ** Key bindings
 
 *** User-reserved key bindings
@@ -202,9 +218,7 @@ Press =C-c C-h= to show all of these.
 
 #+BEGIN_SRC emacs-lisp
 (desktop-save-mode 1)
-(recentf-mode 1)
 (savehist-mode 1)
-(winner-mode 1)
 #+END_SRC
 
 ** Emacs temporary files
@@ -282,9 +296,7 @@ otherwise start a new ansi-term"
 (add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
 #+END_SRC
 
-** Languages
-
-*** Programming modes
+** Programming modes
 
 Turn on flyspell and goto-address for all text buffers.
 
@@ -297,49 +309,6 @@ Turn on flyspell and goto-address for all text buffers.
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
-#+END_SRC
-
-*** Emacs lisp
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-lisp-mode-hook
-	  '(lambda ()
-	     (turn-on-eldoc-mode)))
-#+END_SRC
-
-*** Shell script
-
-#+BEGIN_SRC emacs-lisp
-(defun my-setup-sh-mode ()
-  "My preferences for sh-mode"
-  (interactive)
-  (setq sh-basic-offset 8)
-  (setq sh-indentation 8)
-  (setq sh-indent-for-case-alt '+)
-  (setq sh-indent-for-case-label 0))
-
-(add-hook 'sh-mode-hook 'my-setup-sh-mode)
-#+END_SRC
-
-(use-package server
-  :init
-  (unless (server-running-p)
-    (server-start)))** Miscellaneous settings
-
-*** Disabled commands
-
-#+BEGIN_SRC emacs-lisp
-(mapc (lambda (command) (put command 'disabled nil))
-      '(downcase-region upcase-region upcase-initials-region))
-
-;; Use GUI web browser if it is available
-(if (executable-find "x-www-browser")
-    (progn
-      (setq browse-url-generic-program "x-www-browser")
-      (setq browse-url-browser-function 'browse-url-generic)))
-
-;; Do not clobber text copied from the clipboard
-(setq save-interprogram-paste-before-kill t)
 #+END_SRC
 
 ** Package settings
@@ -420,8 +389,7 @@ Turn on flyspell and goto-address for all text buffers.
 
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
-  :if
-  (eq window-system 'ns)
+  :if (eq window-system 'ns)
   :init
   (progn
     (mapc
@@ -584,6 +552,16 @@ Turn on flyspell and goto-address for all text buffers.
   (ido-ubiquitous-mode 1))
 #+END_SRC
 
+*** lisp-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package lisp-mode
+  :init
+  (add-hook 'emacs-lisp-mode-hook
+	    '(lambda ()
+	       (turn-on-eldoc-mode))))
+#+END_SRC
+
 *** message
 
 #+BEGIN_SRC emacs-lisp
@@ -715,7 +693,7 @@ Turn on flyspell and goto-address for all text buffers.
   (progn
     (setq projectile-switch-project-action 'projectile-vc)
     (setq projectile-use-git-grep t)
-    (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
+    (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line))
 #+END_SRC
 
 *** recentf
@@ -775,6 +753,28 @@ requires =server=.
   (unless (server-running-p)
     (server-start)))
 #+END_SRC
+*** sh-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package sh-mode
+  :init
+  (progn
+    (defun my-setup-sh-mode ()
+      "My preferences for sh-mode"
+      (interactive)
+      (setq sh-basic-offset 8)
+      (setq sh-indentation 8)
+      (setq sh-indent-for-case-alt '+)
+      (setq sh-indent-for-case-label 0))
+
+    (add-hook 'sh-mode-hook 'my-setup-sh-mode)))
+#+END_SRC
+
+(use-package server
+  :init
+  (unless (server-running-p)
+    (server-start)))** Miscellaneous settings
+
 *** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
@@ -873,4 +873,20 @@ Host *
 #+BEGIN_SRC emacs-lisp
 (use-package windmove
   :config (windmove-default-keybindings))
+#+END_SRC
+
+*** winner
+
+#+BEGIN_SRC emacs-lisp
+(use-package winner
+  :init
+  (winner-mode 1))
+#+END_SRC
+
+*** recentf
+
+#+BEGIN_SRC emacs-lisp
+(use-package recenf
+  :init
+  (recentf-mode 1))
 #+END_SRC
