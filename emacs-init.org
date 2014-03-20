@@ -900,5 +900,3 @@ Host *
 	 ("C-0" . zoom-in/out)
 	 ("C-=" . zoom-in/out)))
 #+END_SRC
-
-
