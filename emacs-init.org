@@ -1,13 +1,13 @@
-* Emacs configuration
+#+TITLE: Emacs Configuration
 
-** User information
+* User information
 
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name    "Svend Sorensen")
 (setq user-mail-address "svend@ciffer.net")
 #+END_SRC
 
-** Installing Emacs
+* Installing Emacs
 
 Install from homebrew on OS X.
 
@@ -17,14 +17,20 @@ rsync -a --delete /usr/local/Cellar/emacs/HEAD/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
 #+END_SRC
 
-** Initialize Cask
+* Initialize Cask
 
 #+BEGIN_SRC emacs-lisp
 (require 'cask (expand-file-name "emacs-cask/cask.el" user-emacs-directory))
 (cask-initialize)
 #+END_SRC
 
-** UI
+* Initialize use-package
+
+#+BEGIN_SRC emacs-lisp
+(require 'use-package)
+#+END_SRC
+
+* UI
 
 #+BEGIN_SRC emacs-lisp
 (setq safe-local-variable-values '((encoding . utf-8)))
@@ -33,7 +39,7 @@ tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
 (setq history-length 10000)
 #+END_SRC
 
-*** Mouse
+** Mouse
 
 Copy test selected by the mouse to the kill ring. This was turned off
 in Emacs 24.
@@ -48,7 +54,7 @@ Scroll one line at a time with mouse
 (setq mouse-wheel-scroll-amount '(1))
 #+END_SRC
 
-*** Mode line
+** Mode line
 
 - Display clock in the status bar
 - Display column number in mode-line (line number is displayed by default)
@@ -65,7 +71,7 @@ Display date in 24 hour format in mode line.
 (setq display-time-24hr-format t)
 #+END_SRC
 
-*** Hilight current line
+** Hilight current line
 
 Hilight the current line. To disable for a mode, add this to the mode
 hook:
@@ -79,7 +85,7 @@ hook:
 (global-hl-line-mode t)
 #+END_SRC
 
-*** Chrome
+** Chrome
 
 - Disable welcome screen
 - Disable menu bar
@@ -93,7 +99,7 @@ hook:
 (tool-bar-mode 0)
 #+END_SRC
 
-*** Y/N answers
+** Y/N answers
 
 Enable y/n answers.
 
@@ -101,7 +107,7 @@ Enable y/n answers.
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-*** Themes
+** Themes
 
 Treat all themes as safe.
 
@@ -126,7 +132,7 @@ Disable variable width fonts. Disable variable font sizes.
 (load-theme 'solarized-light t)
 #+END_SRC
 
-*** Balance windows
+** Balance windows
 
 Balance windows automatically.
 
@@ -141,7 +147,7 @@ Balance windows automatically.
   (balance-windows))
 #+END_SRC
 
-*** Disabled commands
+** Disabled commands
 
 #+BEGIN_SRC emacs-lisp
 (mapc (lambda (command) (put command 'disabled nil))
@@ -157,9 +163,46 @@ Balance windows automatically.
 (setq save-interprogram-paste-before-kill t)
 #+END_SRC
 
-** Key bindings
+** OS X specific configuration
 
-*** User-reserved key bindings
+- Turn on menu bar, since it does not use any extra space on OS X.
+- Use Adobe's Source Code Pro font.
+
+#+BEGIN_SRC emacs-lisp
+(when (eq window-system 'ns)
+  (menu-bar-mode 1)
+  (set-face-attribute 'default nil :font "Source Code Pro" :height 140))
+#+END_SRC
+
+** Programming modes
+
+Turn on flyspell and goto-address for all text buffers.
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook 'goto-address-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'goto-address-prog-mode)
+(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
+#+END_SRC
+
+** Auto modes
+
+=bash-fc-*= are bash command editing temporary files (=fc= built-in).
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
+(add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
+(add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
+(add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
+#+END_SRC
+
+* Key bindings
+
+** User-reserved key bindings
 
 =C-c letter= and =<F5>= through =<F9>= are reserved for user use.
 Press =C-c C-h= to show all of these.
@@ -168,55 +211,33 @@ Press =C-c C-h= to show all of these.
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-c a")   'align-current)
-(global-set-key (kbd "C-c b")   'bbdb)
-(global-set-key (kbd "C-c d")   'my-insert-date)
-(global-set-key (kbd "C-c e")   'eww)
-(global-set-key (kbd "C-c f")   'flycheck-mode)
-(global-set-key (kbd "C-c h f") 'helm-firefox-bookmarks)
-(global-set-key (kbd "C-c h f") 'helm-find-files)
-(global-set-key (kbd "C-c h g") 'helm-git-grep-from-here)
-(global-set-key (kbd "C-c h p") 'helm-projectile)
-(global-set-key (kbd "C-c h x") 'helm-M-x)
-(global-set-key (kbd "C-c k")   'kill-this-buffer)
-(global-set-key (kbd "C-c m")   'magit-status)
-(global-set-key (kbd "C-c n")   'linum-mode)
-(global-set-key (kbd "C-c o a") 'org-agenda)
-(global-set-key (kbd "C-c o b") 'org-iswitchb)
-(global-set-key (kbd "C-c o c") 'org-capture)
-(global-set-key (kbd "C-c o l") 'org-store-link)
-(global-set-key (kbd "C-c o r") 'org-remember)
-(global-set-key (kbd "C-c r")   'revert-buffer)
-(global-set-key (kbd "C-c s")   'toggle-truncate-lines)
-(global-set-key (kbd "C-c t")   'my-switch-to-term)
-(global-set-key (kbd "C-c w")   'whitespace-mode)
+(bind-key "C-c a"   'align-current)
+(bind-key "C-c b"   'bbdb)
+(bind-key "C-c d"   'my-insert-date)
+(bind-key "C-c e"   'eww)
+(bind-key "C-c f"   'flycheck-mode)
+(bind-key "C-c h f" 'helm-firefox-bookmarks)
+(bind-key "C-c h f" 'helm-find-files)
+(bind-key "C-c h g" 'helm-git-grep-from-here)
+(bind-key "C-c h p" 'helm-projectile)
+(bind-key "C-c h x" 'helm-M-x)
+(bind-key "C-c k"   'kill-this-buffer)
+(bind-key "C-c m"   'magit-status)
+(bind-key "C-c n"   'linum-mode)
+(bind-key "C-c o a" 'org-agenda)
+(bind-key "C-c o b" 'org-iswitchb)
+(bind-key "C-c o c" 'org-capture)
+(bind-key "C-c o l" 'org-store-link)
+(bind-key "C-c o r" 'org-remember)
+(bind-key "C-c r"   'revert-buffer)
+(bind-key "C-c s"   'toggle-truncate-lines)
+(bind-key "C-c t"   'my-switch-to-term)
+(bind-key "C-c w"   'whitespace-mode)
 #+END_SRC
 
-*** Non-reserved key bindings
+* Emacs temporary files
 
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-`")         'helm-for-files)
-
-; buffer-move
-(global-set-key (kbd "<C-S-up>")    'buf-move-up)
-(global-set-key (kbd "<C-S-down>")  'buf-move-down)
-(global-set-key (kbd "<C-S-left>")  'buf-move-left)
-(global-set-key (kbd "<C-S-right>") 'buf-move-right)
-
-(global-set-key (kbd "M-x")	    'smex)
-(global-set-key (kbd "M-X")	    'smex-major-mode-commands)
-#+END_SRC
-
-** Emacs global modes
-
-#+BEGIN_SRC emacs-lisp
-(desktop-save-mode 1)
-(savehist-mode 1)
-#+END_SRC
-
-** Emacs temporary files
-
-*** Lock files
+** Lock files
 
 http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
 
@@ -229,7 +250,7 @@ http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 (setq create-lockfiles nil)
 #+END_SRC
 
-*** Backup and auto-saves
+** Backup and auto-saves
 
 #+BEGIN_SRC emacs-lisp
 (setq backup-directory-alist
@@ -238,7 +259,7 @@ http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
       `((".*" ,(expand-file-name "backup/" user-emacs-directory) t)))
 #+END_SRC
 
-** User defined functions
+* User defined functions
 
 #+BEGIN_SRC emacs-lisp
 (defun my-insert-date ()
@@ -267,52 +288,9 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 #+END_SRC
 
-** OS X specific configuration
+* Package settings
 
-- Turn on menu bar, since it does not use any extra space on OS X.
-- Use Adobe's Source Code Pro font.
-
-#+BEGIN_SRC emacs-lisp
-(when (eq window-system 'ns)
-  (menu-bar-mode 1)
-  (set-face-attribute 'default nil :font "Source Code Pro" :height 140))
-#+END_SRC
-
-** Auto modes
-
-=bash-fc-*= are bash command editing temporary files (=fc= built-in).
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
-(add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
-(add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
-#+END_SRC
-
-** Programming modes
-
-Turn on flyspell and goto-address for all text buffers.
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'goto-address-mode)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'prog-mode-hook 'goto-address-prog-mode)
-(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
-#+END_SRC
-
-** Package settings
-
-*** 00 use-package
-
-#+BEGIN_SRC emacs-lisp
-(require 'use-package)
-#+END_SRC
-
-*** bash-completion
+** bash-completion
 
 #+BEGIN_SRC emacs-lisp
 (use-package bash-completion
@@ -321,21 +299,37 @@ Turn on flyspell and goto-address for all text buffers.
   ('bash-completion-setup))
 #+END_SRC
 
-*** bbdb
+** bbdb
 
 #+BEGIN_SRC emacs-lisp
 (setq bbdb-file "~/.config/bbdb/.bbdb")
 (setq bbdb-auto-revert-p t)
 #+END_SRC
 
-*** dns-mode
+** buffer-move
+
+#+BEGIN_SRC emacs-lisp
+(use-package buffer-move
+  :bind (("<C-S-up>"    . buf-move-up)
+	 ("<C-S-down>"  . buf-move-down)
+	 ("<C-S-left>"  . buf-move-left)
+	 ("<C-S-right>" . buf-move-right)))
+#+END_SRC
+** desktop
+
+#+BEGIN_SRC emacs-lisp
+(use-package desktop
+  :init(desktop-save-mode 1))
+#+END_SRC
+
+** dns-mode
 
 #+BEGIN_SRC emacs-lisp
 ;; Do not auto increment serial (C-c C-s to increment)
 (setq dns-mode-soa-auto-increment-serial nil)
 #+END_SRC
 
-*** elfeed
+** elfeed
 
 #+BEGIN_SRC emacs-lisp
 (setq elfeed-feeds
@@ -346,7 +340,7 @@ Turn on flyspell and goto-address for all text buffers.
 	"http://planet.debian.org/atom.xml"))
 #+END_SRC
 
-*** erc
+** erc
 
 #+BEGIN_SRC emacs-lisp
 (use-package erc
@@ -369,7 +363,7 @@ Turn on flyspell and goto-address for all text buffers.
 	    ((freenode ((,freenode-username . ,freenode-password))))))))
 #+END_SRC
 
-*** erc-track
+** erc-track
 
 #+BEGIN_SRC emacs-lisp
 ;; Do not notify for join, part, or quit
@@ -378,7 +372,7 @@ Turn on flyspell and goto-address for all text buffers.
 (add-to-list 'erc-track-exclude-types "QUIT")
 #+END_SRC
 
-*** exec-path-from-shell
+** exec-path-from-shell
 
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
@@ -392,7 +386,7 @@ Turn on flyspell and goto-address for all text buffers.
     (exec-path-from-shell-initialize)))
 #+END_SRC
 
-*** flx-ido
+** flx-ido
 
 #+BEGIN_SRC emacs-lisp
 (use-package flx-ido
@@ -400,7 +394,7 @@ Turn on flyspell and goto-address for all text buffers.
   :config (setq ido-use-face nil))
 #+END_SRC
 
-*** flycheck
+** flycheck
 
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
@@ -409,14 +403,14 @@ Turn on flyspell and goto-address for all text buffers.
   (add-hook 'after-init-hook 'global-flycheck-mode))
 #+END_SRC
 
-*** git-commit-mode
+** git-commit-mode
 
 #+BEGIN_SRC emacs-lisp
 ;; Spell check git commit messages
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
 #+END_SRC
 
-*** gnus
+** gnus
 
 #+BEGIN_SRC emacs-lisp
 ;; Gmane
@@ -447,7 +441,7 @@ Turn on flyspell and goto-address for all text buffers.
 	 ("Bcc" "svends@uw.edu"))))
 #+END_SRC
 
-*** gnus-alias
+** gnus-alias
 
 #+BEGIN_SRC emacs-lisp
 (setq gnus-alias-identity-alist
@@ -459,10 +453,11 @@ Turn on flyspell and goto-address for all text buffers.
 	("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")))
 #+END_SRC
 
-*** helm
+** helm
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm
+  :bind (("C-`" . helm-for-files))
   :init
   (progn
     (require 'helm-ls-git)
@@ -473,7 +468,7 @@ Turn on flyspell and goto-address for all text buffers.
     (helm-adaptative-mode 1)))
 #+END_SRC
 
-*** ibuffer
+** ibuffer
 
 #+BEGIN_SRC emacs-lisp
 ;; Define ibuffer groups
@@ -519,7 +514,7 @@ Turn on flyspell and goto-address for all text buffers.
 (add-hook 'ibuffer-hook 'my-setup-ibuffer-mode)
 #+END_SRC
 
-*** ido
+** ido
 
 #+BEGIN_SRC emacs-lisp
 (use-package ido
@@ -537,7 +532,7 @@ Turn on flyspell and goto-address for all text buffers.
 	  ido-use-virtual-buffers t)))
 #+END_SRC
 
-*** ido-ubiquitous
+** ido-ubiquitous
 
 #+BEGIN_SRC emacs-lisp
 (use-package ido-ubiquitous
@@ -545,7 +540,7 @@ Turn on flyspell and goto-address for all text buffers.
   (ido-ubiquitous-mode 1))
 #+END_SRC
 
-*** lisp-mode
+** lisp-mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package lisp-mode
@@ -555,7 +550,7 @@ Turn on flyspell and goto-address for all text buffers.
 	       (turn-on-eldoc-mode))))
 #+END_SRC
 
-*** message
+** message
 
 #+BEGIN_SRC emacs-lisp
 (use-package message
@@ -600,7 +595,7 @@ Turn on flyspell and goto-address for all text buffers.
     (add-hook 'message-setup-hook 'my-setup-message-mode)))
 #+END_SRC
 
-*** notmuch
+** notmuch
 
 #+BEGIN_SRC emacs-lisp
 (use-package notmuch
@@ -653,7 +648,7 @@ Turn on flyspell and goto-address for all text buffers.
     (require 'gnus-art)))
 #+END_SRC
 
-*** org
+** org
 
 #+BEGIN_SRC emacs-lisp
 (require 'org-notmuch)
@@ -677,7 +672,7 @@ Turn on flyspell and goto-address for all text buffers.
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 #+END_SRC
 
-*** projectile
+** projectile
 
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
@@ -689,10 +684,12 @@ Turn on flyspell and goto-address for all text buffers.
     (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
 #+END_SRC
 
-*** recentf
+** recentf
 
 #+BEGIN_SRC emacs-lisp
 (use-package recentf
+  :init
+  (recentf-mode 1))
   :config
   (progn
     ;; Enable recentf mode with ido-mode support
@@ -715,15 +712,7 @@ Turn on flyspell and goto-address for all text buffers.
 	(message "Aborting"))))
 #+END_SRC
 
-*** recentf
-
-#+BEGIN_SRC emacs-lisp
-(use-package recenf
-  :init
-  (recentf-mode 1))
-#+END_SRC
-
-*** ruby-mode
+** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
@@ -746,7 +735,13 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
    ("\\.jbuilder\\'" . ruby-mode)))
 #+END_SRC
 
-*** server
+** savehist
+
+#+BEGIN_SRC emacs-lisp
+(use-package savehist
+  :init (savehist-mode 1))
+#+END_SRC
+** server
 
 Start Emacs server unless one is already running. =server-running-p=
 requires =server=.
@@ -757,7 +752,7 @@ requires =server=.
   (unless (server-running-p)
     (server-start)))
 #+END_SRC
-*** sh-mode
+** sh-mode
 
 #+BEGIN_SRC emacs-lisp
 (use-package sh-mode
@@ -779,7 +774,7 @@ requires =server=.
   (unless (server-running-p)
     (server-start)))** Miscellaneous settings
 
-*** slime
+** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
@@ -789,7 +784,15 @@ requires =server=.
   (setq inferior-lisp-program "sbcl"))
 #+END_SRC
 
-*** term
+** smex
+
+#+BEGIN_SRC emacs-lisp
+(use-package smex
+  :bind (("M-x" . smex)
+	 ("M-X" . smex-major-mode-commands)
+	 ("C-c M-x" . execute-extended-command)))
+#+END_SRC
+** term
 
 #+BEGIN_SRC emacs-lisp
 (defun my-setup-term-mode ()
@@ -833,7 +836,7 @@ requires =server=.
   (add-hook 'term-mode-hook 'my-setup-term-mode))
 #+END_SRC
 
-*** tramp
+** tramp
 
 Use SSH default control master settings. Add the following to
 =~/.ssh/config=.
@@ -872,14 +875,14 @@ Host *
     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)))
 #+END_SRC
 
-*** windmove
+** windmove
 
 #+BEGIN_SRC emacs-lisp
 (use-package windmove
   :config (windmove-default-keybindings))
 #+END_SRC
 
-*** winner
+** winner
 
 #+BEGIN_SRC emacs-lisp
 (use-package winner
@@ -887,7 +890,7 @@ Host *
   (winner-mode 1))
 #+END_SRC
 
-*** zoom-frm
+** zoom-frm
 
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
@@ -897,3 +900,5 @@ Host *
 	 ("C-0" . zoom-in/out)
 	 ("C-=" . zoom-in/out)))
 #+END_SRC
+
+
