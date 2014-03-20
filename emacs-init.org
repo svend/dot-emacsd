@@ -895,8 +895,8 @@ Host *
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
   :init (autoload 'zoom-in/out "zoom-frm")
-  :bind (("C-+" . zoom-in/out)
-	 ("C--" . zoom-in/out)
-	 ("C-0" . zoom-in/out)
-	 ("C-=" . zoom-in/out)))
+  :bind (("C-c C-+" . zoom-in/out)
+	 ("C-c C--" . zoom-in/out)
+	 ("C-c C-0" . zoom-in/out)
+	 ("C-c C-=" . zoom-in/out)))
 #+END_SRC
