@@ -686,30 +686,33 @@ Turn on flyspell and goto-address for all text buffers.
   (progn
     (setq projectile-switch-project-action 'projectile-vc)
     (setq projectile-use-git-grep t)
-    (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line))
+    (add-hook 'after-change-major-mode-hook 'projectile-update-mode-line)))
 #+END_SRC
 
 *** recentf
 
 #+BEGIN_SRC emacs-lisp
-;; Enable recentf mode with ido-mode support
-;;
-;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
+(use-package recentf
+  :config
+  (progn
+    ;; Enable recentf mode with ido-mode support
+    ;;
+    ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
 
-;; Increase size of recent file list
-(setq recentf-max-saved-items 50)
+    ;; Increase size of recent file list
+    (setq recentf-max-saved-items 50)
 
-;; Ignore ephemeral git commit message files
-(add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
-;; Ignore temporary notmuch ical files
-(add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
+    ;; Ignore ephemeral git commit message files
+    (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
+    ;; Ignore temporary notmuch ical files
+    (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
 
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
+    (defun ido-recentf-open ()
+      "Use `ido-completing-read' to \\[find-file] a recent file"
+      (interactive)
+      (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+	  (message "Opening file...")
+	(message "Aborting"))))
 #+END_SRC
 
 *** ruby-mode
@@ -891,8 +894,8 @@ Not working.
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
   :init (autoload 'zoom-in/out "zoom-frm")
-  :bind (("C-+" . 'zoom-in/out)
-	 ("C--" . 'zoom-in/out)
-	 ("C-0" . 'zoom-in/out)
-	 ("C-=" . 'zoom-in/out)))
+  :bind (("C-+" . zoom-in/out)
+	 ("C--" . zoom-in/out)
+	 ("C-0" . zoom-in/out)
+	 ("C-=" . zoom-in/out)))
 #+END_SRC
