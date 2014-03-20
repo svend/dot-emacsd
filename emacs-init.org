@@ -57,7 +57,8 @@ Scroll one line at a time with mouse
 ** Mode line
 
 - Display clock in the status bar
-- Display column number in mode-line (line number is displayed by default)
+- Display column number in mode-line (line number is displayed by
+  default)
 
 #+BEGIN_SRC emacs-lisp
 (display-time-mode t)
@@ -792,6 +793,7 @@ requires =server=.
 	 ("M-X" . smex-major-mode-commands)
 	 ("C-c M-x" . execute-extended-command)))
 #+END_SRC
+
 ** term
 
 #+BEGIN_SRC emacs-lisp
