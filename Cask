@@ -12,6 +12,7 @@
 (depends-on "elfeed")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
+(depends-on "flatui-theme")
 (depends-on "flx-ido")
 (depends-on "flycheck")
 (depends-on "flycheck-ledger")
