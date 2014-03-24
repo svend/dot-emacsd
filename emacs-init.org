@@ -32,26 +32,18 @@ tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
 
 * UI
 
-#+BEGIN_SRC emacs-lisp
-(setq safe-local-variable-values '((encoding . utf-8)))
-(setq require-final-newline t)
-(setq sentence-end-double-space nil)
-(setq history-length 10000)
-#+END_SRC
+** Chrome
 
-** Mouse
-
-Copy test selected by the mouse to the kill ring. This was turned off
-in Emacs 24.
+- Disable welcome screen
+- Disable menu bar
+- Disable scroll bar
+- Disable tool bar
 
 #+BEGIN_SRC emacs-lisp
-(setq mouse-drag-copy-region t)
-#+END_SRC
-
-Scroll one line at a time with mouse
-
-#+BEGIN_SRC emacs-lisp
-(setq mouse-wheel-scroll-amount '(1))
+(setq inhibit-splash-screen t)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
 #+END_SRC
 
 ** Mode line
@@ -72,32 +64,19 @@ Display date in 24 hour format in mode line.
 (setq display-time-24hr-format t)
 #+END_SRC
 
-** Hilight current line
+** Mouse
 
-Hilight the current line. To disable for a mode, add this to the mode
-hook:
-
-#+BEGIN_EXAMPLE
-(make-local-variable 'global-hl-line-mode)
-(setq global-hl-line-mode nil)
-#+END_EXAMPLE
+Copy test selected by the mouse to the kill ring. This was turned off
+in Emacs 24.
 
 #+BEGIN_SRC emacs-lisp
-(global-hl-line-mode t)
+(setq mouse-drag-copy-region t)
 #+END_SRC
 
-** Chrome
-
-- Disable welcome screen
-- Disable menu bar
-- Disable scroll bar
-- Disable tool bar
+Scroll one line at a time with mouse
 
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-splash-screen t)
-(menu-bar-mode 0)
-(scroll-bar-mode 0)
-(tool-bar-mode 0)
+(setq mouse-wheel-scroll-amount '(1))
 #+END_SRC
 
 ** solarized
@@ -119,6 +98,19 @@ Disable variable width fonts. Disable variable font sizes.
     (load-theme 'solarized-light t)))
 #+END_SRC
 
+** Hilight current line
+
+Hilight the current line. To disable for a mode, add this to the mode
+hook:
+
+#+BEGIN_EXAMPLE
+(make-local-variable 'global-hl-line-mode)
+(setq global-hl-line-mode nil)
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+(global-hl-line-mode t)
+#+END_SRC
 
 ** Y/N answers
 
@@ -204,6 +196,15 @@ Turn on flyspell and goto-address for all text buffers.
 (add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
 #+END_SRC
 
+** Misc
+
+#+BEGIN_SRC emacs-lisp
+(setq safe-local-variable-values '((encoding . utf-8)))
+(setq require-final-newline t)
+(setq sentence-end-double-space nil)
+(setq history-length 10000)
+#+END_SRC
+
 * Key bindings
 
 ** User-reserved key bindings
@@ -216,18 +217,12 @@ Press =C-c C-h= to show all of these.
 
 #+BEGIN_SRC emacs-lisp
 (bind-key "C-c a"   'align-current)
-(bind-key "C-c b"   'bbdb)
 (bind-key "C-c d"   'my-insert-date)
 (bind-key "C-c e"   'eww)
 (bind-key "C-c f"   'flycheck-mode)
 (bind-key "C-c k"   'kill-this-buffer)
 (bind-key "C-c m"   'magit-status)
 (bind-key "C-c n"   'linum-mode)
-(bind-key "C-c o a" 'org-agenda)
-(bind-key "C-c o b" 'org-iswitchb)
-(bind-key "C-c o c" 'org-capture)
-(bind-key "C-c o l" 'org-store-link)
-(bind-key "C-c o r" 'org-remember)
 (bind-key "C-c r"   'revert-buffer)
 (bind-key "C-c s"   'toggle-truncate-lines)
 (bind-key "C-c t"   'my-switch-to-term)
@@ -302,6 +297,7 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package bbdb
+  :bind (("C-c b" . bbdb))
   :config
   (progn
     (setq bbdb-file "~/.config/bbdb/.bbdb")
@@ -678,7 +674,11 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package org
-  :defer t
+  :bind (("C-c o a" . org-agenda)
+	 ("C-c o b" . org-iswitchb)
+	 ("C-c o c" . org-capture)
+	 ("C-c o l" . org-store-link)
+	 ("C-c o r" . org-remember))
   :config
   (progn
     (require 'org-notmuch)
