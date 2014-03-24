@@ -100,6 +100,26 @@ hook:
 (tool-bar-mode 0)
 #+END_SRC
 
+** solarized
+
+Solarized light theme.
+
+Disable variable width fonts. Disable variable font sizes.
+
+#+BEGIN_SRC emacs-lisp
+(use-package solarized
+  :init
+  (progn
+    (setq solarized-use-variable-pitch nil)
+    (setq solarized-height-minus-1 1.0)
+    (setq solarized-height-plus-1 1.0)
+    (setq solarized-height-plus-2 1.0)
+    (setq solarized-height-plus-3 1.0)
+    (setq solarized-height-plus-4 1.0)
+    (load-theme 'solarized-light t)))
+#+END_SRC
+
+
 ** Y/N answers
 
 Enable y/n answers.
@@ -114,23 +134,6 @@ Treat all themes as safe.
 
 #+BEGIN_SRC emacs-lisp
 (setq custom-safe-themes t)
-#+END_SRC
-
-Solarized light theme.
-
-Disable variable width fonts. Disable variable font sizes.
-
-#+BEGIN_SRC emacs-lisp
-(setq solarized-use-variable-pitch nil)
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(load-theme 'solarized-light t)
 #+END_SRC
 
 ** Balance windows
@@ -217,11 +220,6 @@ Press =C-c C-h= to show all of these.
 (bind-key "C-c d"   'my-insert-date)
 (bind-key "C-c e"   'eww)
 (bind-key "C-c f"   'flycheck-mode)
-(bind-key "C-c h f" 'helm-firefox-bookmarks)
-(bind-key "C-c h f" 'helm-find-files)
-(bind-key "C-c h g" 'helm-git-grep-from-here)
-(bind-key "C-c h p" 'helm-projectile)
-(bind-key "C-c h x" 'helm-M-x)
 (bind-key "C-c k"   'kill-this-buffer)
 (bind-key "C-c m"   'magit-status)
 (bind-key "C-c n"   'linum-mode)
@@ -303,8 +301,11 @@ otherwise start a new ansi-term"
 ** bbdb
 
 #+BEGIN_SRC emacs-lisp
-(setq bbdb-file "~/.config/bbdb/.bbdb")
-(setq bbdb-auto-revert-p t)
+(use-package bbdb
+  :config
+  (progn
+    (setq bbdb-file "~/.config/bbdb/.bbdb")
+    (setq bbdb-auto-revert-p t)))
 #+END_SRC
 
 ** buffer-move
@@ -320,57 +321,70 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package desktop
-  :init(desktop-save-mode 1))
+  :init (desktop-save-mode 1))
 #+END_SRC
 
 ** dns-mode
 
 #+BEGIN_SRC emacs-lisp
-;; Do not auto increment serial (C-c C-s to increment)
-(setq dns-mode-soa-auto-increment-serial nil)
+(use-package dns-mode
+  :defer t
+  :config
+  (progn
+    ;; Do not auto increment serial (C-c C-s to increment)
+    (setq dns-mode-soa-auto-increment-serial nil)))
 #+END_SRC
 
 ** elfeed
 
 #+BEGIN_SRC emacs-lisp
-(setq elfeed-feeds
-      '("http://git-annex.branchable.com/devblog/index.atom"
-	"http://planet.emacsen.org/atom.xml"
-	"http://www.reddit.com/r/emacs/.rss"
-	"http://www.reddit.com/r/ruby/.rss"
-	"http://planet.debian.org/atom.xml"))
+(use-package elfeed
+  :defer t
+  :config
+  (progn
+    (setq elfeed-feeds
+	  '("http://git-annex.branchable.com/devblog/index.atom"
+	    "http://planet.emacsen.org/atom.xml"
+	    "http://www.reddit.com/r/emacs/.rss"
+	    "http://www.reddit.com/r/ruby/.rss"
+	    "http://planet.debian.org/atom.xml"))))
 #+END_SRC
 
 ** erc
 
 #+BEGIN_SRC emacs-lisp
-(use-package erc
-  :init
-  (progn
-    (erc-services-mode 1)
-    (erc-spelling-mode 1)
-
-    (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
-
-    (setq bitlbee-username (password-store-get "bitlbee-username")
-	  bitlbee-password (password-store-get "bitlbee-password")
-	  freenode-username (password-store-get "freenode/username")
-	  freenode-password (password-store-get "freenode/password"))
-
-    ;; Nickserv configuration
-    (setq erc-prompt-for-nickserv-password nil)
-    (setq erc-nickserv-passwords
-	  `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
-	    ((freenode ((,freenode-username . ,freenode-password))))))))
+  (use-package erc
+    :defer t
+    :config
+    (progn
+      (erc-services-mode 1)
+      (erc-spelling-mode 1)
+      
+      (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
+      
+      (setq bitlbee-username (password-store-get "bitlbee-username")
+            bitlbee-password (password-store-get "bitlbee-password")
+            freenode-username (password-store-get "freenode/username")
+            freenode-password (password-store-get "freenode/password"))
+      
+      ;; Nickserv configuration
+      (setq erc-prompt-for-nickserv-password nil)
+      (setq erc-nickserv-passwords
+            `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+              ((freenode ((,freenode-username . ,freenode-password))))))))
 #+END_SRC
 
 ** erc-track
 
 #+BEGIN_SRC emacs-lisp
-;; Do not notify for join, part, or quit
-(add-to-list 'erc-track-exclude-types "JOIN")
-(add-to-list 'erc-track-exclude-types "PART")
-(add-to-list 'erc-track-exclude-types "QUIT")
+(use-package erc-track
+  :defer t
+  :config
+  (progn
+    ;; Do not notify for join, part, or quit
+    (add-to-list 'erc-track-exclude-types "JOIN")
+    (add-to-list 'erc-track-exclude-types "PART")
+    (add-to-list 'erc-track-exclude-types "QUIT")))
 #+END_SRC
 
 ** exec-path-from-shell
@@ -407,8 +421,12 @@ otherwise start a new ansi-term"
 ** git-commit-mode
 
 #+BEGIN_SRC emacs-lisp
-;; Spell check git commit messages
-(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+(use-package git-commit-mode
+  :defer t
+  :config
+  (progn
+    ;; Spell check git commit messages
+    (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
 #+END_SRC
 
 ** gnus
@@ -458,8 +476,13 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package helm
-  :bind (("C-`" . helm-for-files))
-  :init
+  :bind (("C-`" . helm-for-files)
+	 ("C-c h f" . helm-firefox-bookmarks)
+	 ("C-c h f" . helm-find-files)
+	 ("C-c h g" . helm-git-grep-from-here)
+	 ("C-c h p" . helm-projectile)
+	 ("C-c h x" . helm-M-x))
+  :config
   (progn
     (require 'helm-ls-git)
     (add-to-list 'helm-for-files-preferred-list 'helm-source-ls-git t)
@@ -495,6 +518,7 @@ otherwise start a new ansi-term"
 (defun ibuffer-tramp-add-tramp-filter-groups ()
   (interactive)
   (dolist (group (ibuffer-tramp-generate-filter-groups-by-tramp-connection))
+
     (add-to-list 'ibuffer-filter-groups group t)))
 
 (defun ibuffer-vc-add-vc-filter-groups ()
@@ -545,7 +569,7 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package lisp-mode
-  :init
+  :config
   (add-hook 'emacs-lisp-mode-hook
 	    '(lambda ()
 	       (turn-on-eldoc-mode))))
@@ -599,78 +623,83 @@ otherwise start a new ansi-term"
 ** notmuch
 
 #+BEGIN_SRC emacs-lisp
-(use-package notmuch
-  :init
-  (progn
-    ;; notmuch-always-prompt-for-sender requires ido-mode
-    ;; Add (ido-mode t) to emacs configuration
-    (setq notmuch-always-prompt-for-sender t)
-
-    ;; Use Bcc instead of Fcc
-    (setq notmuch-fcc-dirs nil)
-
-    (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-				   ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
-				   ("Action" . "tag:action")
-				   ("Waiting" . "tag:waiting")
-				   ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-				   ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
-
-    ;; Show newest mail first
-    (setq notmuch-search-oldest-first nil)
-
-    ;; Notmuch remote setup (on all hosts except garnet)
-    (when (not (string= system-name "garnet.ciffer.net"))
-      (setq notmuch-command "notmuch-remote"))
-
-    ;; Getting Things Done (GTD) keybindings
-
-    (setq notmuch-tag-macro-alist
-	  (list
-	   '("a" "+action" "-waiting" "-inbox")
-	   '("w" "-action" "+waiting" "-inbox")
-	   '("d" "-action" "-waiting" "-inbox")))
-
-    (defun notmuch-search-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-	(notmuch-search-tag (cdr macro))))
-
-    (defun notmuch-show-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-	(notmuch-show-tag (cdr macro))))
-
-    (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
-
-    ;; Work around bug with notmuch and emacs-snapshot
-    ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
-    (require 'gnus-art)))
+  (use-package notmuch
+    :defer t
+    :config
+    (progn
+      ;; notmuch-always-prompt-for-sender requires ido-mode
+      ;; Add (ido-mode t) to emacs configuration
+      (setq notmuch-always-prompt-for-sender t)
+  
+      ;; Use Bcc instead of Fcc
+      (setq notmuch-fcc-dirs nil)
+  
+      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
+                                     ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+                                     ("Action" . "tag:action")
+                                     ("Waiting" . "tag:waiting")
+                                     ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+                                     ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+  
+      ;; Show newest mail first
+      (setq notmuch-search-oldest-first nil)
+  
+      ;; Notmuch remote setup (on all hosts except garnet)
+      (when (not (string= system-name "garnet.ciffer.net"))
+        (setq notmuch-command "notmuch-remote"))
+  
+      ;; Getting Things Done (GTD) keybindings
+  
+      (setq notmuch-tag-macro-alist
+            (list
+             '("a" "+action" "-waiting" "-inbox")
+             '("w" "-action" "+waiting" "-inbox")
+             '("d" "-action" "-waiting" "-inbox")))
+  
+      (defun notmuch-search-apply-tag-macro (key)
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-search-tag (cdr macro))))
+  
+      (defun notmuch-show-apply-tag-macro (key)
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-show-tag (cdr macro))))
+  
+      (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
+      (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
+  
+      ;; Work around bug with notmuch and emacs-snapshot
+      ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
+      (require 'gnus-art)))
 #+END_SRC
 
 ** org
 
 #+BEGIN_SRC emacs-lisp
-(require 'org-notmuch)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(setq org-replace-disputed-keys t)
-(setq org-src-fontify-natively t)
-(setq org-src-preserve-indentation t)
+(use-package org
+  :defer t
+  :config
+  (progn
+    (require 'org-notmuch)
+    (add-hook 'org-mode-hook 'auto-fill-mode)
+    (setq org-replace-disputed-keys t)
+    (setq org-src-fontify-natively t)
+    (setq org-src-preserve-indentation t)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((perl . t)
-   (ruby . t)
-   (sh . t)
-   (python . t)
-   (emacs-lisp . t)))
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((perl . t)
+       (ruby . t)
+       (sh . t)
+       (python . t)
+       (emacs-lisp . t)))
 
-;; Make windmove work in org-mode:
-(add-hook 'org-shiftup-final-hook 'windmove-up)
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
+    ;; Make windmove work in org-mode:
+    (add-hook 'org-shiftup-final-hook 'windmove-up)
+    (add-hook 'org-shiftleft-final-hook 'windmove-left)
+    (add-hook 'org-shiftdown-final-hook 'windmove-down)
+    (add-hook 'org-shiftright-final-hook 'windmove-right)))
 #+END_SRC
 
 ** projectile
@@ -689,8 +718,7 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (use-package recentf
-  :init
-  (recentf-mode 1))
+  :init (recentf-mode 1)
   :config
   (progn
     ;; Enable recentf mode with ido-mode support
@@ -710,7 +738,7 @@ otherwise start a new ansi-term"
       (interactive)
       (if (find-file (ido-completing-read "Find recent file: " recentf-list))
 	  (message "Opening file...")
-	(message "Aborting"))))
+	(message "Aborting")))))
 #+END_SRC
 
 ** ruby-mode
@@ -753,11 +781,13 @@ requires =server=.
   (unless (server-running-p)
     (server-start)))
 #+END_SRC
-** sh-mode
+
+** sh-script
 
 #+BEGIN_SRC emacs-lisp
-(use-package sh-mode
-  :init
+(use-package sh-script
+  :defer t
+  :config
   (progn
     (defun my-setup-sh-mode ()
       "My preferences for sh-mode"
@@ -770,18 +800,13 @@ requires =server=.
     (add-hook 'sh-mode-hook 'my-setup-sh-mode)))
 #+END_SRC
 
-(use-package server
-  :init
-  (unless (server-running-p)
-    (server-start)))** Miscellaneous settings
-
 ** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
 #+BEGIN_SRC emacs-lisp
 (use-package slime
-  :init
+  :config
   (setq inferior-lisp-program "sbcl"))
 #+END_SRC
 
@@ -834,7 +859,7 @@ requires =server=.
   (goto-address-mode))
 
 (use-package term
-  :init
+  :config
   (add-hook 'term-mode-hook 'my-setup-term-mode))
 #+END_SRC
 
@@ -852,6 +877,7 @@ Host *
 
 #+BEGIN_SRC emacs-lisp
 (use-package tramp
+  :defer t
   :config
   (progn
     (setq tramp-use-ssh-controlmaster-options nil)
@@ -888,15 +914,13 @@ Host *
 
 #+BEGIN_SRC emacs-lisp
 (use-package winner
-  :init
-  (winner-mode 1))
+  :init (winner-mode 1))
 #+END_SRC
 
 ** zoom-frm
 
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
-  :init (autoload 'zoom-in/out "zoom-frm")
   :bind (("C-c C-+" . zoom-in/out)
 	 ("C-c C--" . zoom-in/out)
 	 ("C-c C-0" . zoom-in/out)
