@@ -52,7 +52,7 @@ Nice color theme with a white background.
 
 #+BEGIN_SRC emacs-lisp
 (use-package tango-plus-theme
-  :init (load-theme 'tango-plus))
+  :init (load-theme 'tango-plus t))
 #+END_SRC
 
 ** solarized
