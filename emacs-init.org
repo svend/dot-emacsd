@@ -591,8 +591,8 @@ otherwise start a new ansi-term"
 #+BEGIN_SRC emacs-lisp
 (use-package magit
   :bind (("C-c m l" . magit-log)
-	 ("C-c m m" . magit-status)))
-
+	 ("C-c m m" . magit-status)
+	 ("C-c m r" . vc-revert))
 #+END_SRC
 
 ** message
