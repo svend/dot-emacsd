@@ -215,6 +215,7 @@ Turn on flyspell and goto-address for all text buffers.
 (setq require-final-newline t)
 (setq sentence-end-double-space nil)
 (setq history-length 10000)
+(setq comint-input-ring-size 10000)
 #+END_SRC
 
 ** Lock files
@@ -259,7 +260,6 @@ Press =C-c C-h= to show all of these.
 (bind-key "C-c e"   'eww)
 (bind-key "C-c f"   'flycheck-mode)
 (bind-key "C-c k"   'kill-this-buffer)
-(bind-key "C-c m"   'magit-status)
 (bind-key "C-c n"   'linum-mode)
 (bind-key "C-c r"   'revert-buffer)
 (bind-key "C-c s"   'toggle-truncate-lines)
@@ -584,6 +584,15 @@ otherwise start a new ansi-term"
   (add-hook 'emacs-lisp-mode-hook
 	    '(lambda ()
 	       (turn-on-eldoc-mode))))
+#+END_SRC
+
+** magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :bind (("C-c m l" . magit-log)
+	 ("C-c m m" . magit-status)))
+
 #+END_SRC
 
 ** message
