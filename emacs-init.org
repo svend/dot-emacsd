@@ -592,7 +592,7 @@ otherwise start a new ansi-term"
 (use-package magit
   :bind (("C-c m l" . magit-log)
 	 ("C-c m m" . magit-status)
-	 ("C-c m r" . vc-revert))
+	 ("C-c m r" . vc-revert)))
 #+END_SRC
 
 ** message
