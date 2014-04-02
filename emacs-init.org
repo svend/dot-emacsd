@@ -503,6 +503,16 @@ otherwise start a new ansi-term"
     (helm-adaptative-mode 1)))
 #+END_SRC
 
+** hippie-exp
+
+[[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
+http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
+
+#+BEGIN_SRC emacs-lisp
+(use-package hippie-exp
+  :bind (("M-/" . hippie-expand)))
+#+END_SRC
+
 ** ibuffer
 
 #+BEGIN_SRC emacs-lisp
