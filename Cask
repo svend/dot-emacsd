@@ -1,7 +1,6 @@
 ;; -*- mode: Lisp -*-
 (source gnu)
 (source melpa)
-(source org)
 
 (depends-on "bash-completion")
 (depends-on "bbdb")
@@ -31,7 +30,6 @@
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
-(depends-on "org-plus-contrib")
 (depends-on "password-store")
 (depends-on "prodigy")
 (depends-on "projectile")
