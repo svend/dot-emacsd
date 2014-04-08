@@ -715,7 +715,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	 ("C-c o r" . org-remember))
   :config
   (progn
-    (require 'org-notmuch)
     (add-hook 'org-mode-hook 'auto-fill-mode)
     (setq org-replace-disputed-keys t)
     (setq org-src-fontify-natively t)
