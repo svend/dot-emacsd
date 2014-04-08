@@ -255,16 +255,16 @@ Press =C-c C-h= to show all of these.
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 #+BEGIN_SRC emacs-lisp
-(bind-key "C-c a"   'align-current)
-(bind-key "C-c d"   'my-insert-date)
-(bind-key "C-c e"   'eww)
-(bind-key "C-c f"   'flycheck-mode)
-(bind-key "C-c k"   'kill-this-buffer)
-(bind-key "C-c n"   'linum-mode)
-(bind-key "C-c r"   'revert-buffer)
-(bind-key "C-c s"   'toggle-truncate-lines)
-(bind-key "C-c t"   'my-switch-to-term)
-(bind-key "C-c w"   'whitespace-mode)
+(bind-key "C-c a" 'align-current)
+(bind-key "C-c d" 'my-insert-date)
+(bind-key "C-c e" 'eww)
+(bind-key "C-c f" 'flycheck-mode)
+(bind-key "C-c k" 'bury-buffer)
+(bind-key "C-c n" 'linum-mode)
+(bind-key "C-c r" 'revert-buffer)
+(bind-key "C-c s" 'toggle-truncate-lines)
+(bind-key "C-c t" 'my-switch-to-term)
+(bind-key "C-c w" 'whitespace-mode)
 #+END_SRC
 
 * User defined functions
