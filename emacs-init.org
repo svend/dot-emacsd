@@ -46,6 +46,23 @@ tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 #+END_SRC
 
+* Emacs Themes
+
+Disable current theme before loading new theme. This prevents
+artifacts from the old theme.
+
+[[https://stackoverflow.com/questions/22866733/emacs-disable-theme-after-loading-a-different-one-themes-conflict?noredirect%3D1#comment34887344_22866733][Emacs disable-theme after loading a different one (Stack Overflow)]]
+
+#+BEGIN_SRC emacs-lisp
+(defun disable-all-themes ()
+  "Disable all active themes."
+  (dolist (i custom-enabled-themes)
+    (disable-theme i)))
+
+(defadvice load-theme (before disable-themes-first activate)
+  (disable-all-themes))
+#+END_SRC
+
 ** tango-plus
 
 Nice color theme with a white background.
