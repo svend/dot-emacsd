@@ -46,7 +46,7 @@ tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 #+END_SRC
 
-* Emacs Themes
+* Emacs themes
 
 Disable current theme before loading new theme. This prevents
 artifacts from the old theme.
@@ -61,6 +61,12 @@ artifacts from the old theme.
 
 (defadvice load-theme (before disable-themes-first activate)
   (disable-all-themes))
+#+END_SRC
+
+Treat all themes as safe.
+
+#+BEGIN_SRC emacs-lisp
+(setq custom-safe-themes t)
 #+END_SRC
 
 ** tango-plus
@@ -80,7 +86,6 @@ Disable variable width fonts. Disable variable font sizes.
 
 #+BEGIN_SRC emacs-lisp
 (use-package solarized
-  :disabled t
   :init
   (progn
     (setq solarized-use-variable-pitch nil
@@ -88,8 +93,7 @@ Disable variable width fonts. Disable variable font sizes.
 	  solarized-height-plus-1 1.0
 	  solarized-height-plus-2 1.0
 	  solarized-height-plus-3 1.0
-	  solarized-height-plus-4 1.0)
-    (load-theme 'solarized-light t)))
+	  solarized-height-plus-4 1.0)))
 #+END_SRC
 
 ** Mode line
@@ -147,14 +151,6 @@ Enable y/n answers.
 
 #+BEGIN_SRC emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-
-** Themes
-
-Treat all themes as safe.
-
-#+BEGIN_SRC emacs-lisp
-(setq custom-safe-themes t)
 #+END_SRC
 
 ** Balance windows
@@ -848,6 +844,14 @@ requires =server=.
       (setq sh-indent-for-case-label 0))
 
     (add-hook 'sh-mode-hook 'my-setup-sh-mode)))
+#+END_SRC
+
+** shell
+
+#+BEGIN_SRC emacs-lisp
+(use-package shell
+  :config
+  (add-hook 'shell-mode-hook 'goto-address-mode)))
 #+END_SRC
 
 ** slime
