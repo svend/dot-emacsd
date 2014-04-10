@@ -851,7 +851,7 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (use-package shell
   :config
-  (add-hook 'shell-mode-hook 'goto-address-mode)))
+  (add-hook 'shell-mode-hook 'goto-address-mode))
 #+END_SRC
 
 ** slime
