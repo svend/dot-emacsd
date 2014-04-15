@@ -14,7 +14,7 @@ Install from homebrew on OS X.
 #+BEGIN_SRC sh
 HOMEBREW_KEEP_INFO=1 brew reinstall emacs --HEAD --cocoa --use-git-head
 rsync -a --delete /usr/local/Cellar/emacs/HEAD/Emacs.app ~/Applications
-tic -o ~/.terminfo /usr/local/share/emacs/24.3.50/etc/e/eterm-color.ti
+tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.ti
 #+END_SRC
 
 * Initialize Cask
