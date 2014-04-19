@@ -16,6 +16,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-ledger")
 (depends-on "gist")
+(depends-on "git")
 (depends-on "git-commit-mode")
 (depends-on "gitignore-mode")
 (depends-on "gnus-alias")
