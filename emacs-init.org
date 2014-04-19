@@ -451,8 +451,9 @@ otherwise start a new ansi-term"
     (defun my-git-clone (url)
       (interactive "sGit repository URL: ")
       (let ((git-repo "~/src"))
-	(git-clone url))))
+        (git-clone url)))))
 #+END_SRC
+
 ** git-commit-mode
 
 #+BEGIN_SRC emacs-lisp
