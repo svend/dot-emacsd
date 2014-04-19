@@ -442,6 +442,17 @@ otherwise start a new ansi-term"
   (add-hook 'after-init-hook 'global-flycheck-mode))
 #+END_SRC
 
+** git
+
+#+BEGIN_SRC emacs-lisp
+(use-package git
+  :config
+  (progn
+    (defun my-git-clone (url)
+      (interactive "sGit repository URL: ")
+      (let ((git-repo "~/src"))
+	(git-clone url))))
+#+END_SRC
 ** git-commit-mode
 
 #+BEGIN_SRC emacs-lisp
