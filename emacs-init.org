@@ -439,6 +439,7 @@ otherwise start a new ansi-term"
 (use-package flycheck
   :config
   (require 'flycheck-ledger)
+  (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
   (add-hook 'after-init-hook 'global-flycheck-mode))
 #+END_SRC
 
