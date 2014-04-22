@@ -229,6 +229,7 @@ Turn on flyspell and goto-address for all text buffers.
 (setq sentence-end-double-space nil)
 (setq history-length 10000)
 (setq comint-input-ring-size 10000)
+(setq-default indent-tabs-mode nil)
 #+END_SRC
 
 ** Lock files
