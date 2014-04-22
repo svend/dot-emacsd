@@ -14,6 +14,7 @@
 (depends-on "flatui-theme")
 (depends-on "flx-ido")
 (depends-on "flycheck")
+(depends-on "flycheck-cask")
 (depends-on "flycheck-ledger")
 (depends-on "gist")
 (depends-on "git")
