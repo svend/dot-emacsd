@@ -474,6 +474,9 @@ otherwise start a new ansi-term"
 (setq gnus-select-method
       '(nntp "news.gmane.org"))
 
+;; Do not take over the entire frame
+(setq gnus-use-full-window nil)
+
 ;; Debugging
 ;; (setq imap-log t)
 
