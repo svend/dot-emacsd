@@ -312,6 +312,13 @@ otherwise start a new ansi-term"
 
 * Package settings
 
+** ace-window
+
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :bind (("C-x o" . ace-window)))
+#+END_SRC
+
 ** bash-completion
 
 #+BEGIN_SRC emacs-lisp
