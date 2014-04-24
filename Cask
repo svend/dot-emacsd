@@ -42,6 +42,7 @@
 (depends-on "slime")
 (depends-on "smex")
 (depends-on "solarized-theme")
+(depends-on "switch-window")
 (depends-on "tango-plus-theme")
 (depends-on "use-package")
 (depends-on "yaml-mode")
