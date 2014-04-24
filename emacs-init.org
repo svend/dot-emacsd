@@ -754,12 +754,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (sh . t)
        (python . t)
        (emacs-lisp . t)))
-
-    ;; Make windmove work in org-mode:
-    (add-hook 'org-shiftup-final-hook 'windmove-up)
-    (add-hook 'org-shiftleft-final-hook 'windmove-left)
-    (add-hook 'org-shiftdown-final-hook 'windmove-down)
-    (add-hook 'org-shiftright-final-hook 'windmove-right)))
 #+END_SRC
 
 ** projectile
@@ -969,13 +963,6 @@ Host *
 	      (format-mode-line mode-line-format 'font-lock-warning-face))))
     (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)))
-#+END_SRC
-
-** windmove
-
-#+BEGIN_SRC emacs-lisp
-(use-package windmove
-  :config (windmove-default-keybindings))
 #+END_SRC
 
 ** winner
