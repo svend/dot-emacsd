@@ -2,6 +2,7 @@
 (source gnu)
 (source melpa)
 
+(depends-on "ace-window")
 (depends-on "bash-completion")
 (depends-on "bbdb")
 (depends-on "buffer-move")
