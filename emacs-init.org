@@ -477,22 +477,25 @@ otherwise start a new ansi-term"
 ** gnus
 
 #+BEGIN_SRC emacs-lisp
-;; Gmane
-(setq gnus-select-method
-      '(nntp "news.gmane.org"))
+(use-package gnus
+  :config
+  (progn
+    ;; Gmane
+    (setq gnus-select-method
+          '(nntp "news.gmane.org"))
 
-;; Do not take over the entire frame
-(setq gnus-use-full-window nil)
+    ;; Do not take over the entire frame
+    (setq gnus-use-full-window nil)
 
-;; Debugging
-;; (setq imap-log t)
+    ;; ;; Debugging
+    ;; (setq imap-log t)
 
-(setq gnus-posting-styles
-      '((".*"
-	 (address "svend@ciffer.net"))
-	("uw"
-	 (address "svends@uw.edu")
-	 ("Bcc" "svends@uw.edu"))))
+    (setq gnus-posting-styles
+          '((".*"
+             (address "svend@ciffer.net"))
+            ("uw"
+             (address "svends@uw.edu")
+             ("Bcc" "svends@uw.edu"))))))
 #+END_SRC
 
 ** gnus-alias
