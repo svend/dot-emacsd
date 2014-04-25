@@ -487,6 +487,8 @@ otherwise start a new ansi-term"
     ;; Do not take over the entire frame
     (setq gnus-use-full-window nil)
 
+    (setq gnus-always-read-dribble-file t)
+
     ;; ;; Debugging
     ;; (setq imap-log t)
 
