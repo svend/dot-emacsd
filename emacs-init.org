@@ -736,10 +736,10 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 #+BEGIN_SRC emacs-lisp
 (use-package org
   :bind (("C-c o a" . org-agenda)
-	 ("C-c o b" . org-iswitchb)
-	 ("C-c o c" . org-capture)
-	 ("C-c o l" . org-store-link)
-	 ("C-c o r" . org-remember))
+         ("C-c o b" . org-iswitchb)
+         ("C-c o c" . org-capture)
+         ("C-c o l" . org-store-link)
+         ("C-c o r" . org-remember))
   :config
   (progn
     (add-hook 'org-mode-hook 'auto-fill-mode)
@@ -753,7 +753,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (ruby . t)
        (sh . t)
        (python . t)
-       (emacs-lisp . t)))
+       (emacs-lisp . t)))))
 #+END_SRC
 
 ** projectile
