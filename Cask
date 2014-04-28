@@ -49,3 +49,4 @@
 (depends-on "yaml-mode")
 (depends-on "zenburn-theme")
 (depends-on "zoom-frm")
+(depends-on "scala-mode2")
