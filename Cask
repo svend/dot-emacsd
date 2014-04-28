@@ -30,6 +30,7 @@
 (depends-on "helm-projectile")
 (depends-on "ido-ubiquitous")
 (depends-on "inf-ruby")
+(depends-on "jabber")
 (depends-on "json-mode")
 (depends-on "ledger-mode")
 (depends-on "magit")
