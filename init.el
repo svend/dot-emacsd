@@ -10,6 +10,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(jabber-alert-presence-hooks nil)
  '(jabber-history-enabled t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
