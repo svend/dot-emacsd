@@ -41,6 +41,7 @@
 (depends-on "projectile")
 (depends-on "puppet-mode")
 (depends-on "robe")
+(depends-on "scala-mode2")
 (depends-on "slime")
 (depends-on "smex")
 (depends-on "solarized-theme")
@@ -49,4 +50,3 @@
 (depends-on "yaml-mode")
 (depends-on "zenburn-theme")
 (depends-on "zoom-frm")
-(depends-on "scala-mode2")
