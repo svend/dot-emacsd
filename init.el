@@ -11,6 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(jabber-alert-presence-hooks nil)
+ '(jabber-auto-reconnect t)
  '(jabber-history-enabled t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
