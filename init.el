@@ -12,7 +12,8 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
- '(jabber-history-enabled t))
+ '(jabber-history-enabled t)
+ '(jabber-keepalive-interval 30))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
