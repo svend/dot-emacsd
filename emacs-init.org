@@ -828,7 +828,29 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (use-package shell
   :config
-  (add-hook 'shell-mode-hook 'goto-address-mode))
+  (add-hook 'shell-mode-hook 'goto-address-mode)
+  (add-hook 'shell-mode-hook (lambda () (setq comint-process-echoes t))))
+#+END_SRC
+
+To disable scroll to bottom:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(remove-hook 'comint-output-filter-functions
+             'comint-postoutput-scroll-to-bottom)
+#+END_SRC
+
+Changing directory generates a message with the new directory path. To
+disable this:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(setq shell-dirtrack-verbose nil)
+#+END_SRC
+
+To search history when you are at a command line using C-r (instead of
+M-r):
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(setq comint-history-isearch dwim)
 #+END_SRC
 
 ** slime
