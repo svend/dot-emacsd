@@ -310,9 +310,14 @@ otherwise start a new ansi-term"
 	(switch-to-buffer found-buffer)
       (ansi-term "bash"))))
 
-(defun ssh-shell (host)
-"Open SSH connection to HOST."
-  (interactive "sOpen ssh connection to host: ")
+(defun ssh-shell-hosts ()
+  (-flatten (list (tramp-parse-sconfig "~/.ssh/config")
+                  (tramp-parse-shosts "~/.ssh/known_hosts"))))
+
+(defun ssh-shell (host &optional user)
+  "Open SSH connection to HOST."
+  (interactive (list
+                (completing-read "Open ssh connection to host: " (ssh-shell-hosts))))
   (let ((default-directory (format  "/ssh:%s:" host)))
     (shell (format "*ssh %s*" host))))
 #+END_SRC
