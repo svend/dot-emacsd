@@ -309,6 +309,12 @@ otherwise start a new ansi-term"
 	     (not (eq found-buffer (current-buffer))))
 	(switch-to-buffer found-buffer)
       (ansi-term "bash"))))
+
+(defun ssh-shell (host)
+"Open SSH connection to HOST."
+  (interactive "sOpen ssh connection to host: ")
+  (let ((default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*ssh %s*" host))))
 #+END_SRC
 
 * Package settings
