@@ -828,8 +828,8 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (use-package shell
   :config
-  (add-hook 'shell-mode-hook 'goto-address-mode)
-  (add-hook 'shell-mode-hook (lambda () (setq comint-process-echoes t))))
+  (add-hook 'shell-mode-hook 'goto-address-mode))
+
 #+END_SRC
 
 To disable scroll to bottom:
