@@ -311,8 +311,7 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 
 (defun ssh-shell-hosts ()
-  (-flatten (list (tramp-parse-sconfig "~/.ssh/config")
-                  (tramp-parse-shosts "~/.ssh/known_hosts"))))
+  (-flatten (mapcar 'apply (tramp-get-completion-function "ssh"))))
 
 (defun ssh-shell (host &optional user)
   "Open SSH connection to HOST."
