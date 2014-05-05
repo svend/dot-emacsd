@@ -41,6 +41,7 @@
 (depends-on "projectile")
 (depends-on "puppet-mode")
 (depends-on "robe")
+(depends-on "sbt-mode")
 (depends-on "scala-mode2")
 (depends-on "slime")
 (depends-on "smex")
