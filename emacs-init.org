@@ -315,6 +315,8 @@ otherwise start a new ansi-term"
 (require 'tramp)
 
 (defun ssh-shell-hosts ()
+  "Return list of known SSH hosts.
+TODO: This also returns known usernames."
   (-flatten (mapcar 'apply (tramp-get-completion-function "ssh"))))
 
 (defun ssh-shell (host &optional user)
