@@ -285,11 +285,18 @@ Press =C-c C-h= to show all of these.
 * User defined functions
 
 #+BEGIN_SRC emacs-lisp
-(defun my-insert-date ()
+(defun my-insert-date (arg)
   "Insert date string"
-  (interactive)
-  (insert (format-time-string "%Y%m%d%H%M%S")))
+  (interactive "p")
+  (cond ((= arg 1)
+         (insert (format-time-string "%Y%m%d")))
+        ((= arg 4)
+         (insert (format-time-string "%Y%m%d%H%M%S")))
+        ((= arg 16)
+         (insert (format-time-string "%Y-%m-%d-%H%M%S")))))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 (defun my-switch-to-term ()
   "Switch to term running in the default-directory,
 otherwise start a new ansi-term"
