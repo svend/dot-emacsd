@@ -330,6 +330,22 @@ With prefix arg, prompt for USER."
                            host))
            (default-directory (format  "/ssh:%s:" user-at-host)))
       (shell (format "*ssh %s*" user-at-host)))))
+
+(defun ssh-dtach (host &optional user)
+  "Open SSH connection to HOST and start dtach session.
+With prefix arg, prompt for USER."
+  (interactive (list
+                (completing-read "Open ssh connection to host: " (ssh-shell-hosts))
+                (if current-prefix-arg (completing-read "User: " nil))))
+  ;; Start bash login shell for remote shell
+  (let ((explicit-shell-file-name "dtach")
+        (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
+                               "/bin/bash" "--noediting" "-login")))
+    (let* ((user-at-host (if (> (length user) 0)
+                             (format "%s@%s" user host)
+                           host))
+           (default-directory (format  "/ssh:%s:" user-at-host)))
+      (shell (format "*ssh-dtach %s*" user-at-host)))))
 #+END_SRC
 
 * Package settings
