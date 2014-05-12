@@ -758,7 +758,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (ruby . t)
        (sh . t)
        (python . t)
-       (emacs-lisp . t)))))
+       (emacs-lisp . t)
+       (scala . t)))))
 #+END_SRC
 
 ** projectile
