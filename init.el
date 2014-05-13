@@ -15,7 +15,8 @@
  '(jabber-auto-reconnect t)
  '(jabber-history-enabled t)
  '(jabber-keepalive-interval 30)
- '(org-src-window-setup (quote other-window)))
+ '(org-src-window-setup (quote other-window))
+ '(projectile-mode-line-lighter "P"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
