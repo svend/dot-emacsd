@@ -11,6 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(electric-pair-mode t)
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
  '(jabber-history-enabled t)
