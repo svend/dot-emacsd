@@ -16,6 +16,7 @@
  '(jabber-auto-reconnect t)
  '(jabber-history-enabled t)
  '(jabber-keepalive-interval 30)
+ '(magit-completing-read-function (quote magit-ido-completing-read))
  '(org-src-window-setup (quote other-window))
  '(projectile-mode-line-lighter "P")
  '(reb-re-syntax (quote string)))
