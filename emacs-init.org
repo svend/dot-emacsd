@@ -761,7 +761,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (setq org-replace-disputed-keys t)
     (setq org-src-fontify-natively t)
     (setq org-src-preserve-indentation t)
-    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
