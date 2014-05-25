@@ -187,12 +187,10 @@ Balance windows automatically.
 ** OS X specific configuration
 
 - Turn on menu bar, since it does not use any extra space on OS X.
-- Use Adobe's Source Code Pro font.
 
 #+BEGIN_SRC emacs-lisp
 (when (eq window-system 'ns)
-  (menu-bar-mode 1)
-  (set-face-attribute 'default nil :font "Source Code Pro" :height 140))
+  (menu-bar-mode 1))
 #+END_SRC
 
 ** Programming modes
