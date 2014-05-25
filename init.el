@@ -29,5 +29,6 @@
  '(fixed-pitch ((t (:family "Source Code Pro"))))
  '(linum ((t (:inherit (shadow default) :weight light))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
+ '(org-document-title ((t (:height 1.2))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(variable-pitch ((t (:family "Verdana")))))
