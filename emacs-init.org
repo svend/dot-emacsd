@@ -57,6 +57,7 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 (add-hook 'dired-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'magit-log-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'shell-mode-hook 'enable-fixed-pitch-mode)
+(add-hook 'term-mode-hook 'enable-fixed-pitch-mode)
 #+END_SRC
 
 * Emacs themes
