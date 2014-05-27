@@ -3,6 +3,7 @@
 (source melpa)
 
 (depends-on "ace-window")
+(depends-on "alert")
 (depends-on "bash-completion")
 (depends-on "bbdb")
 (depends-on "buffer-move")
