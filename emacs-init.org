@@ -48,11 +48,11 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 
 ** Fixed/variable pitch
 
+Modes which rely on fixed-pitch for alignment
+
 #+BEGIN_SRC emacs-lisp
 (defun enable-fixed-pitch-mode ()
     (fixed-pitch-mode t))
-
-;; Modes which rely on fixed-pitch for alignment
 
 (add-hook 'dired-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'magit-log-mode-hook 'enable-fixed-pitch-mode)
