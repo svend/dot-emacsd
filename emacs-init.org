@@ -46,6 +46,19 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 #+END_SRC
 
+** Fixed/variable pitch
+
+#+BEGIN_SRC emacs-lisp
+(defun enable-fixed-pitch-mode ()
+    (fixed-pitch-mode t))
+
+;; Modes which rely on fixed-pitch for alignment
+
+(add-hook 'dired-mode-hook 'enable-fixed-pitch-mode)
+(add-hook 'magit-log-mode-hook 'enable-fixed-pitch-mode)
+(add-hook 'shell-mode-hook 'enable-fixed-pitch-mode)
+#+END_SRC
+
 * Emacs themes
 
 Disable current theme before loading new theme. This prevents
