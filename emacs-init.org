@@ -342,41 +342,37 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (require 'tramp)
+(require 'dash)
 
+;; TODO: This also returns usernames
 (defun ssh-shell-hosts ()
-  "Return list of known SSH hosts.
-TODO: This also returns known usernames."
+  "Return list of known SSH hosts."
   (-flatten (mapcar 'apply (tramp-get-completion-function "ssh"))))
 
-(defun ssh-shell (host &optional user)
-  "Open SSH connection to HOST.
-With prefix arg, prompt for USER."
-  (interactive (list
-                (completing-read "Open ssh connection to host: " (ssh-shell-hosts))
-                (if current-prefix-arg (completing-read "User: " nil))))
-  ;; Start bash login shell for remote shell
-  (let ((explicit-bash-args '("--noediting" "--login")))
-    (let* ((user-at-host (if (> (length user) 0)
-                             (format "%s@%s" user host)
-                           host))
-           (default-directory (format  "/ssh:%s:" user-at-host)))
-      (shell (format "*ssh %s*" user-at-host)))))
+(defun ssh-host-completing-read ()
+    (mapconcat 'identity
+               (let ((crm-separator "@"))
+                 (completing-read-multiple
+                  "Open ssh connection to [user@]host: " (ssh-shell-hosts)))
+               "@"))
 
-(defun ssh-dtach (host &optional user)
-  "Open SSH connection to HOST and start dtach session.
-With prefix arg, prompt for USER."
-  (interactive (list
-                (completing-read "Open ssh connection to host: " (ssh-shell-hosts))
-                (if current-prefix-arg (completing-read "User: " nil))))
+(defun ssh-shell (host)
+  "Open SSH connection to HOST."
+  (interactive (list (ssh-host-completing-read)))
   ;; Start bash login shell for remote shell
+  (let ((explicit-bash-args '("--noediting" "--login"))
+        (default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*ssh %s*" host))))
+
+(defun ssh-dtach (host)
+  "Open SSH connection to HOST and start dtach session."
+  (interactive (list (ssh-host-completing-read)))
   (let ((explicit-shell-file-name "dtach")
+        ;; Start bash login shell for remote shell
         (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
-                               "/bin/bash" "--noediting" "-login")))
-    (let* ((user-at-host (if (> (length user) 0)
-                             (format "%s@%s" user host)
-                           host))
-           (default-directory (format  "/ssh:%s:" user-at-host)))
-      (shell (format "*ssh-dtach %s*" user-at-host)))))
+                               "/bin/bash" "--noediting" "-login"))
+        (default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*ssh-dtach %s*" host))))
 #+END_SRC
 
 * Package settings
