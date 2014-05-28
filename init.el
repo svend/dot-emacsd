@@ -28,7 +28,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- '(linum ((t (:inherit (shadow default) :weight light))))
+ '(linum ((t (:inherit (shadow default) :weight light :height 0.95))))
  '(magit-log-message ((t (:inherit variable-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
  '(org-document-title ((t (:height 1.4))))
