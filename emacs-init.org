@@ -46,6 +46,24 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 #+END_SRC
 
+** Mode line
+
+- Display clock in the status bar
+- Display column number in mode-line (line number is displayed by
+  default)
+
+#+BEGIN_SRC emacs-lisp
+(display-time-mode t)
+(column-number-mode t)
+#+END_SRC
+
+Display date in 24 hour format in mode line.
+
+#+BEGIN_SRC emacs-lisp
+(setq display-time-day-and-date t)
+(setq display-time-24hr-format t)
+#+END_SRC
+
 ** Fixed/variable pitch
 
 Modes which rely on fixed-pitch for alignment
@@ -108,24 +126,6 @@ Disable variable width fonts. Disable variable font sizes.
 	  solarized-height-plus-2 1.0
 	  solarized-height-plus-3 1.0
 	  solarized-height-plus-4 1.0)))
-#+END_SRC
-
-** Mode line
-
-- Display clock in the status bar
-- Display column number in mode-line (line number is displayed by
-  default)
-
-#+BEGIN_SRC emacs-lisp
-(display-time-mode t)
-(column-number-mode t)
-#+END_SRC
-
-Display date in 24 hour format in mode line.
-
-#+BEGIN_SRC emacs-lisp
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
 #+END_SRC
 
 * Emacs settings
