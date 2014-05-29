@@ -375,6 +375,27 @@ otherwise start a new ansi-term"
     (shell (format "*ssh-dtach %s*" host))))
 #+END_SRC
 
+** Alert on comint prompt
+
+#+BEGIN_SRC emacs-lisp
+(require 'alert)
+
+(defun comint-alert-on-prompt (string)
+  "Send alert when prompt is detected."
+  (when (let ((case-fold-search t))
+	  (string-match comint-prompt-regexp string))
+    (alert (format "Prompt: %s" string)))
+  string)
+
+(defun comint-toggle-alert ()
+  "Toggle alert on prompt for current buffer"
+  (interactive)
+  (make-local-variable 'comint-output-filter-functions)
+  (if (member 'comint-alert-on-prompt comint-output-filter-functions)
+      (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
+    (add-hook 'comint-output-filter-functions 'comint-alert-on-prompt)))
+#+END_SRC
+
 * Package settings
 
 ** ace-window
