@@ -19,6 +19,7 @@
  '(jabber-history-enabled t)
  '(jabber-keepalive-interval 30)
  '(magit-completing-read-function (quote magit-ido-completing-read))
+ '(org-default-notes-file "~/doc/notes.org")
  '(org-directory "~/doc/org")
  '(org-src-window-setup (quote other-window))
  '(projectile-mode-line-lighter "P")
@@ -30,6 +31,10 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
+ '(jabber-activity-face ((t (:foreground "#edd400" :weight bold))))
+ '(jabber-activity-personal-face ((t (:foreground "#729fcf" :weight bold))))
+ '(jabber-chat-prompt-foreign ((t (:foreground "#204a87" :weight bold))))
+ '(jabber-chat-prompt-system ((t (:foreground "#4e9a06" :weight bold))))
  '(linum ((t (:inherit (shadow default) :weight light :height 0.95))))
  '(magit-log-message ((t (:inherit variable-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
