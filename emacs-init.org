@@ -782,23 +782,23 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :bind (("C-c o a" . org-agenda)
          ("C-c o b" . org-iswitchb)
          ("C-c o c" . org-capture)
-         ("C-c o l" . org-store-link)
-         ("C-c o r" . org-remember))
+         ("C-c o l" . org-store-link))
   :config
   (progn
+    (require 'org-capture)
+
     (add-hook 'org-mode-hook 'auto-fill-mode)
-    (setq org-replace-disputed-keys t)
     (setq org-src-fontify-natively t)
     (setq org-src-preserve-indentation t)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((perl . t)
-       (ruby . t)
-       (sh . t)
+     '((emacs-lisp . t)
+       (perl . t)
        (python . t)
-       (emacs-lisp . t)
-       (scala . t)))))
+       (ruby . t)
+       (scala . t)
+       (sh . t)))))
 #+END_SRC
 
 ** projectile
