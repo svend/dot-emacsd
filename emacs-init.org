@@ -342,12 +342,13 @@ otherwise start a new ansi-term"
 
 #+BEGIN_SRC emacs-lisp
 (require 'tramp)
-(require 'dash)
 
-;; TODO: This also returns usernames
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
-  (-flatten (mapcar 'apply (tramp-get-completion-function "ssh"))))
+  ;; Copied from cssh.el
+  (cl-reduce 'append (mapcar (lambda (x)
+                               (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
+                             (tramp-get-completion-function "ssh"))))
 
 (defun ssh-add-user-to-hosts (&optional user)
   (if (> (length user) 0)
