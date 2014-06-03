@@ -388,6 +388,15 @@ otherwise start a new ansi-term"
     (shell (format "*ssh-dtach %s*" host))))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(defun tramp-comint-read-input-ring ()
+  (when (tramp-tramp-file-p default-directory)
+    (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
+    (comint-read-input-ring)))
+
+(add-hook 'shell-mode-hook 'tramp-comint-read-input-ring)
+#+END_SRC
+
 ** Alert on comint prompt
 
 #+BEGIN_SRC emacs-lisp
