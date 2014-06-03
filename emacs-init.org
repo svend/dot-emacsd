@@ -349,12 +349,22 @@ otherwise start a new ansi-term"
   "Return list of known SSH hosts."
   (-flatten (mapcar 'apply (tramp-get-completion-function "ssh"))))
 
+(defun ssh-add-user-to-hosts (&optional user)
+  (if (> (length user) 0)
+      (mapcar (lambda (h) (format "%s@%s" user h))
+              (ssh-shell-hosts))
+    (ssh-shell-hosts)))
+
 (defun ssh-host-completing-read ()
-    (mapconcat 'identity
-               (let ((crm-separator "@"))
-                 (completing-read-multiple
-                  "Open ssh connection to [user@]host: " (ssh-shell-hosts)))
-               "@"))
+  (completing-read
+   "Open ssh connection to [user@]host: "
+   (completion-table-dynamic
+    (lambda (str)
+      (let* ((user-and-host (split-string str "@"))
+             (user (if (> (length user-and-host) 1)
+                       (car user-and-host)
+                     nil)))
+        (ssh-add-user-to-hosts user))))))
 
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
