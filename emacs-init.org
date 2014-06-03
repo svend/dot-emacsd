@@ -351,6 +351,7 @@ otherwise start a new ansi-term"
                              (tramp-get-completion-function "ssh"))))
 
 (defun ssh-add-user-to-hosts (&optional user)
+  "Return list of known hosts prefixed with USER."
   (if (> (length user) 0)
       (mapcar (lambda (h) (format "%s@%s" user h))
               (ssh-shell-hosts))
