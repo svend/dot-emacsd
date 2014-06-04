@@ -73,6 +73,7 @@ Modes which rely on fixed-pitch for alignment
     (fixed-pitch-mode t))
 
 (add-hook 'dired-mode-hook 'enable-fixed-pitch-mode)
+(add-hook 'ibuffer-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'magit-log-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'shell-mode-hook 'enable-fixed-pitch-mode)
 (add-hook 'term-mode-hook 'enable-fixed-pitch-mode)
