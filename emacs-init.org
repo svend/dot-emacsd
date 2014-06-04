@@ -410,6 +410,14 @@ otherwise start a new ansi-term"
 
 * Package settings
 
+** inf-ruby
+
+#+BEGIN_SRC emacs-lisp
+(use-package inf-ruby
+  :config
+  (setq inf-ruby-default-implementation "pry"))
+#+END_SRC
+
 ** ace-window
 
 #+BEGIN_SRC emacs-lisp
