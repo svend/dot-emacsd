@@ -51,5 +51,6 @@
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
+ '(sh-heredoc ((t (:foreground "#8f5902"))))
  '(variable-pitch ((t (:family "DejaVu Sans"))))
  '(whitespace-indentation ((t (:background "LightYellow" :foreground "firebrick")))))
