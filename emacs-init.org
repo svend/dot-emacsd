@@ -899,6 +899,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 (use-package savehist
   :init (savehist-mode 1))
 #+END_SRC
+
 ** scala-mode2
 
 Scala worksheets end in =.sc=.
@@ -945,7 +946,6 @@ requires =server=.
 (use-package shell
   :config
   (add-hook 'shell-mode-hook 'goto-address-mode))
-
 #+END_SRC
 
 To disable scroll to bottom:
@@ -1056,7 +1056,6 @@ Host *
   :config
   (progn
     (setq tramp-use-ssh-controlmaster-options nil)
-
 
     ;; Use warning font in modeline when working as root
     ;;
