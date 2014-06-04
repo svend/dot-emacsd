@@ -641,6 +641,26 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :bind (("M-/" . hippie-expand)))
 #+END_SRC
 
+** ibuffer
+
+#+BEGIN_SRC emacs-lisp
+(use-package ibuffer
+  :bind (("C-x C-b" . ibuffer)))
+
+#+END_SRC
+
+** ibuffer-tramp
+
+#+BEGIN_SRC emacs-lisp
+(use-package ibuffer-tramp
+  :config
+  (progn
+    (add-hook 'ibuffer-hook
+              (lambda ()
+                (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+                (ibuffer-dno-sort-by-alphabetic)))))
+#+END_SRC
+
 ** ido
 
 #+BEGIN_SRC emacs-lisp
@@ -849,16 +869,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	(message "Aborting")))))
 #+END_SRC
 
-** scala-mode2
-
-Scala worksheets end in =.sc=.
-
-#+BEGIN_SRC emacs-lisp
-(use-package scala-mode2
-  :mode
-  (("\\.sc\\'" . scala-mode)))
-#+END_SRC
-
 ** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
@@ -888,6 +898,16 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 (use-package savehist
   :init (savehist-mode 1))
 #+END_SRC
+** scala-mode2
+
+Scala worksheets end in =.sc=.
+
+#+BEGIN_SRC emacs-lisp
+(use-package scala-mode2
+  :mode
+  (("\\.sc\\'" . scala-mode)))
+#+END_SRC
+
 ** server
 
 Start Emacs server unless one is already running. =server-running-p=
