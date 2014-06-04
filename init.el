@@ -10,10 +10,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(alert-default-style (quote notifier))
+ '(comint-input-ring-size 10000)
  '(custom-enabled-themes (quote (tango-plus)))
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(electric-pair-mode t)
+ '(history-length 10000)
+ '(indent-tabs-mode nil)
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
  '(jabber-history-enabled t)
@@ -24,7 +27,10 @@
  '(org-directory "~/doc/org")
  '(org-src-window-setup (quote other-window))
  '(projectile-mode-line-lighter "P")
- '(reb-re-syntax (quote string)))
+ '(reb-re-syntax (quote string))
+ '(require-final-newline t)
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(sentence-end-double-space nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

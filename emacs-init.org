@@ -234,17 +234,6 @@ Turn on flyspell and goto-address for all text buffers.
 (add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
 #+END_SRC
 
-** Misc
-
-#+BEGIN_SRC emacs-lisp
-(setq safe-local-variable-values '((encoding . utf-8)))
-(setq require-final-newline t)
-(setq sentence-end-double-space nil)
-(setq history-length 10000)
-(setq comint-input-ring-size 10000)
-(setq-default indent-tabs-mode nil)
-#+END_SRC
-
 ** Lock files
 
 http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
