@@ -29,6 +29,7 @@
 (depends-on "helm-git-grep")
 (depends-on "helm-ls-git")
 (depends-on "helm-projectile")
+(depends-on "ibuffer-tramp")
 (depends-on "ido-ubiquitous")
 (depends-on "inf-ruby")
 (depends-on "jabber")
