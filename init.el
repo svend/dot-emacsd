@@ -43,6 +43,8 @@
  '(jabber-chat-prompt-foreign ((t (:foreground "#204a87" :weight bold))))
  '(jabber-chat-prompt-local ((t (:foreground "#75507b" :weight bold))))
  '(jabber-chat-prompt-system ((t (:foreground "#4e9a06" :weight bold))))
+ '(jabber-title-large ((t (:inherit variable-pitch :weight bold :height 2.0 :width ultra-expanded))))
+ '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.6 :width expanded))))
  '(linum ((t (:inherit (shadow default) :weight light :height 0.95))))
  '(magit-log-message ((t (:inherit variable-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
