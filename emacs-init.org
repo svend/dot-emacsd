@@ -711,6 +711,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 #+BEGIN_SRC emacs-lisp
 (use-package magit
   :bind (("C-c m b" . magit-blame-mode)
+         ("C-c m d" . magit-diff)
          ("C-c m l" . magit-log)
 	 ("C-c m m" . magit-status)
 	 ("C-c m r" . vc-revert)))
