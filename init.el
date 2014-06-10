@@ -39,7 +39,7 @@
  '(default ((t (:family "DejaVu Sans"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(jabber-activity-face ((t (:foreground "#edd400" :weight bold))))
- '(jabber-activity-personal-face ((t (:foreground "#729fcf" :weight bold))))
+ '(jabber-activity-personal-face ((t (:foreground "#8ae234" :weight bold))))
  '(jabber-chat-prompt-foreign ((t (:foreground "#204a87" :weight bold))))
  '(jabber-chat-prompt-local ((t (:foreground "#75507b" :weight bold))))
  '(jabber-chat-prompt-system ((t (:foreground "#4e9a06" :weight bold))))
