@@ -952,9 +952,18 @@ requires =server=.
 ** shell
 
 #+BEGIN_SRC emacs-lisp
+(defun shell-mode-config ()
+  ;; Do not move prompt to bottom of the screen on output
+  (setq comint-scroll-show-maximum-output nil)
+  ;; Do not center the prompt when scrolling
+  (setq-local scroll-conservatively 101))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (use-package shell
   :config
-  (add-hook 'shell-mode-hook 'goto-address-mode))
+  (add-hook 'shell-mode-hook 'goto-address-mode)
+  (add-hook 'shell-mode-hook 'shell-mode-config))
 #+END_SRC
 
 To disable scroll to bottom:
