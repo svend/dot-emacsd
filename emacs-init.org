@@ -70,13 +70,15 @@ Modes which rely on fixed-pitch for alignment
 
 #+BEGIN_SRC emacs-lisp
 (defun enable-fixed-pitch-mode ()
-    (fixed-pitch-mode t))
+  (fixed-pitch-mode t))
 
-(add-hook 'dired-mode-hook 'enable-fixed-pitch-mode)
-(add-hook 'ibuffer-mode-hook 'enable-fixed-pitch-mode)
-(add-hook 'magit-log-mode-hook 'enable-fixed-pitch-mode)
-(add-hook 'shell-mode-hook 'enable-fixed-pitch-mode)
-(add-hook 'term-mode-hook 'enable-fixed-pitch-mode)
+
+(dolist (hook '(dired-mode-hook
+                ibuffer-mode-hook
+                magit-log-mode-hook
+                shell-mode-hook
+                term-mode-hook))
+  (add-hook hook 'enable-fixed-pitch-mode))
 #+END_SRC
 
 * Emacs themes
