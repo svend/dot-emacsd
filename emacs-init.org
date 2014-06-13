@@ -3,7 +3,7 @@
 * User information
 
 #+BEGIN_SRC emacs-lisp
-(setq user-full-name    "Svend Sorensen")
+(setq user-full-name "Svend Sorensen")
 (setq user-mail-address "svend@ciffer.net")
 #+END_SRC
 
@@ -66,12 +66,27 @@ Display date in 24 hour format in mode line.
 
 ** Fixed/variable pitch
 
+Use [[http://dejavu-fonts.org/][DejaVu font family]]. These fonts are already installed on Debian.
+On OS X, use homebrew to install.
+
+Install homebrew-cask and caskroom-fonts.
+
+#+BEGIN_SRC sh
+brew tap caskroom/cask
+brew tap caskroom/font
+#+END_SRC
+
+Install fonts.
+
+#+BEGIN_SRC sh
+brew cask install font-dejavu
+#+END_SRC
+
 Modes which rely on fixed-pitch for alignment
 
 #+BEGIN_SRC emacs-lisp
 (defun enable-fixed-pitch-mode ()
   (fixed-pitch-mode t))
-
 
 (dolist (hook '(dired-mode-hook
                 ibuffer-mode-hook
@@ -282,7 +297,9 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
   (interactive (list (or current-prefix-arg 'toggle)))
   (buffer-face-mode-invoke 'fixed-pitch arg
 			   (called-interactively-p 'interactive)))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 (bind-key "C-c a" 'align-current)
 (bind-key "C-c d" 'my-insert-date)
 (bind-key "C-c e" 'eww)
