@@ -21,6 +21,7 @@
 (depends-on "gist")
 (depends-on "git")
 (depends-on "git-commit-mode")
+(depends-on "gitconfig-mode")
 (depends-on "gitignore-mode")
 (depends-on "gnus-alias")
 (depends-on "go-mode")
