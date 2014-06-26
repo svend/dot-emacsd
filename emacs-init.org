@@ -984,6 +984,8 @@ requires =server=.
 #+BEGIN_SRC emacs-lisp
 (use-package shell
   :config
+  ;; Do not try to colorize comments and strings in shell mode
+  (setq shell-font-lock-keywords nil)
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'shell-mode-hook 'shell-mode-config))
 #+END_SRC
