@@ -106,6 +106,7 @@ artifacts from the old theme.
 #+BEGIN_SRC emacs-lisp
 (defun disable-all-themes ()
   "Disable all active themes."
+  (interactive)
   (dolist (i custom-enabled-themes)
     (disable-theme i)))
 
