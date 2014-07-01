@@ -396,7 +396,7 @@ otherwise start a new ansi-term"
         (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
                                "/bin/bash" "--noediting" "-login"))
         (default-directory (format  "/ssh:%s:" host)))
-    (shell (format "*ssh-dtach %s*" host))))
+    (shell (format "*ssh %s*" host))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -707,7 +707,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	  ido-max-prospects 10
 	  ido-default-file-method 'selected-window
 	  ido-auto-merge-work-directories-length -1
-	  ido-use-virtual-buffers t)))
+	  ido-use-virtual-buffers t)
+    (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
 #+END_SRC
 
 ** ido-ubiquitous
