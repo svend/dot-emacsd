@@ -92,7 +92,8 @@ Modes which rely on fixed-pitch for alignment
                 ibuffer-mode-hook
                 magit-log-mode-hook
                 shell-mode-hook
-                term-mode-hook))
+                term-mode-hook
+                vc-annotate-mode-hook))
   (add-hook hook 'enable-fixed-pitch-mode))
 #+END_SRC
 
