@@ -981,7 +981,10 @@ requires =server=.
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
   ;; Do not center the prompt when scrolling
-  (setq-local scroll-conservatively 101))
+  (setq-local scroll-conservatively 101)
+  ;; Use sh-mode syntax table (handles single quotes, back-ticks,
+  ;; etc.)
+  (set-syntax-table sh-mode-syntax-table))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
