@@ -612,6 +612,12 @@ otherwise start a new ansi-term"
     (setq gnus-select-method
           '(nntp "news.gmane.org"))
 
+    (add-to-list 'gnus-secondary-select-methods
+                 '(nnimap "gmail"
+                          (nnimap-address "imap.gmail.com")
+                          (nnimap-server-port 993)
+                          (nnimap-stream ssl)))
+
     ;; Do not take over the entire frame
     (setq gnus-use-full-window nil)
 
@@ -623,9 +629,10 @@ otherwise start a new ansi-term"
     (setq gnus-posting-styles
           '((".*"
              (address "svend@ciffer.net"))
-            ("uw"
-             (address "svends@uw.edu")
-             ("Bcc" "svends@uw.edu"))))))
+            ("uw" (address "svends@uw.edu")
+             ("Bcc" "svends@uw.edu"))
+            ("whitepages"
+             (address "ssorensen@whitepages.com")))))))
 #+END_SRC
 
 ** gnus-alias
