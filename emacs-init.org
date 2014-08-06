@@ -1154,3 +1154,12 @@ Host *
 	 ("C-c C-0" . zoom-in/out)
 	 ("C-c C-=" . zoom-in/out)))
 #+END_SRC
+
+* External config
+
+Load load config stored outside =~/.emacs.d=.
+
+#+BEGIN_SRC emacs-lisp
+(when (file-exists-p "~/doc/jabberconfig.el")
+  (load-file "~/doc/jabberconfig.el"))
+#+END_SRC
