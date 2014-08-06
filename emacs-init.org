@@ -79,7 +79,7 @@ brew tap caskroom/font
 Install fonts.
 
 #+BEGIN_SRC sh
-brew cask install font-dejavu
+brew cask install font-dejavu-sans
 #+END_SRC
 
 Modes which rely on fixed-pitch for alignment
