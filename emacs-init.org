@@ -189,17 +189,17 @@ Enable y/n answers.
 
 ** Balance windows
 
-Balance windows automatically.
+Horizontally balance windows automatically.
 
 #+BEGIN_SRC emacs-lisp
 (defadvice split-window-below (after restore-balanace-below activate)
-  (balance-windows))
+  (balance-windows-horizontally))
 
 (defadvice split-window-right (after restore-balance-right activate)
-  (balance-windows))
+  (balance-windows-horizontally))
 
 (defadvice delete-window (after restore-balance activate)
-  (balance-windows))
+  (balance-windows-horizontally))
 #+END_SRC
 
 ** Disabled commands
@@ -317,6 +317,45 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 #+END_SRC
 
 * User defined functions
+
+Hacked version of balance-windows which only balances windows
+horizontally.
+
+#+BEGIN_SRC emacs-lisp
+(defun balance-windows-horizontally (&optional window-or-frame)
+  "Horizontally balance the sizes of windows of WINDOW-OR-FRAME.
+WINDOW-OR-FRAME is optional and defaults to the selected frame.
+If WINDOW-OR-FRAME denotes a frame, balance the sizes of all
+windows of that frame.  If WINDOW-OR-FRAME denotes a window,
+recursively balance the sizes of all child windows of that
+window."
+  (interactive)
+  (let* ((window
+	  (cond
+	   ((or (not window-or-frame)
+		(frame-live-p window-or-frame))
+	    (frame-root-window window-or-frame))
+	   ((or (window-live-p window-or-frame)
+		(window-child window-or-frame))
+	    window-or-frame)
+	   (t
+	    (error "Not a window or frame %s" window-or-frame))))
+	 (frame (window-frame window)))
+    ;; ;; Balance vertically.
+    ;; (window--resize-reset (window-frame window))
+    ;; (balance-windows-1 window)
+    ;; (when (window--resize-apply-p frame)
+    ;;   (window-resize-apply frame)
+    ;;   (window--pixel-to-total frame)
+    ;;   (run-window-configuration-change-hook frame))
+    ;; Balance horizontally.
+    (window--resize-reset (window-frame window) t)
+    (balance-windows-1 window t)
+    (when (window--resize-apply-p frame t)
+      (window-resize-apply frame t)
+      (window--pixel-to-total frame t)
+      (run-window-configuration-change-hook frame))))
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (defun my-insert-date (arg)
