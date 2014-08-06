@@ -1179,12 +1179,19 @@ Host *
 
 ** winner
 
+The winner-mode package provides a way to restore previous window
+layouts.
+
 #+BEGIN_SRC emacs-lisp
 (use-package winner
   :init (winner-mode 1))
 #+END_SRC
 
 ** zoom-frm
+
+The zoom-frm package allows scaling all text. (As opposed to
+text-scale-adjust, which only scale the text for a single buffer. Both
+are useful.)
 
 #+BEGIN_SRC emacs-lisp
 (use-package zoom-frm
