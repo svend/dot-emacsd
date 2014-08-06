@@ -479,8 +479,11 @@ otherwise start a new ansi-term"
 
 ** desktop
 
+Do not load encrypted files when Emacs starts.
+
 #+BEGIN_SRC emacs-lisp
 (use-package desktop
+  :config (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
   :init (desktop-save-mode 1))
 #+END_SRC
 
