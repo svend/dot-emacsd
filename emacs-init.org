@@ -765,8 +765,17 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	  mail-envelope-from 'header
 	  message-sendmail-envelope-from 'header)
 
-    ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
-    (setq send-mail-function 'sendmail-send-it)
+    ;; Internal SMTP library
+    (setq message-send-mail-function 'smtpmail-send-it
+	  smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+	  smtpmail-auth-credentials '(("smtp.gmail.com" 587
+				       "svend@ciffer.net" nil))
+	  smtpmail-default-smtp-server "smtp.gmail.com"
+	  smtpmail-smtp-server "smtp.gmail.com"
+	  smtpmail-smtp-service 587)
+
+    ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+    ;; (setq send-mail-function 'sendmail-send-it)
 
     ;; Enable gnus-alias
     (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
