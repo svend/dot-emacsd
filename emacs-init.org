@@ -305,15 +305,16 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c a" 'align-current)
 (bind-key "C-c d" 'my-insert-date)
 (bind-key "C-c e" 'eww)
-(bind-key "C-c f" 'flycheck-mode)
 (bind-key "C-c j" 'dired-jump)
 (bind-key "C-c k" 'bury-buffer)
-(bind-key "C-c n" 'linum-mode)
 (bind-key "C-c r" 'revert-buffer)
-(bind-key "C-c s" 'toggle-truncate-lines)
-(bind-key "C-c t" 'my-switch-to-term)
-(bind-key "C-c v" 'fixed-pitch-mode)
-(bind-key "C-c w" 'whitespace-mode)
+(bind-key "C-c t f" 'flycheck-mode)
+(bind-key "C-c t n" 'linum-mode)
+(bind-key "C-c t s" 'toggle-truncate-lines)
+(bind-key "C-c t v" 'fixed-pitch-mode)
+(bind-key "C-c t w" 'whitespace-mode)
+(bind-key "C-c w r" 'winner-redo)
+(bind-key "C-c w w" 'winner-undo)
 #+END_SRC
 
 * User defined functions
