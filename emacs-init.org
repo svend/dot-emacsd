@@ -632,7 +632,7 @@ otherwise start a new ansi-term"
             ("uw" (address "svends@uw.edu")
              ("Bcc" "svends@uw.edu"))
             ("whitepages"
-             (address "ssorensen@whitepages.com")))))))
+             (address "ssorensen@whitepages.com"))))))
 #+END_SRC
 
 ** gnus-alias
