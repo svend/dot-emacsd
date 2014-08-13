@@ -317,6 +317,12 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c w w" 'winner-undo)
 #+END_SRC
 
+Space as control key.
+
+#+BEGIN_SRC emacs-lisp
+(bind-key "M-SPC" 'set-mark-command)
+(bind-key "M-s-SPC" 'mark-sexp)
+#+END_SRC
 * User defined functions
 
 Hacked version of balance-windows which only balances windows
