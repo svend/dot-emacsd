@@ -341,6 +341,7 @@ xcape -e "$spare_modifier=space"
 #+BEGIN_SRC emacs-lisp
 (bind-key "M-SPC" 'set-mark-command)
 (bind-key "M-s-SPC" 'mark-sexp)
+(bind-key "M-s- " 'mark-sexp)           ; OS X
 (bind-key "s-SPC" 'just-one-space)
 #+END_SRC
 
