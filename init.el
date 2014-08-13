@@ -26,7 +26,6 @@
  '(org-default-notes-file "~/doc/notes.org")
  '(org-directory "~/doc/org")
  '(org-src-window-setup (quote other-window))
- '(projectile-mode-line-lighter "P")
  '(reb-re-syntax (quote string))
  '(require-final-newline t)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
