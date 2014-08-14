@@ -23,7 +23,7 @@
  '(jabber-keepalive-interval 30)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(ns-pop-up-frames nil)
- '(org-default-notes-file "~/doc/notes.org")
+ '(org-default-notes-file "~/doc/org/notes.org")
  '(org-directory "~/doc/org")
  '(org-src-window-setup (quote other-window))
  '(reb-re-syntax (quote string))
