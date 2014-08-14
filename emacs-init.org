@@ -969,7 +969,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :init (projectile-global-mode 1)
   :config
   (progn
-    (setq projectile-use-git-grep t)))
+    (setq projectile-use-git-grep t)
+    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
 #+END_SRC
 
 ** recentf
