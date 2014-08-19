@@ -97,7 +97,8 @@ Modes which rely on fixed-pitch for alignment
   (add-hook hook 'enable-fixed-pitch-mode))
 
 ;; Remove BufFace from mode line
-(diminish 'buffer-face-mode)
+(eval-after-load "face-remap"
+  '(diminish 'buffer-face-mode))
 #+END_SRC
 
 * Emacs themes
