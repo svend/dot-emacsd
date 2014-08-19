@@ -220,7 +220,7 @@ Horizontally balance windows automatically.
 
 ** OS X specific configuration
 
-- Turn on menu bar, since it does not use any extra space on OS X.
+Turn on menu bar, since it does not use any extra space on OS X.
 
 #+BEGIN_SRC emacs-lisp
 (when (eq window-system 'ns)
