@@ -95,6 +95,9 @@ Modes which rely on fixed-pitch for alignment
                 term-mode-hook
                 vc-annotate-mode-hook))
   (add-hook hook 'enable-fixed-pitch-mode))
+
+;; Remove BufFace from mode line
+(diminish 'buffer-face-mode)
 #+END_SRC
 
 * Emacs themes
@@ -820,7 +823,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :bind (("C-c m" . magit-key-mode-popup-dispatch)))
+  :bind (("C-c m" . magit-key-mode-popup-dispatch))
+  :config (diminish 'magit-auto-revert-mode))
 #+END_SRC
 
 ** message
