@@ -1080,6 +1080,7 @@ requires =server=.
   (setq-local scroll-conservatively 101)
   ;; Use sh-mode syntax table (handles single quotes, back-ticks,
   ;; etc.)
+  (require 'sh-script)
   (set-syntax-table sh-mode-syntax-table))
 #+END_SRC
 
