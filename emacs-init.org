@@ -679,6 +679,16 @@ Do not load encrypted files when Emacs starts.
 
 ** gnus
 
+Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
+
+#+BEGIN_SRC sh :results output
+gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";print}'
+#+END_SRC
+
+#+RESULTS:
+: machine imap.gmail.com login EMAIL password PASSWORD port imaps
+: machine smtp.gmail.com login EMAIL password PASSWORD port 587
+
 #+BEGIN_SRC emacs-lisp
 (use-package gnus
   :config
