@@ -70,9 +70,7 @@ On success, return 0.  Otherwise, go as far as possible and return -1."
 (if (> shelln 1)
 (progn
 (setq proc (completing-read "Send code to:" shelllist nil t (elt shelllist 0)))
-(setq outpr (get-process proc))))
-outpr)
-
+(get-process proc))))
 
 (defun shell-eval-line (sprocess command)
   "Evaluates a single command into the shell process."
