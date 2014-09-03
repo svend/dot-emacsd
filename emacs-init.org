@@ -817,7 +817,9 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 #+BEGIN_SRC emacs-lisp sh
 (use-package jabber
   :config
-  (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com")))
+  (progn
+    (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
+    (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))))
 #+END_SRC
 
 ** lisp-mode
