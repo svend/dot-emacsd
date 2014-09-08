@@ -317,8 +317,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c t s" 'toggle-truncate-lines)
 (bind-key "C-c t v" 'fixed-pitch-mode)
 (bind-key "C-c t w" 'whitespace-mode)
-(bind-key "C-c w r" 'winner-redo)
-(bind-key "C-c w w" 'winner-undo)
+(bind-key "C-c w" 'winner-undo)
 #+END_SRC
 
 ** Space as control key
@@ -347,6 +346,20 @@ xcape -e "$spare_modifier=space"
 (bind-key "M-s-SPC" 'mark-sexp)
 (bind-key "M-s- " 'mark-sexp)           ; OS X
 (bind-key "s-SPC" 'just-one-space)
+#+END_SRC
+
+** Other settings
+
+Rapid mark-pop. =C-u C-SPC C-SPC...=
+
+#+BEGIN_SRC emacs-lisp
+(setq set-mark-command-repeat-pop t)
+#+END_SRC
+
+#+BEGIN_SRC 
+(setq sentence-end-double-space nil)
+(setq require-final-newline t)
+(setq indent-tabs-mode nil)
 #+END_SRC
 
 * User defined functions
