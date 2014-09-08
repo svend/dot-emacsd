@@ -356,7 +356,7 @@ Rapid mark-pop. =C-u C-SPC C-SPC...=
 (setq set-mark-command-repeat-pop t)
 #+END_SRC
 
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 (setq sentence-end-double-space nil)
 (setq require-final-newline t)
 (setq indent-tabs-mode nil)
