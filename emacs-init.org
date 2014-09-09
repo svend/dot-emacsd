@@ -437,63 +437,6 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-(require 'tramp)
-(require 'dash)
-
-(defun ssh-shell-hosts ()
-  "Return list of known SSH hosts."
-  ;; Copied from cssh.el
-  (-flatten (mapcar (lambda (x)
-                               (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
-                             (tramp-get-completion-function "ssh"))))
-
-(defun ssh-add-user-to-hosts (&optional user)
-  "Return list of known hosts prefixed with USER."
-  (if (> (length user) 0)
-      (mapcar (lambda (h) (format "%s@%s" user h))
-              (ssh-shell-hosts))
-    (ssh-shell-hosts)))
-
-(defun ssh-host-completing-read ()
-  (completing-read
-   "Open ssh connection to [user@]host: "
-   (completion-table-dynamic
-    (lambda (str)
-      (let* ((user-and-host (split-string str "@"))
-             (user (if (> (length user-and-host) 1)
-                       (car user-and-host)
-                     nil)))
-        (ssh-add-user-to-hosts user))))))
-
-(defun ssh-shell (host)
-  "Open SSH connection to HOST."
-  (interactive (list (ssh-host-completing-read)))
-  ;; Start bash login shell for remote shell
-  (let ((explicit-bash-args '("--noediting" "--login"))
-        (default-directory (format  "/ssh:%s:" host)))
-    (shell (format "*ssh %s*" host))))
-
-(defun ssh-dtach (host)
-  "Open SSH connection to HOST and start dtach session."
-  (interactive (list (ssh-host-completing-read)))
-  (let ((explicit-shell-file-name "dtach")
-        ;; Start bash login shell for remote shell
-        (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
-                               "/bin/bash" "--noediting" "-login"))
-        (default-directory (format  "/ssh:%s:" host)))
-    (shell (format "*ssh %s*" host))))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(defun tramp-comint-read-input-ring ()
-  (when (tramp-tramp-file-p default-directory)
-    (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
-    (comint-read-input-ring)))
-
-(add-hook 'shell-mode-hook 'tramp-comint-read-input-ring)
-#+END_SRC
-
 ** Alert on comint prompt
 
 #+BEGIN_SRC emacs-lisp
@@ -1241,6 +1184,63 @@ Host *
 	      (format-mode-line mode-line-format 'font-lock-warning-face))))
     (add-hook 'find-file-hooks 'my-mode-line-warn-when-root)
     (add-hook 'dired-mode-hook 'my-mode-line-warn-when-root)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'tramp)
+(require 'dash)
+
+(defun ssh-shell-hosts ()
+  "Return list of known SSH hosts."
+  ;; Copied from cssh.el
+  (-flatten (mapcar (lambda (x)
+                               (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
+                             (tramp-get-completion-function "ssh"))))
+
+(defun ssh-add-user-to-hosts (&optional user)
+  "Return list of known hosts prefixed with USER."
+  (if (> (length user) 0)
+      (mapcar (lambda (h) (format "%s@%s" user h))
+              (ssh-shell-hosts))
+    (ssh-shell-hosts)))
+
+(defun ssh-host-completing-read ()
+  (completing-read
+   "Open ssh connection to [user@]host: "
+   (completion-table-dynamic
+    (lambda (str)
+      (let* ((user-and-host (split-string str "@"))
+             (user (if (> (length user-and-host) 1)
+                       (car user-and-host)
+                     nil)))
+        (ssh-add-user-to-hosts user))))))
+
+(defun ssh-shell (host)
+  "Open SSH connection to HOST."
+  (interactive (list (ssh-host-completing-read)))
+  ;; Start bash login shell for remote shell
+  (let ((explicit-bash-args '("--noediting" "--login"))
+        (default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*ssh %s*" host))))
+
+(defun ssh-dtach (host)
+  "Open SSH connection to HOST and start dtach session."
+  (interactive (list (ssh-host-completing-read)))
+  (let ((explicit-shell-file-name "dtach")
+        ;; Start bash login shell for remote shell
+        (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
+                               "/bin/bash" "--noediting" "-login"))
+        (default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*ssh %s*" host))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun tramp-comint-read-input-ring ()
+  (when (tramp-tramp-file-p default-directory)
+    (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
+    (comint-read-input-ring)))
+
+(add-hook 'shell-mode-hook 'tramp-comint-read-input-ring)
 #+END_SRC
 
 ** winner
