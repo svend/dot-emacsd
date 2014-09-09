@@ -26,7 +26,10 @@
  '(org-directory "~/doc/org")
  '(org-src-window-setup (quote other-window))
  '(reb-re-syntax (quote string))
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(tramp-remote-process-environment
+   (quote
+    ("TMOUT=0" "LC_CTYPE=''" "TERM=dumb" "EMACS=t" "INSIDE_EMACS='24.3.93.1,tramp:2.2.9-24.4'" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=" "HISTFILE="))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
