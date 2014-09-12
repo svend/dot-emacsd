@@ -43,7 +43,7 @@
  '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.6 :width expanded))))
  '(linum ((t (:inherit (shadow default) :weight light))))
  '(magit-log-message ((t (:inherit variable-pitch))))
- '(org-block ((t (:inherit nil))))
+ '(org-block ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
  '(org-document-title ((t (:weight bold :height 1.4))))
  '(org-level-1 ((t (:height 1.3))))
