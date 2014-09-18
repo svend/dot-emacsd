@@ -548,7 +548,7 @@ Do not load encrypted files when Emacs starts.
 (use-package erc
   :defer t
   :config
-   (progn
+  (progn
     (erc-services-mode 1)
     (erc-spelling-mode 1)
 
@@ -861,16 +861,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       (interactive)
 
       ;; Enable bbdb completion
-      (bbdb-insinuate-message)
-
-      ;; Bind C-M-j to message-newline-and-reformat
-      ;;
-      ;; Gnome terminal seems to translate M-RET to C-M-j. The GUI shouldn't
-      ;; have this problem.
-      (if window-system
-	  nil
-	(progn
-	  (define-key message-mode-map "\C-\M-j" 'message-newline-and-reformat))))
+      (bbdb-insinuate-message))
 
     (add-hook 'message-setup-hook 'my-setup-message-mode)))
 #+END_SRC
