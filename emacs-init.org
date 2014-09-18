@@ -775,12 +775,28 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :config
   (progn
     (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
+
     (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
-    (dolist (val
-	     (mapcar (lambda(room) `(,room . "Svend Sorensen"))
-		     '("23430_outages@conf.hipchat.com"
-		       "23430_ait@conf.hipchat.com")))
-      (add-to-list 'jabber-muc-default-nicknames val))))
+
+    (defvar hipchat-number "23430")
+    (defvar hipchat-nickname "Svend Sorensen")
+    (defvar hipchat-rooms '("outages" "ops" "ait")
+      "List of hipchat rooms to auto-join")
+
+    (dolist (muc-room
+	     (mapcar (lambda (room)
+		       (concat hipchat-number "_" room "@conf.hipchat.com"))
+		     hipchat-rooms))
+      (add-to-list 'jabber-muc-autojoin muc-room)
+      (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
+
+    (defun hipchat-join (room)
+      (interactive "sRoom name: ")
+      (jabber-muc-join
+       (jabber-read-account)
+       (concat hipchat-number "_" room "@conf.hipchat.com")
+       hipchat-nickname
+       t))))
 #+END_SRC
 
 ** lisp-mode
