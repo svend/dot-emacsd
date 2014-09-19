@@ -819,6 +819,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :config
   (progn
     (diminish 'magit-auto-revert-mode)
+    (setq magit-save-some-buffers 'dontask)
     (add-to-list magit-repo-dirs "~/src")))
 #+END_SRC
 
