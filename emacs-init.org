@@ -984,7 +984,9 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :config
   (progn
     (setq projectile-use-git-grep t)
-    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
+    ;; This may be interacting badly with remote shells
+    ;; (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+    (setq projectile-mode-line " P")))
 #+END_SRC
 
 ** recentf
