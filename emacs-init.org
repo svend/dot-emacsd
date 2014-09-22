@@ -984,9 +984,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :config
   (progn
     (setq projectile-use-git-grep t)
-    ;; This may be interacting badly with remote shells
-    ;; (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
-    (setq projectile-mode-line " P")))
+    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
 #+END_SRC
 
 ** recentf
@@ -1094,6 +1092,9 @@ requires =server=.
   (setq comint-scroll-show-maximum-output nil)
   ;; Do not center the prompt when scrolling
   (setq-local scroll-conservatively 101)
+  ;; Remote shells lock up Emacs with projectile
+  (when (tramp-tramp-file-p default-directory)
+    (setq-local projectile-mode-line " P"))
   ;; Use sh-mode syntax table (handles single quotes, back-ticks,
   ;; etc.)
   (require 'sh-script)
