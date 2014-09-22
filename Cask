@@ -47,6 +47,7 @@
 (depends-on "scala-mode2")
 (depends-on "slime")
 (depends-on "smex")
+(depends-on "terraform-mode")
 (depends-on "use-package")
 (depends-on "yaml-mode")
 (depends-on "zoom-frm")
