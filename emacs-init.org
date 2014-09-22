@@ -513,7 +513,35 @@ Do not load encrypted files when Emacs starts.
 
 #+BEGIN_SRC emacs-lisp
 (use-package desktop
-  :config (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
+  :config
+  (progn
+    (defun my-shell-save-desktop-data (desktop-dirname)
+      "Extra info for shell-mode buffers to be saved in the desktop file."
+      (list default-directory comint-input-ring))
+
+    (defun my-shell-restore-desktop-buffer
+	(desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
+      "Restore a shell buffer's state from the desktop file."
+      (let ((dir (nth 0 desktop-buffer-misc))
+	    (ring (nth 1 desktop-buffer-misc)))
+	(when desktop-buffer-name
+	  (set-buffer (get-buffer-create desktop-buffer-name))
+	  (when dir
+	    (setq default-directory dir))
+	  (shell desktop-buffer-name)
+	  (when ring
+	    (setq comint-input-ring ring))
+	  (current-buffer))))
+
+    (defun my-shell-setup-desktop ()
+      "Sets up a shell buffer to have its state saved in the desktop file."
+      (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
+
+    (add-to-list 'desktop-buffer-mode-handlers
+		 '(shell-mode . my-shell-restore-desktop-buffer))
+    (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
+
+    (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)"))
   :init (desktop-save-mode 1))
 #+END_SRC
 
