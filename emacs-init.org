@@ -1272,6 +1272,7 @@ Host *
 
 #+BEGIN_SRC emacs-lisp
 (defun tramp-comint-read-input-ring ()
+  "Read remote bash_history file into comint input ring."
   (when (tramp-tramp-file-p default-directory)
     (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
     (comint-read-input-ring)))
