@@ -1229,17 +1229,21 @@ Host *
     (add-to-list 'tramp-remote-process-environment "HISTFILE=")))
 #+end_src
 
-#+begin_src emacs-lisp
-(require 'tramp)
-(require 'dash)
+Default value of explicit-bash-args is =("--noediting" "-i")=. We want
+login shell for remote hosts. This should be harmless for local
+shells, however it does increase the start-up time for local shells.
 
-;; Default value of explicit-bash-args is '("--noediting" "-i"). We
-;; want login shell for remote hosts. This may increase the startup
-;; time for local shells.
+#+begin_src emacs-lisp
 (setq explicit-bash-args
       '("--noediting" "--login" "-i"))
 (setq explicit-dtach-args
       '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "--login" "-i"))
+#+end_src
+
+#+begin_src emacs-lisp
+(require 'tramp)
+(require 'dash)
+
 
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
@@ -1297,7 +1301,7 @@ layouts.
 
 #+begin_src emacs-lisp
 (use-package winner
-  :init (winner-mode 1))
+  :init (winner-mode))
 #+end_src
 
 ** zoom-frm
@@ -1312,6 +1316,13 @@ are useful.)
 	 ("C-c C--" . zoom-in/out)
 	 ("C-c C-0" . zoom-in/out)
 	 ("C-c C-=" . zoom-in/out)))
+#+end_src
+
+** yasnippet
+
+#+begin_src emacs-lisp
+(use-package  yasnippet
+  :init (yas-global-mode))
 #+end_src
 
 * External config

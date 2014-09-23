@@ -50,6 +50,7 @@
 (depends-on "terraform-mode")
 (depends-on "use-package")
 (depends-on "yaml-mode")
+(depends-on "yasnippet")
 (depends-on "zoom-frm")
 
 ;; Themes
