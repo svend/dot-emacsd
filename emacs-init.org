@@ -2,33 +2,33 @@
 
 * User information
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq user-full-name "Svend Sorensen")
 (setq user-mail-address "svend@ciffer.net")
-#+END_SRC
+#+end_src
 
 * Installing Emacs
 
 Install from homebrew on OS X.
 
-#+BEGIN_SRC sh
+#+begin_src sh
 HOMEBREW_KEEP_INFO=1 brew reinstall emacs --HEAD --cocoa --use-git-head --with-gnutls --with-imagemagick --with-librsvg
 rsync -a --delete /usr/local/Cellar/emacs/HEAD/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.ti
-#+END_SRC
+#+end_src
 
 * Initialize Cask
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (require 'cask (expand-file-name "emacs-cask/cask.el" user-emacs-directory))
 (cask-initialize)
-#+END_SRC
+#+end_src
 
 * Initialize use-package
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (require 'use-package)
-#+END_SRC
+#+end_src
 
 * Emacs UI
 
@@ -39,12 +39,12 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 - Disable scroll bar
 - Disable tool bar
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq inhibit-splash-screen t)
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-#+END_SRC
+#+end_src
 
 ** Mode line
 
@@ -52,17 +52,17 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/HEAD/share/emacs/*/etc/e/eterm-color.
 - Display column number in mode-line (line number is displayed by
   default)
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (display-time-mode t)
 (column-number-mode t)
-#+END_SRC
+#+end_src
 
 Display date in 24 hour format in mode line.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
-#+END_SRC
+#+end_src
 
 ** Fixed/variable pitch
 
@@ -71,20 +71,20 @@ On OS X, use homebrew to install.
 
 Install homebrew-cask and caskroom-fonts.
 
-#+BEGIN_SRC sh
+#+begin_src sh
 brew tap caskroom/cask
 brew tap caskroom/font
-#+END_SRC
+#+end_src
 
 Install fonts.
 
-#+BEGIN_SRC sh
+#+begin_src sh
 brew cask install font-dejavu-sans
-#+END_SRC
+#+end_src
 
 Modes which rely on fixed-pitch for alignment
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun enable-fixed-pitch-mode ()
   (fixed-pitch-mode t))
 
@@ -99,7 +99,7 @@ Modes which rely on fixed-pitch for alignment
 ;; Remove BufFace from mode line
 (eval-after-load "face-remap"
   '(diminish 'buffer-face-mode))
-#+END_SRC
+#+end_src
 
 * Emacs themes
 
@@ -108,7 +108,7 @@ artifacts from the old theme.
 
 [[https://stackoverflow.com/questions/22866733/emacs-disable-theme-after-loading-a-different-one-themes-conflict?noredirect%3D1#comment34887344_22866733][Emacs disable-theme after loading a different one (Stack Overflow)]]
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun disable-all-themes ()
   "Disable all active themes."
   (interactive)
@@ -117,22 +117,22 @@ artifacts from the old theme.
 
 (defadvice load-theme (before disable-themes-first activate)
   (disable-all-themes))
-#+END_SRC
+#+end_src
 
 Treat all themes as safe.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq custom-safe-themes t)
-#+END_SRC
+#+end_src
 
 ** tango-plus
 
 Nice color theme with a white background.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package tango-plus-theme
   :init (load-theme 'tango-plus t))
-#+END_SRC
+#+end_src
 
 ** solarized
 
@@ -140,7 +140,7 @@ Color theme based on solarized palette.
 
 Disable variable width fonts. Disable variable font sizes.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package solarized
   :init
   (progn
@@ -150,7 +150,7 @@ Disable variable width fonts. Disable variable font sizes.
 	  solarized-height-plus-2 1.0
 	  solarized-height-plus-3 1.0
 	  solarized-height-plus-4 1.0)))
-#+END_SRC
+#+end_src
 
 * Emacs settings
 
@@ -159,43 +159,43 @@ Disable variable width fonts. Disable variable font sizes.
 Copy test selected by the mouse to the kill ring. This was turned off
 in Emacs 24.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq mouse-drag-copy-region t)
-#+END_SRC
+#+end_src
 
 Scroll one line at a time with mouse
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq mouse-wheel-scroll-amount '(1))
-#+END_SRC
+#+end_src
 
 ** Hilight current line
 
 Hilight the current line. To disable for a mode, add this to the mode
 hook:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 (make-local-variable 'global-hl-line-mode)
 (setq global-hl-line-mode nil)
-#+END_EXAMPLE
+#+end_example
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (global-hl-line-mode t)
-#+END_SRC
+#+end_src
 
 ** Y/N answers
 
 Enable y/n answers.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
+#+end_src
 
 ** Balance windows
 
 Horizontally balance windows automatically.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defadvice split-window-below (after restore-balanace-below activate)
   (balance-windows-horizontally))
 
@@ -204,11 +204,11 @@ Horizontally balance windows automatically.
 
 (defadvice delete-window (after restore-balance activate)
   (balance-windows-horizontally))
-#+END_SRC
+#+end_src
 
 ** Disabled commands
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (mapc (lambda (command) (put command 'disabled nil))
       '(downcase-region upcase-region upcase-initials-region))
 
@@ -220,43 +220,43 @@ Horizontally balance windows automatically.
 
 ;; Do not clobber text copied from the clipboard
 (setq save-interprogram-paste-before-kill t)
-#+END_SRC
+#+end_src
 
 ** OS X specific configuration
 
 Turn on menu bar, since it does not use any extra space on OS X.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (when (eq window-system 'ns)
   (menu-bar-mode 1))
-#+END_SRC
+#+end_src
 
 ** Programming modes
 
 Turn on flyspell and goto-address for all text buffers.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'text-mode-hook 'goto-address-mode)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
-#+END_SRC
+#+end_src
 
 ** Auto modes
 
 =bash-fc-*= are bash command editing temporary files (=fc= built-in).
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
 (add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
 (add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
-#+END_SRC
+#+end_src
 
 ** Lock files
 
@@ -267,24 +267,24 @@ edited. They can be disabled as of 24.3.
 
 http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq create-lockfiles nil)
-#+END_SRC
+#+end_src
 
 ** Backup and auto-saves
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "backup/" user-emacs-directory) t)))
-#+END_SRC
+#+end_src
 
 ** Revert
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (global-auto-revert-mode 1)
-#+END_SRC
+#+end_src
 
 ** Key bindings
 
@@ -294,7 +294,7 @@ Press =C-c C-h= to show all of these.
 - [[info:elisp#Key Binding Conventions][Key Binding Conventions]]
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (require 'face-remap)
 (defun fixed-pitch-mode (&optional arg)
   "Fixed-pitch default-face mode.
@@ -303,9 +303,9 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
   (interactive (list (or current-prefix-arg 'toggle)))
   (buffer-face-mode-invoke 'fixed-pitch arg
 			   (called-interactively-p 'interactive)))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (bind-key "C-c a" 'align-current)
 (bind-key "C-c d" 'my-insert-date)
 (bind-key "C-c e" 'eww)
@@ -319,13 +319,13 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c t v" 'fixed-pitch-mode)
 (bind-key "C-c t w" 'whitespace-mode)
 (bind-key "C-c w" 'winner-undo)
-#+END_SRC
+#+end_src
 
 ** Space as control key
 
 Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on OS X.
 
-#+BEGIN_SRC sh 
+#+begin_src sh 
 # Map an unused modifier's keysym to the spacebar's keycode and make
 # it a control modifier. It needs to be an existing key so that emacs
 # won't spazz out when you press it. Hyper_L is a good candidate.
@@ -340,36 +340,36 @@ xmodmap -e "keycode any = space"
 # Finally use xcape to cause the space bar to generate a space when
 # tapped.
 xcape -e "$spare_modifier=space"
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (bind-key "M-SPC" 'set-mark-command)
 (bind-key "M-s-SPC" 'mark-sexp)
 (bind-key "M-s- " 'mark-sexp)           ; OS X
 (bind-key "s-SPC" 'just-one-space)
-#+END_SRC
+#+end_src
 
 ** Other settings
 
 Rapid mark-pop. =C-u C-SPC C-SPC...=
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq set-mark-command-repeat-pop t)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq sentence-end-double-space nil)
 (setq require-final-newline t)
 (setq indent-tabs-mode nil)
 (show-paren-mode)
-#+END_SRC
+#+end_src
 
 * User defined functions
 
 Hacked version of balance-windows which only balances windows
 horizontally.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun balance-windows-horizontally (&optional window-or-frame)
   "Horizontally balance the sizes of windows of WINDOW-OR-FRAME.
 WINDOW-OR-FRAME is optional and defaults to the selected frame.
@@ -403,9 +403,9 @@ window."
       (window-resize-apply frame t)
       (window--pixel-to-total frame t)
       (run-window-configuration-change-hook frame))))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun my-insert-date (arg)
   "Insert date string"
   (interactive "p")
@@ -415,9 +415,9 @@ window."
          (insert (format-time-string "%Y%m%d%H%M%S")))
         ((= arg 16)
          (insert (format-time-string "%Y-%m-%d-%H%M%S")))))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun my-switch-to-term ()
   "Switch to term running in the default-directory,
 otherwise start a new ansi-term"
@@ -437,11 +437,11 @@ otherwise start a new ansi-term"
 	     (not (eq found-buffer (current-buffer))))
 	(switch-to-buffer found-buffer)
       (ansi-term "bash"))))
-#+END_SRC
+#+end_src
 
 ** Alert on comint prompt
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (require 'alert)
 
 (defun comint-alert-on-prompt (string)
@@ -458,60 +458,60 @@ otherwise start a new ansi-term"
   (if (member 'comint-alert-on-prompt comint-output-filter-functions)
       (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
     (add-hook 'comint-output-filter-functions 'comint-alert-on-prompt)))
-#+END_SRC
+#+end_src
 
 * Package settings
 
 ** inf-ruby
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package inf-ruby
   :config
   (setq inf-ruby-default-implementation "pry"))
-#+END_SRC
+#+end_src
 
 ** ace-window
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ace-window
   :bind (("C-x o" . ace-window)))
-#+END_SRC
+#+end_src
 
 ** bash-completion
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package bash-completion
   :disabled t
   :init
   ('bash-completion-setup))
-#+END_SRC
+#+end_src
 
 ** bbdb
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package bbdb
   :bind (("C-c b" . bbdb))
   :config
   (progn
     (setq bbdb-file "~/.config/bbdb/.bbdb")
     (setq bbdb-auto-revert-p t)))
-#+END_SRC
+#+end_src
 
 ** buffer-move
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package buffer-move
   :bind (("<C-S-up>"    . buf-move-up)
 	 ("<C-S-down>"  . buf-move-down)
 	 ("<C-S-left>"  . buf-move-left)
 	 ("<C-S-right>" . buf-move-right)))
-#+END_SRC
+#+end_src
 
 ** desktop
 
 Do not load encrypted files when Emacs starts.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package desktop
   :config
   (progn
@@ -543,22 +543,22 @@ Do not load encrypted files when Emacs starts.
 
     (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)"))
   :init (desktop-save-mode 1))
-#+END_SRC
+#+end_src
 
 ** dns-mode
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package dns-mode
   :defer t
   :config
   (progn
     ;; Do not auto increment serial (C-c C-s to increment)
     (setq dns-mode-soa-auto-increment-serial nil)))
-#+END_SRC
+#+end_src
 
 ** elfeed
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package elfeed
   :defer t
   :config
@@ -569,11 +569,11 @@ Do not load encrypted files when Emacs starts.
 	    "http://www.reddit.com/r/emacs/.rss"
 	    "http://www.reddit.com/r/ruby/.rss"
 	    "http://planet.debian.org/atom.xml"))))
-#+END_SRC
+#+end_src
 
 ** erc
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package erc
   :defer t
   :config
@@ -593,11 +593,11 @@ Do not load encrypted files when Emacs starts.
     (setq erc-nickserv-passwords
           `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
             ((freenode ((,freenode-username . ,freenode-password))))))))
-#+END_SRC
+#+end_src
 
 ** erc-track
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package erc-track
   :defer t
   :config
@@ -606,11 +606,11 @@ Do not load encrypted files when Emacs starts.
     (add-to-list 'erc-track-exclude-types "JOIN")
     (add-to-list 'erc-track-exclude-types "PART")
     (add-to-list 'erc-track-exclude-types "QUIT")))
-#+END_SRC
+#+end_src
 
 ** exec-path-from-shell
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package exec-path-from-shell
   :if (eq window-system 'ns)
   :init
@@ -620,29 +620,29 @@ Do not load encrypted files when Emacs starts.
        (add-to-list 'exec-path-from-shell-variables variable))
      '("ALTERNATE_EDITOR" "EDITOR" "GPG_AGENT_INFO" "HISTFILE" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))
     (exec-path-from-shell-initialize)))
-#+END_SRC
+#+end_src
 
 ** flx-ido
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package flx-ido
   :init (flx-ido-mode 1)
   :config (setq ido-use-face nil))
-#+END_SRC
+#+end_src
 
 ** flycheck
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package flycheck
   :config
   (require 'flycheck-ledger)
   (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
   (add-hook 'after-init-hook 'global-flycheck-mode))
-#+END_SRC
+#+end_src
 
 ** git
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package git
   :config
   (progn
@@ -650,32 +650,32 @@ Do not load encrypted files when Emacs starts.
       (interactive "sGit repository URL: ")
       (let ((git-repo "~/src"))
         (git-clone url)))))
-#+END_SRC
+#+end_src
 
 ** git-commit-mode
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package git-commit-mode
   :defer t
   :config
   (progn
     ;; Spell check git commit messages
     (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
-#+END_SRC
+#+end_src
 
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
 
-#+BEGIN_SRC sh :results output
+#+begin_src sh :results output
 gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";print}'
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 : machine imap.gmail.com login EMAIL password PASSWORD port imaps
 : machine smtp.gmail.com login EMAIL password PASSWORD port 587
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package gnus
   :config
   (progn
@@ -704,11 +704,11 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 	     ("Bcc" "svends@uw.edu"))
 	    ("whitepages"
 	     (address "ssorensen@whitepages.com"))))))
-#+END_SRC
+#+end_src
 
 ** gnus-alias
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package gnus-alias
   :config
   (setq gnus-alias-identity-alist
@@ -719,11 +719,11 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
   (setq gnus-alias-identity-rules
 	'(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
 	  ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
-#+END_SRC
+#+end_src
 
 ** helm
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package helm
   :bind (("C-`" . helm-for-files)
 	 ("C-c h f" . helm-firefox-bookmarks)
@@ -739,29 +739,29 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
     (helm-attrset 'follow 1 helm-source-buffers-list)
 
     (helm-adaptative-mode 1)))
-#+END_SRC
+#+end_src
 
 ** hippie-exp
 
 [[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
 http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package hippie-exp
   :bind (("M-/" . hippie-expand)))
-#+END_SRC
+#+end_src
 
 ** ibuffer
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ibuffer
   :bind (("C-x C-b" . ibuffer)))
 
-#+END_SRC
+#+end_src
 
 ** ibuffer-tramp
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ibuffer-tramp
   :config
   (progn
@@ -769,11 +769,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
               (lambda ()
                 (ibuffer-tramp-set-filter-groups-by-tramp-connection)
                 (ibuffer-dno-sort-by-alphabetic)))))
-#+END_SRC
+#+end_src
 
 ** ido
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ido
   :init (ido-mode 1)
   :config
@@ -788,19 +788,19 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	  ido-auto-merge-work-directories-length -1
 	  ido-use-virtual-buffers t)
     (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
-#+END_SRC
+#+end_src
 
 ** ido-ubiquitous
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ido-ubiquitous
   :init
   (ido-ubiquitous-mode 1))
-#+END_SRC
+#+end_src
 
 ** jabber
 
-#+BEGIN_SRC emacs-lisp sh
+#+begin_src emacs-lisp sh
 (use-package jabber
   :config
   (progn
@@ -827,21 +827,21 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (concat hipchat-number "_" room "@conf.hipchat.com")
        hipchat-nickname
        t))))
-#+END_SRC
+#+end_src
 
 ** lisp-mode
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook
 	    '(lambda ()
 	       (turn-on-eldoc-mode))))
-#+END_SRC
+#+end_src
 
 ** magit
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package magit
   :bind (("C-c m" . magit-key-mode-popup-dispatch))
   :config
@@ -849,11 +849,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (diminish 'magit-auto-revert-mode)
     (setq magit-save-some-buffers 'dontask)
     (setq magit-repo-dirs '("~/src"))))
-#+END_SRC
+#+end_src
 
 ** message
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package message
   :init
   (progn
@@ -894,11 +894,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       (bbdb-insinuate-message))
 
     (add-hook 'message-setup-hook 'my-setup-message-mode)))
-#+END_SRC
+#+end_src
 
 ** notmuch
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package notmuch
     :defer t
     :config
@@ -948,11 +948,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       ;; Work around bug with notmuch and emacs-snapshot
       ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
       (require 'gnus-art)))
-#+END_SRC
+#+end_src
 
 ** org
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package org
   :bind (("C-c o a" . org-agenda)
          ("C-c o b" . org-iswitchb)
@@ -967,6 +967,12 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (setq org-src-preserve-indentation t)
     (setq org-use-speed-commands t)
 
+    ;; Lower case all org template block headers
+    (mapc (lambda (asc)
+	    (let ((org-sce-dc (downcase (nth 1 asc))))
+	      (setf (nth 1 asc) org-sce-dc)))
+	  org-structure-template-alist)
+
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
@@ -974,23 +980,23 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (python . t)
        (ruby . t)
        (scala . t)
-       (sh . t)))))
-#+END_SRC
+       (sh . t)))))?
+#+end_src
 
 ** projectile
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package projectile
   :init (projectile-global-mode 1)
   :config
   (progn
     (setq projectile-use-git-grep t)
     (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
-#+END_SRC
+#+end_src
 
 ** recentf
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package recentf
   :init (recentf-mode 1)
   :config
@@ -1013,13 +1019,13 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       (if (find-file (ido-completing-read "Find recent file: " recentf-list))
 	  (message "Opening file...")
 	(message "Aborting")))))
-#+END_SRC
+#+end_src
 
 ** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package ruby-mode
   :config
   (progn
@@ -1036,40 +1042,40 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
    ("Thorfile\\'"    . ruby-mode)
    ("Vagrantfile\\'" . ruby-mode)
    ("\\.jbuilder\\'" . ruby-mode)))
-#+END_SRC
+#+end_src
 
 ** savehist
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package savehist
   :init (savehist-mode 1))
-#+END_SRC
+#+end_src
 
 ** scala-mode2
 
 Scala worksheets end in =.sc=.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package scala-mode2
   :mode
   (("\\.sc\\'" . scala-mode)))
-#+END_SRC
+#+end_src
 
 ** server
 
 Start Emacs server unless one is already running. =server-running-p=
 requires =server=.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package server
   :init
   (unless (server-running-p)
     (server-start)))
-#+END_SRC
+#+end_src
 
 ** sh-script
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package sh-script
   :defer t
   :config
@@ -1083,11 +1089,11 @@ requires =server=.
       (setq sh-indent-for-case-label 0))
 
     (add-hook 'sh-mode-hook 'my-setup-sh-mode)))
-#+END_SRC
+#+end_src
 
 ** shell
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun shell-mode-config ()
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
@@ -1100,60 +1106,60 @@ requires =server=.
   ;; etc.)
   (require 'sh-script)
   (set-syntax-table sh-mode-syntax-table))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package shell
   :config
   ;; Do not try to colorize comments and strings in shell mode
   (setq shell-font-lock-keywords nil)
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'shell-mode-hook 'shell-mode-config))
-#+END_SRC
+#+end_src
 
 To disable scroll to bottom:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (remove-hook 'comint-output-filter-functions
              'comint-postoutput-scroll-to-bottom)
-#+END_SRC
+#+end_src
 
 Changing directory generates a message with the new directory path. To
 disable this:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (setq shell-dirtrack-verbose nil)
-#+END_SRC
+#+end_src
 
 To search history when you are at a command line using C-r (instead of
 M-r):
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
 (setq comint-history-isearch dwim)
-#+END_SRC
+#+end_src
 
 ** slime
 
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package slime
   :config
   (setq inferior-lisp-program "sbcl"))
-#+END_SRC
+#+end_src
 
 ** smex
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package smex
   :bind (("M-x" . smex)
 	 ("M-X" . smex-major-mode-commands)
 	 ("C-c M-x" . execute-extended-command)))
-#+END_SRC
+#+end_src
 
 ** term
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun my-setup-term-mode ()
   "My preferences for term mode"
   (interactive)
@@ -1193,7 +1199,7 @@ M-r):
 (use-package term
   :config
   (add-hook 'term-mode-hook 'my-setup-term-mode))
-#+END_SRC
+#+end_src
 
 ** tramp
 
@@ -1206,14 +1212,14 @@ See http://www.gnu.org/software/emacs/manual/html_node/tramp/Ad_002dhoc-multi_00
 Use SSH default control master settings. Add the following to
 =~/.ssh/config=.
 
-#+BEGIN_EXAMPLE conf
+#+begin_example conf
 Host *
 	ControlMaster auto
 	ControlPath ~/.ssh/control.%h_%p_%r
 	ControlPersist 60m
-#+END_EXAMPLE
+#+end_example
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package tramp
   :defer t
   :config
@@ -1221,9 +1227,9 @@ Host *
     (setq tramp-use-ssh-controlmaster-options nil)
     ;; Tramp sets HISTFILE to /dev/null so bash history on remote shells does not work.
     (add-to-list 'tramp-remote-process-environment "HISTFILE=")))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (require 'tramp)
 (require 'dash)
 
@@ -1272,9 +1278,9 @@ Host *
   (let ((explicit-shell-file-name "dtach")
 	(default-directory (format  "/ssh:%s:" host)))
     (shell (format "*shell*<%s>" host))))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun tramp-comint-read-input-ring ()
   "Read remote bash_history file into comint input ring."
   (when (tramp-tramp-file-p default-directory)
@@ -1282,17 +1288,17 @@ Host *
     (comint-read-input-ring)))
 
 (add-hook 'shell-mode-hook 'tramp-comint-read-input-ring)
-#+END_SRC
+#+end_src
 
 ** winner
 
 The winner-mode package provides a way to restore previous window
 layouts.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package winner
   :init (winner-mode 1))
-#+END_SRC
+#+end_src
 
 ** zoom-frm
 
@@ -1300,19 +1306,19 @@ The zoom-frm package allows scaling all text. (As opposed to
 text-scale-adjust, which only scale the text for a single buffer. Both
 are useful.)
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package zoom-frm
   :bind (("C-c C-+" . zoom-in/out)
 	 ("C-c C--" . zoom-in/out)
 	 ("C-c C-0" . zoom-in/out)
 	 ("C-c C-=" . zoom-in/out)))
-#+END_SRC
+#+end_src
 
 * External config
 
 Load load config stored outside =~/.emacs.d=.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (when (file-exists-p "~/doc/jabberconfig.el")
   (load-file "~/doc/jabberconfig.el"))
-#+END_SRC
+#+end_src
