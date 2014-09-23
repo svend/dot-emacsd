@@ -1227,9 +1227,10 @@ Host *
 (require 'dash)
 
 ;; Default value of explicit-bash-args is '("--noediting" "-i"). We
-;; want login shell for remote hosts
-(setq explicit-remote-bash-args
-      '("--noediting" "--login"))
+;; want login shell for remote hosts. This may increase the startup
+;; time for local shells.
+(setq explicit-bash-args
+      '("--noediting" "-i" "--login"))
 (setq explicit-dtach-args
       '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "-login"))
 
@@ -1261,15 +1262,13 @@ Host *
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
-  (let ((explicit-bash-args explicit-remote-bash-args)
-        (default-directory (format  "/ssh:%s:" host)))
+  (let ((default-directory (format  "/ssh:%s:" host)))
     (shell (format "*ssh %s*" host))))
 
 (defun ssh-dtach (host)
   "Open SSH connection to HOST and start dtach session."
   (interactive (list (ssh-host-completing-read)))
   (let ((explicit-shell-file-name "dtach")
-	;; Start bash login shell for remote shell
 	(default-direct ory (format  "/ssh:%s:" host)))
     (shell (format "*ssh %s*" host))))
 #+END_SRC
