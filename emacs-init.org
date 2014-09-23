@@ -965,6 +965,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (add-hook 'org-mode-hook 'auto-fill-mode)
     (setq org-src-fontify-natively t)
     (setq org-src-preserve-indentation t)
+    (setq org-use-speed-commands t)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
