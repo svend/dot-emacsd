@@ -1226,12 +1226,19 @@ Host *
 (require 'tramp)
 (require 'dash)
 
+;; Default value of explicit-bash-args is '("--noediting" "-i"). We
+;; want login shell for remote hosts
+(setq explicit-remote-bash-args
+      '("--noediting" "--login"))
+(setq explicit-dtach-args
+      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "-login"))
+
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
   ;; Copied from cssh.el
   (-flatten (mapcar (lambda (x)
-                               (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
-                             (tramp-get-completion-function "ssh"))))
+		      (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
+		    (tramp-get-completion-function "ssh"))))
 
 (defun ssh-add-user-to-hosts (&optional user)
   "Return list of known hosts prefixed with USER."
@@ -1254,8 +1261,7 @@ Host *
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
-  ;; Start bash login shell for remote shell
-  (let ((explicit-bash-args '("--noediting" "--login"))
+  (let ((explicit-bash-args explicit-remote-bash-args)
         (default-directory (format  "/ssh:%s:" host)))
     (shell (format "*ssh %s*" host))))
 
@@ -1263,10 +1269,8 @@ Host *
   "Open SSH connection to HOST and start dtach session."
   (interactive (list (ssh-host-completing-read)))
   (let ((explicit-shell-file-name "dtach")
-        ;; Start bash login shell for remote shell
-        (explicit-dtach-args '("-A" "/tmp/ssorensen.dtach" "-z"
-                               "/bin/bash" "--noediting" "-login"))
-        (default-directory (format  "/ssh:%s:" host)))
+	;; Start bash login shell for remote shell
+	(default-direct ory (format  "/ssh:%s:" host)))
     (shell (format "*ssh %s*" host))))
 #+END_SRC
 
