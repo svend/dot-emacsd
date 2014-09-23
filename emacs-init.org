@@ -1232,7 +1232,7 @@ Host *
 (setq explicit-bash-args
       '("--noediting" "-i" "--login"))
 (setq explicit-dtach-args
-      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "-login"))
+      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "-i" "--login"))
 
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
