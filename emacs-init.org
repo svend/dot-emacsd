@@ -1230,9 +1230,9 @@ Host *
 ;; want login shell for remote hosts. This may increase the startup
 ;; time for local shells.
 (setq explicit-bash-args
-      '("--noediting" "-i" "--login"))
+      '("--noediting" "--login" "-i"))
 (setq explicit-dtach-args
-      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "-i" "--login"))
+      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "--login" "-i"))
 
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
