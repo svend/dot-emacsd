@@ -1263,14 +1263,14 @@ Host *
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
   (let ((default-directory (format  "/ssh:%s:" host)))
-    (shell (format "*ssh %s*" host))))
+    (shell (format "*shell*<%s>" host))))
 
 (defun ssh-dtach (host)
   "Open SSH connection to HOST and start dtach session."
   (interactive (list (ssh-host-completing-read)))
   (let ((explicit-shell-file-name "dtach")
-	(default-direct ory (format  "/ssh:%s:" host)))
-    (shell (format "*ssh %s*" host))))
+	(default-directory (format  "/ssh:%s:" host)))
+    (shell (format "*shell*<%s>" host))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
