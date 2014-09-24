@@ -66,8 +66,8 @@ Display date in 24 hour format in mode line.
 
 ** Fixed/variable pitch
 
-Use [[http://dejavu-fonts.org/][DejaVu font family]]. These fonts are already installed on Debian.
-On OS X, use homebrew to install.
+Use [[http://dejavu-fonts.org/][DejaVu font family]]. These fonts are in the [[https://packages.debian.org/sid/fonts-dejavu][fonts-dejavu]] package on
+Debian. On OS X, use homebrew to install.
 
 Install homebrew-cask and caskroom-fonts.
 
