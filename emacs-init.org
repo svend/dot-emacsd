@@ -1209,7 +1209,7 @@ Edit remote files via sudo
 
 See http://www.gnu.org/software/emacs/manual/html_node/tramp/Ad_002dhoc-multi_002dhops.html
 
-=/ssh:example.com|sudo:localhost:/file=
+=/ssh:example.com|sudo::/file=
 
 Use SSH default control master settings. Add the following to
 =~/.ssh/config=.
