@@ -803,32 +803,32 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 ** jabber
 
 #+begin_src emacs-lisp sh
-(use-package jabber
-  :config
-  (progn
-    (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
+  (use-package jabber
+    :config
+    (progn
+      (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
 
-    (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
+      (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
 
-    (defvar hipchat-number "23430")
-    (defvar hipchat-nickname "Svend Sorensen")
-    (defvar hipchat- rooms '("ait" "ops" "ops-notifications" "outages" "release")
-      "List of hipchat rooms to auto-join")
+      (defvar hipchat-number "23430")
+      (defvar hipchat-nickname "Svend Sorensen")
+      (defvar hipchat-rooms '("ait" "ops" "ops-notifications" "outages" "release")
+        "List of hipchat rooms to auto-join")
 
-    (dolist (muc-room
-	     (mapcar (lambda (room)
-		       (concat hipchat-number "_" room "@conf.hipchat.com"))
-		     hipchat-rooms))
-      (add-to-list 'jabber-muc-autojoin muc-room)
-      (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
+      (dolist (muc-room
+               (mapcar (lambda (room)
+                         (concat hipchat-number "_" room "@conf.hipchat.com"))
+                       hipchat-rooms))
+        (add-to-list 'jabber-muc-autojoin muc-room)
+        (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
 
-    (defun hipchat-join (room)
-      (interactive "sRoom name: ")
-      (jabber-muc-join
-       (jabber-read-account)
-       (concat hipchat-number "_" room "@conf.hipchat.com")
-       hipchat-nickname
-       t))))
+      (defun hipchat-join (room)
+        (interactive "sRoom name: ")
+        (jabber-muc-join
+         (jabber-read-account)
+         (concat hipchat-number "_" room "@conf.hipchat.com")
+         hipchat-nickname
+         t))))
 #+end_src
 
 ** lisp-mode
