@@ -284,6 +284,7 @@ http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 
 #+begin_src emacs-lisp
 (global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
 #+end_src
 
 ** Key bindings
@@ -468,6 +469,13 @@ otherwise start a new ansi-term"
 (use-package inf-ruby
   :config
   (setq inf-ruby-default-implementation "pry"))
+#+end_src
+
+** ace-jump
+
+#+begin_src emacs-lisp
+(use-package ace-jump-mode
+  :bind (("C-c c" . ace-jump-mode)))
 #+end_src
 
 ** ace-window
