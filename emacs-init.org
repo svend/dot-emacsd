@@ -83,8 +83,11 @@ brew cask install font-dejavu-sans
 #+end_src
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :family "DejaVu Sans" :height 105)
-(set-face-attribute 'fixed-pitch nil :family "DejaVu Sans Mono")
+(set-face-attribute 'default nil
+		    :family "DejaVu Sans"
+		    :height (if (eq window-system 'ns) 130 105))
+(set-face-attribute 'fixed-pitch nil
+		    :family "DejaVu Sans Mono")
 #+end_src
 
 Modes which rely on fixed-pitch for alignment
