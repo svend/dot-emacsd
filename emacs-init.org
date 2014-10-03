@@ -982,6 +982,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (require 'org-capture)
 
     (add-hook 'org-mode-hook 'auto-fill-mode)
+    (add-hook 'org-mode-hook 'org-babel-result-hide-all)
     (setq org-src-fontify-natively t)
     (setq org-src-preserve-indentation t)
     (setq org-use-speed-commands t)
