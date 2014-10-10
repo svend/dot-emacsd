@@ -829,7 +829,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
     (defvar hipchat-number "23430")
     (defvar hipchat-nickname "Svend Sorensen")
-    (defvar hipchat-rooms '("ait" "ops" "ops-notifications" "outages" "release")
+    (defvar hipchat-rooms '("ait" "deployment_improvement" "ops" "ops-notifications" "outages" "release")
       "List of hipchat rooms to auto-join")
 
     (dolist (muc-room
