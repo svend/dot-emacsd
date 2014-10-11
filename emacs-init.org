@@ -684,8 +684,11 @@ Disable ido faces to see flx highlights.
 
 ** go-mode
 
+go-eldoc requires gocode.
+
 #+begin_src sh
 apt-get install gocode
+go get code.google.com/p/rog-go/exp/cmd/godef
 #+end_src
 
 #+begin_src emacs-lisp
