@@ -684,11 +684,16 @@ Disable ido faces to see flx highlights.
 
 ** go-mode
 
+#+begin_src sh
+apt-get install gocode
+#+end_src
+
 #+begin_src emacs-lisp
 (use-package go-mode
   :config
   (progn
     (setq gofmt-command "goimports")
+    (add-hook 'go-mode-hook 'go-eldoc-setup)
     (add-hook 'before-save-hook 'gofmt-before-save)))
 #+end_src
 

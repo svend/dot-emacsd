@@ -23,6 +23,7 @@
 (depends-on "gitconfig-mode")
 (depends-on "gitignore-mode")
 (depends-on "gnus-alias")
+(depends-on "go-eldoc")
 (depends-on "go-mode")
 (depends-on "haskell-mode")
 (depends-on "helm")
