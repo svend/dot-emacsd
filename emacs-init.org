@@ -682,6 +682,16 @@ Disable ido faces to see flx highlights.
     (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
 #+end_src
 
+** go-mode
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :config
+  (progn
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook 'gofmt-before-save)))
+#+end_src
+
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
