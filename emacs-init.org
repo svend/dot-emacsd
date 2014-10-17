@@ -98,8 +98,8 @@ Modes which rely on fixed-pitch for alignment
 
 (dolist (hook '(dired-mode-hook
                 ibuffer-mode-hook
-		go-mode-hook
                 magit-log-mode-hook
+		prog-mode-hook
                 shell-mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
