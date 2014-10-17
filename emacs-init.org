@@ -687,12 +687,14 @@ Disable ido faces to see flx highlights.
 
 ** go-mode
 
+- godoc (for =godoc=)
 - gocode (for =go-eldoc=)
 - godef (for go-mode's =godef-*= commands)
 - goimports (for =gofmt-command=)
 - golint (used with flycheck)
 
 #+begin_src sh
+go get code.google.com/p/go.tools/cmd/godoc
 go get code.google.com/p/go.tools/cmd/goimports
 go get code.google.com/p/rog-go/exp/cmd/godef
 go get github.com/golang/lint/golint
