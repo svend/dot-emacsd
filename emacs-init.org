@@ -237,7 +237,10 @@ Turn on menu bar, since it does not use any extra space on OS X.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
-  (menu-bar-mode 1))
+  (menu-bar-mode 1)
+  ;; TODO: default value of gpg-gpg-program is being modified to gpg.
+  ;; I'm not sure why.
+  (setq epg-gpg-program "gpg2"))
 #+end_src
 
 ** Programming modes
