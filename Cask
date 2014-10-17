@@ -45,6 +45,7 @@
 (depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "puppet-mode")
+(depends-on "quickrun")
 (depends-on "robe")
 (depends-on "sbt-mode")
 (depends-on "scala-mode2")
