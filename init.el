@@ -43,6 +43,7 @@
  '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.6 :width expanded))))
  '(linum ((t (:inherit (shadow default) :weight light))))
  '(magit-log-message ((t (:inherit variable-pitch))))
+ '(markdown-inline-code-face ((t (:inherit fixed-pitch :foreground "#8f5902"))))
  '(markdown-pre-face ((t (:inherit fixed-pitch :foreground "#8f5902"))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
