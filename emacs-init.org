@@ -1370,6 +1370,16 @@ are useful.)
 	 ("C-c C-=" . zoom-in/out)))
 #+end_src
 
+** quickrun
+
+#+begin_src emacs-lisp
+(use-package quickrun
+  :bind (("C-c q a" . quickrun-with-arg)
+	 ("C-c q q" . quickrun)
+	 ("C-c q r" . quickrun-region)
+	 ("C-c q s" . quickrun-shell)))
+#+end_src
+
 ** yasnippet
 
 #+begin_src emacs-lisp
