@@ -53,6 +53,7 @@
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
+ '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
  '(sh-heredoc ((t (:foreground "#8f5902"))))
  '(show-paren-match ((t (:background "#fce94f"))))
  '(variable-pitch ((t (:family "DejaVu Sans"))))
