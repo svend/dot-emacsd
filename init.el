@@ -34,6 +34,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-face ((t (:inherit variable-pitch :foreground "#888a85" :slant normal))))
+ '(font-lock-doc-face ((t (:inherit (font-lock-string-face variable-pitch)))))
  '(jabber-activity-face ((t (:foreground "#edd400" :weight bold))))
  '(jabber-activity-personal-face ((t (:foreground "#8ae234" :weight bold))))
  '(jabber-chat-prompt-foreign ((t (:foreground "#204a87" :weight bold))))
