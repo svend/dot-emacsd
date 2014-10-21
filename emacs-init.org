@@ -98,7 +98,9 @@ Modes which rely on fixed-pitch for alignment
 
 (dolist (hook '(dired-mode-hook
                 ibuffer-mode-hook
-                magit-log-mode-hook
+		ledger-report-mode-hook
+		ledger-mode-hook
+		magit-log-mode-hook
 		prog-mode-hook
 		quickrun/mode-hook
                 shell-mode-hook
