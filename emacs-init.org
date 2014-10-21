@@ -375,7 +375,7 @@ Rapid mark-pop. =C-u C-SPC C-SPC...=
 - Shorter auto-revert interval. Default is 5 seconds.
 
 #+begin_src emacs-lisp
-(setq auto-revert-interval 1)
+(setq auto-revert-interval 0.1)
 (setq indent-tabs-mode nil)
 (setq require-final-newline t)
 (setq sentence-end-double-space nil)
