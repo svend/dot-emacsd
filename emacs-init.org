@@ -366,7 +366,7 @@ xcape -e "$spare_modifier=space"
 
 ** Other settings
 
-Rapid mark-pop. =C-u C-SPC C-SPC...=
+Rapid mark-pop (=C-u C-SPC C-SPC...=).
 
 #+begin_src emacs-lisp
 (setq set-mark-command-repeat-pop t)
