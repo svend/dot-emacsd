@@ -15,7 +15,6 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(electric-pair-mode t)
- '(gnutls-verify-error t)
  '(history-length 10000)
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
