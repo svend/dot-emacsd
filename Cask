@@ -9,6 +9,8 @@
 (depends-on "buffer-move")
 (depends-on "calfw")
 (depends-on "coffee-mode")
+(depends-on "company")
+(depends-on "company-go")
 (depends-on "csv-mode")
 (depends-on "elfeed")
 (depends-on "exec-path-from-shell")
