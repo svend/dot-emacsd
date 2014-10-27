@@ -97,6 +97,7 @@ Modes which rely on fixed-pitch for alignment
   (fixed-pitch-mode t))
 
 (dolist (hook '(dired-mode-hook
+		ediff-mode-hook
                 ibuffer-mode-hook
 		ledger-report-mode-hook
 		ledger-mode-hook
