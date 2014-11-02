@@ -203,7 +203,7 @@ Enable y/n answers.
 
 ** Balance windows
 
-Horizontally balance windows automatically.
+Balance windows horizontally automatically.
 
 #+begin_src emacs-lisp
 (defadvice split-window-below (after restore-balanace-below activate)
