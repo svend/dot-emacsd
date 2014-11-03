@@ -96,7 +96,8 @@ Modes which rely on fixed-pitch for alignment
 (defun enable-fixed-pitch-mode ()
   (fixed-pitch-mode t))
 
-(dolist (hook '(dired-mode-hook
+(dolist (hook '(comint-mode-hook
+		dired-mode-hook
 		ediff-mode-hook
                 ibuffer-mode-hook
 		ledger-report-mode-hook
@@ -104,7 +105,6 @@ Modes which rely on fixed-pitch for alignment
 		magit-log-mode-hook
 		prog-mode-hook
 		quickrun/mode-hook
-                shell-mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
   (add-hook hook 'enable-fixed-pitch-mode))
