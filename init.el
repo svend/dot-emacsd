@@ -34,6 +34,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-changed ((t (:inherit fixed-pitch))))
  '(diff-context ((t (:inherit (shadow fixed-pitch)))))
+ '(diff-header ((t (:inherit fixed-pitch :background "grey80"))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face variable-pitch)))))
  '(jabber-activity-face ((t (:foreground "#edd400" :weight bold))))
  '(jabber-activity-personal-face ((t (:foreground "#8ae234" :weight bold))))
