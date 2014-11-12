@@ -43,6 +43,7 @@
 (depends-on "mmm-mode")
 (depends-on "operate-on-number")
 (depends-on "password-store")
+(depends-on "perspective")
 (depends-on "polymode")
 (depends-on "prodigy")
 (depends-on "projectile")
