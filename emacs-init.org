@@ -1082,6 +1082,15 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 	(message "Aborting")))))
 #+end_src
 
+** robe
+
+#+begin_src emacs-lisp
+(use-package robe
+  :config
+  (progn
+    (add-hook 'ruby-mode-hook 'robe-mode)))
+#+end_src
+
 ** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
