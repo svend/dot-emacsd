@@ -105,7 +105,7 @@ Modes which rely on fixed-pitch for alignment
 		ledger-report-mode-hook
 		ledger-mode-hook
 		magit-log-mode-hook
-		notmuch-search
+		notmuch-search-hook
 		prog-mode-hook
 		quickrun/mode-hook
                 term-mode-hook
