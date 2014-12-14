@@ -50,6 +50,7 @@
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
+ '(org-code ((t (:inherit (shadow fixed-pitch)))))
  '(org-document-title ((t (:weight bold :height 1.4))))
  '(org-level-1 ((t (:height 1.3))))
  '(org-level-2 ((t (:height 1.2))))
