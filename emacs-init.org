@@ -485,19 +485,18 @@ otherwise start a new ansi-term"
 
 * Package settings
 
-** inf-ruby
-
-#+begin_src emacs-lisp
-(use-package inf-ruby
-  :config
-  (setq inf-ruby-default-implementation "pry"))
-#+end_src
-
 ** ace-jump
 
 #+begin_src emacs-lisp
 (use-package ace-jump-mode
   :bind (("C-c c" . ace-jump-mode)))
+#+end_src
+
+** ace-link
+
+#+begin_src emacs-lisp
+(use-package ace-link
+  :init (ace-link-setup-default))
 #+end_src
 
 ** ace-window
@@ -696,37 +695,6 @@ Disable ido faces to see flx highlights.
     (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
 #+end_src
 
-** go-mode
-
-- godoc (for =godoc=)
-- gocode (for =go-eldoc=)
-- godef (for go-mode's =godef-*= commands)
-- goimports (for =gofmt-command=)
-- golint (used with flycheck)
-
-#+begin_src sh
-go get code.google.com/p/go.tools/cmd/godoc
-go get code.google.com/p/go.tools/cmd/goimports
-go get code.google.com/p/rog-go/exp/cmd/godef
-go get github.com/golang/lint/golint
-go get github.com/nsf/gocode
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package go-mode
-  :config
-  (progn
-    (setq gofmt-command "goimports")
-    (add-hook 'go-mode-hook 'go-eldoc-setup)
-    (add-hook 'go-mode-hook (lambda ()
-			      (local-set-key (kbd "M-.") 'godef-jump)))
-    (add-hook 'go-mode-hook 'company-mode)
-    (add-hook 'go-mode-hook (lambda ()
-			    (set (make-local-variable 'company-backends) '(company-go))
-			    (company-mode)))
-  (add-hook 'before-save-hook 'gofmt-before-save)))
-#+end_src
-
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
@@ -783,6 +751,37 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
   (setq gnus-alias-identity-rules
 	'(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
 	  ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+#+end_src
+
+** go-mode
+
+- godoc (for =godoc=)
+- gocode (for =go-eldoc=)
+- godef (for go-mode's =godef-*= commands)
+- goimports (for =gofmt-command=)
+- golint (used with flycheck)
+
+#+begin_src sh
+go get code.google.com/p/go.tools/cmd/godoc
+go get code.google.com/p/go.tools/cmd/goimports
+go get code.google.com/p/rog-go/exp/cmd/godef
+go get github.com/golang/lint/golint
+go get github.com/nsf/gocode
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :config
+  (progn
+    (setq gofmt-command "goimports")
+    (add-hook 'go-mode-hook 'go-eldoc-setup)
+    (add-hook 'go-mode-hook (lambda ()
+			      (local-set-key (kbd "M-.") 'godef-jump)))
+    (add-hook 'go-mode-hook 'company-mode)
+    (add-hook 'go-mode-hook (lambda ()
+			    (set (make-local-variable 'company-backends) '(company-go))
+			    (company-mode)))
+  (add-hook 'before-save-hook 'gofmt-before-save)))
 #+end_src
 
 ** helm
@@ -860,6 +859,14 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 (use-package ido-ubiquitous
   :init
   (ido-ubiquitous-mode 1))
+#+end_src
+
+** inf-ruby
+
+#+begin_src emacs-lisp
+(use-package inf-ruby
+  :config
+  (setq inf-ruby-default-implementation "pry"))
 #+end_src
 
 ** jabber
@@ -1057,6 +1064,16 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   (progn
     (setq projectile-use-git-grep t)
     (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
+#+end_src
+
+** quickrun
+
+#+begin_src emacs-lisp
+(use-package quickrun
+  :bind (("C-c q a" . quickrun-with-arg)
+	 ("C-c q q" . quickrun)
+	 ("C-c q r" . quickrun-region)
+	 ("C-c q s" . quickrun-shell)))
 #+end_src
 
 ** recentf
@@ -1378,6 +1395,13 @@ layouts.
   :init (winner-mode))
 #+end_src
 
+** yasnippet
+
+#+begin_src emacs-lisp
+(use-package  yasnippet
+  :init (yas-global-mode))
+#+end_src
+
 ** zoom-frm
 
 The zoom-frm package allows scaling all text. (As opposed to
@@ -1390,23 +1414,6 @@ are useful.)
 	 ("C-c C--" . zoom-in/out)
 	 ("C-c C-0" . zoom-in/out)
 	 ("C-c C-=" . zoom-in/out)))
-#+end_src
-
-** quickrun
-
-#+begin_src emacs-lisp
-(use-package quickrun
-  :bind (("C-c q a" . quickrun-with-arg)
-	 ("C-c q q" . quickrun)
-	 ("C-c q r" . quickrun-region)
-	 ("C-c q s" . quickrun-shell)))
-#+end_src
-
-** yasnippet
-
-#+begin_src emacs-lisp
-(use-package  yasnippet
-  :init (yas-global-mode))
 #+end_src
 
 * External config

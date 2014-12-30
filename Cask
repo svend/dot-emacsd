@@ -2,6 +2,7 @@
 (source gnu)
 (source melpa)
 
+(depends-on "ace-link")
 (depends-on "ace-window")
 (depends-on "alert")
 (depends-on "bash-completion")
