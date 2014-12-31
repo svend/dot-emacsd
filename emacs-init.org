@@ -1190,6 +1190,8 @@ requires =server=.
   (setq comint-scroll-show-maximum-output nil)
   ;; Do not center the prompt when scrolling
   (setq-local scroll-conservatively 101)
+  ;; Do not store duplicate history entries
+  (setq comint-input-ignoredups t)
   ;; Remote shells lock up Emacs with projectile
   (when (tramp-tramp-file-p default-directory)
     (setq-local projectile-mode-line " P"))
