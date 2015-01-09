@@ -1184,7 +1184,26 @@ requires =server=.
 
 ** shell
 
+See http://stackoverflow.com/a/11255996
+
 #+begin_src emacs-lisp
+(defun comint-fix-window-size ()
+  "Change process window size."
+  (when (derived-mode-p 'comint-mode)
+    (let ((process (get-buffer-process (current-buffer))))
+      (unless (eq nil process)
+        (set-process-window-size process
+				 (window-height)
+				 ;; Adjust for columns
+				 (truncate (* 0.873 (window-width))))))))
+
+(defun comint-fix-window-size ()
+  "Change process window size."
+  (when (derived-mode-p 'comint-mode)
+    (set-process-window-size (get-buffer-process (current-buffer))
+			     (window-height)
+			     (truncate (* 0.87 (window-width))))))
+
 (defun shell-mode-config ()
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
@@ -1195,6 +1214,10 @@ requires =server=.
   ;; Remote shells lock up Emacs with projectile
   (when (tramp-tramp-file-p default-directory)
     (setq-local projectile-mode-line " P"))
+  ;; add this hook as buffer local, so it runs once per window.
+  (add-hook 'window-configuration-change-hook 'comint-fix-window-size nil t)
+  ;; Run when shell starts, as well as when window layout change
+  (comint-fix-window-size)
   ;; Use sh-mode syntax table (handles single quotes, back-ticks,
   ;; etc.)
   (require 'sh-script)
