@@ -1197,13 +1197,6 @@ See http://stackoverflow.com/a/11255996
 				 ;; Adjust for columns
 				 (truncate (* 0.873 (window-width))))))))
 
-(defun comint-fix-window-size ()
-  "Change process window size."
-  (when (derived-mode-p 'comint-mode)
-    (set-process-window-size (get-buffer-process (current-buffer))
-			     (window-height)
-			     (truncate (* 0.87 (window-width))))))
-
 (defun shell-mode-config ()
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
