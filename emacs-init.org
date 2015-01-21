@@ -1118,9 +1118,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package ruby-mode
-  :config
-  (progn
-    (setq ruby-align-to-stmt-keywords t))
   :mode
   (("\\.rake\\'"     . ruby-mode)
    ("Rakefile\\'"    . ruby-mode)
