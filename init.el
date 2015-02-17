@@ -20,6 +20,8 @@
  '(jabber-auto-reconnect t)
  '(jabber-history-enabled t)
  '(jabber-keepalive-interval 30)
+ '(js-indent-level 2)
+ '(json-reformat:indent-width 2)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(ns-pop-up-frames nil)
  '(org-default-notes-file "~/doc/org/notes.org")
