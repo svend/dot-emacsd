@@ -1060,7 +1060,9 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 #+begin_src emacs-lisp
 (use-package pdf-tools
   :config
-  (pdf-tools-install))
+  (progn
+    (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
+    (pdf-tools-install)))
 #+end_src
 
 ** projectile
