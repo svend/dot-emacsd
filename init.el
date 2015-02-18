@@ -12,6 +12,7 @@
  '(comint-input-ignoredups t)
  '(comint-input-ring-size 10000)
  '(custom-enabled-themes (quote (tango-plus)))
+ '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(electric-pair-mode t)
