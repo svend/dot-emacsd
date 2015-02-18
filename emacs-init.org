@@ -1055,6 +1055,15 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (sh . t)))))?
 #+end_src
 
+** pdf-tools
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :config
+  (pdf-tools-install))
+
+#+end_src
+
 ** projectile
 
 #+begin_src emacs-lisp
