@@ -1061,7 +1061,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 (use-package pdf-tools
   :config
   (pdf-tools-install))
-
 #+end_src
 
 ** projectile
