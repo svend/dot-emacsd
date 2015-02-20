@@ -14,6 +14,7 @@
 (depends-on "company-go")
 (depends-on "csv-mode")
 (depends-on "elfeed")
+(depends-on "ensime")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "flx-ido")
