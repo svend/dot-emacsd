@@ -4,6 +4,7 @@
 
 (depends-on "ace-link")
 (depends-on "ace-window")
+(depends-on "ag")
 (depends-on "alert")
 (depends-on "bash-completion")
 (depends-on "bbdb")
