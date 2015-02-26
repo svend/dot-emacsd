@@ -244,7 +244,9 @@ Turn on menu bar, since it does not use any extra space on OS X.
   (menu-bar-mode 1)
   ;; TODO: default value of gpg-gpg-program is being modified to gpg.
   ;; I'm not sure why.
-  (setq epg-gpg-program "gpg2"))
+  (setq epg-gpg-program "gpg2")
+  ;; ns-print-buffer locks Emacs. This does not happen with `emacs-Q' .
+  (global-unset-key (kbd "s-p")))
 #+end_src
 
 ** Programming modes
