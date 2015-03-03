@@ -1060,6 +1060,14 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 ** pdf-tools
 
+#+begin_src sh
+cd ~/.emacs.d/.cask/24.4.90.1/elpa/pdf-tools-20150219.2326/build
+
+zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig \
+make
+#+end_src
+
 #+begin_src emacs-lisp
 (use-package pdf-tools
   :config
