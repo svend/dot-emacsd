@@ -1084,7 +1084,8 @@ make
   :config
   (progn
     (setq projectile-use-git-grep t)
-    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))))
+    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+    (projectile-cleanup-known-projects)))
 #+end_src
 
 ** quickrun
