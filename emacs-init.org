@@ -1055,7 +1055,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (python . t)
        (ruby . t)
        (scala . t)
-       (sh . t)))))?
+       (sh . t)))))
 #+end_src
 
 ** pdf-tools
