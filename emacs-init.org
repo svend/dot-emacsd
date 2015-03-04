@@ -324,7 +324,6 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 #+end_src
 
 #+begin_src emacs-lisp
-(bind-key "C-c a" 'align-current)
 (bind-key "C-c d" 'my-insert-date)
 (bind-key "C-c e" 'eww)
 (bind-key "C-c j" 'dired-jump)
@@ -491,7 +490,7 @@ otherwise start a new ansi-term"
 
 #+begin_src emacs-lisp
 (use-package ace-jump-mode
-  :bind (("C-c c" . ace-jump-mode)))
+  :bind (("C-c a" . ace-jump-mode)))
 #+end_src
 
 ** ace-link
@@ -1027,7 +1026,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package org
-  :bind (("C-c o a" . org-agenda)
+  :bind (("C-c c" . org-capture)
+	 ("C-c o a" . org-agenda)
          ("C-c o b" . org-iswitchb)
          ("C-c o c" . org-capture)
          ("C-c o l" . org-store-link))
