@@ -537,6 +537,24 @@ otherwise start a new ansi-term"
 	 ("<C-S-right>" . buf-move-right)))
 #+end_src
 
+** comint-mode
+
+Change scrolling behavior for comint modes.
+
+#+begin_src emacs-lisp
+(defun comint-mode-config()
+  ;; Do not move prompt to bottom of the screen on output
+  (setq comint-scroll-show-maximum-output nil)
+  ;; Do not center the prompt when scrolling
+  ;;
+  ;; ("If the value is greater than 100, redisplay will never recenter
+  ;; point, but will always scroll just enough text to bring point
+  ;; into view, even if you move far away.")
+  (setq-local scroll-conservatively 101))
+
+(add-hook 'comint-mode-hook 'comint-mode-config)
+#+end_src
+
 ** desktop
 
 Do not load encrypted files when Emacs starts.
@@ -1217,10 +1235,6 @@ See http://stackoverflow.com/a/11255996
 				 (truncate (* 0.873 (window-width))))))))
 
 (defun shell-mode-config ()
-  ;; Do not move prompt to bottom of the screen on output
-  (setq comint-scroll-show-maximum-output nil)
-  ;; Do not center the prompt when scrolling
-  (setq-local scroll-conservatively 101)
   ;; Do not store duplicate history entries
   (setq comint-input-ignoredups t)
   ;; Remote shells lock up Emacs with projectile
