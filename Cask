@@ -71,5 +71,6 @@
 (depends-on "flatui-theme")
 (depends-on "leuven-theme")
 (depends-on "solarized-theme")
+(depends-on "subatomic-theme")
 (depends-on "tango-plus-theme")
 (depends-on "zenburn-theme")
