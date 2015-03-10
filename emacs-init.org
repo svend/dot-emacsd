@@ -138,6 +138,13 @@ artifacts from the old theme.
   (interactive)
   (dolist (i custom-enabled-themes)
     (disable-theme i)))
+
+(defun my-load-theme ()
+  "Load a single theme then load override theme."
+  (interactive)
+  (disable-all-themes)
+  (call-interactively 'load-theme)
+  (load-theme 'simple t))
 #+end_src
 
 Treat all themes as safe.
@@ -253,6 +260,10 @@ Turn on menu bar, since it does not use any extra space on OS X.
   ;; TODO: default value of gpg-gpg-program is being modified to gpg.
   ;; I'm not sure why.
   (setq epg-gpg-program "gpg2")
+
+  ;; Line numbers are truncated, probably due to default variable
+  ;; width font.
+  (setq linum-format " %d")
 
   ;; x-popup-dialog creates a dialog that cannot be dismissed. This
   ;; does not happen with `-Q'. To reproduce, evaluate the following.
