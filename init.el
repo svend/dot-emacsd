@@ -11,7 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(comint-input-ignoredups t)
  '(comint-input-ring-size 10000)
- '(custom-enabled-themes (quote (tango-plus)))
+ '(custom-enabled-themes (quote (simple sanityinc-tomorrow-day)))
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))

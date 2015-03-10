@@ -153,33 +153,6 @@ Treat all themes as safe.
 (setq custom-safe-themes t)
 #+end_src
 
-** tango-plus
-
-Nice color theme with a white background.
-
-#+begin_src emacs-lisp
-(use-package tango-plus-theme
-  :init (load-theme 'tango-plus t))
-#+end_src
-
-** solarized
-
-Color theme based on solarized palette.
-
-Disable variable width fonts. Disable variable font sizes.
-
-#+begin_src emacs-lisp
-(use-package solarized
-  :init
-  (progn
-    (setq solarized-use-variable-pitch nil
-	  solarized-height-minus-1 1.0
-	  solarized-height-plus-1 1.0
-	  solarized-height-plus-2 1.0
-	  solarized-height-plus-3 1.0
-	  solarized-height-plus-4 1.0)))
-#+end_src
-
 * Emacs settings
 
 ** Mouse
