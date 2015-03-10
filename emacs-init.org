@@ -36,13 +36,11 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 
 - Disable welcome screen
 - Disable menu bar
-- Disable scroll bar
 - Disable tool bar
 
 #+begin_src emacs-lisp
 (setq inhibit-splash-screen t)
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+end_src
 
