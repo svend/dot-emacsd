@@ -261,10 +261,6 @@ Turn on menu bar, since it does not use any extra space on OS X.
   ;; I'm not sure why.
   (setq epg-gpg-program "gpg2")
 
-  ;; Line numbers are truncated, probably due to default variable
-  ;; width font.
-  (setq linum-format " %d")
-
   ;; x-popup-dialog creates a dialog that cannot be dismissed. This
   ;; does not happen with `-Q'. To reproduce, evaluate the following.
   ;;
