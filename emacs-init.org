@@ -105,15 +105,16 @@ Modes which rely on fixed-pitch for alignment
   (fixed-pitch-mode t))
 
 (dolist (hook '(comint-mode-hook
-		dired-mode-hook
-		ediff-mode-hook
+                dired-mode-hook
+                ediff-mode-hook
                 ibuffer-mode-hook
-		ledger-report-mode-hook
-		ledger-mode-hook
-		magit-log-mode-hook
-		notmuch-search-hook
-		prog-mode-hook
-		quickrun/mode-hook
+                gnus-group-mode-hook
+                ledger-report-mode-hook
+                ledger-mode-hook
+                magit-log-mode-hook
+                notmuch-search-hook
+                prog-mode-hook
+                quickrun/mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
   (add-hook hook 'enable-fixed-pitch-mode))
