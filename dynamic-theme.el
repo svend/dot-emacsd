@@ -8,7 +8,7 @@
  `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
  `(cursor ((t (:background ,(face-foreground 'default)))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
- `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :family "Sans Serif")))))
+ `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow))))))
 
 (load-theme 'svend t)
 

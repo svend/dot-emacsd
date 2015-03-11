@@ -1,24 +1,6 @@
 (deftheme svend
   "Created 2015-03-10.")
 
-(custom-theme-set-variables
- 'svend
- '(comint-input-ignoredups t)
- '(comint-input-ring-size 10000)
- '(cursor-type (quote bar))
- '(dired-dwim-target t)
- '(enable-local-variables :safe)
- '(history-length 10000)
- '(jabber-alert-presence-hooks nil)
- '(jabber-auto-reconnect t)
- '(jabber-history-enabled t)
- '(org-default-notes-file "~/doc/org/notes.org")
- '(org-directory "~/doc/org")
- '(org-reverse-note-order t)
- '(org-src-window-setup (quote other-window))
- '(safe-local-variable-values (quote ((encoding . utf-8))))
- '(electric-pair-mode t))
-
 (custom-theme-set-faces
  'svend
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face variable-pitch)))))
