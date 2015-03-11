@@ -793,15 +793,7 @@ go get github.com/nsf/gocode
 	 ("C-c h f" . helm-find-files)
 	 ("C-c h g" . helm-git-grep-from-here)
 	 ("C-c h p" . helm-projectile)
-	 ("C-c h x" . helm-M-x))
-  :config
-  (progn
-    (require 'helm-ls-git)
-    (add-to-list 'helm-for-files-preferred-list 'helm-source-ls-git t)
-    (delete 'helm-source-locate helm-for-files-preferred-list)
-    (helm-attrset 'follow 1 helm-source-buffers-list)
-
-    (helm-adaptative-mode 1)))
+	 ("C-c h x" . helm-M-x)))
 #+end_src
 
 ** hippie-exp
