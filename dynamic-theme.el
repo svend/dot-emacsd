@@ -1,8 +1,8 @@
-(deftheme simple
+(deftheme dynamic
   "Created 2015-03-10.")
 
 (custom-theme-set-faces
- 'simple
+ 'dynamic
  `(flycheck-fringe-error ((t (:background ,(face-background 'error) :foreground ,(face-foreground 'error)))))
  `(flycheck-fringe-warning ((t (:background ,(face-background 'warning) :foreground ,(face-foreground 'warning)))))
  `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
@@ -10,4 +10,6 @@
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
  `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :family "Sans Serif")))))
 
-(provide-theme 'simple)
+(load-theme 'svend t)
+
+(provide-theme 'dynamic)
