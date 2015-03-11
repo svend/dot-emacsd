@@ -593,6 +593,14 @@ Do not load encrypted files when Emacs starts.
 	    "http://planet.debian.org/atom.xml"))))
 #+end_src
 
+** ensime
+
+#+begin_src emacs-lisp
+(use-package ensime
+  :config
+  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
+#+end_src
+
 ** erc
 
 #+begin_src emacs-lisp
