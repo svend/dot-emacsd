@@ -81,16 +81,6 @@ brew cask install font-dejavu-sans
 #+end_src
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil
-		    :family "DejaVu Sans"
-		    :height (if (eq window-system 'ns) 130 100))
-(set-face-attribute 'fixed-pitch nil
-		    :family "DejaVu Sans Mono")
-#+end_src
-
-Modes which rely on fixed-pitch for alignment
-
-#+begin_src emacs-lisp
 (defun enable-fixed-pitch-mode ()
   (fixed-pitch-mode t))
 
@@ -133,7 +123,7 @@ artifacts from the old theme.
   (interactive)
   (disable-all-themes)
   (call-interactively 'load-theme)
-  (load-theme 'simple t))
+  (load-theme 'dynamic t))
 #+end_src
 
 Treat all themes as safe.
