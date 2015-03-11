@@ -22,7 +22,8 @@
  '(org-verbatim ((t (:inherit fixed-pitch))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(default ((t (:family "DejaVu Sans"))))
- '(fixed-pitch ((t (:family "DejaVu Sans Mono")))))
+ '(variable-pitch ((t (:family "DejaVu Sans")))))
 
 (provide-theme 'svend)
