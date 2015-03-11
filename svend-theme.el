@@ -20,7 +20,8 @@
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
+ '(org-table ((t (:inherit fixed-pitch))))
  '(default ((t (:family "DejaVu Sans"))))
- '(org-table ((t (:inherit fixed-pitch)))))
+ '(linum ((t (:inherit (shadow variable-pitch) :weight light)))))
 
 (provide-theme 'svend)
