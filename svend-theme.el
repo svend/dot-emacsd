@@ -1,5 +1,5 @@
 (deftheme svend
-  "Created 2015-03-10.")
+  "Created 2015-03-11.")
 
 (custom-theme-set-faces
  'svend
@@ -21,7 +21,8 @@
  '(org-level-3 ((t (:height 1.1))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
  '(org-table ((t (:inherit fixed-pitch))))
+ '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
  '(default ((t (:family "DejaVu Sans"))))
- '(linum ((t (:inherit (shadow variable-pitch) :weight light)))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono")))))
 
 (provide-theme 'svend)
