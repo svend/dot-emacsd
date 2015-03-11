@@ -11,7 +11,6 @@
  '(jabber-chat-prompt-system ((t (:foreground "#4e9a06" :weight bold))))
  '(jabber-title-large ((t (:inherit variable-pitch :weight bold :height 2.0 :width ultra-expanded))))
  '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.6 :width expanded))))
- '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit (bold fixed-pitch)))))
@@ -21,9 +20,7 @@
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
- '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(sh-heredoc ((t (:foreground "#8f5902"))))
- '(show-paren-match ((t (:background "#fce94f" :foreground "#000000"))))
+ '(org-verbatim ((t (:inherit fixed-pitch))))
  '(default ((t (:family "DejaVu Sans")))))
 
 (provide-theme 'svend)
