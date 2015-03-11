@@ -23,6 +23,7 @@
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
  '(sh-heredoc ((t (:foreground "#8f5902"))))
- '(show-paren-match ((t (:background "#fce94f" :foreground "#000000")))))
+ '(show-paren-match ((t (:background "#fce94f" :foreground "#000000"))))
+ '(default ((t (:family "DejaVu Sans")))))
 
 (provide-theme 'svend)
