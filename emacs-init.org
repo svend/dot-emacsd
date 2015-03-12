@@ -1033,7 +1033,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     (setq org-src-preserve-indentation t)
     (setq org-use-speed-commands t)
     (setq org-capture-templates
-	  '(("t" "Task" entry (file+headline "" "Tasks")
+	  '(("t" "Task" entry (file "tasks.org")
 	     "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
 
     ;; Lower case all org template block headers
