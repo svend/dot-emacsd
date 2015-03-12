@@ -23,7 +23,11 @@
  '(org-table ((t (:inherit fixed-pitch))))
  '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- '(default ((t (:family "DejaVu Sans"))))
- '(variable-pitch ((t (:family "DejaVu Sans")))))
+ '(variable-pitch ((t (:family "DejaVu Sans"))))
+ '(default ((t (:height 140 :family "DejaVu Sans"))))
+ '(diff-removed ((t (:inherit fixed-pitch))))
+ '(diff-added ((t (:inherit fixed-pitch))))
+ '(diff-hunk-header ((t (:inherit fixed-pitch))))
+ '(diff-context ((t (:inherit (shadow fixed-pitch))))))
 
 (provide-theme 'svend)
