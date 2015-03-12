@@ -1355,8 +1355,6 @@ shells, however it does increase the start-up time for local shells.
 #+begin_src emacs-lisp
 (setq explicit-bash-args
       '("--noediting" "--login" "-i"))
-(setq explicit-dtach-args
-      '("-A" "/tmp/ssorensen.dtach" "-z" "/bin/bash" "--noediting" "--login" "-i"))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1398,7 +1396,7 @@ shells, however it does increase the start-up time for local shells.
 (defun ssh-dtach (host)
   "Open SSH connection to HOST and start dtach session."
   (interactive (list (ssh-host-completing-read)))
-  (let ((explicit-shell-file-name "dtach")
+  (let ((explicit-bash-args '("-c" "dtach -A .dtach-$(hostname -f)-ssorensen -z /bin/bash --noediting --login -i"))
 	(default-directory (format  "/ssh:%s:" host)))
     (shell (format "*shell*<%s>" host))))
 #+end_src
