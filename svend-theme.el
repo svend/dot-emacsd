@@ -3,14 +3,19 @@
 
 (custom-theme-set-faces
  'svend
- '(default ((t (:family "DejaVu Sans"))))
+ `(cursor ((t (:background ,(face-foreground 'default)))))
+ `(default ((t (:family "DejaVu Sans" :height ,(if (eq window-system 'ns) 130 110)))))
  '(diff-added ((t (:inherit fixed-pitch))))
  '(diff-context ((t (:inherit (shadow fixed-pitch)))))
  '(diff-hunk-header ((t (:inherit fixed-pitch))))
  '(diff-removed ((t (:inherit fixed-pitch))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(font-lock-doc-face ((t (:inherit variable-pitch))))
- '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
+ `(flycheck-fringe-error ((t (:background ,(face-background 'error) :foreground ,(face-foreground 'error)))))
+ `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
+ `(flycheck-fringe-warning ((t (:background ,(face-background 'warning) :foreground ,(face-foreground 'warning)))))
+ `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
+ `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light (:inherit (shadow variable-pitch))))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit fixed-pitch))))
