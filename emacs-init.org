@@ -285,6 +285,8 @@ Press =C-c C-h= to show all of these.
 - [[info:elisp#Key Binding Conventions][Key Binding Conventions]]
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
+This is a copy of variable-pitch-mode modified for fixed-pitch.
+
 #+begin_src emacs-lisp
 (require 'face-remap)
 (defun fixed-pitch-mode (&optional arg)
