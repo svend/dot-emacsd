@@ -1,2 +1,4 @@
 # Ignore everything
-*
+/*
+!/snippets/
+!/*-theme.el
