@@ -24,7 +24,7 @@
  '(linum ((t (:inherit (shadow variable-pitch) :weight light))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(variable-pitch ((t (:family "DejaVu Sans"))))
- '(default ((t (:height 130 :family "DejaVu Sans"))))
+ '(default ((t (:family "DejaVu Sans"))))
  '(diff-removed ((t (:inherit fixed-pitch))))
  '(diff-added ((t (:inherit fixed-pitch))))
  '(diff-hunk-header ((t (:inherit fixed-pitch))))

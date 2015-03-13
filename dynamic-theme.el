@@ -8,8 +8,7 @@
  `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
  `(cursor ((t (:background ,(face-foreground 'default)))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
- `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow))))))
+ `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
+ `(deault ((t (:height (if (eq window-system 'ns) 130 100))))))
 
 (load-theme 'svend t)
-
-(provide-theme 'dynamic)
