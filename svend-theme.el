@@ -4,7 +4,7 @@
 (custom-theme-set-faces
  'svend
  `(cursor ((t (:background ,(face-foreground 'default)))))
- `(default ((t (:family "DejaVu Sans" :height ,(if (eq window-system 'ns) 130 105)))))
+ `(default ((t (:family "DejaVu Sans" :height ,(if (eq window-system 'ns) 130 100)))))
  '(diff-added ((t (:inherit fixed-pitch))))
  '(diff-context ((t (:inherit (shadow fixed-pitch)))))
  '(diff-hunk-header ((t (:inherit fixed-pitch))))
