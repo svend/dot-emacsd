@@ -58,6 +58,7 @@
 (depends-on "sbt-mode")
 (depends-on "scala-mode2")
 (depends-on "slime")
+(depends-on "smartparens")
 (depends-on "smex")
 (depends-on "terraform-mode")
 (depends-on "use-package")
