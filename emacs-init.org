@@ -1277,6 +1277,16 @@ M-r):
   (setq inferior-lisp-program "sbcl"))
 #+end_src
 
+** smartparens
+
+#+begin_src emacs-lisp
+(use-package smartparens
+  :init (progn
+	  (smartparens-global-mode t)
+	  (require 'smartparens-config)
+	  (sp-use-smartparens-bindings)))
+#+end_src
+
 ** smex
 
 #+begin_src emacs-lisp
