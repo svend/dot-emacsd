@@ -31,7 +31,6 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
-
 #+end_src
 
 * Emacs UI
