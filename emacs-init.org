@@ -27,7 +27,11 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 * Initialize use-package
 
 #+begin_src emacs-lisp
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
 #+end_src
 
 * Emacs UI
@@ -1175,7 +1179,7 @@ requires =server=.
 
 #+begin_src emacs-lisp
 (use-package server
-  :init
+  :config
   (unless (server-running-p)
     (server-start)))
 #+end_src
