@@ -649,7 +649,7 @@ Do not load encrypted files when Emacs starts.
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
   :if (eq window-system 'ns)
-  :init
+  :config
   (progn
     (mapc
      (lambda (variable)
