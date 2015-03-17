@@ -1380,7 +1380,6 @@ bash shell.
 (require 'tramp)
 (require 'dash)
 
-
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
   ;; Copied from cssh.el
