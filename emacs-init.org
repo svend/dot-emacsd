@@ -19,12 +19,16 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 
 * Initialize Cask
 
+This is required before any packages can be used.
+
 #+begin_src emacs-lisp
 (require 'cask (expand-file-name "emacs-cask/cask.el" user-emacs-directory))
 (cask-initialize)
 #+end_src
 
 * Initialize use-package
+
+This is required before any use-package forms.
 
 #+begin_src emacs-lisp
 (eval-when-compile
