@@ -33,6 +33,23 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 (require 'bind-key)
 #+end_src
 
+* Initialize exec-path-from-shell
+
+This needs to come before anything that uses PATH (e.g.
+executable-find).
+
+#+begin_src emacs-lisp
+(use-package exec-path-from-shell
+  :if (eq window-system 'ns)
+  :config
+  (progn
+    (mapc
+     (lambda (variable)
+       (add-to-list 'exec-path-from-shell-variables variable))
+     '("ALTERNATE_EDITOR" "CDPATH" "EDITOR" "GOPATH" "GPG_AGENT_INFO" "HISTFILE" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))
+    (exec-path-from-shell-initialize)))
+#+end_src
+
 * Emacs UI
 
 ** Chrome
@@ -641,20 +658,6 @@ Do not load encrypted files when Emacs starts.
     (add-to-list 'erc-track-exclude-types "JOIN")
     (add-to-list 'erc-track-exclude-types "PART")
     (add-to-list 'erc-track-exclude-types "QUIT")))
-#+end_src
-
-** exec-path-from-shell
-
-#+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :if (eq window-system 'ns)
-  :config
-  (progn
-    (mapc
-     (lambda (variable)
-       (add-to-list 'exec-path-from-shell-variables variable))
-     '("ALTERNATE_EDITOR" "CDPATH" "EDITOR" "GOPATH" "GPG_AGENT_INFO" "HISTFILE" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))
-    (exec-path-from-shell-initialize)))
 #+end_src
 
 ** flx-ido
