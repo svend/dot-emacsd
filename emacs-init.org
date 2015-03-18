@@ -522,7 +522,10 @@ otherwise start a new ansi-term"
 #+begin_src emacs-lisp
 (use-package alert
   :init (progn
-	  (setq alert-default-style 'notifier)))
+	  (setq alert-default-style
+		(if (eq window-system 'ns)
+		    'notifier
+		  'notifications))))
 #+end_src
 
 ** bash-completion
