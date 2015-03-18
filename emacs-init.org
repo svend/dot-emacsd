@@ -45,12 +45,14 @@ executable-find).
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
   "Return a list of env variables"
-  (cl-remove-if (lambda (s) (string-equal s "_"))
-		(mapcar (lambda (s) (car (split-string s "=")))
-			(split-string
-			 (shell-command-to-string
-			  "bash -l -i -c \"gprintenv --null\" 2>/dev/null")
-			 (char-to-string ?\x0) t))))
+  (cl-set-difference
+   (mapcar (lambda (s) (car (split-string s "=")))
+	   (split-string
+	    (shell-command-to-string
+	     "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
+	    (char-to-string ?\x0) t))
+   '("Apple_PubSub_Socket_Render" "_")
+   :test 'string-equal))
 
 (use-package exec-path-from-shell
   :if (eq window-system 'ns)
