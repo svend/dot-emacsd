@@ -502,6 +502,14 @@ otherwise start a new ansi-term"
   :bind (("C-x o" . ace-window)))
 #+end_src
 
+** alert
+
+#+begin_src emacs-lisp
+(use-package alert
+  :init (progn
+	  (setq alert-default-style 'notifier)))
+#+end_src
+
 ** bash-completion
 
 #+begin_src emacs-lisp
