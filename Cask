@@ -55,6 +55,7 @@
 (depends-on "quickrun")
 (depends-on "restclient")
 (depends-on "robe")
+(depends-on "ruby-tools")
 (depends-on "sbt-mode")
 (depends-on "scala-mode2")
 (depends-on "slime")
