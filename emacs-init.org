@@ -1188,17 +1188,23 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 #+begin_src emacs-lisp
 (use-package ruby-mode
   :mode
-  (("\\.rake\\'"     . ruby-mode)
-   ("Rakefile\\'"    . ruby-mode)
-   ("\\.gemspec\\'"  . ruby-mode)
-   ("\\.ru\\'"	     . ruby-mode)
-   ("Gemfile\\'"     . ruby-mode)
-   ("Guardfile\\'"   . ruby-mode)
-   ("Capfile\\'"     . ruby-mode)
-   ("\\.thor\\'"     . ruby-mode)
-   ("Thorfile\\'"    . ruby-mode)
+  (("\\.rake\\'" . ruby-mode)
+   ("Rakefile\\'" . ruby-mode)
+   ("\\.gemspec\\'" . ruby-mode)
+   ("\\.ru\\'" . ruby-mode)
+   ("Gemfile\\'" . ruby-mode)
+   ("Guardfile\\'" . ruby-mode)
+   ("Capfile\\'" . ruby-mode)
+   ("\\.thor\\'" . ruby-mode)
+   ("\\.rabl\\'" . ruby-mode)
+   ("Thorfile\\'" . ruby-mode)
    ("Vagrantfile\\'" . ruby-mode)
-   ("\\.jbuilder\\'" . ruby-mode)))
+   ("\\.jbuilder\\'" . ruby-mode)
+   ("Podfile\\'" . ruby-mode)
+   ("\\.podspec\\'" . ruby-mode)
+   ("Puppetfile\\'" . ruby-mode)
+   ("Berksfile\\'" . ruby-mode)
+   ("Appraisals\\'" . ruby-mode)))
 #+end_src
 
 ** savehist
