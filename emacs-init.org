@@ -808,14 +808,19 @@ go get github.com/nsf/gocode
   :config
   (progn
     (setq gofmt-command "goimports")
-    (add-hook 'go-mode-hook 'go-eldoc-setup)
-    (add-hook 'go-mode-hook (lambda ()
-			      (local-set-key (kbd "M-.") 'godef-jump)))
-    (add-hook 'go-mode-hook 'company-mode)
-    (add-hook 'go-mode-hook (lambda ()
-			    (set (make-local-variable 'company-backends) '(company-go))
-			    (company-mode)))
-  (add-hook 'before-save-hook 'gofmt-before-save)))
+
+    (defun my-go-mode-defaults ()
+      (local-set-key (kbd "M-.") 'godef-jump)
+      (set (make-local-variable 'company-backends) '(company-go))
+      (company-mode)
+      (add-hook 'before-save-hook 'gofmt-before-save)
+
+      ;; El-doc for Go
+      (go-eldoc-setup)
+
+      ;; CamelCase aware editing operations
+      (subword-mode +1))
+    (add-hook 'go-mode-hook 'my-go-mode-defaults)))
 #+end_src
 
 ** helm
@@ -1204,7 +1209,16 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
    ("\\.podspec\\'" . ruby-mode)
    ("Puppetfile\\'" . ruby-mode)
    ("Berksfile\\'" . ruby-mode)
-   ("Appraisals\\'" . ruby-mode)))
+   ("Appraisals\\'" . ruby-mode))
+  :config
+  (progn
+    (require 'ruby-tools)
+    (defun my-ruby-mode-defaults ()
+      (inf-ruby-minor-mode +1)
+      (ruby-tools-mode +1)
+      ;; CamelCase aware editing operations
+      (subword-mode +1))
+    (add-hook 'ruby-mode-hook 'my-ruby-mode-defaults)))
 #+end_src
 
 ** savehist
