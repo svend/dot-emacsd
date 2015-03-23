@@ -1111,8 +1111,8 @@ cd ~/.emacs.d/.cask/*/elpa/pdf-tools-*/build
 
 zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig \
-make &&
-cp server/edpfinfo ..
+make
+cp server/epdfinfo ..
 #+end_src
 
 #+begin_src emacs-lisp
