@@ -1208,6 +1208,13 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
   :init (savehist-mode 1))
 #+end_src
 
+** saveplace
+
+#+begin_src emacs-lisp
+(use-package saveplace
+  :init (setq-default save-place t))
+#+end_src
+
 ** scala-mode2
 
 Scala worksheets end in =.sc=.
