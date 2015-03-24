@@ -393,7 +393,7 @@ Rapid mark-pop (=C-u C-SPC C-SPC...=).
 #+begin_src emacs-lisp
 (setq auto-revert-interval 0.1)
 (setq indent-tabs-mode nil)
-(setq require-final-newline t)
+(setq require-final-newline 'ask)
 (setq sentence-end-double-space nil)
 (show-paren-mode)
 #+end_src
@@ -872,9 +872,9 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :init (ido-mode 1)
   :config
   (progn
+    (ido-everywhere)
     (setq ido-enable-prefix nil
 	  ido-enable-flex-matching t
-	  ido-everywhere t
 	  ido-create-new-buffer 'always
 	  ido-use-filename-at-point 'guess
 	  ido-max-prospects 10
