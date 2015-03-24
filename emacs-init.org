@@ -1086,6 +1086,7 @@ of `org-babel-temporary-directory'."
     (add-hook 'org-mode-hook 'auto-fill-mode)
     (add-hook 'org-mode-hook 'org-babel-result-hide-all)
     (setq org-completion-use-ido t)
+    (setq org-refile-targets '((nil :maxlevel . 9)))
     (setq org-src-fontify-natively t)
     (setq org-src-preserve-indentation t)
     (setq org-use-speed-commands t)
