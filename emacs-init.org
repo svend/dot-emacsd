@@ -426,6 +426,7 @@ Rapid mark-pop (=C-u C-SPC C-SPC...=).
 ** Compile
 
 #+begin_src emacs-lisp
+(setq compilation-scroll-output 'first-error)
 (defun my-colorize-compilation-buffer ()
   "Colorize a compilation mode buffer."
   (interactive)
