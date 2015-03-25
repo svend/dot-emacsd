@@ -241,7 +241,10 @@ Balance windows horizontally automatically.
 
 #+begin_src emacs-lisp
 (mapc (lambda (command) (put command 'disabled nil))
-      '(downcase-region upcase-region upcase-initials-region))
+      '(erase-buffer
+	downcase-region
+	upcase-region
+	upcase-initials-region))
 
 ;; Use GUI web browser if it is available
 (if (executable-find "x-www-browser")
