@@ -44,6 +44,7 @@
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
+(depends-on "neotree")
 (depends-on "operate-on-number")
 (depends-on "password-store")
 (depends-on "pdf-tools")
