@@ -169,6 +169,22 @@ Treat all themes as safe.
 
 * Emacs settings
 
+** Bell
+
+#+begin_src emacs-lisp
+(setq visible-bell t)
+(setq ring-bell-function
+      (lambda ()
+	(unless
+	    (memq this-command
+		  '(abort-recursive-edit
+		    isearch-abort
+		    isearch-printing-char
+		    keyboard-quit
+		    nil))
+	  (ding))))
+#+end_src
+
 ** Mouse
 
 Copy test selected by the mouse to the kill ring. This was turned off
