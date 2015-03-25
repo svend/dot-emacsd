@@ -367,6 +367,12 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c w" 'winner-undo)
 #+end_src
 
+** Truncate lines
+
+#+begin_src emacs-lisp
+(setq-default truncate-lines t)
+#+end_src
+
 ** Space as control key
 
 Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on OS X.
