@@ -619,6 +619,16 @@ Change scrolling behavior for comint modes.
 (add-hook 'comint-mode-hook 'comint-mode-config)
 #+end_src
 
+** company
+
+#+begin_src emacs-lisp
+(use-package company
+  :init (global-company-mode)
+  :config
+  (progn
+    (setq company-minimum-prefix-length 2)))
+#+end_src
+
 ** desktop
 
 Do not load encrypted files when Emacs starts.
@@ -855,7 +865,6 @@ go get github.com/nsf/gocode
     (defun my-go-mode-defaults ()
       (local-set-key (kbd "M-.") 'godef-jump)
       (set (make-local-variable 'company-backends) '(company-go))
-      (company-mode)
       (add-hook 'before-save-hook 'gofmt-before-save)
 
       ;; El-doc for Go
