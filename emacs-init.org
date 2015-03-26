@@ -992,7 +992,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   (progn
     (diminish 'magit-auto-revert-mode)
     (setq magit-save-some-buffers 'dontask)
-    (setq magit-repo-dirs '("~/src"))))
+    (setq magit-repo-dirs '("~/src"))
+    (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
 #+end_src
 
 ** message

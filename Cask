@@ -42,6 +42,7 @@
 (depends-on "json-mode")
 (depends-on "ledger-mode")
 (depends-on "magit")
+(depends-on "magit-filenotify")
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
 (depends-on "neotree")
