@@ -12,7 +12,7 @@
 Install from homebrew on OS X.
 
 #+begin_src sh
-brew install emacs --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-glib --devel 
+brew install emacs --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-glib --devel
 rsync -a --delete /usr/local/Cellar/emacs/*/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 #+end_src
@@ -47,10 +47,10 @@ executable-find).
   "Return a list of env variables"
   (cl-set-difference
    (mapcar (lambda (s) (car (split-string s "=")))
-	   (split-string
-	    (shell-command-to-string
-	     "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
-	    (char-to-string ?\x0) t))
+           (split-string
+            (shell-command-to-string
+             "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
+            (char-to-string ?\x0) t))
    '("Apple_PubSub_Socket_Render" "_")
    :test 'string-equal))
 
@@ -175,14 +175,14 @@ Treat all themes as safe.
 (setq visible-bell t)
 (setq ring-bell-function
       (lambda ()
-	(unless
-	    (memq this-command
-		  '(abort-recursive-edit
-		    isearch-abort
-		    isearch-printing-char
-		    keyboard-quit
-		    nil))
-	  (ding))))
+        (unless
+            (memq this-command
+                  '(abort-recursive-edit
+                    isearch-abort
+                    isearch-printing-char
+                    keyboard-quit
+                    nil))
+          (ding))))
 #+end_src
 
 ** Mouse
@@ -205,7 +205,7 @@ Scroll one line at a time with mouse
 Hilight the current line. To disable for a mode, add this to the mode
 hook:
 
-#+begin_src emacs-lisp :tangle 
+#+begin_src emacs-lisp :tangle
 (make-local-variable 'global-hl-line-mode)
 (setq global-hl-line-mode nil)
 #+end_src
@@ -242,9 +242,9 @@ Balance windows horizontally automatically.
 #+begin_src emacs-lisp
 (mapc (lambda (command) (put command 'disabled nil))
       '(erase-buffer
-	downcase-region
-	upcase-region
-	upcase-initials-region))
+        downcase-region
+        upcase-region
+        upcase-initials-region))
 
 ;; Use GUI web browser if it is available
 (if (executable-find "x-www-browser")
@@ -296,10 +296,10 @@ Turn on flyspell and goto-address for all text buffers.
 =bash-fc-*= are bash command editing temporary files (=fc= built-in).
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '(".mrconfig$"		  . conf-mode))
+(add-to-list 'auto-mode-alist '(".mrconfig$"              . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("Carton\\'"		  . lisp-mode))
-(add-to-list 'auto-mode-alist '("bash-fc-"		  . sh-mode))
+(add-to-list 'auto-mode-alist '("Carton\\'"               . lisp-mode))
+(add-to-list 'auto-mode-alist '("bash-fc-"                . sh-mode))
 #+end_src
 
 ** Lock files
@@ -349,7 +349,7 @@ An interface to `buffer-face-mode' which uses the `fixed-pitch' face.
 Besides the choice of face, it is the same as `buffer-face-mode'."
   (interactive (list (or current-prefix-arg 'toggle)))
   (buffer-face-mode-invoke 'fixed-pitch arg
-			   (called-interactively-p 'interactive)))
+                           (called-interactively-p 'interactive)))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -358,7 +358,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (bind-key "C-c j" 'dired-jump)
 (bind-key "C-c k" 'bury-buffer)
 (bind-key "C-c r" 'revert-buffer)
-(bind-key "C-c t b" 'scroll-bar-mode) 
+(bind-key "C-c t b" 'scroll-bar-mode)
 (bind-key "C-c t c" 'flycheck-mode)
 (bind-key "C-c t l" 'visual-line-mode)
 (bind-key "C-c t m" 'menu-bar-mode)
@@ -380,7 +380,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 
 Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on OS X.
 
-#+begin_src sh 
+#+begin_src sh
 # Map an unused modifier's keysym to the spacebar's keycode and make
 # it a control modifier. It needs to be an existing key so that emacs
 # won't spazz out when you press it. Hyper_L is a good candidate.
@@ -456,16 +456,16 @@ recursively balance the sizes of all child windows of that
 window."
   (interactive)
   (let* ((window
-	  (cond
-	   ((or (not window-or-frame)
-		(frame-live-p window-or-frame))
-	    (frame-root-window window-or-frame))
-	   ((or (window-live-p window-or-frame)
-		(window-child window-or-frame))
-	    window-or-frame)
-	   (t
-	    (error "Not a window or frame %s" window-or-frame))))
-	 (frame (window-frame window)))
+          (cond
+           ((or (not window-or-frame)
+                (frame-live-p window-or-frame))
+            (frame-root-window window-or-frame))
+           ((or (window-live-p window-or-frame)
+                (window-child window-or-frame))
+            window-or-frame)
+           (t
+            (error "Not a window or frame %s" window-or-frame))))
+         (frame (window-frame window)))
     ;; ;; Balance vertically.
     ;; (window--resize-reset (window-frame window))
     ;; (balance-windows-1 window)
@@ -500,19 +500,19 @@ window."
 otherwise start a new ansi-term"
   (interactive)
   (let (found-buffer
-	(directory (expand-file-name default-directory))
-	(buffers (buffer-list)))
+        (directory (expand-file-name default-directory))
+        (buffers (buffer-list)))
     (while (and (not found-buffer)
-		buffers)
+                buffers)
       (with-current-buffer (car buffers)
-	(when (and (string= major-mode "term-mode")
-		   (string= default-directory directory))
-	  (setq found-buffer (car buffers)))
-	(setq buffers (cdr buffers))))
+        (when (and (string= major-mode "term-mode")
+                   (string= default-directory directory))
+          (setq found-buffer (car buffers)))
+        (setq buffers (cdr buffers))))
     ;; If we found a term, switch to it, otherwise start a term
     (if (and found-buffer
-	     (not (eq found-buffer (current-buffer))))
-	(switch-to-buffer found-buffer)
+             (not (eq found-buffer (current-buffer))))
+        (switch-to-buffer found-buffer)
       (ansi-term "bash"))))
 #+end_src
 
@@ -524,7 +524,7 @@ otherwise start a new ansi-term"
 (defun comint-alert-on-prompt (string)
   "Send alert when prompt is detected."
   (when (let ((case-fold-search t))
-	  (string-match comint-prompt-regexp string))
+          (string-match comint-prompt-regexp string))
     (alert (format "Prompt: %s" string)))
   string)
 
@@ -565,10 +565,10 @@ otherwise start a new ansi-term"
 #+begin_src emacs-lisp
 (use-package alert
   :init (progn
-	  (setq alert-default-style
-		(if (eq window-system 'ns)
-		    'notifier
-		  'notifications))))
+          (setq alert-default-style
+                (if (eq window-system 'ns)
+                    'notifier
+                  'notifications))))
 #+end_src
 
 ** bash-completion
@@ -596,9 +596,9 @@ otherwise start a new ansi-term"
 #+begin_src emacs-lisp
 (use-package buffer-move
   :bind (("<C-S-up>"    . buf-move-up)
-	 ("<C-S-down>"  . buf-move-down)
-	 ("<C-S-left>"  . buf-move-left)
-	 ("<C-S-right>" . buf-move-right)))
+         ("<C-S-down>"  . buf-move-down)
+         ("<C-S-left>"  . buf-move-left)
+         ("<C-S-right>" . buf-move-right)))
 #+end_src
 
 ** comint-mode
@@ -632,25 +632,25 @@ Do not load encrypted files when Emacs starts.
       (list default-directory comint-input-ring))
 
     (defun my-shell-restore-desktop-buffer
-	(desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
+        (desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
       "Restore a shell buffer's state from the desktop file."
       (let ((dir (nth 0 desktop-buffer-misc))
-	    (ring (nth 1 desktop-buffer-misc)))
-	(when desktop-buffer-name
-	  (set-buffer (get-buffer-create desktop-buffer-name))
-	  (when dir
-	    (setq default-directory dir))
-	  (shell desktop-buffer-name)
-	  (when ring
-	    (setq comint-input-ring ring))
-	  (current-buffer))))
+            (ring (nth 1 desktop-buffer-misc)))
+        (when desktop-buffer-name
+          (set-buffer (get-buffer-create desktop-buffer-name))
+          (when dir
+            (setq default-directory dir))
+          (shell desktop-buffer-name)
+          (when ring
+            (setq comint-input-ring ring))
+          (current-buffer))))
 
     (defun my-shell-setup-desktop ()
       "Sets up a shell buffer to have its state saved in the desktop file."
       (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
 
     (add-to-list 'desktop-buffer-mode-handlers
-		 '(shell-mode . my-shell-restore-desktop-buffer))
+                 '(shell-mode . my-shell-restore-desktop-buffer))
     (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
 
     (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
@@ -677,11 +677,11 @@ Do not load encrypted files when Emacs starts.
   :config
   (progn
     (setq elfeed-feeds
-	  '("http://git-annex.branchable.com/devblog/index.atom"
-	    "http://planet.emacsen.org/atom.xml"
-	    "http://www.reddit.com/r/emacs/.rss"
-	    "http://www.reddit.com/r/ruby/.rss"
-	    "http://planet.debian.org/atom.xml"))))
+          '("http://git-annex.branchable.com/devblog/index.atom"
+            "http://planet.emacsen.org/atom.xml"
+            "http://www.reddit.com/r/emacs/.rss"
+            "http://www.reddit.com/r/ruby/.rss"
+            "http://planet.debian.org/atom.xml"))))
 #+end_src
 
 ** ensime
@@ -790,13 +790,13 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
   (progn
     ;; Gmane
     (setq gnus-select-method
-	  '(nntp "news.gmane.org"))
+          '(nntp "news.gmane.org"))
 
     (add-to-list 'gnus-secondary-select-methods
-		 '(nnimap "gmail"
-			  (nnimap-address "imap.gmail.com")
-			  (nnimap-server-port 993)
-			  (nnimap-stream ssl)))
+                 '(nnimap "gmail"
+                          (nnimap-address "imap.gmail.com")
+                          (nnimap-server-port 993)
+                          (nnimap-stream ssl)))
 
     ;; Do not take over the entire frame
     (setq gnus-use-full-window nil)
@@ -807,12 +807,12 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
     ;; (setq imap-log t)
 
     (setq gnus-posting-styles
-	  '((".*"
-	     (address "svend@ciffer.net"))
-	    ("uw" (address "svends@uw.edu")
-	     ("Bcc" "svends@uw.edu"))
-	    ("whitepages"
-	     (address "ssorensen@whitepages.com"))))))
+          '((".*"
+             (address "svend@ciffer.net"))
+            ("uw" (address "svends@uw.edu")
+             ("Bcc" "svends@uw.edu"))
+            ("whitepages"
+             (address "ssorensen@whitepages.com"))))))
 #+end_src
 
 ** gnus-alias
@@ -821,13 +821,13 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 (use-package gnus-alias
   :config
   (setq gnus-alias-identity-alist
-	'(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
-	  ("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)
+        '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
+          ("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)
           ("wp" nil "Svend Sorensen <ssorensen@whitepages.com>" nil (("Bcc" . "ssorensen@whitepages.com")) nil nil)))
   (setq gnus-alias-default-identity "default")
   (setq gnus-alias-identity-rules
-	'(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
-	  ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+        '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
+          ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
 #+end_src
 
 ** go-mode
@@ -871,11 +871,11 @@ go get github.com/nsf/gocode
 #+begin_src emacs-lisp
 (use-package helm
   :bind (("C-`" . helm-for-files)
-	 ("C-c h f" . helm-firefox-bookmarks)
-	 ("C-c h f" . helm-find-files)
-	 ("C-c h g" . helm-git-grep-from-here)
-	 ("C-c h p" . helm-projectile)
-	 ("C-c h x" . helm-M-x)))
+         ("C-c h f" . helm-firefox-bookmarks)
+         ("C-c h f" . helm-find-files)
+         ("C-c h g" . helm-git-grep-from-here)
+         ("C-c h p" . helm-projectile)
+         ("C-c h x" . helm-M-x)))
 #+end_src
 
 ** hippie-exp
@@ -917,12 +917,12 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   (progn
     (ido-everywhere)
     (setq ido-enable-prefix nil
-	  ido-enable-flex-matching t
-	  ido-create-new-buffer 'always
-	  ido-use-filename-at-point 'guess
-	  ido-default-file-method 'selected-window
-	  ido-auto-merge-work-directories-length -1
-	  ido-use-virtual-buffers t)
+          ido-enable-flex-matching t
+          ido-create-new-buffer 'always
+          ido-use-filename-at-point 'guess
+          ido-default-file-method 'selected-window
+          ido-auto-merge-work-directories-length -1
+          ido-use-virtual-buffers t)
     (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
 #+end_src
 
@@ -958,9 +958,9 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       "List of hipchat rooms to auto-join")
 
     (dolist (muc-room
-	     (mapcar (lambda (room)
-		       (concat hipchat-number "_" room "@conf.hipchat.com"))
-		     hipchat-rooms))
+             (mapcar (lambda (room)
+                       (concat hipchat-number "_" room "@conf.hipchat.com"))
+                     hipchat-rooms))
       (add-to-list 'jabber-muc-autojoin muc-room)
       (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
 
@@ -979,8 +979,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook
-	    '(lambda ()
-	       (turn-on-eldoc-mode))))
+            '(lambda ()
+               (turn-on-eldoc-mode))))
 #+end_src
 
 ** magit
@@ -1008,21 +1008,21 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
     ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
     ;; (emacs >= 23.2+1-5)
     (setq sendmail-program "/usr/bin/msmtp"
-	  mail-specify-envelope-from t
-	  mail-envelope-from 'header
-	  message-sendmail-envelope-from 'header)
+          mail-specify-envelope-from t
+          mail-envelope-from 'header
+          message-sendmail-envelope-from 'header)
 
     ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
     ;; (setq send-mail-function 'sendmail-send-it)
 
     ;; Internal SMTP library
     (setq message-send-mail-function 'smtpmail-send-it
-	  smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-	  smtpmail-auth-credentials '(("smtp.gmail.com" 587
-				       "svend@ciffer.net" nil))
-	  smtpmail-default-smtp-server "smtp.gmail.com"
-	  smtpmail-smtp-server "smtp.gmail.com"
-	  smtpmail-smtp-service 587)
+          smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+          smtpmail-auth-credentials '(("smtp.gmail.com" 587
+                                       "svend@ciffer.net" nil))
+          smtpmail-default-smtp-server "smtp.gmail.com"
+          smtpmail-smtp-server "smtp.gmail.com"
+          smtpmail-smtp-service 587)
 
     ;; Enable gnus-alias
     (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
@@ -1056,36 +1056,36 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
       (setq notmuch-fcc-dirs nil)
 
       (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-				     ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
-				     ("Action" . "tag:action")
-				     ("Waiting" . "tag:waiting")
-				     ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-				     ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+                                     ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+                                     ("Action" . "tag:action")
+                                     ("Waiting" . "tag:waiting")
+                                     ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+                                     ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
 
       ;; Show newest mail first
       (setq notmuch-search-oldest-first nil)
 
       ;; Notmuch remote setup (on all hosts except garnet)
       (when (not (string= system-name "garnet.ciffer.net"))
-	(setq notmuch-command "notmuch-remote"))
+        (setq notmuch-command "notmuch-remote"))
 
       ;; Getting Things Done (GTD) keybindings
 
       (setq notmuch-tag-macro-alist
-	    (list
-	     '("a" "+action" "-waiting" "-inbox")
-	     '("w" "-action" "+waiting" "-inbox")
-	     '("d" "-action" "-waiting" "-inbox")))
+            (list
+             '("a" "+action" "-waiting" "-inbox")
+             '("w" "-action" "+waiting" "-inbox")
+             '("d" "-action" "-waiting" "-inbox")))
 
       (defun notmuch-search-apply-tag-macro (key)
-	(interactive "k")
-	(let ((macro (assoc key notmuch-tag-macro-alist)))
-	  (notmuch-search-tag (cdr macro))))
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-search-tag (cdr macro))))
 
       (defun notmuch-show-apply-tag-macro (key)
-	(interactive "k")
-	(let ((macro (assoc key notmuch-tag-macro-alist)))
-	  (notmuch-show-tag (cdr macro))))
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-show-tag (cdr macro))))
 
       (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
       (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
@@ -1100,7 +1100,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 #+begin_src emacs-lisp
 (use-package org
   :bind (("C-c c" . org-capture)
-	 ("C-c o a" . org-agenda)
+         ("C-c o a" . org-agenda)
          ("C-c o b" . org-iswitchb)
          ("C-c o c" . org-capture)
          ("C-c o l" . org-store-link))
@@ -1114,17 +1114,17 @@ Passes PREFIX and SUFFIX directly to `make-temp-file' with the
 value of `temporary-file-directory' temporarily set to the value
 of `org-babel-temporary-directory'."
       (if (file-remote-p default-directory)
-	  (let ((prefix
-		 (concat (file-remote-p default-directory)
-			 ;; Replace temporary-file-directory with "/tmp"
-			 (expand-file-name prefix "/tmp"))))
-	    (make-temp-file prefix nil suffix))
-	(let ((temporary-file-directory
-	       (or (and (boundp 'org-babel-temporary-directory)
-			(file-exists-p org-babel-temporary-directory)
-			org-babel-temporary-directory)
-		   temporary-file-directory)))
-	  (make-temp-file prefix nil suffix))))
+          (let ((prefix
+                 (concat (file-remote-p default-directory)
+                         ;; Replace temporary-file-directory with "/tmp"
+                         (expand-file-name prefix "/tmp"))))
+            (make-temp-file prefix nil suffix))
+        (let ((temporary-file-directory
+               (or (and (boundp 'org-babel-temporary-directory)
+                        (file-exists-p org-babel-temporary-directory)
+                        org-babel-temporary-directory)
+                   temporary-file-directory)))
+          (make-temp-file prefix nil suffix))))
 
     (add-hook 'org-mode-hook 'auto-fill-mode)
     (add-hook 'org-mode-hook 'org-babel-result-hide-all)
@@ -1134,14 +1134,14 @@ of `org-babel-temporary-directory'."
     (setq org-src-preserve-indentation t)
     (setq org-use-speed-commands t)
     (setq org-capture-templates
-	  '(("t" "Task" entry (file "tasks.org")
-	     "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
+          '(("t" "Task" entry (file "tasks.org")
+             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
 
     ;; Lower case all org template block headers
     (mapc (lambda (asc)
-	    (let ((org-sce-dc (downcase (nth 1 asc))))
-	      (setf (nth 1 asc) org-sce-dc)))
-	  org-structure-template-alist)
+            (let ((org-sce-dc (downcase (nth 1 asc))))
+              (setf (nth 1 asc) org-sce-dc)))
+          org-structure-template-alist)
 
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -1189,9 +1189,9 @@ cp server/epdfinfo ..
 #+begin_src emacs-lisp
 (use-package quickrun
   :bind (("C-c q a" . quickrun-with-arg)
-	 ("C-c q q" . quickrun)
-	 ("C-c q r" . quickrun-region)
-	 ("C-c q s" . quickrun-shell)))
+         ("C-c q q" . quickrun)
+         ("C-c q r" . quickrun-region)
+         ("C-c q s" . quickrun-shell)))
 #+end_src
 
 ** recentf
@@ -1217,8 +1217,8 @@ cp server/epdfinfo ..
       "Use `ido-completing-read' to \\[find-file] a recent file"
       (interactive)
       (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-	  (message "Opening file...")
-	(message "Aborting")))))
+          (message "Opening file...")
+        (message "Aborting")))))
 #+end_src
 
 ** robe
@@ -1330,9 +1330,9 @@ See http://stackoverflow.com/a/11255996
     (let ((process (get-buffer-process (current-buffer))))
       (unless (eq nil process)
         (set-process-window-size process
-				 (window-height)
-				 ;; Adjust for columns
-				 (truncate (* 0.873 (window-width))))))))
+                                 (window-height)
+                                 ;; Adjust for columns
+                                 (truncate (* 0.873 (window-width))))))))
 
 (defun shell-mode-config ()
   ;; Do not store duplicate history entries
@@ -1401,10 +1401,10 @@ M-r):
 #+begin_src emacs-lisp
 (use-package smartparens
   :init (progn
-	  (smartparens-global-mode t)
-	  (require 'smartparens-config)
-	  (sp-use-smartparens-bindings)
-	  (define-key sp-keymap (kbd "M-<backspace>") nil)))
+          (smartparens-global-mode t)
+          (require 'smartparens-config)
+          (sp-use-smartparens-bindings)
+          (define-key sp-keymap (kbd "M-<backspace>") nil)))
 #+end_src
 
 ** smex
@@ -1412,8 +1412,8 @@ M-r):
 #+begin_src emacs-lisp
 (use-package smex
   :bind (("M-x" . smex)
-	 ("M-X" . smex-major-mode-commands)
-	 ("C-c M-x" . execute-extended-command)))
+         ("M-X" . smex-major-mode-commands)
+         ("C-c M-x" . execute-extended-command)))
 #+end_src
 
 ** term
@@ -1469,9 +1469,9 @@ Use SSH default control master settings. Add the following to
 
 #+begin_example conf
 Host *
-	ControlMaster auto
-	ControlPath ~/.ssh/control.%h_%p_%r
-	ControlPersist 60m
+        ControlMaster auto
+        ControlPath ~/.ssh/control.%h_%p_%r
+        ControlPersist 60m
 #+end_example
 
 #+begin_src emacs-lisp
@@ -1504,8 +1504,8 @@ bash shell.
   "Return list of known SSH hosts."
   ;; Copied from cssh.el
   (-flatten (mapcar (lambda (x)
-		      (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
-		    (tramp-get-completion-function "ssh"))))
+                      (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
+                    (tramp-get-completion-function "ssh"))))
 
 (defun ssh-add-user-to-hosts (&optional user)
   "Return list of known hosts prefixed with USER."
@@ -1568,9 +1568,9 @@ are useful.)
 #+begin_src emacs-lisp
 (use-package zoom-frm
   :bind (("C-c C-+" . zoom-in/out)
-	 ("C-c C--" . zoom-in/out)
-	 ("C-c C-0" . zoom-in/out)
-	 ("C-c C-=" . zoom-in/out)))
+         ("C-c C--" . zoom-in/out)
+         ("C-c C-0" . zoom-in/out)
+         ("C-c C-=" . zoom-in/out)))
 #+end_src
 
 * External config
