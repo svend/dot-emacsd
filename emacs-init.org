@@ -623,11 +623,11 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package company
-  :diminish "Co"
   :init (global-company-mode)
   :config
   (progn
-    (setq company-minimum-prefix-length 2)))
+    (setq company-lighter-base "Co")
+(setq company-minimum-prefix-length 2)))
 #+end_src
 
 ** desktop
