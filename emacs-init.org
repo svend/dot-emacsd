@@ -699,6 +699,7 @@ Do not load encrypted files when Emacs starts.
 
 #+begin_src emacs-lisp
 (use-package ensime
+  :defer t
   :config
   (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
 #+end_src
