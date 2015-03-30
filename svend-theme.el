@@ -26,6 +26,7 @@
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
- '(variable-pitch ((t (:family "DejaVu Sans")))))
+ '(variable-pitch ((t (:family "DejaVu Sans"))))
+ '(font-lock-constant-face ((t (:inherit fixed-pitch)))))
 
 (provide-theme 'svend)
