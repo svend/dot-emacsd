@@ -22,6 +22,7 @@
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
 (depends-on "flycheck-ledger")
+(depends-on "ghc")
 (depends-on "gist")
 (depends-on "git")
 (depends-on "git-commit-mode")
