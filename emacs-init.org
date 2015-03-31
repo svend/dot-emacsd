@@ -12,7 +12,7 @@
 Install from homebrew on OS X.
 
 #+begin_src sh
-brew install emacs --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-glib --devel
+brew install emacs --with-cocoa --with-glib --with-gnutls --with-imagemagick --with-librsvg --devel
 rsync -a --delete /usr/local/Cellar/emacs/*/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 #+end_src
