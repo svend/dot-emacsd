@@ -876,6 +876,20 @@ go get github.com/nsf/gocode
     (add-hook 'go-mode-hook 'my-go-mode-defaults)))
 #+end_src
 
+** haskell
+
+#+begin_src emacs-lisp
+(use-package haskell-mode
+  :config
+  (progn
+    (defun my-haskell-mode-defaults ()
+      (subword-mode +1)
+      (turn-on-haskell-doc-mode)
+      (turn-on-haskell-indentation)
+      (interactive-haskell-mode +1))
+    (add-hook 'haskell-mode-hook 'my-haskell-mode-defaults)))
+#+end_src
+
 ** helm
 
 #+begin_src emacs-lisp
