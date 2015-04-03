@@ -516,7 +516,7 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 #+end_src
 
-Work around [[http:https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host name completion in shell mode take 45 seconds]]
+Work around [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host name completion in shell mode take 45 seconds]]
 by disabling second while.
 
 #+begin_src emacs-lisp
