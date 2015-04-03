@@ -1220,8 +1220,7 @@ cd ~/.emacs.d/.cask/*/elpa/pdf-tools-*/build
 
 zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig \
-make
-cp server/epdfinfo ..
+make melpa-build
 #+end_src
 
 #+begin_src emacs-lisp
