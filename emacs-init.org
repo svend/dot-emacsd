@@ -638,7 +638,9 @@ Change scrolling behavior for comint modes.
   ;; ("If the value is greater than 100, redisplay will never recenter
   ;; point, but will always scroll just enough text to bring point
   ;; into view, even if you move far away.")
-  (setq-local scroll-conservatively 101))
+  (setq-local scroll-conservatively 101)
+  ;; Wrap lines (truncate-lines is turned on globally)
+  (setq truncate-lines nil))
 
 (add-hook 'comint-mode-hook 'comint-mode-config)
 #+end_src
@@ -1020,6 +1022,15 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        (concat hipchat-number "_" room "@conf.hipchat.com")
        hipchat-nickname
        t))))
+#+end_src
+
+** json-mode
+
+Terraform state files are JSON.
+
+#+begin_src emacs-lisp
+(use-package json-mode
+  :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
 #+end_src
 
 ** lisp-mode
@@ -1636,3 +1647,4 @@ Load load config stored outside =~/.emacs.d=.
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
 #+end_src
+a
