@@ -47,6 +47,7 @@
 (depends-on "markdown-mode")
 (depends-on "mmm-mode")
 (depends-on "neotree")
+(depends-on "nix-mode")
 (depends-on "operate-on-number")
 (depends-on "password-store")
 (depends-on "pdf-tools")
