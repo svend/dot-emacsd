@@ -1424,7 +1424,7 @@ See http://stackoverflow.com/a/11255996
 #+begin_src emacs-lisp
 (use-package shell
   :config
-  (setq explicit-shell-file-name "/bin/bash")
+  (setq explicit-shell-file-name "bash")
   ;; Do not try to colorize comments and strings in shell mode
   (setq shell-font-lock-keywords nil)
   (add-hook 'shell-mode-hook 'goto-address-mode)
@@ -1559,7 +1559,7 @@ bash shell.
 
 #+begin_src emacs-lisp
 (setq explicit-bash-args
-      '("-c" "dtach -A \"$HOME/.dtach-$(hostname -f)-ssorensen\" -z /bin/bash --noediting --login -i 2>/dev/null || /bin/bash --noediting --login -i"))'
+      '("-c" "dtach -A \"$HOME/.dtach-$(hostname -f)-ssorensen\" -z bash --noediting --login -i 2>/dev/null || bash --noediting --login -i"))'
 #+end_src
 
 #+begin_src emacs-lisp
