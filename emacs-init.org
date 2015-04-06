@@ -1620,7 +1620,7 @@ layouts.
 ** yasnippet
 
 #+begin_src emacs-lisp
-(use-package  yasnippet
+(use-package yasnippet
   :init (yas-global-mode))
 #+end_src
 
