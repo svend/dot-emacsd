@@ -653,6 +653,7 @@ Change scrolling behavior for comint modes.
   :config
   (progn
     (setq company-lighter-base "Co")
+    (setq company-show-numbers t)
 (setq company-minimum-prefix-length 2)))
 #+end_src
 
