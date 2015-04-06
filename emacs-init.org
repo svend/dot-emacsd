@@ -1621,7 +1621,9 @@ layouts.
 
 #+begin_src emacs-lisp
 (use-package yasnippet
-  :init (yas-global-mode))
+  :init (yas-global-mode)
+  :config (progn
+	    (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))))
 #+end_src
 
 ** zoom-frm
