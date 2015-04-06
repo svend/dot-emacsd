@@ -1619,6 +1619,8 @@ layouts.
 
 ** yasnippet
 
+[[https://github.com/capitaomorte/yasnippet/issues/289]]
+
 #+begin_src emacs-lisp
 (use-package yasnippet
   :init (yas-global-mode)
