@@ -673,6 +673,14 @@ Change scrolling behavior for comint modes.
 (setq company-minimum-prefix-length 2)))
 #+end_src
 
+** company-go
+
+#+begin_src emacs-lisp
+(use-package company-go
+  :ensure t
+  :defer t)
+#+end_src
+
 ** desktop
 
 Do not load encrypted files when Emacs starts.
@@ -804,8 +812,8 @@ Disable ido faces to see flx highlights.
   :ensure t
   :config
   (progn (require 'flycheck-ledger)
-	 (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
-	 (add-hook 'after-init-hook 'global-flycheck-mode))
+	 ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
+	 (add-hook 'after-init-hook 'global-flycheck-mode)))
 #+end_src
 
 ** flycheck-ledger
@@ -887,6 +895,8 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 
 #+begin_src emacs-lisp
 (use-package gnus-alias
+  :ensure t
+  :defer t
   :config
   (setq gnus-alias-identity-alist
         '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
@@ -916,6 +926,8 @@ go get github.com/nsf/gocode
 
 #+begin_src emacs-lisp
 (use-package go-mode
+  :ensure t
+  :defer t
   :config
   (progn
     (setq gofmt-command "goimports")
@@ -933,10 +945,12 @@ go get github.com/nsf/gocode
     (add-hook 'go-mode-hook 'my-go-mode-defaults)))
 #+end_src
 
-** haskell
+** haskell-mode
 
 #+begin_src emacs-lisp
 (use-package haskell-mode
+  :ensure t
+  :defer t
   :config
   (progn
     (defun my-haskell-mode-defaults ()
@@ -981,6 +995,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ibuffer-tramp
+  :ensure t
   :config
   (progn
     (add-hook 'ibuffer-hook
@@ -1011,6 +1026,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ido-ubiquitous
+  :ensure t
   :init
   (ido-ubiquitous-mode 1))
 #+end_src
@@ -1019,6 +1035,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package inf-ruby
+  :ensure t
+  :defer t
   :config
   (setq inf-ruby-default-implementation "pry"))
 #+end_src
@@ -1027,6 +1045,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp sh
 (use-package jabber
+  :ensure t
+  :defer t
   :config
   (progn
     (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
@@ -1081,6 +1101,7 @@ Terraform state files are JSON.
   :bind (("C-c m" . magit-key-mode-popup-dispatch))
   :config
   (progn
+    (setq magit-last-seen-setup-instructions "1.4.0")
     (diminish 'magit-auto-revert-mode)
     (setq magit-save-some-buffers 'dontask)
     (setq magit-repo-dirs '("~/src"))
@@ -1263,6 +1284,7 @@ make melpa-build
 
 #+begin_src emacs-lisp
 (use-package pdf-tools
+  :ensure t
   :config
   (progn
     (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
@@ -1273,6 +1295,7 @@ make melpa-build
 
 #+begin_src emacs-lisp
 (use-package projectile
+  :ensure t
   :init (projectile-global-mode 1)
   :config
   (progn
@@ -1322,6 +1345,8 @@ make melpa-build
 
 #+begin_src emacs-lisp
 (use-package robe
+  :ensure t
+  :defer t
   :config
   (progn
     (add-hook 'ruby-mode-hook 'robe-mode)))
@@ -1362,6 +1387,13 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
     (add-hook 'ruby-mode-hook 'my-ruby-mode-defaults)))
 #+end_src
 
+** ruby-tools
+
+#+begin_src emacs-lisp
+(use-package ruby-tools
+  :ensure t
+  :defer t)
+#+end_src
 ** savehist
 
 #+begin_src emacs-lisp
@@ -1495,6 +1527,8 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package slime
+  :ensure t
+  :defer t
   :config
   (setq inferior-lisp-program "sbcl"))
 #+end_src
@@ -1503,6 +1537,7 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package smartparens
+  :ensure t
   :init (progn
           (smartparens-global-mode t)
           (require 'smartparens-config)
