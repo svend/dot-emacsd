@@ -625,6 +625,14 @@ by disabling second while.
 
 #+begin_src emacs-lisp
 (use-package bbdb
+  :ensure t
+  :defer t)
+#+end_src
+
+** bbdb
+
+#+begin_src emacs-lisp
+(use-package bbdb
   :bind (("C-c b" . bbdb))
   :config
   (progn
@@ -803,8 +811,7 @@ Disable ido faces to see flx highlights.
 (use-package flycheck
   :ensure t
   :config
-  (progn (require 'flycheck-ledger)
-	 ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
+  (progn ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
 	 (add-hook 'after-init-hook 'global-flycheck-mode)))
 #+end_src
 
@@ -1125,7 +1132,8 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package message
-  :init
+  :defer t
+  :config
   (progn
     ;; Use MSMTP with auto-smtp selection
     ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
@@ -1384,7 +1392,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
    ("Appraisals\\'" . ruby-mode))
   :config
   (progn
-    (require 'ruby-tools)
     (defun my-ruby-mode-defaults ()
       (inf-ruby-minor-mode +1)
       (ruby-tools-mode +1)
