@@ -69,6 +69,7 @@ executable-find).
    :test 'string-equal))
 
 (use-package exec-path-from-shell
+  :ensure t
   :if (eq window-system 'ns)
   :config
   (progn
@@ -130,8 +131,18 @@ brew cask install font-dejavu-sans
 #+end_src
 
 #+begin_src emacs-lisp
-(defun enable-fixed-pitch-mode ()
-  (fixed-pitch-mode t))
+(require 'face-remap)
+
+(defun my-fixed-pitch-mode (&optional arg)
+  "Fixed-pitch default-face mode.
+An interface to `buffer-face-mode' which uses the `fixed-pitch' face.
+Besides the choice of face, it is the same as `buffer-face-mode'."
+  (interactive (list (or current-prefix-arg 'toggle)))
+  (buffer-face-mode-invoke 'fixed-pitch arg
+                           (called-interactively-p 'interactive)))
+
+(defun my-enable-fixed-pitch-mode ()
+  (my-fixed-pitch-mode t))
 
 (dolist (hook '(comint-mode-hook
                 dired-mode-hook
@@ -146,7 +157,7 @@ brew cask install font-dejavu-sans
                 quickrun/mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
-  (add-hook hook 'enable-fixed-pitch-mode))
+  (add-hook hook 'my-enable-fixed-pitch-mode))
 
 ;; Remove BufFace from mode line
 (eval-after-load "face-remap"
@@ -179,6 +190,11 @@ Treat all themes as safe.
 
 #+begin_src emacs-lisp
 (setq custom-safe-themes t)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t)
 #+end_src
 
 * Emacs settings
@@ -352,19 +368,6 @@ Press =C-c C-h= to show all of these.
 
 - [[info:elisp#Key Binding Conventions][Key Binding Conventions]]
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
-
-This is a copy of variable-pitch-mode modified for fixed-pitch.
-
-#+begin_src emacs-lisp
-(require 'face-remap)
-(defun fixed-pitch-mode (&optional arg)
-  "Fixed-pitch default-face mode.
-An interface to `buffer-face-mode' which uses the `fixed-pitch' face.
-Besides the choice of face, it is the same as `buffer-face-mode'."
-  (interactive (list (or current-prefix-arg 'toggle)))
-  (buffer-face-mode-invoke 'fixed-pitch arg
-                           (called-interactively-p 'interactive)))
-#+end_src
 
 #+begin_src emacs-lisp
 (bind-key "C-c d" 'my-insert-date)
@@ -554,33 +557,13 @@ by disabling second while.
 	  ssh-hosts-list)))))
 #+end_src
 
-** Alert on comint prompt
-
-#+begin_src emacs-lisp
-(require 'alert)
-
-(defun comint-alert-on-prompt (string)
-  "Send alert when prompt is detected."
-  (when (let ((case-fold-search t))
-          (string-match comint-prompt-regexp string))
-    (alert (format "Prompt: %s" string)))
-  string)
-
-(defun comint-toggle-alert ()
-  "Toggle alert on prompt for current buffer"
-  (interactive)
-  (make-local-variable 'comint-output-filter-functions)
-  (if (member 'comint-alert-on-prompt comint-output-filter-functions)
-      (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
-    (add-hook 'comint-output-filter-functions 'comint-alert-on-prompt)))
-#+end_src
-
 * Package settings
 
 ** ace-jump
 
 #+begin_src emacs-lisp
 (use-package ace-jump-mode
+  :ensure t
   :bind (("C-c a" . ace-jump-mode)))
 #+end_src
 
@@ -588,6 +571,7 @@ by disabling second while.
 
 #+begin_src emacs-lisp
 (use-package ace-link
+  :ensure t
   :init (ace-link-setup-default))
 #+end_src
 
@@ -595,6 +579,7 @@ by disabling second while.
 
 #+begin_src emacs-lisp
 (use-package ace-window
+  :ensure t
   :bind (("C-x o" . ace-window)))
 #+end_src
 
@@ -603,6 +588,21 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package alert
   :init (progn
+	  (defun comint-alert-on-prompt (string)
+	    "Send alert when prompt is detected."
+	    (when (let ((case-fold-search t))
+		    (string-match comint-prompt-regexp string))
+	      (alert (format "Prompt: %s" string)))
+	    string)
+
+	  (defun comint-toggle-alert ()
+	    "Toggle alert on prompt for current buffer"
+	    (interactive)
+	    (make-local-variable 'comint-output-filter-functions)
+	    (if (member 'comint-alert-on-prompt comint-output-filter-functions)
+		(remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
+	      (add-hook 'comint-output-filter-functions 'comint-alert-on-prompt)))
+
           (setq alert-default-style
                 (if (eq window-system 'ns)
                     'notifier
@@ -1062,6 +1062,7 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package magit
+  :ensure t
   :bind (("C-c m" . magit-key-mode-popup-dispatch))
   :config
   (progn
@@ -1069,6 +1070,13 @@ Terraform state files are JSON.
     (setq magit-save-some-buffers 'dontask)
     (setq magit-repo-dirs '("~/src"))
     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
+#+end_src
+
+** magit-filenotify
+
+#+begin_src emacs-lisp
+(use-package magit-filenotify
+  :ensure t)
 #+end_src
 
 ** message
@@ -1578,13 +1586,15 @@ bash shell.
 
 #+begin_src emacs-lisp
 (require 'tramp)
+
+(my-require-package 'dash)
 (require 'dash)
 
 (defun ssh-shell-hosts ()
   "Return list of known SSH hosts."
   ;; Copied from cssh.el
   (-flatten (mapcar (lambda (x)
-                      (remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
+                      (cl-remove-if 'null (mapcar 'cadr (apply (car x) (cdr x)))))
                     (tramp-get-completion-function "ssh"))))
 
 (defun ssh-add-user-to-hosts (&optional user)
