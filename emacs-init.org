@@ -17,16 +17,30 @@ rsync -a --delete /usr/local/Cellar/emacs/*/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 #+end_src
 
-* Initialize Cask
+* Initialize package.el
 
-This is required before any packages can be used.
+[[http://melpa.org/#/getting-started][MELPA]]
 
 #+begin_src emacs-lisp
-(require 'cask (expand-file-name "emacs-cask/cask.el" user-emacs-directory))
-(cask-initialize)
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
 #+end_src
 
 * Initialize use-package
+
+#+begin_src emacs-lisp
+(defun my-require-package (package)
+  "Install PACKAGE unless already installed."
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(my-require-package 'use-package)
+#+end_src
 
 This is required before any use-package forms.
 
