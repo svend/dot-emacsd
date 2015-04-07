@@ -1633,6 +1633,13 @@ Host *
   :defer t
   :config
   (progn
+    ;; Frequently Asked Questions: How could I speed up tramp?
+    ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+    (setq vc-ignore-dir-regexp
+	  (format "\\(%s\\)\\|\\(%s\\)"
+		  vc-ignore-dir-regexp
+		  tramp-file-name-regexp))
+
     (setq tramp-use-ssh-controlmaster-options nil)
     ;; Tramp sets HISTFILE to /dev/null so bash history on remote shells does not work.
     (add-to-list 'tramp-remote-process-environment "HISTFILE=")))
