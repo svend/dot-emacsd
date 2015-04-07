@@ -968,6 +968,14 @@ go get github.com/nsf/gocode
          ("C-c h x" . helm-M-x)))
 #+end_src
 
+** helm-projectile
+
+#+begin_src emacs-lisp
+(use-package helm-projectile
+  :ensure t
+  :defer t)
+#+end_src
+
 ** hippie-exp
 
 [[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
