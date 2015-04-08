@@ -1287,6 +1287,14 @@ of `org-babel-temporary-directory'."
        (sh . t)))))
 #+end_src
 
+** password-store
+
+#+begin_src emacs-lisp
+(use-package password-store
+  :ensure t
+  :defer t)
+#+end_src
+
 ** pdf-tools
 
 #+begin_src sh
