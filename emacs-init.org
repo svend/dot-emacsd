@@ -37,6 +37,7 @@ tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 (defun my-require-package (package)
   "Install PACKAGE unless already installed."
   (unless (package-installed-p package)
+    (package-refresh-contents)
     (package-install package)))
 
 (my-require-package 'use-package)
@@ -1196,6 +1197,14 @@ Terraform state files are JSON.
       (bbdb-insinuate-message))
 
     (add-hook 'message-setup-hook 'my-setup-message-mode)))
+#+end_src
+
+** nix-mode
+
+#+begin_src emacs-lisp
+(use-package nix-mode
+  :ensure t
+  :defer t)
 #+end_src
 
 ** notmuch
