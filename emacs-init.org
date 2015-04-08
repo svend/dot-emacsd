@@ -583,6 +583,14 @@ by disabling second while.
   :bind (("C-x o" . ace-window)))
 #+end_src
 
+** ag
+
+#+begin_src emacs-lisp
+(use-package ag
+  :ensure t
+  :defer t)
+#+end_src
+
 ** alert
 
 #+begin_src emacs-lisp
