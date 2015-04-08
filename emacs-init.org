@@ -993,6 +993,14 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :bind (("M-/" . hippie-expand)))
 #+end_src
 
+** hydra
+
+#+begin_src emacs-lisp
+(use-package hydra
+  :ensure t
+  :defer t)
+#+end_src
+
 ** ibuffer
 
 #+begin_src emacs-lisp
