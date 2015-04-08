@@ -1349,6 +1349,16 @@ make melpa-build
     (projectile-cleanup-known-projects)))
 #+end_src
 
+** python
+
+Associate Nagios check-mk files with python.
+
+#+begin_src emacs-lisp
+(use-package python
+  :mode
+  (("\\.mk\\'" . python-mode)))
+#+end_src
+
 ** quickrun
 
 #+begin_src emacs-lisp
