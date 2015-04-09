@@ -1144,6 +1144,14 @@ Terraform state files are JSON.
   :defer t)
 #+end_src
 
+** markdown-mode
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** message
 
 #+begin_src emacs-lisp
