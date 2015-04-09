@@ -1345,7 +1345,10 @@ make melpa-build
   :config
   (progn
     (setq projectile-use-git-grep t)
-    (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+    ;; Omit project name for remote buffers
+    (setq projectile-mode-line '(:eval (if (file-remote-p default-directory)
+					   (" P")
+					 (format " P[%s]" (projectile-project-name)))))
     (projectile-cleanup-known-projects)))
 #+end_src
 
@@ -1529,9 +1532,6 @@ See http://stackoverflow.com/a/11255996
 (define-key shell-mode-map (kbd "TAB") #'company-manual-begin)
   ;; Do not store duplicate history entries
   (setq comint-input-ignoredups t)
-  ;; Remote shells lock up Emacs with projectile
-  (when (tramp-tramp-file-p default-directory)
-    (setq-local projectile-mode-line " P"))
 
   ;; ;; This seems to cause problems with bash getting into a bad
   ;; ;; "command not found" state.
