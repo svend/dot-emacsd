@@ -1765,6 +1765,14 @@ layouts.
   :init (winner-mode))
 #+end_src
 
+** yaml-mode
+
+#+begin_src emacs-lisp
+(use-package yaml-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** yasnippet
 
 [[https://github.com/capitaomorte/yasnippet/issues/289]]
