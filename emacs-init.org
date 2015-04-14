@@ -1356,7 +1356,7 @@ make melpa-build
     (setq projectile-use-git-grep t)
     ;; Omit project name for remote buffers
     (setq projectile-mode-line '(:eval (if (file-remote-p default-directory)
-					   (" P")
+					   '(" P")
 					 (format " P[%s]" (projectile-project-name)))))
     (projectile-cleanup-known-projects)))
 #+end_src
