@@ -1670,6 +1670,14 @@ M-r):
   (add-hook 'term-mode-hook 'my-setup-term-mode))
 #+end_src
 
+** terraform-mode
+
+#+begin_src emacs-lisp
+(use-package terraform-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** tramp
 
 Edit remote files via sudo
