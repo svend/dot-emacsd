@@ -195,7 +195,8 @@ Treat all themes as safe.
 
 #+begin_src emacs-lisp
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t)
+  :ensure t
+  :defer t)
 #+end_src
 
 * Emacs settings
@@ -690,6 +691,14 @@ Change scrolling behavior for comint modes.
   :defer t)
 #+end_src
 
+** csv-mode
+
+#+begin_src emacs-lisp
+(use-package csv-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** desktop
 
 Do not load encrypted files when Emacs starts.
@@ -858,6 +867,22 @@ Disable ido faces to see flx highlights.
     (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
 #+end_src
 
+** gitconfig-mode
+
+#+begin_src emacs-lisp
+(use-package gitconfig-mode
+  :ensure t
+  :defer t)
+#+end_src
+
+** gitignore-mode
+
+#+begin_src emacs-lisp
+(use-package gitignore-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
@@ -916,6 +941,14 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
   (setq gnus-alias-identity-rules
         '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
           ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+#+end_src
+
+** go-eldoc
+
+#+begin_src emacs-lisp
+(use-package go-eldoc
+  :ensure t
+  :defer t)
 #+end_src
 
 ** go-mode
@@ -1110,6 +1143,14 @@ Terraform state files are JSON.
   :ensure t
   :defer t
   :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
+#+end_src
+
+** ledger-mode
+
+#+begin_src emacs-lisp
+(use-package ledger-mode
+  :ensure t
+  :defer t)
 #+end_src
 
 ** lisp-mode
@@ -1417,6 +1458,14 @@ Associate Nagios check-mk files with python.
       (if (find-file (ido-completing-read "Find recent file: " recentf-list))
           (message "Opening file...")
         (message "Aborting")))))
+#+end_src
+
+** restclient
+
+#+begin_src emacs-lisp
+(use-package restclient
+  :ensure t
+  :defer t)
 #+end_src
 
 ** robe
