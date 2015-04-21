@@ -384,7 +384,7 @@ Press =C-c C-h= to show all of these.
 (bind-key "C-c t n" 'linum-mode)
 (bind-key "C-c t s" 'flyspell-mode)
 (bind-key "C-c t t" 'toggle-truncate-lines)
-(bind-key "C-c t v" 'fixed-pitch-mode)
+(bind-key "C-c t v" 'my-fixed-pitch-mode)
 (bind-key "C-c t w" 'whitespace-mode)
 (bind-key "C-c w" 'winner-undo)
 #+end_src
