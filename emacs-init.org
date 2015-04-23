@@ -829,8 +829,10 @@ Disable ido faces to see flx highlights.
 (use-package flycheck
   :ensure t
   :config
-  (progn ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
-	 (add-hook 'after-init-hook 'global-flycheck-mode)))
+  (progn
+    ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
+    (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
+    (add-hook 'after-init-hook 'global-flycheck-mode)))
 #+end_src
 
 ** flycheck-ledger
