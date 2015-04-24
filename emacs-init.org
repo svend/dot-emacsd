@@ -656,7 +656,17 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package calfw
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (progn
+    (setq cfw:fchar-junction ?╋
+      cfw:fchar-vertical-line ?┃
+      cfw:fchar-horizontal-line ?━
+      cfw:fchar-left-junction ?┣
+      cfw:fchar-right-junction ?┫
+      cfw:fchar-top-junction ?┯
+      cfw:fchar-top-left-corner ?┏
+      cfw:fchar-top-right-corner ?┓)))
 #+end_src
 
 ** comint-mode
