@@ -560,7 +560,7 @@ by disabling second while.
 	ssh-hosts-list))))
 #+end_src
 
-* Package settings
+* Package
 
 ** ace-jump
 
@@ -649,6 +649,14 @@ by disabling second while.
   (progn
     (setq bbdb-file "~/.config/bbdb/.bbdb")
     (setq bbdb-auto-revert-p t)))
+#+end_src
+
+** calfw
+
+#+begin_src emacs-lisp
+(use-package calfw
+  :ensure t
+  :defer t)
 #+end_src
 
 ** comint-mode
