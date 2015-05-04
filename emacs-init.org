@@ -146,6 +146,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
   (my-fixed-pitch-mode t))
 
 (dolist (hook '(calendar-mode-hook
+		cfw:calendar-mode-hook
 		comint-mode-hook
                 dired-mode-hook
                 ediff-mode-hook
