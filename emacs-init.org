@@ -1253,6 +1253,13 @@ Terraform state files are JSON.
     (add-hook 'message-setup-hook 'my-setup-message-mode)))
 #+end_src
 
+** monokai-theme
+
+#+begin_src emacs-lisp
+(use-package monokai-theme
+  :ensure t
+  :defer t)
+#+end_src
 ** nix-mode
 
 #+begin_src emacs-lisp
