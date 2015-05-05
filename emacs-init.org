@@ -1790,7 +1790,10 @@ Host *
 
     (setq tramp-use-ssh-controlmaster-options nil)
     ;; Tramp sets HISTFILE to /dev/null so bash history on remote shells does not work.
-    (add-to-list 'tramp-remote-process-environment "HISTFILE=")))
+    ;; TODO: (setq tramp-histfile-override nil) instead?
+    (add-to-list 'tramp-remote-process-environment "HISTFILE=")
+    (add-to-list 'tramp-remote-process-environment "HISTFILESIZE=")
+    (add-to-list 'tramp-remote-process-environment "HISTSIZE=")))
 #+end_src
 
 Default value of explicit-bash-args is =("--noediting" "-i")=. We want
