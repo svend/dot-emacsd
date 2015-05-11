@@ -563,14 +563,6 @@ by disabling second while.
 
 * Package
 
-** ace-jump
-
-#+begin_src emacs-lisp
-(use-package ace-jump-mode
-  :ensure t
-  :defer t)
-#+end_src
-
 ** ace-link
 
 #+begin_src emacs-lisp
