@@ -577,7 +577,7 @@ by disabling second while.
 (use-package ace-window
   :ensure t
   :bind (("C-x o" . ace-window)
-	 ("C-c a" . avi-goto-word-1)))
+	 ("C-c a" . avy-goto-word-1)))
 #+end_src
 
 ** ag
