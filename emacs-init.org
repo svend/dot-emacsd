@@ -576,8 +576,7 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package ace-window
   :ensure t
-  :bind (("C-x o" . ace-window)
-	 ("C-c a" . avy-goto-word-1)))
+  :bind (("C-x o" . ace-window)))
 #+end_src
 
 ** ag
@@ -615,6 +614,14 @@ by disabling second while.
 	  (if (eq window-system 'ns)
 	      'notifier
 	    'notifications))))
+#+end_src
+
+** avy
+
+#+begin_src emacs-lisp
+(use-package avy
+  :ensure t
+  :bind (("C-c a" . avy-goto-word-1)))
 #+end_src
 
 ** bash-completion
