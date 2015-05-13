@@ -1695,7 +1695,7 @@ M-r):
   :init (progn
           (smartparens-global-mode t)
           (require 'smartparens-config)
-          (sp-use-smartparens-bindings)
+          (sp-use-paredit-bindings)
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
 #+end_src
 
