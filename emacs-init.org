@@ -1626,7 +1626,12 @@ See http://stackoverflow.com/a/11255996
                                  (truncate (* 0.873 (window-width))))))))
 
 (defun shell-mode-config ()
-(define-key shell-mode-map (kbd "TAB") #'company-manual-begin)
+  ;; company-mode
+  ;;
+  ;; Enable tab, disable idle completion
+  (setq-local company-idle-delay nil)
+  (define-key shell-mode-map (kbd "TAB") #'company-manual-begin)
+
   ;; Do not store duplicate history entries
   (setq comint-input-ignoredups t)
 
