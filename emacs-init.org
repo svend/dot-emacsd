@@ -156,7 +156,6 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
                 ledger-mode-hook
                 magit-log-mode-hook
                 notmuch-search-hook
-                prog-mode-hook
                 quickrun/mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
