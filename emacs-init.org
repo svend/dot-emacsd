@@ -1713,6 +1713,14 @@ M-r):
          ("C-c M-x" . execute-extended-command)))
 #+end_src
 
+** solarized-theme
+
+#+begin_src emacs-lisp
+(use-package solarized-theme
+  :ensure t
+  :defer t)
+#+end_src
+
 ** term
 
 #+begin_src emacs-lisp
