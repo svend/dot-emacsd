@@ -1721,6 +1721,14 @@ M-r):
   :defer t)
 #+end_src
 
+** tango-plus-theme
+
+#+begin_src emacs-lisp
+(use-package tango-plus-theme
+  :ensure t
+  :defer t)
+#+end_src
+
 ** term
 
 #+begin_src emacs-lisp
