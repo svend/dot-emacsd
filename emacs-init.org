@@ -113,6 +113,12 @@ Display date in 24 hour format in mode line.
 (setq display-time-24hr-format t)
 #+end_src
 
+** Underline position
+
+#+begin_src emacs-lisp
+(setq x-underline-at-descent-line t)
+#+end_src
+
 ** Fixed/variable pitch
 
 Use [[http://dejavu-fonts.org/][DejaVu font family]]. These fonts are in the [[https://packages.debian.org/sid/fonts-dejavu][fonts-dejavu]] package on
