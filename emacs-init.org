@@ -774,6 +774,14 @@ Do not load encrypted files when Emacs starts.
     (setq dns-mode-soa-auto-increment-serial nil)))
 #+end_src
 
+** dockerfile-mode
+
+#+begin_src emacs-lisp
+(use-package dockerfile-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** elfeed
 
 #+begin_src emacs-lisp
