@@ -387,7 +387,7 @@ Press =C-c C-h= to show all of these.
 (global-set-key
  (kbd "C-c t")
  (defhydra hydra-toggle ()
-   "Winner"
+   "Toggle"
    ("b" scroll-bar-mode "scroll-bar")
    ("l" visual-line-mode "visual-line")
    ("m" menu-bar-mode "menu-bar")
