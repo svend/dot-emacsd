@@ -384,16 +384,26 @@ Press =C-c C-h= to show all of these.
 (bind-key "C-c j" 'dired-jump)
 (bind-key "C-c k" 'bury-buffer)
 (bind-key "C-c r" 'revert-buffer)
-(bind-key "C-c t b" 'scroll-bar-mode)
-(bind-key "C-c t c" 'flycheck-mode)
-(bind-key "C-c t l" 'visual-line-mode)
-(bind-key "C-c t m" 'menu-bar-mode)
-(bind-key "C-c t n" 'linum-mode)
-(bind-key "C-c t s" 'flyspell-mode)
-(bind-key "C-c t t" 'toggle-truncate-lines)
-(bind-key "C-c t v" 'my-fixed-pitch-mode)
-(bind-key "C-c t w" 'whitespace-mode)
-(bind-key "C-c w" 'winner-undo)
+
+(global-set-key
+ (kbd "C-c t")
+ (defhydra hydra-toggle (:timeout 2)
+   "Winner"
+   ("b" scroll-bar-mode "scroll-bar")
+   ("l" visual-line-mode "visual-line")
+   ("m" menu-bar-mode "menu-bar")
+   ("n" linum-mode "linum")
+   ("s" flyspell-mode "flyspell")
+   ("t" toggle-runcate-lines "trucate")
+   ("v" my-fixed-pitch-mode "fixed-pitch")
+   ("w" whitespace-mode "fixed-pitch")))
+
+(global-set-key
+ (kbd "C-c w")
+ (defhydra hydra-winner ()
+   "Winner"
+   ("w" winner-undo "back")
+   ("r" winner-redo "forward" :exit t)))
 #+end_src
 
 ** Truncate lines
@@ -581,7 +591,9 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package ace-window
   :ensure t
-  :bind (("C-x o" . ace-window)))
+  :bind (("C-x o" . ace-window))
+  :config (progn
+	    (setq aw-swap-invert t)))
 #+end_src
 
 ** ag
