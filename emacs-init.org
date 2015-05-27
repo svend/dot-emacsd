@@ -395,7 +395,7 @@ Press =C-c C-h= to show all of these.
    ("s" flyspell-mode "flyspell")
    ("t" toggle-runcate-lines "trucate")
    ("v" my-fixed-pitch-mode "fixed-pitch")
-   ("w" whitespace-mode "fixed-pitch")))
+   ("w" whitespace-mode "whitespace")))
 
 (global-set-key
  (kbd "C-c w")
@@ -1498,7 +1498,7 @@ Associate Nagios check-mk files with python.
     ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
 
     ;; Increase size of recent file list
-    (setq recentf-max-saved-items 50)
+    (setq recentf-max-saved-items 1000)
 
     ;; Ignore ephemeral git commit message files
     (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
