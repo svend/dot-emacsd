@@ -1725,6 +1725,9 @@ M-r):
           (smartparens-global-mode t)
           (require 'smartparens-config)
           (sp-use-paredit-bindings)
+	  ;; sp-paredit-bindings: ("M-r" . sp-splice-sexp-killing-around)
+	  (define-key sp-keymap (kbd "M-r") nil)
+	  ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
 #+end_src
 
