@@ -244,7 +244,7 @@ Scroll one line at a time with mouse
 Hilight the current line. To disable for a mode, add this to the mode
 hook:
 
-#+begin_src emacs-lisp :tangle
+#+begin_src emacs-lisp :tangle no
 (make-local-variable 'global-hl-line-mode)
 (setq global-hl-line-mode nil)
 #+end_src
@@ -1437,7 +1437,6 @@ of `org-babel-temporary-directory'."
 
 #+begin_src sh
 cd ~/.emacs.d/elpa/pdf-tools-*/build
-
 zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig \
 make melpa-build
