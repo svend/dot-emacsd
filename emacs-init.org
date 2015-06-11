@@ -1446,7 +1446,10 @@ make melpa-build
 (use-package pdf-tools
   :ensure t
   :init (pdf-tools-install)
-  :config (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode))
+  :config
+  (progn
+    (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
+    (add-hook 'pdf-view-mode-hook 'pdf-view-fit-page-to-window)))
 #+end_src
 
 ** projectile
