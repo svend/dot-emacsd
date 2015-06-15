@@ -1417,7 +1417,8 @@ of `org-babel-temporary-directory'."
 
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((emacs-lisp . t)
+     '((calc . t)
+       (emacs-lisp . t)
        (perl . t)
        (python . t)
        (ruby . t)
