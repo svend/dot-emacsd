@@ -389,6 +389,7 @@ Press =C-c C-h= to show all of these.
  (defhydra hydra-toggle ()
    "Toggle"
    ("b" scroll-bar-mode "scroll-bar")
+   ("c" flycheck-mode "flycheck")
    ("l" visual-line-mode "visual-line")
    ("m" menu-bar-mode "menu-bar")
    ("n" linum-mode "linum")
