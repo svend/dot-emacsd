@@ -633,6 +633,14 @@ by disabling second while.
 	    'notifications))))
 #+end_src
 
+** auth-password-store
+
+#+begin_src emacs-lisp
+(use-package auth-password-store
+  :ensure t
+  :defer t)
+#+end_src
+
 ** avy
 
 #+begin_src emacs-lisp
@@ -1425,6 +1433,14 @@ of `org-babel-temporary-directory'."
        (ruby . t)
        (scala . t)
        (sh . t)))))
+#+end_src
+
+** pass
+
+#+begin_src emacs-lisp
+(use-package pass
+  :ensure t
+  :defer t)
 #+end_src
 
 ** password-store
