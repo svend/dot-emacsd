@@ -576,7 +576,7 @@ by disabling second while.
 	ssh-hosts-list))))
 #+end_src
 
-* Package
+* Packages
 
 ** ace-link
 
