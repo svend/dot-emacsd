@@ -28,15 +28,6 @@ ln -sf /usr/local/opt/emacs/Emacs.app ~/Applications
 tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
 #+end_src
 
-* Easy Customization
-
-Save customization in =emacs-custom.el= instead of =init.el=.
-
-#+begin_src emacs-lisp
-(setq custom-file "~/.emacs.d/emacs-custom.el")
-(load custom-file)
-#+end_src
-
 * Initialize package.el
 
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
@@ -2026,4 +2017,12 @@ Load load config stored outside =~/.emacs.d=.
 #+begin_src emacs-lisp
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
+#+end_src
+* Easy Customization
+
+Save customization in =emacs-custom.el= instead of =init.el=.
+
+#+begin_src emacs-lisp
+(setq custom-file "~/.emacs.d/emacs-custom.el")
+(load custom-file)
 #+end_src
