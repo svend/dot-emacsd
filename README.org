@@ -1,1 +1,1 @@
-emacs-init.org
+conf/emacs-init.org

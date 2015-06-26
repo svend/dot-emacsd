@@ -2020,9 +2020,9 @@ Load load config stored outside =~/.emacs.d=.
 #+end_src
 * Easy Customization
 
-Save customization in =emacs-custom.el= instead of =init.el=.
+Save customization in =conf/emacs-custom.el= instead of =init.el=.
 
 #+begin_src emacs-lisp
-(setq custom-file "~/.emacs.d/emacs-custom.el")
+(setq custom-file "~/.emacs.d/conf/emacs-custom.el")
 (load custom-file)
 #+end_src
