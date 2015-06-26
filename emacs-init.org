@@ -69,17 +69,6 @@ This needs to come before anything that uses PATH (e.g.
 executable-find).
 
 #+begin_src emacs-lisp
-(defun bash-shell-variables()
-  "Return a list of env variables"
-  (cl-set-difference
-   (mapcar (lambda (s) (car (split-string s "=")))
-           (split-string
-            (shell-command-to-string
-             "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
-            (char-to-string ?\x0) t))
-   '("Apple_PubSub_Socket_Render" "_")
-   :test 'string-equal))
-
 (use-package exec-path-from-shell
   :ensure t
   :if (eq window-system 'ns)
@@ -99,6 +88,21 @@ executable-find).
        "LC_ALL"
        "SSH_AUTH_SOCK"))
     (exec-path-from-shell-initialize)))
+#+end_src
+
+Experimental function that gets environmental variables from bash.
+
+#+begin_src emacs-lisp
+(defun bash-shell-variables()
+  "Return a list of env variables"
+  (cl-set-difference
+   (mapcar (lambda (s) (car (split-string s "=")))
+           (split-string
+            (shell-command-to-string
+             "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
+            (char-to-string ?\x0) t))
+   '("Apple_PubSub_Socket_Render" "_")
+   :test 'string-equal))
 #+end_src
 
 * Emacs UI
@@ -230,6 +234,9 @@ Treat all themes as safe.
 
 ** Bell
 
+Use visual bell, and reduce bell noise for common actions (e.g.
+=C-g=).
+
 #+begin_src emacs-lisp
 (setq visible-bell t)
 (setq ring-bell-function
@@ -261,16 +268,17 @@ Scroll one line at a time with mouse
 
 ** Hilight current line
 
-Hilight the current line. To disable for a mode, add this to the mode
-hook:
+Hilight the current line.
+
+#+begin_src emacs-lisp
+(global-hl-line-mode t)
+#+end_src
+
+To disable for a mode, add this to the mode hook:
 
 #+begin_src emacs-lisp :tangle no
 (make-local-variable 'global-hl-line-mode)
 (setq global-hl-line-mode nil)
-#+end_src
-
-#+begin_src emacs-lisp
-(global-hl-line-mode t)
 #+end_src
 
 ** Y/N answers
@@ -376,6 +384,9 @@ http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 
 ** Backup and auto-saves
 
+Put all backup and auto-saves into =~/.emacs.d= instead of the current
+directory.
+
 #+begin_src emacs-lisp
 (setq backup-directory-alist
       `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
@@ -384,6 +395,8 @@ http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 #+end_src
 
 ** Revert
+
+Enable global auto-revert mode.
 
 #+begin_src emacs-lisp
 (global-auto-revert-mode 1)
@@ -436,6 +449,8 @@ Press =C-c C-h= to show all of these.
 
 Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on OS X.
 
+xcape:
+
 #+begin_src sh
 # Map an unused modifier's keysym to the spacebar's keycode and make
 # it a control modifier. It needs to be an existing key so that emacs
@@ -452,6 +467,11 @@ xmodmap -e "keycode any = space"
 # tapped.
 xcape -e "$spare_modifier=space"
 #+end_src
+
+Karabiner: 
+
+- Change Space Key
+  - Space to Control_L (+ When you type Space only, send Space)
 
 #+begin_src emacs-lisp
 (bind-key "C-x M-SPC" 'pop-global-mark)
