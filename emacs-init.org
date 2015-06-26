@@ -88,7 +88,16 @@ executable-find).
     (mapc
      (lambda (variable)
        (add-to-list 'exec-path-from-shell-variables variable))
-     '("ALTERNATE_EDITOR" "CDPATH" "EDITOR" "GOPATH" "GPG_AGENT_INFO" "HISTFILE" "INFOPATH" "LANG" "LC_ALL" "SSH_AUTH_SOCK"))
+     '("ALTERNATE_EDITOR"
+       "CDPATH"
+       "EDITOR"
+       "GOPATH"
+       "GPG_AGENT_INFO"
+       "HISTFILE"
+       "INFOPATH"
+       "LANG"
+       "LC_ALL"
+       "SSH_AUTH_SOCK"))
     (exec-path-from-shell-initialize)))
 #+end_src
 
