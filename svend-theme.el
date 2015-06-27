@@ -9,7 +9,7 @@
  '(diff-context ((t (:inherit (shadow fixed-pitch)))))
  '(diff-hunk-header ((t (:inherit fixed-pitch))))
  '(diff-removed ((t (:inherit fixed-pitch))))
- '(fixed-pitch ((t (:family "Input Mono"))))
+ '(fixed-pitch ((t (:family "Input Mono Regular"))))
  '(font-lock-doc-face ((t (:inherit variable-pitch))))
  `(flycheck-fringe-error ((t (:background ,(face-background 'error) :foreground ,(face-foreground 'error)))))
  `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
@@ -26,6 +26,6 @@
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
- '(variable-pitch ((t (:family "Input Sans")))))
+ '(variable-pitch ((t (:family "Input Sans Regular")))))
 
 (provide-theme 'svend)
