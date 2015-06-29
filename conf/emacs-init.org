@@ -678,7 +678,7 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package auth-password-store
   :ensure t
-  :defer t)
+  :init (auth-pass-enable))
 #+end_src
 
 ** avy
