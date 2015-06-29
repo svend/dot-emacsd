@@ -1,5 +1,6 @@
 # Ignore everything
 /*
 !/conf/
+/conf/emacs-init.el
 !/snippets/
 !/*-theme.el
