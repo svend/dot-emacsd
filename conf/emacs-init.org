@@ -2018,6 +2018,7 @@ Load load config stored outside =~/.emacs.d=.
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
 #+end_src
+
 * Easy Customization
 
 Save customization in =conf/emacs-custom.el= instead of =init.el=.
