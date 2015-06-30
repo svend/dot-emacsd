@@ -499,6 +499,12 @@ Rapid mark-pop (=C-u C-SPC C-SPC...=).
 (show-paren-mode)
 #+end_src
 
+Wrap lines at 80 columns instead of 70.
+
+#+begin_src emacs-lisp
+(setq-default fill-column 80)
+#+end_src
+
 ** Compile
 
 #+begin_src emacs-lisp
