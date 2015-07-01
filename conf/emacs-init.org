@@ -1271,8 +1271,6 @@ Terraform state files are JSON.
 (use-package magit
   :ensure t
   :bind (("C-c m" . magit-key-mode-popup-dispatch))
-  :init
-  (setq magit-last-seen-setup-instructions "1.4.0")
   :config
   (progn
     (diminish 'magit-auto-revert-mode)
@@ -1567,8 +1565,6 @@ Associate Nagios check-mk files with python.
     ;; Increase size of recent file list
     (setq recentf-max-saved-items 1000)
 
-    ;; Ignore ephemeral git commit message files
-    (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
     ;; Ignore temporary notmuch ical files
     (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
 
