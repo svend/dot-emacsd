@@ -6,7 +6,7 @@
  '(comint-input-ignoredups t)
  '(comint-input-ring-size 10000)
  '(cursor-type (quote bar))
- '(custom-enabled-themes (quote (svend sanityinc-tomorrow-day)))
+ '(custom-enabled-themes (quote (svend dichromacy)))
  '(custom-file "~/.emacs.d/emacs-custom.el")
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
