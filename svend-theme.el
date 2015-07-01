@@ -15,7 +15,7 @@
  `(flycheck-fringe-info ((t (:background ,(face-background 'success) :foreground ,(face-foreground 'success)))))
  `(flycheck-fringe-warning ((t (:background ,(face-background 'warning) :foreground ,(face-foreground 'warning)))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
- `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :slant normal :underline nil :weight light :inherit (shadow fixed-pitch)))))
+ `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :slant normal :underline nil :weight light :inherit (fixed-pitch shadow default)))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit fixed-pitch))))
