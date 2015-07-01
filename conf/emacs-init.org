@@ -957,18 +957,6 @@ Disable ido faces to see flx highlights.
         (git-clone url)))))
 #+end_src
 
-** git-commit-mode
-
-#+begin_src emacs-lisp
-(use-package git-commit-mode
-  :ensure t
-  :defer t
-  :config
-  (progn
-    ;; Spell check git commit messages
-    (add-hook 'git-commit-mode-hook 'turn-on-flyspell)))
-#+end_src
-
 ** gitconfig-mode
 
 #+begin_src emacs-lisp
@@ -1270,12 +1258,11 @@ Terraform state files are JSON.
 #+begin_src emacs-lisp
 (use-package magit
   :ensure t
-  :bind (("C-c m" . magit-key-mode-popup-dispatch))
+  :bind (("C-c m" . magit-dispatch-popup))
   :config
   (progn
-    (diminish 'magit-auto-revert-mode)
-    (setq magit-save-some-buffers 'dontask)
-    (setq magit-repo-dirs '("~/src"))
+    (setq magit-save-repository-buffers 'dontask)
+    (setq magit-repository-directories '("~/src"))
     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
 #+end_src
 
