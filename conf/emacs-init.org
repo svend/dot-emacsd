@@ -363,10 +363,10 @@ Turn on flyspell and goto-address for all text buffers.
 =bash-fc-*= are bash command editing temporary files (=fc= built-in).
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '(".mrconfig$"              . conf-mode))
+(add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("Carton\\'"               . lisp-mode))
-(add-to-list 'auto-mode-alist '("bash-fc-"                . sh-mode))
+(add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
+(add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
 #+end_src
 
 ** Lock files
