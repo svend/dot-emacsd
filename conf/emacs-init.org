@@ -1261,7 +1261,7 @@ Terraform state files are JSON.
   :bind (("C-c m" . magit-dispatch-popup))
   :config
   (progn
-    (setq magit-completing-read-function magit-ido-completing-read)
+    (setq magit-completing-read-function 'magit-ido-completing-read)
     (setq magit-save-repository-buffers 'dontask)
     (setq magit-repository-directories '("~/src"))
     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
