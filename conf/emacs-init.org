@@ -355,7 +355,7 @@ Turn on flyspell and goto-address for all text buffers.
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'goto-address-prog-mode)
-(add-hook 'prog-mode-hook 'linum-mode)g
+(add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+end_src
 
