@@ -417,27 +417,6 @@ Press =C-c C-h= to show all of these.
 (bind-key "C-c e" 'eww)
 (bind-key "C-c j" 'dired-jump)
 (bind-key "C-c r" 'revert-buffer)
-
-(global-set-key
- (kbd "C-c t")
- (defhydra hydra-toggle ()
-   "Toggle"
-   ("b" scroll-bar-mode "scroll-bar")
-   ("c" flycheck-mode "flycheck")
-   ("l" visual-line-mode "visual-line")
-   ("m" menu-bar-mode "menu-bar")
-   ("n" linum-mode "linum")
-   ("s" flyspell-mode "flyspell")
-   ("t" toggle-truncate-lines "trucate")
-   ("v" my-fixed-pitch-mode "fixed-pitch")
-   ("w" whitespace-mode "whitespace")))
-
-(global-set-key
- (kbd "C-c w")
- (defhydra hydra-winner ()
-   "Winner"
-   ("w" winner-undo "back")
-   ("r" winner-redo "forward" :exit t)))
 #+end_src
 
 ** Truncate lines
@@ -1129,9 +1108,31 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 ** hydra
 
 #+begin_src emacs-lisp
-(use-package hydra
-  :ensure t
-  :defer t)
+  (use-package hydra
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (global-set-key
+       (kbd "C-c t")
+       (defhydra hydra-toggle ()
+         "Toggle"
+         ("b" scroll-bar-mode "scroll-bar")
+         ("c" flycheck-mode "flycheck")
+         ("l" visual-line-mode "visual-line")
+         ("m" menu-bar-mode "menu-bar")
+         ("n" linum-mode "linum")
+         ("s" flyspell-mode "flyspell")
+         ("t" toggle-truncate-lines "trucate")
+         ("v" my-fixed-pitch-mode "fixed-pitch")
+         ("w" whitespace-mode "whitespace")))
+
+      (global-set-key
+       (kbd "C-c w")
+       (defhydra hydra-winner ()
+         "Winner"
+         ("w" winner-undo "back")
+         ("r" winner-redo "forward" :exit t)))))
 #+end_src
 
 ** ibuffer
