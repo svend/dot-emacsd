@@ -743,6 +743,12 @@ by disabling second while.
 Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
+;; Catch OpenStack openrc password prompt
+(setq comint-password-prompt-regexp
+      (concat comint-password-prompt-regexp
+	      "\\|"
+	      "Please enter your OpenStack Password:"))
+
 (defun comint-mode-config()
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
