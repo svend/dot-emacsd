@@ -483,7 +483,7 @@ Rapid mark-pop (=C-u C-SPC C-SPC...=).
 
 #+begin_src emacs-lisp
 (setq auto-revert-interval 0.1)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq require-final-newline 'ask)
 (setq sentence-end-double-space nil)
 (show-paren-mode)
