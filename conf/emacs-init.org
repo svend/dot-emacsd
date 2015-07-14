@@ -914,6 +914,14 @@ Do not load encrypted files when Emacs starts.
     (add-to-list 'erc-track-exclude-types "QUIT")))
 #+end_src
 
+** erlang
+
+#+begin_src emacs-lisp
+(use-package erlang
+  :ensure t
+  :defer t)
+#+end_src
+
 ** flx-ido
 
 Disable ido faces to see flx highlights.
