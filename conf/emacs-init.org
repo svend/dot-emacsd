@@ -1296,6 +1296,9 @@ Terraform state files are JSON.
     (setq magit-completing-read-function 'magit-ido-completing-read)
     (setq magit-save-repository-buffers 'dontask)
     (setq magit-repository-directories '("~/src"))
+    ;; https://github.com/magit/magit/issues/2076
+    (setq magit-branch-arguments '()) ; do NOT want --track
+    (setq magit-push-arguments '("--set-upstream"))
     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
 #+end_src
 
