@@ -983,6 +983,13 @@ Disable ido faces to see flx highlights.
   :defer t)
 #+end_src
 
+** gnuplot
+
+#+begin_src emacs-lisp
+(use-package gnuplot
+  :ensure t
+  :defer t)
+#+end_src
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
