@@ -1570,7 +1570,11 @@ Associate Nagios check-mk files with python.
 #+begin_src emacs-lisp
 (use-package python
   :mode
-  (("\\.mk\\'" . python-mode)))
+  (("\\.mk\\'" . python-mode))
+  :config
+  (progn
+    ;; PEP 8 compliant filling rules, 79 chars maximum
+    (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))))
 #+end_src
 
 ** quickrun
