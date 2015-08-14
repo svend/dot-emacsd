@@ -1074,6 +1074,7 @@ Disable ido faces to see flx highlights.
   :ensure t
   :defer t)
 #+end_src
+
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
