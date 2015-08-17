@@ -593,7 +593,6 @@ how `split-window-sensibly' determines whether WINDOW can be split."
                  (split-window window nil (if split-window-right
                                               'left
                                             'right))))))))
-
 #+end_src
 
 #+begin_src emacs-lisp
