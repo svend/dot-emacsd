@@ -577,7 +577,6 @@ to occur.
 Have a look at the function `window-splittable-p' if you want to know
 how `split-window-sensibly' determines whether WINDOW can be split."
     (setq window (or window (selected-window)))
-    (message "foo")
     (or (and (window-splittable-p window t)
              ;; Split window horizontally.
              (split-window window nil (if split-window-right 'left  'right)))
