@@ -80,6 +80,7 @@ executable-find).
      '("ALTERNATE_EDITOR"
        "CDPATH"
        "EDITOR"
+       "GO15VENDOREXPERIMENT"
        "GOPATH"
        "GPG_AGENT_INFO"
        "HISTFILE"
