@@ -65,6 +65,22 @@ This is required before any use-package forms.
 
 * Initialize exec-path-from-shell
 
+Experimental function that gets environmental variables from bash. This uses
+gprintenv from the homebrew coreutils package.
+
+#+begin_src emacs-lisp
+(defun bash-shell-variables()
+  "Return a list of env variables"
+  (cl-set-difference
+   (mapcar (lambda (s) (car (split-string s "=")))
+           (split-string
+            (shell-command-to-string
+             "bash -l -i -c \"gprintenv --null\" 2>/dev/null")
+            (char-to-string ?\x0) t))
+   '("Apple_PubSub_Socket_Render" "_")
+   :test 'string-equal))
+#+end_src
+
 This needs to come before anything that uses PATH (e.g.
 executable-find).
 
@@ -74,36 +90,22 @@ executable-find).
   :if (eq window-system 'ns)
   :config
   (progn
-    (mapc
-     (lambda (variable)
-       (add-to-list 'exec-path-from-shell-variables variable))
-     '("ALTERNATE_EDITOR"
-       "CDPATH"
-       "EDITOR"
-       "GO15VENDOREXPERIMENT"
-       "GOPATH"
-       "GPG_AGENT_INFO"
-       "HISTFILE"
-       "INFOPATH"
-       "LANG"
-       "LC_ALL"
-       "SSH_AUTH_SOCK"))
+    ;; (mapc
+    ;;  (lambda (variable)
+    ;;    (add-to-list 'exec-path-from-shell-variables variable))
+    ;;  '("ALTERNATE_EDITOR"
+    ;;    "CDPATH"
+    ;;    "EDITOR"
+    ;;    "GO15VENDOREXPERIMENT"
+    ;;    "GOPATH"
+    ;;    "GPG_AGENT_INFO"
+    ;;    "HISTFILE"
+    ;;    "INFOPATH"
+    ;;    "LANG"
+    ;;    "LC_ALL"
+    ;;    "SSH_AUTH_SOCK"))
+    (setq exec-path-from-shell-variables (bash-shell-variables))
     (exec-path-from-shell-initialize)))
-#+end_src
-
-Experimental function that gets environmental variables from bash.
-
-#+begin_src emacs-lisp
-(defun bash-shell-variables()
-  "Return a list of env variables"
-  (cl-set-difference
-   (mapcar (lambda (s) (car (split-string s "=")))
-           (split-string
-            (shell-command-to-string
-             "bash -l -i -c \"/usr/local/bin/gprintenv --null\" 2>/dev/null")
-            (char-to-string ?\x0) t))
-   '("Apple_PubSub_Socket_Render" "_")
-   :test 'string-equal))
 #+end_src
 
 * Emacs UI
