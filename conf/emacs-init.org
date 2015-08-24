@@ -1990,7 +1990,9 @@ M-r):
 
 (use-package term
   :config
-  (add-hook 'term-mode-hook 'my-setup-term-mode))
+  (progn
+    (setq-default term-buffer-maximum-size 10000)
+    (add-hook 'term-mode-hook 'my-setup-term-mode)))
 #+end_src
 
 ** terraform-mode
