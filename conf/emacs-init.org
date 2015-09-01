@@ -493,6 +493,7 @@ Rapid mark-pop (=C-u C-SPC C-SPC...=).
 (setq require-final-newline 'ask)
 (setq sentence-end-double-space nil)
 (show-paren-mode)
+(setq enable-local-variables :safe)
 #+end_src
 
 Wrap lines at 80 columns instead of 70.
@@ -1674,13 +1675,18 @@ Associate Nagios check-mk files with python.
 
 ** quickrun
 
+Increase timeout to 60 seconds from the default of 10 seconds.
+
 #+begin_src emacs-lisp
 (use-package quickrun
   :ensure t
   :bind (("C-c q a" . quickrun-with-arg)
          ("C-c q q" . quickrun)
          ("C-c q r" . quickrun-region)
-         ("C-c q s" . quickrun-shell)))
+         ("C-c q s" . quickrun-shell))
+  :config
+  (progn
+    (setq quickrun-timeout-seconds 60)))
 #+end_src
 
 ** recentf
