@@ -1874,7 +1874,8 @@ See http://stackoverflow.com/a/11255996
   (setq explicit-shell-file-name "bash")
   ;; Do not try to colorize comments and strings in shell mode
   (setq shell-font-lock-keywords nil)
-  (add-hook 'shell-mode-hook 'goto-address-mode)
+  ;; This seems to be slowing down shell buffers
+  ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'shell-mode-hook 'shell-mode-config))
 #+end_src
 
