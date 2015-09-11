@@ -508,6 +508,13 @@ Open a new window for asynchronous commands without prompting.
 (setq async-shell-command-buffer 'new-buffer)
 #+end_src
 
+Add timezones for =display-time-world=.
+
+#+begin_src emacs-lisp
+(add-to-list 'display-time-world-list '("Europe/Budapest" "Budapest"))
+(add-to-list 'display-time-world-list '("America/Chicago" "Chicago"))
+#+end_src
+
 ** Compile
 
 #+begin_src emacs-lisp
