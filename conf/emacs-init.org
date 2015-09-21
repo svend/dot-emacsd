@@ -773,7 +773,6 @@ by disabling second while.
 #+begin_src emacs-lisp
 (use-package auth-password-store
   :ensure t
-  :config (defalias 'seq-some-p 'seq-some)
   :init (auth-pass-enable))
 #+end_src
 
