@@ -654,6 +654,17 @@ window."
 #+end_src
 
 #+begin_src emacs-lisp
+(defun my-shell-cd ()
+  "Switch to shell buffer and change directory to `default-directory'."
+  (interactive)
+  (let ((d default-directory))
+    (pop-to-buffer "*shell*")
+    (goto-char (point-max))
+    (insert (format "cd %s" d))
+    (comint-send-input)))
+#+end_src
+
+#+begin_src emacs-lisp
 (defun my-insert-date (arg)
   "Insert date string"
   (interactive "p")
