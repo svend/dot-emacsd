@@ -658,7 +658,7 @@ window."
   "Switch to shell buffer and change directory to `default-directory'."
   (interactive)
   (let ((d default-directory))
-    (pop-to-buffer "*shell*")
+    (shell)
     (goto-char (point-max))
     (insert (format "cd %s" d))
     (comint-send-input)))
