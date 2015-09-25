@@ -70,7 +70,8 @@ gprintenv from the homebrew coreutils package.
 
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
-  "Return a list of env variables"
+  "Return a list of env variables.
+This requires the homebrew coreutils package."
   (cl-set-difference
    (mapcar (lambda (s) (car (split-string s "=")))
            (split-string
@@ -79,6 +80,11 @@ gprintenv from the homebrew coreutils package.
             (char-to-string ?\x0) t))
    '("Apple_PubSub_Socket_Render" "_")
    :test 'string-equal))
+
+(defun my-exec-path-from-shell-initialize ()
+  "Initialize environment with all shell variables."
+  (interactive)
+  (exec-path-from-shell-copy-envs (bash-shell-variables)))
 #+end_src
 
 This needs to come before anything that uses PATH (e.g.
