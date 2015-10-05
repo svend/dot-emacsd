@@ -1993,6 +1993,14 @@ M-r):
   :defer t)
 #+end_src
 
+** swiper
+
+#+begin_src emacs-lisp
+(use-package swiper
+  :ensure t
+  :bind (("C-c s" . swiper)))
+#+end_src
+
 ** tango-plus-theme
 
 #+begin_src emacs-lisp
