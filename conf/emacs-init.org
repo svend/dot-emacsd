@@ -1187,9 +1187,9 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 - golint (used with flycheck)
 
 #+begin_src sh
-go get code.google.com/p/go.tools/cmd/godoc
-go get code.google.com/p/go.tools/cmd/goimports
-go get code.google.com/p/rog-go/exp/cmd/godef
+go get golang.org/x/tools/cmd/godoc
+go get golang.org/x/tools/cmd/goimports
+go get github.com/rogpeppe/godef
 go get github.com/golang/lint/golint
 go get github.com/nsf/gocode
 #+end_src
