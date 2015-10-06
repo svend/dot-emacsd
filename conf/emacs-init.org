@@ -2059,6 +2059,14 @@ M-r):
   :defer t)
 #+end_src
 
+** toml-mode
+
+#+begin_src emacs-lisp
+(use-package toml-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** tramp
 
 Edit remote files via sudo
