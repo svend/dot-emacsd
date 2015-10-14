@@ -521,6 +521,12 @@ Add timezones for =display-time-world=.
 (add-to-list 'display-time-world-list '("America/Chicago" "Chicago"))
 #+end_src
 
+Prefer newer files.
+
+#+begin_src emacs-lisp
+(setq load-prefer-newer t)
+#+end_src
+
 ** Compile
 
 #+begin_src emacs-lisp
