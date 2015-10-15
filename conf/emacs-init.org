@@ -1705,6 +1705,12 @@ make melpa-build
   :init (projectile-global-mode 1)
   :config
   (progn
+    ;; Mark projectile variables as safe
+    (seq-doseq (var '(projectile-project-compilation-cmd
+                      projectile-project-test-cmd
+                      projectile-project-run-cmd))
+      (put var 'safe-local-variable #'stringp))
+
     (setq projectile-use-git-grep t)
     ;; Omit project name for remote buffers
     (setq projectile-mode-line '(:eval (if (file-remote-p default-directory)
