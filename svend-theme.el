@@ -13,6 +13,9 @@
  '(font-lock-doc-face ((t (:inherit variable-pitch))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
  `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :inherit (fixed-pitch shadow default)))))
+ ;; Default mode line foreground and background
+ `(mode-line ((t (:background "grey75" :foreground "black"))))
+ `(mode-line-inactive ((t (:background "grey90" :foreground "grey20"))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit fixed-pitch))))
