@@ -71,19 +71,16 @@ gprintenv from the homebrew coreutils package.
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
   "Return a list of env variables.
-This requires the homebrew coreutils package."
+This requires the homebrew coreutils package on OS X."
   (let ((printenv (if (eq window-system 'ns)
                       "gprintenv"
                     "printenv")))
-    (cl-set-difference
-     (mapcar (lambda (s) (car (split-string s "=")))
-             (split-string
-              (shell-command-to-string
-               (format
-                "bash -l -i -c \"%s --null\" 2>/dev/null" printenv))
-              (char-to-string ?\x0) t))
-     '("Apple_PubSub_Socket_Render" "_")
-     :test 'string-equal)))
+    (mapcar (lambda (s) (car (split-string s "=")))
+            (split-string
+             (shell-command-to-string
+              (format
+               "bash -l -i -c \"%s --null\" 2>/dev/null" printenv))
+             (char-to-string ?\x0) t))))
 
 (defun my-exec-path-from-shell-initialize ()
   "Initialize environment with all shell variables."
