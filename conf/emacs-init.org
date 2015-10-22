@@ -959,15 +959,17 @@ Do not load encrypted files when Emacs starts.
 
     (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
     (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
-    (setq desktop-restore-eager 20))
+    (setq desktop-restore-eager 20)
+
+    (defun my-setup-desktop-auto-save ()
+      (setq my-save-desktop-timer
+            (run-with-idle-timer
+             5 t
+             (lambda ()
+               (desktop-save desktop-dirname)))))
+    (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save))
   :init
-  (progn
-    (desktop-save-mode 1)
-    (setq my-save-desktop-timer
-          (run-with-idle-timer
-           5 t
-           (lambda ()
-             (desktop-save desktop-dirname))))))
+  (desktop-save-mode 1))
 #+end_src
 
 ** dns-mode
