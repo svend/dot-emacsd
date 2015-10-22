@@ -528,6 +528,19 @@ Prefer newer files.
 (setq load-prefer-newer t)
 #+end_src
 
+Add option to revert buffer when prompting to save modified buffers.
+
+#+begin_src emacs-lisp
+(add-to-list
+ 'save-some-buffers-action-alist
+ '(?r
+   (lambda (buf)
+     (save-current-buffer
+       (set-buffer buf)
+       (revert-buffer t t t)))
+   "revert this buffer"))
+#+end_src
+
 ** Compile
 
 #+begin_src emacs-lisp
