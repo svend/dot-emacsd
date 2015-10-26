@@ -14,8 +14,8 @@
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
  `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :inherit (fixed-pitch shadow default)))))
  ;; Default mode line foreground and background
- `(mode-line ((t (:background "grey75" :foreground "black"))))
- `(mode-line-inactive ((t (:background "grey90" :foreground "grey20" :box (:line-width -1 :color "grey75" :style nil)))))
+ '(mode-line ((t (:background "grey75" :foreground "black"))))
+ '(mode-line-inactive ((t (:background "grey90" :foreground "grey20" :box (:line-width -1 :color "grey75" :style nil)))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit fixed-pitch))))
