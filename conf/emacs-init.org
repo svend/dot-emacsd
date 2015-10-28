@@ -257,8 +257,11 @@ Treat all themes as safe.
 Use visual bell, and reduce bell noise for common actions (e.g.
 =C-g=).
 
+Disable visual bell until [[http://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D21662][this]] is fixed.
+
 #+begin_src emacs-lisp
-(setq visible-bell t)
+(unless (eq window-system 'ns)
+        (setq visible-bell t))
 (setq ring-bell-function
       (lambda ()
         (unless
