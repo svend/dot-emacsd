@@ -26,7 +26,7 @@
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
- '(show-paren-match ((t (:background "#e6ffc2"))))
+ '(show-paren-match ((t (:background "#8ae234"))))
  '(variable-pitch ((t (:family "Input Sans")))))
 
 (provide-theme 'svend)
