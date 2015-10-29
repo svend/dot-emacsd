@@ -1461,6 +1461,9 @@ Terraform state files are JSON.
     (setq magit-branch-arguments '()) ; do NOT want --track
     (setq magit-push-arguments '("--set-upstream"))
 
+    ;; See https://github.com/magit/magit/issues/2265
+    ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
+    (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
     (add-hook 'after-save-hook 'magit-after-save-refresh-status)
     (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)))
 #+end_src
