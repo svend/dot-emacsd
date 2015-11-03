@@ -316,7 +316,9 @@ Enable y/n answers.
 
 Balance windows horizontally automatically.
 
-#+begin_src emacs-lisp
+This is now disabled.
+
+#+begin_src emacs-lisp :tangle no
 (defadvice split-window-below (after restore-balanace-below activate)
   (balance-windows-horizontally))
 
