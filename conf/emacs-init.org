@@ -2187,7 +2187,7 @@ bash shell.
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
-  (let ((default-directory (format  "/ssh:%s:" host)))
+  (let ((default-directory (format  "/scpx:%s:" host)))
     (shell (format "*shell*<%s>" host))))
 #+end_src
 
