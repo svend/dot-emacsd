@@ -200,6 +200,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 		comint-mode-hook
                 dired-mode-hook
                 ediff-mode-hook
+                eshell-mode-hook
                 ibuffer-mode-hook
                 gnus-group-mode-hook
                 ledger-report-mode-hook
