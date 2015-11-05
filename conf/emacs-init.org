@@ -79,7 +79,7 @@ This requires the homebrew coreutils package on OS X."
             (split-string
              (shell-command-to-string
               (format
-               "bash -l -i -c \"%s --null\" 2>/dev/null" printenv))
+               "bash -l -c \"%s --null\" 2>/dev/null" printenv))
              (char-to-string ?\x0) t))))
 
 (defun my-exec-path-from-shell-initialize ()
