@@ -2133,6 +2133,7 @@ Host *
 		  vc-ignore-dir-regexp
 		  tramp-file-name-regexp))
 
+    (setq tramp-default-method "scpx")
     (setq tramp-use-ssh-controlmaster-options nil)
     ;; Tramp sets HISTFILE to /dev/null so bash history on remote shells does not work.
     ;; TODO: (setq tramp-histfile-override nil) instead?
@@ -2187,7 +2188,7 @@ bash shell.
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
-  (let ((default-directory (format  "/scpx:%s:" host)))
+  (let ((default-directory (format  "/%s:" host)))
     (shell (format "*shell*<%s>" host))))
 #+end_src
 
