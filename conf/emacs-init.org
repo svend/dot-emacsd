@@ -54,7 +54,7 @@ From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 (my-require-package 'use-package)
 #+end_src
 
-This is required before any use-package forms.
+This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b3c7e207257c81ba/README.md#use-packageel-is-no-longer-needed-at-runtime][required]] before any use-package forms.
 
 #+begin_src emacs-lisp
 (eval-when-compile
@@ -876,15 +876,18 @@ by disabling second while.
 
 ** comint-mode
 
-Change scrolling behavior for comint modes.
+Catch OpenStack openrc password prompt.
 
 #+begin_src emacs-lisp
-;; Catch OpenStack openrc password prompt
 (setq comint-password-prompt-regexp
       (concat comint-password-prompt-regexp
 	      "\\|"
 	      "Please enter your OpenStack Password:"))
+#+end_src
 
+Change scrolling behavior for comint modes.
+
+#+begin_src emacs-lisp
 (defun comint-mode-config()
   ;; Do not move prompt to bottom of the screen on output
   (setq comint-scroll-show-maximum-output nil)
@@ -931,8 +934,6 @@ Change scrolling behavior for comint modes.
 
 ** desktop
 
-Do not load encrypted files when Emacs starts.
-
 #+begin_src emacs-lisp
 (use-package desktop
   :config
@@ -964,6 +965,8 @@ Do not load encrypted files when Emacs starts.
     (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
 
     (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
+
+    ;; Do not load encrypted files when Emacs starts.
     (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
     (setq desktop-restore-eager 20)
 
@@ -2222,7 +2225,7 @@ layouts.
 
 ** yasnippet
 
-[[https://github.com/capitaomorte/yasnippet/issues/289]]
+Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289][capitaomorte/yasnippet#289]].
 
 #+begin_src emacs-lisp
 (use-package yasnippet
