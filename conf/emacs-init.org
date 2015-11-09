@@ -65,8 +65,8 @@ This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b
 
 * Initialize exec-path-from-shell
 
-Experimental function that gets environmental variables from bash. This uses
-gprintenv from the homebrew coreutils package.
+Function that gets environmental variables from bash. This uses gprintenv from
+the homebrew coreutils package.
 
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
@@ -88,31 +88,14 @@ This requires the homebrew coreutils package on OS X."
   (exec-path-from-shell-copy-envs (bash-shell-variables)))
 #+end_src
 
-This needs to come before anything that uses PATH (e.g.
-executable-find).
+This needs to come before anything that uses PATH (e.g. executable-find).
 
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
   :ensure t
   :if window-system
-  :config
-  (progn
-    ;; (mapc
-    ;;  (lambda (variable)
-    ;;    (add-to-list 'exec-path-from-shell-variables variable))
-    ;;  '("ALTERNATE_EDITOR"
-    ;;    "CDPATH"
-    ;;    "EDITOR"
-    ;;    "GO15VENDOREXPERIMENT"
-    ;;    "GOPATH"
-    ;;    "GPG_AGENT_INFO"
-    ;;    "HISTFILE"
-    ;;    "INFOPATH"
-    ;;    "LANG"
-    ;;    "LC_ALL"
-    ;;    "SSH_AUTH_SOCK"))
-    (setq exec-path-from-shell-variables (bash-shell-variables))
-    (exec-path-from-shell-initialize)))
+  :init (setq exec-path-from-shell-variables (bash-shell-variables))
+  :config (exec-path-from-shell-initialize))
 #+end_src
 
 * Emacs UI
@@ -380,6 +363,8 @@ Turn on flyspell and goto-address for all text buffers.
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'text-mode-hook 'goto-address-mode)
 #+end_src
+
+Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
@@ -730,28 +715,29 @@ otherwise start a new ansi-term"
       (ansi-term "bash"))))
 #+end_src
 
-Work around [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host name completion in shell mode take 45 seconds]]
-by disabling second while.
+Work around [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host name completion in shell mode take 45 seconds]] by
+disabling second while.
 
 #+begin_src emacs-lisp
-(require 'pcmpl-unix)
+(when (> emacs-major-version 24)
+  (require 'pcmpl-unix)
 
-(defun pcmpl-ssh-known-hosts ()
-  "Return a list of hosts found in `pcmpl-ssh-known-hosts-file'."
-  (when (and pcmpl-ssh-known-hosts-file
-	     (file-readable-p pcmpl-ssh-known-hosts-file))
-    (with-temp-buffer
-      (insert-file-contents-literally pcmpl-ssh-known-hosts-file)
-      (let ((host-re "\\(?:\\([-.[:alnum:]]+\\)\\|\\[\\([-.[:alnum:]]+\\)\\]:[0-9]+\\)[, ]")
-	    ssh-hosts-list)
-	(while (re-search-forward (concat "^ *" host-re) nil t)
-	  (add-to-list 'ssh-hosts-list (concat (match-string 1)
-					       (match-string 2)))
-	  (while (and (eq ?, (char-before))
-		      (re-search-forward host-re (line-end-position) t))
-	    (add-to-list 'ssh-hosts-list (concat (match-string 1)
-						 (match-string 2)))))
-	ssh-hosts-list))))
+  (defun pcmpl-ssh-known-hosts ()
+    "Return a list of hosts found in `pcmpl-ssh-known-hosts-file'."
+    (when (and pcmpl-ssh-known-hosts-file
+               (file-readable-p pcmpl-ssh-known-hosts-file))
+      (with-temp-buffer
+        (insert-file-contents-literally pcmpl-ssh-known-hosts-file)
+        (let ((host-re "\\(?:\\([-.[:alnum:]]+\\)\\|\\[\\([-.[:alnum:]]+\\)\\]:[0-9]+\\)[, ]")
+              ssh-hosts-list)
+          (while (re-search-forward (concat "^ *" host-re) nil t)
+            (add-to-list 'ssh-hosts-list (concat (match-string 1)
+                                                 (match-string 2)))
+            (while (and (eq ?, (char-before))
+                        (re-search-forward host-re (line-end-position) t))
+              (add-to-list 'ssh-hosts-list (concat (match-string 1)
+                                                   (match-string 2)))))
+          ssh-hosts-list)))))
 #+end_src
 
 * Packages
