@@ -193,7 +193,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
                 quickrun/mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
-  (add-hook hook 'my-enable-fixed-pitch-mode))
+  (add-hook hook #'my-enable-fixed-pitch-mode))
 
 ;; Remove BufFace from mode line
 (eval-after-load "face-remap"
@@ -360,16 +360,16 @@ Turn on menu bar, since it does not use any extra space on OS X.
 Turn on flyspell and goto-address for all text buffers.
 
 #+begin_src emacs-lisp
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'goto-address-mode)
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'text-mode-hook #'goto-address-mode)
 #+end_src
 
 Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'prog-mode-hook 'goto-address-prog-mode)
-(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(add-hook 'prog-mode-hook #'goto-address-prog-mode)
+(add-hook 'prog-mode-hook #'linum-mode)
 (add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
 #+end_src
 
@@ -789,7 +789,7 @@ disabling second while.
       (make-local-variable 'comint-output-filter-functions)
       (if (member 'comint-alert-on-prompt comint-output-filter-functions)
 	  (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
-	(add-hook 'comint-output-filter-functions 'comint-alert-on-prompt)))
+	(add-hook 'comint-output-filter-functions #'comint-alert-on-prompt)))
 
     (setq alert-default-style
 	  (if (eq window-system 'ns)
@@ -886,7 +886,7 @@ Change scrolling behavior for comint modes.
   ;; Wrap lines (truncate-lines is turned on globally)
   (setq truncate-lines nil))
 
-(add-hook 'comint-mode-hook 'comint-mode-config)
+(add-hook 'comint-mode-hook #'comint-mode-config)
 #+end_src
 
 ** company
@@ -1017,7 +1017,7 @@ Change scrolling behavior for comint modes.
   :ensure t
   :defer t
   :config
-  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
+  (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
 #+end_src
 
 ** erc
@@ -1083,9 +1083,9 @@ Disable ido faces to see flx highlights.
   :ensure t
   :config
   (progn
-    ;; (add-hook 'flycheck-mode-hook 'flycheck-cask-setup)
+    ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
     (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
-    (add-hook 'after-init-hook 'global-flycheck-mode)))
+    (add-hook 'after-init-hook #'global-flycheck-mode)))
 #+end_src
 
 ** flycheck-ledger
@@ -1229,14 +1229,14 @@ go get github.com/nsf/gocode
     (defun my-go-mode-defaults ()
       (local-set-key (kbd "M-.") 'godef-jump)
       (set (make-local-variable 'company-backends) '(company-go))
-      (add-hook 'before-save-hook 'gofmt-before-save)
+      (add-hook 'before-save-hook #'gofmt-before-save)
 
       ;; El-doc for Go
       (go-eldoc-setup)
 
       ;; CamelCase aware editing operations
       (subword-mode +1))
-    (add-hook 'go-mode-hook 'my-go-mode-defaults)))
+    (add-hook 'go-mode-hook #'my-go-mode-defaults)))
 #+end_src
 
 ** haskell-mode
@@ -1252,7 +1252,7 @@ go get github.com/nsf/gocode
       (turn-on-haskell-doc-mode)
       (turn-on-haskell-indentation)
       (interactive-haskell-mode +1))
-    (add-hook 'haskell-mode-hook 'my-haskell-mode-defaults)))
+    (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults)))
 #+end_src
 
 ** helm
@@ -1382,7 +1382,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :defer t
   :config
   (progn
-    (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
+    (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
 
     (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
 
@@ -1456,7 +1456,7 @@ Terraform state files are JSON.
     ;; See https://github.com/magit/magit/issues/2265
     ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
     (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
-    (add-hook 'after-save-hook 'magit-after-save-refresh-status)))
+    (add-hook 'after-save-hook #'magit-after-save-refresh-status)))
 #+end_src
 
 ** markdown-mode
@@ -1498,7 +1498,7 @@ Terraform state files are JSON.
           smtpmail-smtp-service 587)
 
     ;; Enable gnus-alias
-    (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+    (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
     (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
     ;; Enable notmuch-address completion
@@ -1511,7 +1511,7 @@ Terraform state files are JSON.
       ;; Enable bbdb completion
       (bbdb-insinuate-message))
 
-    (add-hook 'message-setup-hook 'my-setup-message-mode)))
+    (add-hook 'message-setup-hook #'my-setup-message-mode)))
 #+end_src
 
 ** monokai-theme
@@ -1640,8 +1640,8 @@ of `org-babel-temporary-directory'."
                    temporary-file-directory)))
           (make-temp-file prefix nil suffix))))
 
-    (add-hook 'org-mode-hook 'auto-fill-mode)
-    (add-hook 'org-mode-hook 'org-babel-result-hide-all)
+    (add-hook 'org-mode-hook #'auto-fill-mode)
+    (add-hook 'org-mode-hook #'org-babel-result-hide-all)
     (setq org-completion-use-ido t)
     (setq org-refile-targets '((nil :maxlevel . 9)))
     (setq org-src-fontify-natively t)
@@ -1700,7 +1700,7 @@ make melpa-build
   :config
   (progn
     (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
-    (add-hook 'pdf-view-mode-hook 'pdf-view-fit-page-to-window)))
+    (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window)))
 #+end_src
 
 ** projectile
@@ -1796,7 +1796,7 @@ Increase timeout to 60 seconds from the default of 10 seconds.
   :defer t
   :config
   (progn
-    (add-hook 'ruby-mode-hook 'robe-mode)))
+    (add-hook 'ruby-mode-hook #'robe-mode)))
 #+end_src
 
 ** ruby-mode
@@ -1830,7 +1830,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
       (ruby-tools-mode +1)
       ;; CamelCase aware editing operations
       (subword-mode +1))
-    (add-hook 'ruby-mode-hook 'my-ruby-mode-defaults)))
+    (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults)))
 #+end_src
 
 ** ruby-tools
@@ -1868,7 +1868,7 @@ Scala worksheets end in =.sc=.
   (progn
     (defun my-scala-mode-defaults ()
       (subword-mode +1))
-    (add-hook 'scala-mode-hook 'my-scala-mode-defaults)))
+    (add-hook 'scala-mode-hook #'my-scala-mode-defaults)))
 #+end_src
 
 ** server
@@ -1898,7 +1898,7 @@ requires =server=.
       (setq sh-indent-for-case-alt '+)
       (setq sh-indent-for-case-label 0))
 
-    (add-hook 'sh-mode-hook 'my-setup-sh-mode)))
+    (add-hook 'sh-mode-hook #'my-setup-sh-mode)))
 #+end_src
 
 ** shell
@@ -1930,7 +1930,7 @@ See http://stackoverflow.com/a/11255996
   ;; ;; "command not found" state.
   ;; ;;
   ;; ;; add this hook as buffer local, so it runs once per window.
-  ;; (add-hook 'window-configuration-change-hook 'comint-fix-window-size nil t)
+  ;; (add-hook 'window-configuration-change-hook #'comint-fix-window-size nil t)
   ;; ;; ;; Run when shell starts, as well as when window layout change
   ;; (comint-fix-window-size)
 
@@ -1948,7 +1948,7 @@ See http://stackoverflow.com/a/11255996
   (setq shell-font-lock-keywords nil)
   ;; This seems to be slowing down shell buffers
   ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
-  (add-hook 'shell-mode-hook 'shell-mode-config))
+  (add-hook 'shell-mode-hook #'shell-mode-config))
 #+end_src
 
 To disable scroll to bottom:
@@ -2073,7 +2073,7 @@ M-r):
   :config
   (progn
     (setq-default term-buffer-maximum-size 10000)
-    (add-hook 'term-mode-hook 'my-setup-term-mode)))
+    (add-hook 'term-mode-hook #'my-setup-term-mode)))
 #+end_src
 
 ** terraform-mode
@@ -2185,7 +2185,7 @@ bash shell.
     (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
     (comint-read-input-ring)))
 
-(add-hook 'shell-mode-hook 'tramp-comint-read-input-ring)
+(add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
 #+end_src
 
 ** winner
