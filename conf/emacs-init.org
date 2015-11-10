@@ -1432,8 +1432,8 @@ Terraform state files are JSON.
 (use-package lisp-mode
   :config
   (add-hook 'emacs-lisp-mode-hook
-            '(lambda ()
-               (turn-on-eldoc-mode))))
+            (lambda ()
+              (turn-on-eldoc-mode))))
 #+end_src
 
 ** magit
