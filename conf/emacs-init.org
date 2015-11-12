@@ -219,7 +219,8 @@ artifacts from the old theme.
   (interactive)
   (disable-all-themes)
   (call-interactively 'load-theme)
-  (load-theme 'svend t))
+  (load-theme 'svend t)
+  (load-theme 'svend-font-input t))
 #+end_src
 
 Treat all themes as safe.
