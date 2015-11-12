@@ -2191,11 +2191,19 @@ bash shell.
 #+begin_src emacs-lisp
 (defun tramp-comint-read-input-ring ()
   "Read remote bash_history file into comint input ring."
+  (interactive)
   (when (tramp-tramp-file-p default-directory)
-    (setq-local comint-input-ring-file-name (format "%s~/.bash_history" default-directory))
-    (comint-read-input-ring)))
+    (tramp-set-comint-input-ring-file)
+    (when (ring-empty-p comint-input-ring)
+      (comint-read-input-ring))))
 
-(add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
+(defun tramp-set-comint-input-ring-file ()
+  "Set the name of the remote comint-input-ring-file."
+  (when (tramp-tramp-file-p default-directory)
+    (setq comint-input-ring-file-name (format "%s~/.bash_history" default-directory))))
+
+(add-hook 'shell-mode-hook #'tramp-set-comint-input-ring-file)
+;; (add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
 #+end_src
 
 ** winner
