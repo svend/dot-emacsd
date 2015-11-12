@@ -4,12 +4,11 @@
 (custom-theme-set-faces
  'svend
  `(cursor ((t (:background ,(face-foreground 'default)))))
- `(default ((t (:family "Input Sans" :height ,(if (eq window-system 'ns) 130 100)))))
+ `(default ((t (:height ,(if (eq window-system 'ns) 130 100)))))
  '(diff-added ((t (:inherit fixed-pitch))))
  '(diff-context ((t (:inherit (shadow fixed-pitch)))))
  '(diff-hunk-header ((t (:inherit fixed-pitch))))
  '(diff-removed ((t (:inherit fixed-pitch))))
- '(fixed-pitch ((t (:family "Input Mono"))))
  '(font-lock-doc-face ((t (:inherit variable-pitch))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
  `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :inherit (fixed-pitch shadow default)))))
@@ -26,7 +25,6 @@
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
- '(show-paren-match ((t (:background "#8ae234"))))
- '(variable-pitch ((t (:family "Input Sans")))))
+ '(show-paren-match ((t (:background "#8ae234")))))
 
 (provide-theme 'svend)
