@@ -719,7 +719,7 @@ Work around [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host
 disabling second while.
 
 #+begin_src emacs-lisp
-(when (> emacs-major-version 24)
+(when (< emacs-major-version 24)
   (require 'pcmpl-unix)
 
   (defun pcmpl-ssh-known-hosts ()
