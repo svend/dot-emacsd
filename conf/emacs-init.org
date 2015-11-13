@@ -1195,6 +1195,16 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
           ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
 #+end_src
 
+** gnutls
+
+#+begin_src emacs-lisp
+(use-package gnutls
+  :defer t
+  :config
+  (add-to-list 'gnutls-trustfiles
+               (expand-file-name "~/.certs/ca-bundle.crt")))
+#+end_src
+
 ** go-eldoc
 
 #+begin_src emacs-lisp
@@ -1610,18 +1620,6 @@ Terraform state files are JSON.
   :defer t)
 #+end_src
 
-** org-capture
-
-#+begin_src emacs-lisp
-(use-package org-capture
-  :bind (("C-c o c" . org-capture))
-  :config
-  (progn
-    (setq org-capture-templates
-          '(("t" "Task" entry (file "tasks.org")
-             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
-#+end_src
-
 ** org
 
 #+begin_src emacs-lisp
@@ -1677,6 +1675,18 @@ of `org-babel-temporary-directory'."
        (ruby . t)
        (scala . t)
        (sh . t)))))
+#+end_src
+
+** org-capture
+
+#+begin_src emacs-lisp
+(use-package org-capture
+  :bind (("C-c o c" . org-capture))
+  :config
+  (progn
+    (setq org-capture-templates
+          '(("t" "Task" entry (file "tasks.org")
+             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
 #+end_src
 
 ** pass
