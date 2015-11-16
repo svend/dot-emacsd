@@ -7,27 +7,6 @@
 (setq user-mail-address "svend@ciffer.net")
 #+end_src
 
-* Installing Emacs
-
-Install from homebrew on OS X.
-
-=brew linkapps emacs= creates a symlink under =/Applications=, but
-Emacs does not show up in Spotlight. Emacs does show up in Spotlight
-if a symlink is created under =~/Applications=.
-
-#+begin_src sh
-brew install emacs \
-     --with-cocoa \
-     --with-glib \
-     --with-gnutls \
-     --with-imagemagick \
-     --with-librsvg \
-     --devel
-
-ln -sf /usr/local/opt/emacs/Emacs.app ~/Applications
-tic -o ~/.terminfo /usr/local/Cellar/emacs/*/share/emacs/*/etc/e/eterm-color.ti
-#+end_src
-
 * Initialize package.el
 
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
