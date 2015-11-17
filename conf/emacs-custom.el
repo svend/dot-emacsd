@@ -6,7 +6,7 @@
  '(comint-input-ignoredups t)
  '(comint-input-ring-size 10000)
  '(cursor-type (quote bar))
- '(custom-enabled-themes (quote (svend svend-font-input tango-plus)))
+ '(custom-enabled-themes (quote ( svend-dejavu-input  svend tango-plus)))
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))

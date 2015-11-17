@@ -199,7 +199,7 @@ artifacts from the old theme.
   (disable-all-themes)
   (call-interactively 'load-theme)
   (load-theme 'svend t)
-  (load-theme 'svend-font-input t))
+  (load-theme 'svend-font-dejavu t))
 #+end_src
 
 Treat all themes as safe.
