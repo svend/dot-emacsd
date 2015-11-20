@@ -2178,9 +2178,10 @@ bash shell.
   (let ((default-directory (format  "/%s:" host)))
     ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
     ;; file first seems to fix this.
+    ;;
+    ;; Cannot read shell history file when using with-current-buffer.
     (find-file-noselect default-directory)
     (shell (format "*shell*<%s>" host))))
-
 #+end_src
 
 #+begin_src emacs-lisp
