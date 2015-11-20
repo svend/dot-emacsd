@@ -117,12 +117,7 @@ Display date in 24 hour format in mode line.
 
 ** Fonts
 
-User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
-
-*** Input
-
-[[http://input.fontbureau.com/][Input]] is a non-free font that is good variable pitch font for
-programming.
+Linux: User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
 
 *** DejaVu
 
@@ -169,6 +164,7 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
                 ledger-mode-hook
                 magit-log-mode-hook
                 notmuch-search-hook
+                prog-mode-hook
                 quickrun/mode-hook
                 term-mode-hook
                 vc-annotate-mode-hook))
@@ -178,6 +174,11 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
 (eval-after-load "face-remap"
   '(diminish 'buffer-face-mode))
 #+end_src
+
+*** Input
+
+[[http://input.fontbureau.com/][Input]] is a non-free font that is good variable pitch font for
+programming.
 
 * Emacs themes
 
@@ -2175,7 +2176,11 @@ bash shell.
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
   (let ((default-directory (format  "/%s:" host)))
+    ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
+    ;; file first seems to fix this.
+    (find-file-noselect default-directory)
     (shell (format "*shell*<%s>" host))))
+
 #+end_src
 
 #+begin_src emacs-lisp
@@ -2193,7 +2198,7 @@ bash shell.
     (setq comint-input-ring-file-name (format "%s~/.bash_history" default-directory))))
 
 (add-hook 'shell-mode-hook #'tramp-set-comint-input-ring-file)
-;; (add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
+(add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
 #+end_src
 
 ** winner
