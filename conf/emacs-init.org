@@ -318,8 +318,8 @@ Turn on menu bar, since it does not use any extra space on OS X.
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
   (menu-bar-mode 1)
-  ;; TODO: default value of epg-gpg-program is being modified to gpg.
-  ;; I'm not sure why.
+  ;; TODO: default value of epg-gpg-program is being modified to gpg. Perhaps
+  ;; gpg2 is not in the path when epg is getting loaded.
   (setq epg-gpg-program "gpg2")
 
   ;; x-popup-dialog creates a dialog that cannot be dismissed. This
