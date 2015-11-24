@@ -212,11 +212,10 @@ Treat all themes as safe.
 
 ** Bell
 
-Use visual bell. Disable visual bell on OS X until [[http://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D21662][this]] is fixed.
+Use visual bell.
 
 #+begin_src emacs-lisp
-(unless (eq window-system 'ns)
-        (setq visible-bell t))
+(setq visible-bell t)
 #+end_src
 
 Reduce bell noise for common actions (e.g. =C-g=).
