@@ -202,12 +202,6 @@ Treat all themes as safe.
 (setq custom-safe-themes t)
 #+end_src
 
-#+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :defer t)
-#+end_src
-
 * Emacs settings
 
 ** Bell
@@ -830,6 +824,14 @@ disabling second while.
       cfw:fchar-top-junction ?┯
       cfw:fchar-top-left-corner ?┏
       cfw:fchar-top-right-corner ?┓)))
+#+end_src
+
+** color-theme-sanityinc-tomorrow
+
+#+begin_src emacs-lisp
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :defer t)
 #+end_src
 
 ** comint-mode
