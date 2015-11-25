@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'svend-font-dejavu
- '(default ((t (:family "DejaVu Sans"))))
+ '(default ((t (:family "DejaVu Sans Mono"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  '(variable-pitch ((t (:family "DejaVu Sans")))))
 

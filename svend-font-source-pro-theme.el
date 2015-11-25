@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'svend-font-source-pro
- '(default ((t (:family "Source Sans Pro"))))
+ '(default ((t (:family "Source Code Pro"))))
  '(fixed-pitch ((t (:family "Source Code Pro"))))
  '(variable-pitch ((t (:family "Source Sans Pro")))))
 

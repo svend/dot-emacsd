@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'svend-font-oxygen
- '(default ((t (:family "Oxygen"))))
+ '(default ((t (:family "Oxygen Mono"))))
  '(fixed-pitch ((t (:family "Oxygen Mono"))))
  '(variable-pitch ((t (:family "Oxygen")))))
 

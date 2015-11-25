@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'svend-font-fira
- '(default ((t (:family "Fira"))))
+ '(default ((t (:family "Fira Mono"))))
  '(fixed-pitch ((t (:family "Fira Mono"))))
  '(variable-pitch ((t (:family "Fira")))))
 

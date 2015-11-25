@@ -142,27 +142,6 @@ Besides the choice of face, it is the same as `buffer-face-mode'."
   (buffer-face-mode-invoke 'fixed-pitch arg
                            (called-interactively-p 'interactive)))
 
-(defun my-enable-fixed-pitch-mode ()
-  (my-fixed-pitch-mode t))
-
-(dolist (hook '(calendar-mode-hook
-		cfw:calendar-mode-hook
-		comint-mode-hook
-                dired-mode-hook
-                ediff-mode-hook
-                eshell-mode-hook
-                ibuffer-mode-hook
-                gnus-group-mode-hook
-                ledger-report-mode-hook
-                ledger-mode-hook
-                magit-log-mode-hook
-                notmuch-search-hook
-                prog-mode-hook
-                quickrun/mode-hook
-                term-mode-hook
-                vc-annotate-mode-hook))
-  (add-hook hook #'my-enable-fixed-pitch-mode))
-
 ;; Remove BufFace from mode line
 (eval-after-load "face-remap"
   '(diminish 'buffer-face-mode))
@@ -323,6 +302,7 @@ Turn on flyspell and goto-address for all text buffers.
 #+begin_src emacs-lisp
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'text-mode-hook #'goto-address-mode)
+(add-hook 'text-mode-hook #'variable-pitch-mode)
 #+end_src
 
 Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
@@ -1289,7 +1269,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        ("n" linum-mode "linum")
        ("s" flyspell-mode "flyspell")
        ("t" toggle-truncate-lines "trucate")
-       ("v" my-fixed-pitch-mode "fixed-pitch")
+       ("v" variable-pitch-mode "fixed-pitch")
        ("w" whitespace-mode "whitespace")))
 
     (global-set-key
