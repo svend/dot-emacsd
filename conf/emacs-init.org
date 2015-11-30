@@ -2165,7 +2165,7 @@ bash shell.
   (when (tramp-tramp-file-p default-directory)
     (tramp-set-comint-input-ring-file)
     (when (ring-empty-p comint-input-ring)
-      (comint-read-input-ring))))
+      (comint-read-input-ring t))))
 
 (defun tramp-set-comint-input-ring-file ()
   "Set the name of the remote comint-input-ring-file."
