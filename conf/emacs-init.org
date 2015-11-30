@@ -1889,16 +1889,6 @@ requires =server=.
 See http://stackoverflow.com/a/11255996
 
 #+begin_src emacs-lisp
-(defun comint-fix-window-size ()
-  "Change process window size."
-  (when (derived-mode-p 'comint-mode)
-    (let ((process (get-buffer-process (current-buffer))))
-      (unless (eq nil process)
-        (set-process-window-size process
-                                 (window-height)
-                                 ;; Adjust for columns
-                                 (truncate (* 0.873 (window-width))))))))
-
 (defun shell-mode-config ()
   ;; company-mode
   ;;
