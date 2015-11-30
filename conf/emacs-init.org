@@ -1335,6 +1335,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :ensure t
   :defer t
   :config
+  (defun my-inf-ruby-mode-setup ()
+    (setq comint-input-ring-file-name "~/.pry_history")
+    (when (ring-empty-p comint-input-ring)
+      (comint-read-input-ring t)))
+  (add-hook 'inf-ruby-mode-hook #'my-inf-ruby-mode-setup)
   (setq inf-ruby-default-implementation "pry"))
 #+end_src
 
