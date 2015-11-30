@@ -13,6 +13,8 @@ From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 
 #+begin_src emacs-lisp
 (require 'package)
+;; Add nix elpa directory
+(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
