@@ -272,15 +272,6 @@ This is now disabled.
         downcase-region
         upcase-region
         upcase-initials-region))
-
-;; Use GUI web browser if it is available
-(if (executable-find "x-www-browser")
-    (progn
-      (setq browse-url-generic-program "x-www-browser")
-      (setq browse-url-browser-function 'browse-url-generic)))
-
-;; Do not clobber text copied from the clipboard
-(setq save-interprogram-paste-before-kill t)
 #+end_src
 
 ** OS X specific configuration
@@ -433,11 +424,12 @@ Shorter auto-revert interval. Default is 5 seconds.
 Misc settings.
 
 #+begin_src emacs-lisp
-(setq-default indent-tabs-mode nil)
-(setq require-final-newline 'ask)
-(setq sentence-end-double-space nil)
-(show-paren-mode)
 (setq enable-local-variables :safe)
+(setq require-final-newline 'ask)
+(setq save-interprogram-paste-before-kill t) ;; Do not clobber text copied from the clipboard
+(setq sentence-end-double-space nil)
+(setq-default indent-tabs-mode nil)
+(show-paren-mode)
 #+end_src
 
 Wrap lines at 80 columns instead of 70.
