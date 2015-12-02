@@ -1887,9 +1887,11 @@ See http://stackoverflow.com/a/11255996
 (defun shell-mode-config ()
   ;; company-mode
   ;;
-  ;; Enable tab, disable idle completion
+  ;; Disable idle completion
   (setq-local company-idle-delay nil)
-  (define-key shell-mode-map (kbd "TAB") #'company-manual-begin)
+  ;; Tab to complete. Use company-complete-common instead of
+  ;; company-manual-begin to complete on tab.
+  (define-key shell-mode-map (kbd "TAB") #'company-complete-common)
 
   ;; Do not store duplicate history entries
   (setq comint-input-ignoredups t)
