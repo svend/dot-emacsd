@@ -1400,6 +1400,14 @@ Terraform state files are JSON.
               (turn-on-eldoc-mode))))
 #+end_src
 
+** lua-mode
+
+#+begin_src emacs-lisp
+(use-package lua-mode
+  :ensure t
+  :defer t)
+#+end_src
+
 ** magit
 
 #+begin_src emacs-lisp
