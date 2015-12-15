@@ -1114,6 +1114,8 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
                           (nnimap-server-port 993)
                           (nnimap-stream ssl)))
 
+    ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
+    (setq gnus-always-read-dribble-file t)
     ;; Do not take over the entire frame
     (setq gnus-use-full-window nil)
 
