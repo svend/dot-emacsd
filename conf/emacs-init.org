@@ -1426,10 +1426,6 @@ Terraform state files are JSON.
     (setq magit-revert-buffers nil)
     (setq magit-save-repository-buffers 'dontask)
 
-    ;; https://github.com/magit/magit/issues/2076
-    (setq magit-branch-arguments '()) ; do NOT want --track
-    (setq magit-push-arguments '("--set-upstream"))
-
     ;; See https://github.com/magit/magit/issues/2265
     ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
     (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
