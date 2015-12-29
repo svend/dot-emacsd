@@ -1421,7 +1421,6 @@ Terraform state files are JSON.
   :config
   (progn
     (setq magit-completing-read-function 'magit-ido-completing-read)
-    (setq magit-push-always-verify nil)
     (setq magit-repository-directories '("~/src"))
     ;; We have global-auto-revert mode enabled
     (setq magit-revert-buffers nil)
