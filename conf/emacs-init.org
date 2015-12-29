@@ -9,6 +9,10 @@
 
 * Initialize package.el
 
+#+begin_src emacs-lisp
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
+#+end_src
+
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 
 #+begin_src emacs-lisp
@@ -1419,6 +1423,8 @@ Terraform state files are JSON.
     (setq magit-completing-read-function 'magit-ido-completing-read)
     (setq magit-push-always-verify nil)
     (setq magit-repository-directories '("~/src"))
+    ;; We have global-auto-revert mode enabled
+    (setq magit-revert-buffers nil)
     (setq magit-save-repository-buffers 'dontask)
 
     ;; https://github.com/magit/magit/issues/2076
@@ -2001,6 +2007,14 @@ M-r):
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)
          ("C-c M-x" . execute-extended-command)))
+#+end_src
+
+** smtpmail-multi
+
+#+begin_src emacs-lisp
+(use-package smtpmail-multi
+  :ensure t
+  :defer t)
 #+end_src
 
 ** solarized-theme
