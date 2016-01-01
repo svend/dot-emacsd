@@ -1110,7 +1110,8 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 
     ;; Gmane
     (add-to-list 'gnus-secondary-select-methods
-                 '(nntp "news.gmane.org"))
+                 '(nntp "gmane"
+                        (nntp-address "news.gmane.org")))
 
     ;; Gmail
     (add-to-list 'gnus-secondary-select-methods
