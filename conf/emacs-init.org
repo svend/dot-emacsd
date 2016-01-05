@@ -1105,6 +1105,7 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 (use-package gnus
   :config
   (progn
+    (setq gnus-gcc-mark-as-read t)
     (setq gnus-inhibit-startup-message t)
     (setq gnus-select-method '(nnnil ""))
 
