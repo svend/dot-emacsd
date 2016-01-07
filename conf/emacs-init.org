@@ -1125,7 +1125,7 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
     (setq gnus-inhibit-startup-message t)
     (setq gnus-use-full-window nil) ;; Do not take over the entire frame
 
-    ;; (setq imap-log t) ;; Debugging
+    ;; (setq nnimap-record-commands t) ;; Record all IMAP commands in the ‘"*imap log*"’
 
     (setq gnus-posting-styles
           '((".*" (address "svend@ciffer.net"))))))
