@@ -257,17 +257,10 @@ Balance windows horizontally automatically.
 This is now disabled.
 
 #+begin_src emacs-lisp :tangle no
-(defadvice split-window-below (after restore-balanace-below activate)
-  (balance-windows-horizontally))
-
-(defadvice split-window-right (after restore-balance-right activate)
-  (balance-windows-horizontally))
-
-(defadvice split-window (after restore-balance activate)
-  (balance-windows-horizontally))
-
-(defadvice delete-window (after restore-balance activate)
-  (balance-windows-horizontally))
+(advice-add 'split-window-below :after #'balance-windows-horizontally)
+(advice-add 'split-window-right :after #'balance-windows-horizontally)
+;; (advice-add 'split-window :after #'balance-windows-horizontally)
+(advice-add 'delete-window :after #'balance-windows-horizontally)
 #+end_src
 
 ** Disabled commands
