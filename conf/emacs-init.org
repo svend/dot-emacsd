@@ -1119,9 +1119,7 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
     (setq gnus-use-full-window nil) ;; Do not take over the entire frame
 
     ;; (setq nnimap-record-commands t) ;; Record all IMAP commands in the ‘"*imap log*"’
-
-    (add-to-list 'gnus-posting-styles
-          '((".*" (address "svend@ciffer.net"))))))
+    )
 #+end_src
 
 ** gnus-alias
