@@ -1113,13 +1113,16 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
                           (nnimap-server-port 993)
                           (nnimap-stream ssl)))
 
-    (setq gnus-always-read-dribble-file t) ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
-    (setq gnus-gcc-mark-as-read t) ;; Mark sent messages as read
-    (setq gnus-inhibit-startup-message t)
-    (setq gnus-use-full-window nil) ;; Do not take over the entire frame
+    ;; ;; Record all IMAP commands in the ‘"*imap log*"’
+    ;; (setq nnimap-record-commands t)
 
-    ;; (setq nnimap-record-commands t) ;; Record all IMAP commands in the ‘"*imap log*"’
-    )
+    ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
+    (setq gnus-always-read-dribble-file t)
+    ;; Mark sent messages as read
+    (setq gnus-gcc-mark-as-read t)
+    (setq gnus-inhibit-startup-message t)
+    ;; Do not take over the entire frame
+    (setq gnus-use-full-window nil)))
 #+end_src
 
 ** gnus-alias
