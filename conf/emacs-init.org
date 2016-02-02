@@ -706,6 +706,14 @@ disabling second while.
   :defer t)
 #+end_src
 
+** aggressive-indent
+
+#+begin_src emacs-lisp
+(use-package aggressive-indent
+  :ensure t
+  :defer t)
+#+end_src
+
 ** alert
 
 #+begin_src emacs-lisp
