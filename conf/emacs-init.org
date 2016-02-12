@@ -823,7 +823,11 @@ Catch OpenStack openrc password prompt.
 (setq comint-password-prompt-regexp
       (concat comint-password-prompt-regexp
               "\\|"
-              "Please enter your OpenStack Password:"))
+              ;; OpenStack
+              "Please enter your OpenStack Password:"
+              "\\|"
+              ;; Ansible
+              "SUDO password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
