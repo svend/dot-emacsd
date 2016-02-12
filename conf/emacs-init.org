@@ -711,7 +711,8 @@ disabling second while.
 #+begin_src emacs-lisp
 (use-package aggressive-indent
   :ensure t
-  :defer t)
+  :config (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
+  :init (global-aggressive-indent-mode 1))
 #+end_src
 
 ** alert
