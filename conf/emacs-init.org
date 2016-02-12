@@ -2117,10 +2117,9 @@ Use SSH default control master settings. Add the following to
 =~/.ssh/config=.
 
 #+begin_example conf
-Host *
-        ControlMaster auto
-        ControlPath ~/.ssh/control.%h_%p_%r
-        ControlPersist 60m
+ControlMaster auto
+ControlPath ~/.ssh/control.%h_%p_%r
+ControlPersist 60m
 #+end_example
 
 #+begin_src emacs-lisp
