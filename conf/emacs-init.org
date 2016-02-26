@@ -1162,7 +1162,7 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
   :defer t
   :config
   (add-to-list 'gnutls-trustfiles
-               (expand-file-name "~/.certs/ca-bundle.crt")))
+               (expand-file-name "~/.certs/ca-certificates.crt")))
 #+end_src
 
 ** go-eldoc
