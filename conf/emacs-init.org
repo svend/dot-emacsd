@@ -1877,7 +1877,7 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package saveplace
-  :init (setq-default save-place t))
+  :init (save-place-mode))
 #+end_src
 
 ** scala-mode2
