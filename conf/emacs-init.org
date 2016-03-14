@@ -1279,12 +1279,11 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        ("v" variable-pitch-mode "fixed-pitch")
        ("w" whitespace-mode "whitespace")))
 
-    (global-set-key
-     (kbd "C-c w")
-     (defhydra hydra-winner ()
-       "Winner"
-       ("w" winner-undo "back")
-       ("r" winner-redo "forward" :exit t)))))
+    (defhydra hydra-winner ()
+      "Winner"
+      ("w" winner-undo "back")
+      ("r" winner-redo "forward" :exit t))
+    (global-set-key (kbd "C-c w") 'hydra-winner/winner-undo)))
 #+end_src
 
 ** ibuffer
