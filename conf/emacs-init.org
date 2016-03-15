@@ -1721,9 +1721,10 @@ make melpa-build
     (setq projectile-use-git-grep t)
     (add-to-list 'projectile-project-root-files ".kitchen.yml")
     ;; Omit project name for remote buffers
-    (setq projectile-mode-line '(:eval (if (file-remote-p default-directory)
-                                           '(" P")
-                                         (format " P[%s]" (projectile-project-name)))))
+    (setq projectile-mode-line
+          '(:eval (if (file-remote-p default-directory)
+                      " P"
+                    (format " P[%s]" (projectile-project-name)))))
     (projectile-cleanup-known-projects)))
 #+end_src
 
