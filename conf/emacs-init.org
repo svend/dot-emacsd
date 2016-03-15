@@ -1719,6 +1719,7 @@ make melpa-build
       (put var 'safe-local-variable #'stringp))
 
     (setq projectile-use-git-grep t)
+    (add-to-list 'projectile-project-root-files ".kitchen.yml")
     ;; Omit project name for remote buffers
     (setq projectile-mode-line '(:eval (if (file-remote-p default-directory)
                                            '(" P")
