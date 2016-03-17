@@ -827,7 +827,9 @@ Catch OpenStack openrc password prompt.
               "Please enter your OpenStack Password:"
               "\\|"
               ;; Ansible
-              "SUDO password:"))
+              "SUDO password:"
+              "\\|"
+              "Vault password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
