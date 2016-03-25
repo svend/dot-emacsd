@@ -2161,44 +2161,41 @@ bash shell.
 #+begin_src emacs-lisp
 (require 'tramp)
 
-(my-require-package 'dash)
-(require 'dash)
-
-(defun ssh-shell-hosts ()
-  "Return list of known SSH hosts."
-  ;; Copied from cssh.el
-  (-flatten (mapcar (lambda (x)
-                      (cl-remove-if 'null (mapcar #'cadr (apply (car x) (cdr x)))))
-                    (tramp-get-completion-function "ssh"))))
-
-(defun ssh-add-user-to-hosts (&optional user)
-  "Return list of known hosts prefixed with USER."
-  (if (> (length user) 0)
-      (mapcar (lambda (h) (format "%s@%s" user h))
-              (ssh-shell-hosts))
-    (ssh-shell-hosts)))
-
 (defun ssh-host-completing-read ()
   (completing-read
    "Open ssh connection to [user@]host: "
    (completion-table-dynamic
     (lambda (str)
-      (let* ((user-and-host (split-string str "@"))
-             (user (if (> (length user-and-host) 1)
-                       (car user-and-host)
-                     nil)))
-        (ssh-add-user-to-hosts user))))))
+      (tramp-completion-handle-file-name-all-completions str "/")))))
 
-(defun ssh-shell (host)
+(defun ssh-shell-2 (host)
   "Open SSH connection to HOST."
-  (interactive (list (ssh-host-completing-read)))
-  (let ((default-directory (format  "/%s:" host)))
+  (interactive "f")
+  (let ((default-directory host))
     ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
     ;; file first seems to fix this.
     ;;
     ;; Cannot read shell history file when using with-current-buffer.
     (find-file-noselect default-directory)
     (shell (format "*shell*<%s>" host))))
+
+(defun ssh-shell (host)
+  "Open SSH connection to HOST."
+  (interactive (list (ssh-host-completing-read)))
+  (let ((default-directory (format  "/%s" host)))
+    ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
+    ;; file first seems to fix this.
+    ;;
+    ;; Cannot read shell history file when using with-current-buffer.
+    (find-file-noselect default-directory)
+    (shell (format "*shell*<%s>" host))))
+
+(defun dtach-shell (socket)
+  "Attach to specified dtach SOCKET or create it if it does not exist"
+  (interactive "F")
+  (let ((explicit-shell-file-name "dtach")
+        (explicit-dtach-args `("-A" ,socket "-z" "bash" "--noediting" "--login" "-i")))
+    (shell (format "*dtach*<%s>" socket))))
 #+end_src
 
 #+begin_src emacs-lisp
