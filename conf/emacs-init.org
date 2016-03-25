@@ -2141,7 +2141,6 @@ ControlPersist 60m
                   vc-ignore-dir-regexp
                   tramp-file-name-regexp))
 
-    (setq tramp-default-method "scpx")
     (setq tramp-use-ssh-controlmaster-options nil)
     ;; Tramp sets HISTFILE so bash history on remote shells does not work.
     (setq tramp-histfile-override nil)))
