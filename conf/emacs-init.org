@@ -871,6 +871,15 @@ Change scrolling behavior for comint modes.
   :defer t)
 #+end_src
 
+** company-jedi
+
+#+begin_src emacs-lisp
+(use-package company-jedi
+  :ensure t
+  :defer t)
+#+end_src
+
+
 ** csv-mode
 
 #+begin_src emacs-lisp
