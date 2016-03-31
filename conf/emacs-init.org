@@ -876,7 +876,10 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package company-jedi
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (progn
+    (setq jedi:use-shortcuts t)))
 #+end_src
 
 
