@@ -2194,7 +2194,10 @@ bash shell.
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
-  (let ((default-directory (format  "/%s" host)))
+  (let* ((host (if (string-suffix-p ":" "host")
+                   host
+                 (format  "%s:" host)))
+         (default-directory (format  "/%s" host)))
     ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
     ;; file first seems to fix this.
     ;;
