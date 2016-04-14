@@ -298,10 +298,15 @@ Turn on flyspell and goto-address for all text buffers.
 Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(add-hook 'prog-mode-hook #'goto-address-prog-mode)
-(add-hook 'prog-mode-hook #'linum-mode)
-(add-hook 'prog-mode-hook (lambda () (setq show-trailing-whitespace t)))
+(defun my-prog-mode-hook()
+  (flyspell-prog-mode)
+  (goto-address-prog-mode)
+  (linum-mode)
+  (setq show-trailing-whitespace t))
+
+(add-hook 'prog-mode-hook #'my-prog-mode-hook)
+(add-hook 'yaml-mode-hook #'my-prog-mode-hook)
+(add-hook 'yaml-mode-hook #'my-fixed-pitch-mode)
 #+end_src
 
 ** Auto modes
