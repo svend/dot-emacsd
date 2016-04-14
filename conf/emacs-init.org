@@ -232,6 +232,7 @@ Scroll one line at a time with mouse
 Hilight the current line.
 
 #+begin_src emacs-lisp
+(setq global-hl-line-sticky-flag t)
 (global-hl-line-mode t)
 #+end_src
 
