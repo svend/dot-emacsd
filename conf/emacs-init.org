@@ -1619,58 +1619,57 @@ Terraform state files are JSON.
 ** org
 
 #+begin_src emacs-lisp
-(use-package org
-  :bind (("C-c c" . org-capture)
-         ("C-c o a" . org-agenda)
-         ("C-c o b" . org-iswitchb)
-         ("C-c o l" . org-store-link))
-  :config
-  (progn
-    (defun org-babel-temp-file (prefix &optional suffix)
-      "Create a temporary file in the `org-babel-temporary-directory'.
-Passes PREFIX and SUFFIX directly to `make-temp-file' with the
-value of `temporary-file-directory' temporarily set to the value
-of `org-babel-temporary-directory'."
-      (if (file-remote-p default-directory)
-          (let ((prefix
-                 (concat (file-remote-p default-directory)
-                         ;; Replace temporary-file-directory with "/tmp"
-                         (expand-file-name prefix "/tmp"))))
-            (make-temp-file prefix nil suffix))
-        (let ((temporary-file-directory
-               (or (and (boundp 'org-babel-temporary-directory)
-                        (file-exists-p org-babel-temporary-directory)
-                        org-babel-temporary-directory)
-                   temporary-file-directory)))
-          (make-temp-file prefix nil suffix))))
+  (use-package org
+    :bind (("C-c c" . org-capture)
+           ("C-c o a" . org-agenda)
+           ("C-c o b" . org-iswitchb)
+           ("C-c o l" . org-store-link))
+    :config
+    (progn
+      (defun org-babel-temp-file (prefix &optional suffix)
+        "Create a temporary file in the `org-babel-temporary-directory'.
+  Passes PREFIX and SUFFIX directly to `make-temp-file' with the
+  value of `temporary-file-directory' temporarily set to the value
+  of `org-babel-temporary-directory'."
+        (if (file-remote-p default-directory)
+            (let ((prefix
+                   (concat (file-remote-p default-directory)
+                           ;; Replace temporary-file-directory with "/tmp"
+                           (expand-file-name prefix "/tmp"))))
+              (make-temp-file prefix nil suffix))
+          (let ((temporary-file-directory
+                 (or (and (boundp 'org-babel-temporary-directory)
+                          (file-exists-p org-babel-temporary-directory)
+                          org-babel-temporary-directory)
+                     temporary-file-directory)))
+            (make-temp-file prefix nil suffix))))
 
-    (add-hook 'org-mode-hook #'auto-fill-mode)
-    (add-hook 'org-mode-hook #'org-babel-result-hide-all)
-    (setq org-completion-use-ido t)
-    (setq org-ellipsis "…")
-    (setq org-refile-targets '((nil :maxlevel . 9)))
-    (setq org-src-fontify-natively t)
-    (setq org-src-preserve-indentation t)
-    (setq org-use-speed-commands t)
-    (setq org-capture-templates
-          '(("t" "Task" entry (file "tasks.org")
-             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
+      (add-hook 'org-mode-hook #'auto-fill-mode)
+      (add-hook 'org-mode-hook #'org-babel-result-hide-all)
+      (setq org-completion-use-ido t)
+      (setq org-ellipsis "…")
+      (setq org-refile-targets '((nil :maxlevel . 9)))
+      (setq org-src-fontify-natively t)
+      (setq org-use-speed-commands t)
+      (setq org-capture-templates
+            '(("t" "Task" entry (file "tasks.org")
+               "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
 
-    ;; Lower case all org template block headers
-    (mapc (lambda (asc)
-            (let ((org-sce-dc (downcase (nth 1 asc))))
-              (setf (nth 1 asc) org-sce-dc)))
-          org-structure-template-alist)
+      ;; Lower case all org template block headers
+      (mapc (lambda (asc)
+              (let ((org-sce-dc (downcase (nth 1 asc))))
+                (setf (nth 1 asc) org-sce-dc)))
+            org-structure-template-alist)
 
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((calc . t)
-       (emacs-lisp . t)
-       (perl . t)
-       (python . t)
-       (ruby . t)
-       (scala . t)
-       (sh . t)))))
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((calc . t)
+         (emacs-lisp . t)
+         (perl . t)
+         (python . t)
+         (ruby . t)
+         (scala . t)
+         (sh . t)))))
 #+end_src
 
 ** org-capture
