@@ -3,49 +3,49 @@
 * User information
 
 #+begin_src emacs-lisp
-(setq user-full-name "Svend Sorensen")
-(setq user-mail-address "svend@ciffer.net")
+  (setq user-full-name "Svend Sorensen")
+  (setq user-mail-address "svend@ciffer.net")
 #+end_src
 
 * Initialize package.el
 
 #+begin_src emacs-lisp
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
+  (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
 #+end_src
 
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 
 #+begin_src emacs-lisp
-(require 'package)
-;; Add nix elpa directory
-(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
+  (require 'package)
+  ;; Add nix elpa directory
+  (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/") t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
 #+end_src
 
 * Initialize use-package
 
 #+begin_src emacs-lisp
-(defun my-require-package (package)
-  "Install PACKAGE unless already installed."
-  (unless (package-installed-p package)
-    (package-refresh-contents)
-    (package-install package)))
+  (defun my-require-package (package)
+    "Install PACKAGE unless already installed."
+    (unless (package-installed-p package)
+      (package-refresh-contents)
+      (package-install package)))
 
-(my-require-package 'use-package)
+  (my-require-package 'use-package)
 #+end_src
 
 This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b3c7e207257c81ba/README.md#use-packageel-is-no-longer-needed-at-runtime][required]] before any use-package forms.
 
 #+begin_src emacs-lisp
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
+  (eval-when-compile
+    (require 'use-package))
+  (require 'diminish)
+  (require 'bind-key)
 #+end_src
 
 * Initialize exec-path-from-shell
@@ -54,33 +54,33 @@ Function that gets environmental variables from bash. This uses gprintenv from
 the homebrew coreutils package.
 
 #+begin_src emacs-lisp
-(defun bash-shell-variables()
-  "Return a list of env variables.
-This requires the homebrew coreutils package on OS X."
-  (let ((printenv (if (eq window-system 'ns)
-                      "gprintenv"
-                    "printenv")))
-    (mapcar (lambda (s) (car (split-string s "=")))
-            (split-string
-             (shell-command-to-string
-              (format
-               "bash -l -c \"%s --null\" 2>/dev/null" printenv))
-             (char-to-string ?\x0) t))))
+  (defun bash-shell-variables()
+    "Return a list of env variables.
+  This requires the homebrew coreutils package on OS X."
+    (let ((printenv (if (eq window-system 'ns)
+                        "gprintenv"
+                      "printenv")))
+      (mapcar (lambda (s) (car (split-string s "=")))
+              (split-string
+               (shell-command-to-string
+                (format
+                 "bash -l -c \"%s --null\" 2>/dev/null" printenv))
+               (char-to-string ?\x0) t))))
 
-(defun my-exec-path-from-shell-initialize ()
-  "Initialize environment with all shell variables."
-  (interactive)
-  (exec-path-from-shell-copy-envs (bash-shell-variables)))
+  (defun my-exec-path-from-shell-initialize ()
+    "Initialize environment with all shell variables."
+    (interactive)
+    (exec-path-from-shell-copy-envs (bash-shell-variables)))
 #+end_src
 
 This needs to come before anything that uses PATH (e.g. executable-find).
 
 #+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :ensure t
-  :if window-system
-  :init (setq exec-path-from-shell-variables (bash-shell-variables))
-  :config (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :ensure t
+    :if window-system
+    :init (setq exec-path-from-shell-variables (bash-shell-variables))
+    :config (exec-path-from-shell-initialize))
 #+end_src
 
 * Emacs UI
@@ -92,9 +92,9 @@ This needs to come before anything that uses PATH (e.g. executable-find).
 - Disable tool bar
 
 #+begin_src emacs-lisp
-(setq inhibit-splash-screen t)
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (setq inhibit-splash-screen t)
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+end_src
 
 ** Mode line
@@ -104,15 +104,15 @@ This needs to come before anything that uses PATH (e.g. executable-find).
   default)
 
 #+begin_src emacs-lisp
-(display-time-mode t)
-(column-number-mode t)
+  (display-time-mode t)
+  (column-number-mode t)
 #+end_src
 
 Display date in 24 hour format in mode line.
 
 #+begin_src emacs-lisp
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
+  (setq display-time-day-and-date t)
+  (setq display-time-24hr-format t)
 #+end_src
 
 ** Fonts
@@ -138,19 +138,19 @@ brew cask install font-dejavu-sans
 #+end_src
 
 #+begin_src emacs-lisp
-(require 'face-remap)
+  (require 'face-remap)
 
-(defun my-fixed-pitch-mode (&optional arg)
-  "Fixed-pitch default-face mode.
-An interface to `buffer-face-mode' which uses the `fixed-pitch' face.
-Besides the choice of face, it is the same as `buffer-face-mode'."
-  (interactive (list (or current-prefix-arg 'toggle)))
-  (buffer-face-mode-invoke 'fixed-pitch arg
-                           (called-interactively-p 'interactive)))
+  (defun my-fixed-pitch-mode (&optional arg)
+    "Fixed-pitch default-face mode.
+  An interface to `buffer-face-mode' which uses the `fixed-pitch' face.
+  Besides the choice of face, it is the same as `buffer-face-mode'."
+    (interactive (list (or current-prefix-arg 'toggle)))
+    (buffer-face-mode-invoke 'fixed-pitch arg
+                             (called-interactively-p 'interactive)))
 
-;; Remove BufFace from mode line
-(eval-after-load "face-remap"
-  '(diminish 'buffer-face-mode))
+  ;; Remove BufFace from mode line
+  (eval-after-load "face-remap"
+    '(diminish 'buffer-face-mode))
 #+end_src
 
 *** Input
@@ -166,25 +166,25 @@ artifacts from the old theme.
 [[https://stackoverflow.com/questions/22866733/emacs-disable-theme-after-loading-a-different-one-themes-conflict?noredirect%3D1#comment34887344_22866733][Emacs disable-theme after loading a different one (Stack Overflow)]]
 
 #+begin_src emacs-lisp
-(defun disable-all-themes ()
-  "Disable all active themes."
-  (interactive)
-  (dolist (i custom-enabled-themes)
-    (disable-theme i)))
+  (defun disable-all-themes ()
+    "Disable all active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
 
-(defun my-load-theme ()
-  "Load a single theme then load override theme."
-  (interactive)
-  (disable-all-themes)
-  (call-interactively 'load-theme)
-  (load-theme 'svend t)
-  (load-theme 'svend-font-dejavu t))
+  (defun my-load-theme ()
+    "Load a single theme then load override theme."
+    (interactive)
+    (disable-all-themes)
+    (call-interactively 'load-theme)
+    (load-theme 'svend t)
+    (load-theme 'svend-font-dejavu t))
 #+end_src
 
 Treat all themes as safe.
 
 #+begin_src emacs-lisp
-(setq custom-safe-themes t)
+  (setq custom-safe-themes t)
 #+end_src
 
 * Emacs settings
@@ -194,22 +194,22 @@ Treat all themes as safe.
 Use visual bell.
 
 #+begin_src emacs-lisp
-(setq visible-bell t)
+  (setq visible-bell t)
 #+end_src
 
 Reduce bell noise for common actions (e.g. =C-g=).
 
 #+begin_src emacs-lisp
-(setq ring-bell-function
-      (lambda ()
-        (unless
-            (memq this-command
-                  '(abort-recursive-edit
-                    isearch-abort
-                    isearch-printing-char
-                    keyboard-quit
-                    nil))
-          (ding))))
+  (setq ring-bell-function
+        (lambda ()
+          (unless
+              (memq this-command
+                    '(abort-recursive-edit
+                      isearch-abort
+                      isearch-printing-char
+                      keyboard-quit
+                      nil))
+            (ding))))
 #+end_src
 
 ** Mouse
@@ -218,13 +218,13 @@ Copy test selected by the mouse to the kill ring. This was turned off
 in Emacs 24.
 
 #+begin_src emacs-lisp
-(setq mouse-drag-copy-region t)
+  (setq mouse-drag-copy-region t)
 #+end_src
 
 Scroll one line at a time with mouse
 
 #+begin_src emacs-lisp
-(setq mouse-wheel-scroll-amount '(1))
+  (setq mouse-wheel-scroll-amount '(1))
 #+end_src
 
 ** Hilight current line
@@ -232,15 +232,15 @@ Scroll one line at a time with mouse
 Hilight the current line.
 
 #+begin_src emacs-lisp
-(setq global-hl-line-sticky-flag t)
-(global-hl-line-mode t)
+  (setq global-hl-line-sticky-flag t)
+  (global-hl-line-mode t)
 #+end_src
 
 To disable for a mode, add this to the mode hook:
 
 #+begin_src emacs-lisp :tangle no
-(make-local-variable 'global-hl-line-mode)
-(setq global-hl-line-mode nil)
+  (make-local-variable 'global-hl-line-mode)
+  (setq global-hl-line-mode nil)
 #+end_src
 
 ** Y/N answers
@@ -248,7 +248,7 @@ To disable for a mode, add this to the mode hook:
 Enable y/n answers.
 
 #+begin_src emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 ** Balance windows
@@ -258,20 +258,20 @@ Balance windows horizontally automatically.
 This is now disabled.
 
 #+begin_src emacs-lisp :tangle no
-(advice-add 'split-window-below :after #'balance-windows-horizontally)
-(advice-add 'split-window-right :after #'balance-windows-horizontally)
-;; (advice-add 'split-window :after #'balance-windows-horizontally)
-(advice-add 'delete-window :after #'balance-windows-horizontally)
+  (advice-add 'split-window-below :after #'balance-windows-horizontally)
+  (advice-add 'split-window-right :after #'balance-windows-horizontally)
+  ;; (advice-add 'split-window :after #'balance-windows-horizontally)
+  (advice-add 'delete-window :after #'balance-windows-horizontally)
 #+end_src
 
 ** Disabled commands
 
 #+begin_src emacs-lisp
-(mapc (lambda (command) (put command 'disabled nil))
-      '(erase-buffer
-        downcase-region
-        upcase-region
-        upcase-initials-region))
+  (mapc (lambda (command) (put command 'disabled nil))
+        '(erase-buffer
+          downcase-region
+          upcase-region
+          upcase-initials-region))
 #+end_src
 
 ** OS X specific configuration
@@ -279,11 +279,11 @@ This is now disabled.
 Turn on menu bar, since it does not use any extra space on OS X.
 
 #+begin_src emacs-lisp
-(when (eq window-system 'ns)
-  (menu-bar-mode 1)
-  ;; TODO: default value of epg-gpg-program is being modified to gpg. Perhaps
-  ;; gpg2 is not in the path when epg is getting loaded.
-  (setq epg-gpg-program "gpg2"))
+  (when (eq window-system 'ns)
+    (menu-bar-mode 1)
+    ;; TODO: default value of epg-gpg-program is being modified to gpg. Perhaps
+    ;; gpg2 is not in the path when epg is getting loaded.
+    (setq epg-gpg-program "gpg2"))
 #+end_src
 
 ** Programming modes
@@ -291,23 +291,23 @@ Turn on menu bar, since it does not use any extra space on OS X.
 Turn on flyspell and goto-address for all text buffers.
 
 #+begin_src emacs-lisp
-(add-hook 'text-mode-hook #'flyspell-mode)
-(add-hook 'text-mode-hook #'goto-address-mode)
-(add-hook 'text-mode-hook #'variable-pitch-mode)
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'text-mode-hook #'goto-address-mode)
+  (add-hook 'text-mode-hook #'variable-pitch-mode)
 #+end_src
 
 Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 
 #+begin_src emacs-lisp
-(defun my-prog-mode-hook()
-  (flyspell-prog-mode)
-  (goto-address-prog-mode)
-  (linum-mode)
-  (setq show-trailing-whitespace t))
+  (defun my-prog-mode-hook()
+    (flyspell-prog-mode)
+    (goto-address-prog-mode)
+    (linum-mode)
+    (setq show-trailing-whitespace t))
 
-(add-hook 'prog-mode-hook #'my-prog-mode-hook)
-(add-hook 'yaml-mode-hook #'my-prog-mode-hook)
-(add-hook 'yaml-mode-hook #'my-fixed-pitch-mode)
+  (add-hook 'prog-mode-hook #'my-prog-mode-hook)
+  (add-hook 'yaml-mode-hook #'my-prog-mode-hook)
+  (add-hook 'yaml-mode-hook #'my-fixed-pitch-mode)
 #+end_src
 
 ** Auto modes
@@ -315,10 +315,10 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 =bash-fc-*= are bash command editing temporary files (=fc= built-in).
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
-(add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
-(add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
-(add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
+  (add-to-list 'auto-mode-alist '(".mrconfig$" . conf-mode))
+  (add-to-list 'auto-mode-alist '("/etc/network/interfaces" . conf-mode))
+  (add-to-list 'auto-mode-alist '("Carton\\'" . lisp-mode))
+  (add-to-list 'auto-mode-alist '("bash-fc-" . sh-mode))
 #+end_src
 
 ** Lock files
@@ -331,7 +331,7 @@ edited. They can be disabled as of 24.3.
 http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 
 #+begin_src emacs-lisp
-(setq create-lockfiles nil)
+  (setq create-lockfiles nil)
 #+end_src
 
 ** Backup and auto-saves
@@ -340,10 +340,10 @@ Put all backup and auto-saves into =~/.emacs.d= instead of the current
 directory.
 
 #+begin_src emacs-lisp
-(setq backup-directory-alist
-      `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
-(setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "backup/" user-emacs-directory) t)))
+  (setq backup-directory-alist
+        `((".*" . ,(expand-file-name "backup/" user-emacs-directory))))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(expand-file-name "backup/" user-emacs-directory) t)))
 #+end_src
 
 ** Revert
@@ -351,8 +351,8 @@ directory.
 Enable global auto-revert mode.
 
 #+begin_src emacs-lisp
-(global-auto-revert-mode 1)
-(setq global-auto-revert-non-file-buffers t)
+  (global-auto-revert-mode 1)
+  (setq global-auto-revert-non-file-buffers t)
 #+end_src
 
 ** Key bindings
@@ -364,16 +364,16 @@ Press =C-c C-h= to show all of these.
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 #+begin_src emacs-lisp
-(bind-key "C-c d" 'my-insert-date)
-(bind-key "C-c e" 'eww)
-(bind-key "C-c j" 'dired-jump)
-(bind-key "C-c r" 'revert-buffer)
+  (bind-key "C-c d" 'my-insert-date)
+  (bind-key "C-c e" 'eww)
+  (bind-key "C-c j" 'dired-jump)
+  (bind-key "C-c r" 'revert-buffer)
 #+end_src
 
 ** Truncate lines
 
 #+begin_src emacs-lisp
-(setq-default truncate-lines t)
+  (setq-default truncate-lines t)
 #+end_src
 
 ** Space as control key
@@ -405,11 +405,11 @@ Karabiner:
   - Space to Control_L (+ When you type Space only, send Space)
 
 #+begin_src emacs-lisp
-(bind-key "C-x M-SPC" 'pop-global-mark)
-(bind-key "M-SPC" 'set-mark-command)
-(bind-key "M-s-SPC" 'mark-sexp)
-(bind-key "M-s- " 'mark-sexp)           ; OS X
-(bind-key "s-SPC" 'just-one-space)
+  (bind-key "C-x M-SPC" 'pop-global-mark)
+  (bind-key "M-SPC" 'set-mark-command)
+  (bind-key "M-s-SPC" 'mark-sexp)
+  (bind-key "M-s- " 'mark-sexp)           ; OS X
+  (bind-key "s-SPC" 'just-one-space)
 #+end_src
 
 ** Other settings
@@ -417,81 +417,81 @@ Karabiner:
 Rapid mark-pop (=C-u C-SPC C-SPC...=).
 
 #+begin_src emacs-lisp
-(setq set-mark-command-repeat-pop t)
+  (setq set-mark-command-repeat-pop t)
 #+end_src
 
 Shorter auto-revert interval. Default is 5 seconds.
 
 #+begin_src emacs-lisp
-(setq auto-revert-interval 0.1)
+  (setq auto-revert-interval 0.1)
 #+end_src
 
 Misc settings.
 
 #+begin_src emacs-lisp
-(setq enable-local-variables :safe)
-(setq require-final-newline 'ask)
-(setq save-interprogram-paste-before-kill t) ;; Do not clobber text copied from the clipboard
-(setq sentence-end-double-space nil)
-(setq-default indent-tabs-mode nil)
-(show-paren-mode)
+  (setq enable-local-variables :safe)
+  (setq require-final-newline 'ask)
+  (setq save-interprogram-paste-before-kill t) ;; Do not clobber text copied from the clipboard
+  (setq sentence-end-double-space nil)
+  (setq-default indent-tabs-mode nil)
+  (show-paren-mode)
 #+end_src
 
 Wrap lines at 80 columns instead of 70.
 
 #+begin_src emacs-lisp
-(setq-default fill-column 80)
+  (setq-default fill-column 80)
 #+end_src
 
 Open a new window for asynchronous commands without prompting.
 
 #+begin_src emacs-lisp
-(setq async-shell-command-buffer 'new-buffer)
+  (setq async-shell-command-buffer 'new-buffer)
 #+end_src
 
 Add timezones for =display-time-world=.
 
 #+begin_src emacs-lisp
-(add-to-list 'display-time-world-list '("UTC" "UTC"))
-(add-to-list 'display-time-world-list '("Europe/Budapest" "Budapest"))
-(add-to-list 'display-time-world-list '("America/Chicago" "Chicago"))
+  (add-to-list 'display-time-world-list '("UTC" "UTC"))
+  (add-to-list 'display-time-world-list '("Europe/Budapest" "Budapest"))
+  (add-to-list 'display-time-world-list '("America/Chicago" "Chicago"))
 #+end_src
 
 Prefer newer files.
 
 #+begin_src emacs-lisp
-(setq load-prefer-newer t)
+  (setq load-prefer-newer t)
 #+end_src
 
 Add option to revert buffer when prompting to save modified buffers.
 
 #+begin_src emacs-lisp
-(add-to-list
- 'save-some-buffers-action-alist
- '(?r
-   (lambda (buf)
-     (save-current-buffer
-       (set-buffer buf)
-       (revert-buffer t t t)))
-   "revert this buffer"))
+  (add-to-list
+   'save-some-buffers-action-alist
+   '(?r
+     (lambda (buf)
+       (save-current-buffer
+         (set-buffer buf)
+         (revert-buffer t t t)))
+     "revert this buffer"))
 #+end_src
 
 ** Compile
 
 #+begin_src emacs-lisp
-(setq compilation-scroll-output 'first-error)
-(defun my-colorize-compilation-buffer ()
-  "Colorize a compilation mode buffer."
-  (interactive)
-  ;; we don't want to mess with child modes such as grep-mode, ack, ag, etc
-  (when (eq major-mode 'compilation-mode)
-    (let ((inhibit-read-only t))
-      (ansi-color-apply-on-region (point-min) (point-max)))))
+  (setq compilation-scroll-output 'first-error)
+  (defun my-colorize-compilation-buffer ()
+    "Colorize a compilation mode buffer."
+    (interactive)
+    ;; we don't want to mess with child modes such as grep-mode, ack, ag, etc
+    (when (eq major-mode 'compilation-mode)
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (point-min) (point-max)))))
 
-;; Colorize output of Compilation Mode, see
-;; http://stackoverflow.com/a/3072831/355252
-(require 'ansi-color)
-(add-hook 'compilation-filter-hook #'my-colorize-compilation-buffer)
+  ;; Colorize output of Compilation Mode, see
+  ;; http://stackoverflow.com/a/3072831/355252
+  (require 'ansi-color)
+  (add-hook 'compilation-filter-hook #'my-colorize-compilation-buffer)
 #+end_src
 
 ** Window splitting
@@ -499,78 +499,78 @@ Add option to revert buffer when prompting to save modified buffers.
 http://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
 
 #+begin_src emacs-lisp
-(with-eval-after-load "window"
-  (defcustom split-window-below nil
-    "If non-nil, vertical splits produce new windows below."
-    :group 'windows
-    :type 'boolean)
+  (with-eval-after-load "window"
+    (defcustom split-window-below nil
+      "If non-nil, vertical splits produce new windows below."
+      :group 'windows
+      :type 'boolean)
 
-  (defcustom split-window-right nil
-    "If non-nil, horizontal splits produce new windows to the right."
-    :group 'windows
-    :type 'boolean)
+    (defcustom split-window-right nil
+      "If non-nil, horizontal splits produce new windows to the right."
+      :group 'windows
+      :type 'boolean)
 
-  (fmakunbound #'split-window-sensibly)
+    (fmakunbound #'split-window-sensibly)
 
-  (defun split-window-sensibly
-      (&optional window)
-    "Split WINDOW in a way suitable for `display-buffer'.
-WINDOW defaults to the currently selected window.  If
-`split-width-threshold' specifies an integer, WINDOW is at least
-`split-width-threshold' columns wide and can be split horizontally,
-split WINDOW into two windows side by side and return either the right
-window if `split-window-right' is non-nil or the left window if
-`split-window-right' is nil.  Otherwise, if `split-height-threshold'
-specifies an integer, WINDOW is at least `split-height-threshold' lines
-tall and can be split vertically, split WINDOW into two windows one
-above the other and return either the lower window if
-`split-window-below' is non-nil or the upper window if
-`split-window-below' is nil.  If this can't be done either and WINDOW
-is the only window on its frame, try to split WINDOW horizontally
-disregarding any value specified by `split-width-threshold'.  If that
-succeeds, return either the right window if `split-window-right' is
-non-nil or the left window if `split-window-right' is nil.  Return nil
-otherwise.
+    (defun split-window-sensibly
+        (&optional window)
+      "Split WINDOW in a way suitable for `display-buffer'.
+  WINDOW defaults to the currently selected window.  If
+  `split-width-threshold' specifies an integer, WINDOW is at least
+  `split-width-threshold' columns wide and can be split horizontally,
+  split WINDOW into two windows side by side and return either the right
+  window if `split-window-right' is non-nil or the left window if
+  `split-window-right' is nil.  Otherwise, if `split-height-threshold'
+  specifies an integer, WINDOW is at least `split-height-threshold' lines
+  tall and can be split vertically, split WINDOW into two windows one
+  above the other and return either the lower window if
+  `split-window-below' is non-nil or the upper window if
+  `split-window-below' is nil.  If this can't be done either and WINDOW
+  is the only window on its frame, try to split WINDOW horizontally
+  disregarding any value specified by `split-width-threshold'.  If that
+  succeeds, return either the right window if `split-window-right' is
+  non-nil or the left window if `split-window-right' is nil.  Return nil
+  otherwise.
 
-By default `display-buffer' routines call this function to split the
-largest or least recently used window.  To change the default customize
-the option `split-window-preferred-function'.
+  By default `display-buffer' routines call this function to split the
+  largest or least recently used window.  To change the default customize
+  the option `split-window-preferred-function'.
 
-You can enforce this function to not split WINDOW horizontally, by
-setting (or binding) the variable `split-width-threshold' to nil.  If,
-in addition, you set `split-height-threshold' to zero, chances increase
-that this function does split WINDOW vertically.
+  You can enforce this function to not split WINDOW horizontally, by
+  setting (or binding) the variable `split-width-threshold' to nil.  If,
+  in addition, you set `split-height-threshold' to zero, chances increase
+  that this function does split WINDOW vertically.
 
-In order to not split WINDOW vertically, set (or bind) the variable
-`split-height-threshold' to nil.  Additionally, you can set
-`split-width-threshold' to zero to make a horizontal split more likely
-to occur.
+  In order to not split WINDOW vertically, set (or bind) the variable
+  `split-height-threshold' to nil.  Additionally, you can set
+  `split-width-threshold' to zero to make a horizontal split more likely
+  to occur.
 
-Have a look at the function `window-splittable-p' if you want to know
-how `split-window-sensibly' determines whether WINDOW can be split."
-    (setq window (or window (selected-window)))
-    (or (and (window-splittable-p window t)
-             ;; Split window horizontally.
-             (split-window window nil (if split-window-right 'left  'right)))
-        (and (window-splittable-p window)
-             ;; Split window vertically.
-             (split-window window nil (if split-window-below 'above 'below)))
-        (and (eq window (frame-root-window (window-frame window)))
-             (not (window-minibuffer-p window))
-             ;; If WINDOW is the only window on its frame and is not the
-             ;; minibuffer window, try to split it horizontally disregarding the
-             ;; value of `split-width-threshold'.
-             (let ((split-width-threshold 0))
-               (when (window-splittable-p window t)
-                 (split-window window nil (if split-window-right
-                                              'left
-                                            'right))))))))
+  Have a look at the function `window-splittable-p' if you want to know
+  how `split-window-sensibly' determines whether WINDOW can be split."
+      (setq window (or window (selected-window)))
+      (or (and (window-splittable-p window t)
+               ;; Split window horizontally.
+               (split-window window nil (if split-window-right 'left  'right)))
+          (and (window-splittable-p window)
+               ;; Split window vertically.
+               (split-window window nil (if split-window-below 'above 'below)))
+          (and (eq window (frame-root-window (window-frame window)))
+               (not (window-minibuffer-p window))
+               ;; If WINDOW is the only window on its frame and is not the
+               ;; minibuffer window, try to split it horizontally disregarding the
+               ;; value of `split-width-threshold'.
+               (let ((split-width-threshold 0))
+                 (when (window-splittable-p window t)
+                   (split-window window nil (if split-window-right
+                                                'left
+                                              'right))))))))
 #+end_src
 
 #+begin_src emacs-lisp
-(setq-default
- split-height-threshold  0
- split-width-threshold   120)
+  (setq-default
+   split-height-threshold  0
+   split-width-threshold   120)
 #+end_src
 
 * User defined functions
@@ -579,109 +579,109 @@ Hacked version of balance-windows which only balances windows
 horizontally.
 
 #+begin_src emacs-lisp
-(defun balance-windows-horizontally (&optional window-or-frame)
-  "Horizontally balance the sizes of windows of WINDOW-OR-FRAME.
-WINDOW-OR-FRAME is optional and defaults to the selected frame.
-If WINDOW-OR-FRAME denotes a frame, balance the sizes of all
-windows of that frame.  If WINDOW-OR-FRAME denotes a window,
-recursively balance the sizes of all child windows of that
-window."
-  (interactive)
-  (let* ((window
-          (cond
-           ((or (not window-or-frame)
-                (frame-live-p window-or-frame))
-            (frame-root-window window-or-frame))
-           ((or (window-live-p window-or-frame)
-                (window-child window-or-frame))
-            window-or-frame)
-           (t
-            (error "Not a window or frame %s" window-or-frame))))
-         (frame (window-frame window)))
-    ;; ;; Balance vertically.
-    ;; (window--resize-reset (window-frame window))
-    ;; (balance-windows-1 window)
-    ;; (when (window--resize-apply-p frame)
-    ;;   (window-resize-apply frame)
-    ;;   (window--pixel-to-total frame)
-    ;;   (run-window-configuration-change-hook frame))
-    ;; Balance horizontally.
-    (window--resize-reset (window-frame window) t)
-    (balance-windows-1 window t)
-    (when (window--resize-apply-p frame t)
-      (window-resize-apply frame t)
-      (window--pixel-to-total frame t)
-      (run-window-configuration-change-hook frame))))
+  (defun balance-windows-horizontally (&optional window-or-frame)
+    "Horizontally balance the sizes of windows of WINDOW-OR-FRAME.
+  WINDOW-OR-FRAME is optional and defaults to the selected frame.
+  If WINDOW-OR-FRAME denotes a frame, balance the sizes of all
+  windows of that frame.  If WINDOW-OR-FRAME denotes a window,
+  recursively balance the sizes of all child windows of that
+  window."
+    (interactive)
+    (let* ((window
+            (cond
+             ((or (not window-or-frame)
+                  (frame-live-p window-or-frame))
+              (frame-root-window window-or-frame))
+             ((or (window-live-p window-or-frame)
+                  (window-child window-or-frame))
+              window-or-frame)
+             (t
+              (error "Not a window or frame %s" window-or-frame))))
+           (frame (window-frame window)))
+      ;; ;; Balance vertically.
+      ;; (window--resize-reset (window-frame window))
+      ;; (balance-windows-1 window)
+      ;; (when (window--resize-apply-p frame)
+      ;;   (window-resize-apply frame)
+      ;;   (window--pixel-to-total frame)
+      ;;   (run-window-configuration-change-hook frame))
+      ;; Balance horizontally.
+      (window--resize-reset (window-frame window) t)
+      (balance-windows-1 window t)
+      (when (window--resize-apply-p frame t)
+        (window-resize-apply frame t)
+        (window--pixel-to-total frame t)
+        (run-window-configuration-change-hook frame))))
 #+end_src
 
 #+begin_src emacs-lisp
-(defun my-shell-cd ()
-  "Switch to shell buffer and change directory to `default-directory'."
-  (interactive)
-  (let ((d default-directory))
-    (shell)
-    (goto-char (point-max))
-    (insert (format "cd %s" d))
-    (comint-send-input)))
+  (defun my-shell-cd ()
+    "Switch to shell buffer and change directory to `default-directory'."
+    (interactive)
+    (let ((d default-directory))
+      (shell)
+      (goto-char (point-max))
+      (insert (format "cd %s" d))
+      (comint-send-input)))
 #+end_src
 
 #+begin_src emacs-lisp
-(defun my-insert-date (arg)
-  "Insert date string"
-  (interactive "p")
-  (cond ((= arg 1)
-         (insert (format-time-string "%Y%m%d")))
-        ((= arg 4)
-         (insert (format-time-string "%Y%m%d%H%M%S")))
-        ((= arg 16)
-         (insert (format-time-string "%Y-%m-%d-%H%M%S")))))
+  (defun my-insert-date (arg)
+    "Insert date string"
+    (interactive "p")
+    (cond ((= arg 1)
+           (insert (format-time-string "%Y%m%d")))
+          ((= arg 4)
+           (insert (format-time-string "%Y%m%d%H%M%S")))
+          ((= arg 16)
+           (insert (format-time-string "%Y-%m-%d-%H%M%S")))))
 #+end_src
 
 #+begin_src emacs-lisp
-(defun my-switch-to-term ()
-  "Switch to term running in the default-directory,
-otherwise start a new ansi-term"
-  (interactive)
-  (let (found-buffer
-        (directory (expand-file-name default-directory))
-        (buffers (buffer-list)))
-    (while (and (not found-buffer)
-                buffers)
-      (with-current-buffer (car buffers)
-        (when (and (string= major-mode "term-mode")
-                   (string= default-directory directory))
-          (setq found-buffer (car buffers)))
-        (setq buffers (cdr buffers))))
-    ;; If we found a term, switch to it, otherwise start a term
-    (if (and found-buffer
-             (not (eq found-buffer (current-buffer))))
-        (switch-to-buffer found-buffer)
-      (ansi-term "bash"))))
+  (defun my-switch-to-term ()
+    "Switch to term running in the default-directory,
+  otherwise start a new ansi-term"
+    (interactive)
+    (let (found-buffer
+          (directory (expand-file-name default-directory))
+          (buffers (buffer-list)))
+      (while (and (not found-buffer)
+                  buffers)
+        (with-current-buffer (car buffers)
+          (when (and (string= major-mode "term-mode")
+                     (string= default-directory directory))
+            (setq found-buffer (car buffers)))
+          (setq buffers (cdr buffers))))
+      ;; If we found a term, switch to it, otherwise start a term
+      (if (and found-buffer
+               (not (eq found-buffer (current-buffer))))
+          (switch-to-buffer found-buffer)
+        (ansi-term "bash"))))
 #+end_src
 
 Work around [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug%3D17284][#17284 Host name completion in shell mode take 45 seconds]] by
 disabling second while.
 
 #+begin_src emacs-lisp
-(when (< emacs-major-version 24)
-  (require 'pcmpl-unix)
+  (when (< emacs-major-version 24)
+    (require 'pcmpl-unix)
 
-  (defun pcmpl-ssh-known-hosts ()
-    "Return a list of hosts found in `pcmpl-ssh-known-hosts-file'."
-    (when (and pcmpl-ssh-known-hosts-file
-               (file-readable-p pcmpl-ssh-known-hosts-file))
-      (with-temp-buffer
-        (insert-file-contents-literally pcmpl-ssh-known-hosts-file)
-        (let ((host-re "\\(?:\\([-.[:alnum:]]+\\)\\|\\[\\([-.[:alnum:]]+\\)\\]:[0-9]+\\)[, ]")
-              ssh-hosts-list)
-          (while (re-search-forward (concat "^ *" host-re) nil t)
-            (add-to-list 'ssh-hosts-list (concat (match-string 1)
-                                                 (match-string 2)))
-            (while (and (eq ?, (char-before))
-                        (re-search-forward host-re (line-end-position) t))
+    (defun pcmpl-ssh-known-hosts ()
+      "Return a list of hosts found in `pcmpl-ssh-known-hosts-file'."
+      (when (and pcmpl-ssh-known-hosts-file
+                 (file-readable-p pcmpl-ssh-known-hosts-file))
+        (with-temp-buffer
+          (insert-file-contents-literally pcmpl-ssh-known-hosts-file)
+          (let ((host-re "\\(?:\\([-.[:alnum:]]+\\)\\|\\[\\([-.[:alnum:]]+\\)\\]:[0-9]+\\)[, ]")
+                ssh-hosts-list)
+            (while (re-search-forward (concat "^ *" host-re) nil t)
               (add-to-list 'ssh-hosts-list (concat (match-string 1)
-                                                   (match-string 2)))))
-          ssh-hosts-list)))))
+                                                   (match-string 2)))
+              (while (and (eq ?, (char-before))
+                          (re-search-forward host-re (line-end-position) t))
+                (add-to-list 'ssh-hosts-list (concat (match-string 1)
+                                                     (match-string 2)))))
+            ssh-hosts-list)))))
 #+end_src
 
 * Packages
@@ -689,136 +689,136 @@ disabling second while.
 ** ace-link
 
 #+begin_src emacs-lisp
-(use-package ace-link
-  :ensure t
-  :init (ace-link-setup-default))
+  (use-package ace-link
+    :ensure t
+    :init (ace-link-setup-default))
 #+end_src
 
 ** ace-window
 
 #+begin_src emacs-lisp
-(use-package ace-window
-  :ensure t
-  :bind (("C-x o" . ace-window))
-  :config (progn
-            (setq aw-swap-invert t)))
+  (use-package ace-window
+    :ensure t
+    :bind (("C-x o" . ace-window))
+    :config (progn
+              (setq aw-swap-invert t)))
 #+end_src
 
 ** ag
 
 #+begin_src emacs-lisp
-(use-package ag
-  :ensure t
-  :defer t)
+  (use-package ag
+    :ensure t
+    :defer t)
 #+end_src
 
 ** aggressive-indent
 
 #+begin_src emacs-lisp
-(use-package aggressive-indent
-  :ensure t
-  :config (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
-  :init (global-aggressive-indent-mode 1))
+  (use-package aggressive-indent
+    :ensure t
+    :config (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
+    :init (global-aggressive-indent-mode 1))
 #+end_src
 
 ** alert
 
 #+begin_src emacs-lisp
-(use-package alert
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (defun comint-alert-on-prompt (string)
-      "Send alert when prompt is detected."
-      (when (let ((case-fold-search t))
-              (string-match comint-prompt-regexp string))
-        (alert (format "Prompt: %s" string)))
-      string)
+  (use-package alert
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (defun comint-alert-on-prompt (string)
+        "Send alert when prompt is detected."
+        (when (let ((case-fold-search t))
+                (string-match comint-prompt-regexp string))
+          (alert (format "Prompt: %s" string)))
+        string)
 
-    (defun comint-toggle-alert ()
-      "Toggle alert on prompt for current buffer"
-      (interactive)
-      (make-local-variable 'comint-output-filter-functions)
-      (if (member 'comint-alert-on-prompt comint-output-filter-functions)
-          (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
-        (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt)))
+      (defun comint-toggle-alert ()
+        "Toggle alert on prompt for current buffer"
+        (interactive)
+        (make-local-variable 'comint-output-filter-functions)
+        (if (member 'comint-alert-on-prompt comint-output-filter-functions)
+            (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
+          (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt)))
 
-    (setq alert-default-style
-          (if (eq window-system 'ns)
-              'notifier
-            'notifications))))
+      (setq alert-default-style
+            (if (eq window-system 'ns)
+                'notifier
+              'notifications))))
 #+end_src
 
 ** auth-password-store
 
 #+begin_src emacs-lisp
-(use-package auth-password-store
-  :ensure t
-  :init (auth-pass-enable))
+  (use-package auth-password-store
+    :ensure t
+    :init (auth-pass-enable))
 #+end_src
 
 ** avy
 
 #+begin_src emacs-lisp
-(use-package avy
-  :ensure t
-  :bind (("C-c a" . avy-goto-word-1)
-         ("M-g M-g" . avy-goto-line)))
+  (use-package avy
+    :ensure t
+    :bind (("C-c a" . avy-goto-word-1)
+           ("M-g M-g" . avy-goto-line)))
 #+end_src
 
 ** bash-completion
 
 #+begin_src emacs-lisp
-(use-package bash-completion
-  :disabled t
-  :init
-  ('bash-completion-setup))
+  (use-package bash-completion
+    :disabled t
+    :init
+    ('bash-completion-setup))
 #+end_src
 
 ** bbdb
 
 #+begin_src emacs-lisp
-(use-package bbdb
-  :ensure t
-  :defer t)
+  (use-package bbdb
+    :ensure t
+    :defer t)
 #+end_src
 
 ** bbdb
 
 #+begin_src emacs-lisp
-(use-package bbdb
-  :bind (("C-c b" . bbdb))
-  :config
-  (progn
-    (setq bbdb-file "~/.config/bbdb/.bbdb")
-    (setq bbdb-auto-revert-p t)))
+  (use-package bbdb
+    :bind (("C-c b" . bbdb))
+    :config
+    (progn
+      (setq bbdb-file "~/.config/bbdb/.bbdb")
+      (setq bbdb-auto-revert-p t)))
 #+end_src
 
 ** calfw
 
 #+begin_src emacs-lisp
-(use-package calfw
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (setq cfw:fchar-junction ?╋
-      cfw:fchar-vertical-line ?┃
-      cfw:fchar-horizontal-line ?━
-      cfw:fchar-left-junction ?┣
-      cfw:fchar-right-junction ?┫
-      cfw:fchar-top-junction ?┯
-      cfw:fchar-top-left-corner ?┏
-      cfw:fchar-top-right-corner ?┓)))
+  (use-package calfw
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq cfw:fchar-junction ?╋
+        cfw:fchar-vertical-line ?┃
+        cfw:fchar-horizontal-line ?━
+        cfw:fchar-left-junction ?┣
+        cfw:fchar-right-junction ?┫
+        cfw:fchar-top-junction ?┯
+        cfw:fchar-top-left-corner ?┏
+        cfw:fchar-top-right-corner ?┓)))
 #+end_src
 
 ** color-theme-sanityinc-tomorrow
 
 #+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :defer t)
+  (use-package color-theme-sanityinc-tomorrow
+    :ensure t
+    :defer t)
 #+end_src
 
 ** comint-mode
@@ -826,224 +826,224 @@ disabling second while.
 Catch OpenStack openrc password prompt.
 
 #+begin_src emacs-lisp
-(setq comint-password-prompt-regexp
-      (concat comint-password-prompt-regexp
-              "\\|"
-              ;; OpenStack
-              "Please enter your OpenStack Password:"
-              "\\|"
-              ;; Ansible
-              "SUDO password:"
-              "\\|"
-              "Vault password:"))
+  (setq comint-password-prompt-regexp
+        (concat comint-password-prompt-regexp
+                "\\|"
+                ;; OpenStack
+                "Please enter your OpenStack Password:"
+                "\\|"
+                ;; Ansible
+                "SUDO password:"
+                "\\|"
+                "Vault password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
-(defun comint-mode-config()
-  ;; Do not move prompt to bottom of the screen on output
-  (setq comint-scroll-show-maximum-output nil)
-  ;; Do not center the prompt when scrolling
-  ;;
-  ;; ("If the value is greater than 100, redisplay will never recenter
-  ;; point, but will always scroll just enough text to bring point
-  ;; into view, even if you move far away.")
-  (setq-local scroll-conservatively 101)
-  ;; Wrap lines (truncate-lines is turned on globally)
-  (setq truncate-lines nil))
+  (defun comint-mode-config()
+    ;; Do not move prompt to bottom of the screen on output
+    (setq comint-scroll-show-maximum-output nil)
+    ;; Do not center the prompt when scrolling
+    ;;
+    ;; ("If the value is greater than 100, redisplay will never recenter
+    ;; point, but will always scroll just enough text to bring point
+    ;; into view, even if you move far away.")
+    (setq-local scroll-conservatively 101)
+    ;; Wrap lines (truncate-lines is turned on globally)
+    (setq truncate-lines nil))
 
-(add-hook 'comint-mode-hook #'comint-mode-config)
+  (add-hook 'comint-mode-hook #'comint-mode-config)
 #+end_src
 
 ** company
 
 #+begin_src emacs-lisp
-(use-package company
-  :ensure t
-  :init (global-company-mode)
-  :config
-  (progn
-    (setq company-lighter-base "Co")
-    (setq company-show-numbers t)
-(setq company-minimum-prefix-length 2)))
+  (use-package company
+    :ensure t
+    :init (global-company-mode)
+    :config
+    (progn
+      (setq company-lighter-base "Co")
+      (setq company-show-numbers t)
+  (setq company-minimum-prefix-length 2)))
 #+end_src
 
 ** company-go
 
 #+begin_src emacs-lisp
-(use-package company-go
-  :ensure t
-  :defer t)
+  (use-package company-go
+    :ensure t
+    :defer t)
 #+end_src
 
 ** company-jedi
 
 #+begin_src emacs-lisp
-(use-package company-jedi
-  :ensure t
-  :init (add-hook 'python-mode-hook 'jedi:setup)
-  :config
-  (progn
-    (setq jedi:use-shortcuts t)))
+  (use-package company-jedi
+    :ensure t
+    :init (add-hook 'python-mode-hook 'jedi:setup)
+    :config
+    (progn
+      (setq jedi:use-shortcuts t)))
 #+end_src
 
 
 ** csv-mode
 
 #+begin_src emacs-lisp
-(use-package csv-mode
-  :ensure t
-  :defer t)
+  (use-package csv-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** desktop
 
 #+begin_src emacs-lisp
-(use-package desktop
-  :config
-  (progn
-    (defun my-shell-save-desktop-data (desktop-dirname)
-      "Extra info for shell-mode buffers to be saved in the desktop file."
-      (list default-directory comint-input-ring))
+  (use-package desktop
+    :config
+    (progn
+      (defun my-shell-save-desktop-data (desktop-dirname)
+        "Extra info for shell-mode buffers to be saved in the desktop file."
+        (list default-directory comint-input-ring))
 
-    (defun my-shell-restore-desktop-buffer
-        (desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
-      "Restore a shell buffer's state from the desktop file."
-      (let ((dir (nth 0 desktop-buffer-misc))
-            (ring (nth 1 desktop-buffer-misc)))
-        (when desktop-buffer-name
-          (set-buffer (get-buffer-create desktop-buffer-name))
-          (when dir
-            (setq default-directory dir))
-          (shell desktop-buffer-name)
-          (when ring
-            (setq comint-input-ring ring))
-          (current-buffer))))
+      (defun my-shell-restore-desktop-buffer
+          (desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
+        "Restore a shell buffer's state from the desktop file."
+        (let ((dir (nth 0 desktop-buffer-misc))
+              (ring (nth 1 desktop-buffer-misc)))
+          (when desktop-buffer-name
+            (set-buffer (get-buffer-create desktop-buffer-name))
+            (when dir
+              (setq default-directory dir))
+            (shell desktop-buffer-name)
+            (when ring
+              (setq comint-input-ring ring))
+            (current-buffer))))
 
-    (defun my-shell-setup-desktop ()
-      "Sets up a shell buffer to have its state saved in the desktop file."
-      (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
+      (defun my-shell-setup-desktop ()
+        "Sets up a shell buffer to have its state saved in the desktop file."
+        (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
 
-    (add-to-list 'desktop-buffer-mode-handlers
-                 '(shell-mode . my-shell-restore-desktop-buffer))
-    (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
+      (add-to-list 'desktop-buffer-mode-handlers
+                   '(shell-mode . my-shell-restore-desktop-buffer))
+      (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
 
-    (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
+      (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
 
-    ;; Do not load encrypted files when Emacs starts.
-    (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
-    (setq desktop-restore-eager 20)
+      ;; Do not load encrypted files when Emacs starts.
+      (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
+      (setq desktop-restore-eager 20)
 
-    (defun my-setup-desktop-auto-save ()
-      (setq my-save-desktop-timer
-            (run-with-idle-timer
-             5 t
-             (lambda ()
-               (desktop-save desktop-dirname)))))
-    (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save))
-  :init
-  (desktop-save-mode 1))
+      (defun my-setup-desktop-auto-save ()
+        (setq my-save-desktop-timer
+              (run-with-idle-timer
+               5 t
+               (lambda ()
+                 (desktop-save desktop-dirname)))))
+      (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save))
+    :init
+    (desktop-save-mode 1))
 #+end_src
 
 ** dns-mode
 
 #+begin_src emacs-lisp
-(use-package dns-mode
-  :defer t
-  :config
-  (progn
-    ;; Do not auto increment serial (C-c C-s to increment)
-    (setq dns-mode-soa-auto-increment-serial nil)))
+  (use-package dns-mode
+    :defer t
+    :config
+    (progn
+      ;; Do not auto increment serial (C-c C-s to increment)
+      (setq dns-mode-soa-auto-increment-serial nil)))
 #+end_src
 
 ** docker-tramp
 
 #+begin_src emacs-lisp
-(use-package docker-tramp
-  :ensure t
-  :defer t)
+  (use-package docker-tramp
+    :ensure t
+    :defer t)
 #+end_src
 
 ** dockerfile-mode
 
 #+begin_src emacs-lisp
-(use-package dockerfile-mode
-  :ensure t
-  :defer t)
+  (use-package dockerfile-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** elfeed
 
 #+begin_src emacs-lisp
-(use-package elfeed
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (setq elfeed-feeds
-          '("http://git-annex.branchable.com/devblog/index.atom"
-            "http://planet.emacsen.org/atom.xml"
-            "http://www.reddit.com/r/emacs/.rss"
-            "http://www.reddit.com/r/ruby/.rss"
-            "http://planet.debian.org/atom.xml"))))
+  (use-package elfeed
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq elfeed-feeds
+            '("http://git-annex.branchable.com/devblog/index.atom"
+              "http://planet.emacsen.org/atom.xml"
+              "http://www.reddit.com/r/emacs/.rss"
+              "http://www.reddit.com/r/ruby/.rss"
+              "http://planet.debian.org/atom.xml"))))
 #+end_src
 
 ** ensime
 
 #+begin_src emacs-lisp
-(use-package ensime
-  :ensure t
-  :defer t
-  :config
-  (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
+  (use-package ensime
+    :ensure t
+    :defer t
+    :config
+    (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
 #+end_src
 
 ** erc
 
 #+begin_src emacs-lisp
-(use-package erc
-  :defer t
-  :config
-  (progn
-    (erc-services-mode 1)
-    (erc-spelling-mode 1)
+  (use-package erc
+    :defer t
+    :config
+    (progn
+      (erc-services-mode 1)
+      (erc-spelling-mode 1)
 
-    (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
+      (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
 
-    ;; Nickserv configuration
-    (setq erc-nick "svend")
-    (setq erc-prompt-for-nickserv-password nil)
-    (let ((bitlbee-username (password-store-get "bitlbee-username"))
-          (bitlbee-password (password-store-get "bitlbee-password"))
-          (freenode-username (password-store-get "freenode/username"))
-          (freenode-password (password-store-get "freenode/password")))
-      (setq erc-nickserv-passwords
-            `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
-              ((freenode ((,freenode-username . ,freenode-password)))))))
+      ;; Nickserv configuration
+      (setq erc-nick "svend")
+      (setq erc-prompt-for-nickserv-password nil)
+      (let ((bitlbee-username (password-store-get "bitlbee-username"))
+            (bitlbee-password (password-store-get "bitlbee-password"))
+            (freenode-username (password-store-get "freenode/username"))
+            (freenode-password (password-store-get "freenode/password")))
+        (setq erc-nickserv-passwords
+              `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+                ((freenode ((,freenode-username . ,freenode-password)))))))
 
-    (setq erc-autojoin-channels-alist '(("freenode.net" "#nixos" "##nix-darwin" "#org-mode" "#emacs")))))
+      (setq erc-autojoin-channels-alist '(("freenode.net" "#nixos" "##nix-darwin" "#org-mode" "#emacs")))))
 #+end_src
 
 ** erc-track
 
 #+begin_src emacs-lisp
-(use-package erc-track
-  :defer t
-  :config
-  (progn
-    ;; Do not notify for join, part, or quit
-    (add-to-list 'erc-track-exclude-types "JOIN")
-    (add-to-list 'erc-track-exclude-types "PART")
-    (add-to-list 'erc-track-exclude-types "QUIT")))
+  (use-package erc-track
+    :defer t
+    :config
+    (progn
+      ;; Do not notify for join, part, or quit
+      (add-to-list 'erc-track-exclude-types "JOIN")
+      (add-to-list 'erc-track-exclude-types "PART")
+      (add-to-list 'erc-track-exclude-types "QUIT")))
 #+end_src
 
 ** erlang
 
 #+begin_src emacs-lisp
-(use-package erlang
-  :ensure t
-  :defer t)
+  (use-package erlang
+    :ensure t
+    :defer t)
 #+end_src
 
 ** flx-ido
@@ -1051,68 +1051,68 @@ Change scrolling behavior for comint modes.
 Disable ido faces to see flx highlights.
 
 #+begin_src emacs-lisp
-(use-package flx-ido
-  :ensure t
-  :init (flx-ido-mode 1)
-  :config (setq ido-use-face nil))
+  (use-package flx-ido
+    :ensure t
+    :init (flx-ido-mode 1)
+    :config (setq ido-use-face nil))
 #+end_src
 
 ** flycheck
 
 #+begin_src emacs-lisp
-(use-package flycheck
-  :ensure t
-  :config
-  (progn
-    ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
-    (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
-    (add-hook 'after-init-hook #'global-flycheck-mode)))
+  (use-package flycheck
+    :ensure t
+    :config
+    (progn
+      ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+      (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
+      (add-hook 'after-init-hook #'global-flycheck-mode)))
 #+end_src
 
 ** flycheck-ledger
 
 #+begin_src emacs-lisp
-(use-package flycheck-ledger
-  :ensure t
-  :defer t)
+  (use-package flycheck-ledger
+    :ensure t
+    :defer t)
 #+end_src
 
 ** git
 
 #+begin_src emacs-lisp
-(use-package git
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (defun my-git-clone (url)
-      (interactive "sGit repository URL: ")
-      (let ((git-repo "~/src"))
-        (git-clone url)))))
+  (use-package git
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (defun my-git-clone (url)
+        (interactive "sGit repository URL: ")
+        (let ((git-repo "~/src"))
+          (git-clone url)))))
 #+end_src
 
 ** gitconfig-mode
 
 #+begin_src emacs-lisp
-(use-package gitconfig-mode
-  :ensure t
-  :defer t)
+  (use-package gitconfig-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** gitignore-mode
 
 #+begin_src emacs-lisp
-(use-package gitignore-mode
-  :ensure t
-  :defer t)
+  (use-package gitignore-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** gnuplot
 
 #+begin_src emacs-lisp
-(use-package gnuplot
-  :ensure t
-  :defer t)
+  (use-package gnuplot
+    :ensure t
+    :defer t)
 #+end_src
 
 ** gnus
@@ -1128,69 +1128,69 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 : machine smtp.gmail.com login EMAIL password PASSWORD port 587
 
 #+begin_src emacs-lisp
-(use-package gnus
-  :config
-  (progn
-    ;; Use secondary-select-methods
-    (setq gnus-select-method '(nnnil ""))
+  (use-package gnus
+    :config
+    (progn
+      ;; Use secondary-select-methods
+      (setq gnus-select-method '(nnnil ""))
 
-    ;; Gmane
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nntp "gmane"
-                        (nntp-address "news.gmane.org")))
+      ;; Gmane
+      (add-to-list 'gnus-secondary-select-methods
+                   '(nntp "gmane"
+                          (nntp-address "news.gmane.org")))
 
-    ;; Gmail
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nnimap "gmail"
-                          (nnimap-address "imap.gmail.com")
-                          (nnimap-server-port 993)
-                          (nnimap-stream ssl)))
+      ;; Gmail
+      (add-to-list 'gnus-secondary-select-methods
+                   '(nnimap "gmail"
+                            (nnimap-address "imap.gmail.com")
+                            (nnimap-server-port 993)
+                            (nnimap-stream ssl)))
 
-    ;; ;; Record all IMAP commands in the ‘"*imap log*"’
-    ;; (setq nnimap-record-commands t)
+      ;; ;; Record all IMAP commands in the ‘"*imap log*"’
+      ;; (setq nnimap-record-commands t)
 
-    ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
-    (setq gnus-always-read-dribble-file t)
-    ;; Mark sent messages as read
-    (setq gnus-gcc-mark-as-read t)
-    (setq gnus-inhibit-startup-message t)
-    ;; Do not take over the entire frame
-    (setq gnus-use-full-window nil)))
+      ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
+      (setq gnus-always-read-dribble-file t)
+      ;; Mark sent messages as read
+      (setq gnus-gcc-mark-as-read t)
+      (setq gnus-inhibit-startup-message t)
+      ;; Do not take over the entire frame
+      (setq gnus-use-full-window nil)))
 #+end_src
 
 ** gnus-alias
 
 #+begin_src emacs-lisp
-(use-package gnus-alias
-  :ensure t
-  :defer t
-  :config
-  (setq gnus-alias-identity-alist
-        '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
-          ("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)
-          ("wp" nil "Svend Sorensen <ssorensen@whitepages.com>" nil (("Bcc" . "ssorensen@whitepages.com")) nil nil)))
-  (setq gnus-alias-default-identity "default")
-  (setq gnus-alias-identity-rules
-        '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
-          ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+  (use-package gnus-alias
+    :ensure t
+    :defer t
+    :config
+    (setq gnus-alias-identity-alist
+          '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
+            ("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)
+            ("wp" nil "Svend Sorensen <ssorensen@whitepages.com>" nil (("Bcc" . "ssorensen@whitepages.com")) nil nil)))
+    (setq gnus-alias-default-identity "default")
+    (setq gnus-alias-identity-rules
+          '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
+            ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
 #+end_src
 
 ** gnutls
 
 #+begin_src emacs-lisp
-(use-package gnutls
-  :defer t
-  :config
-  (add-to-list 'gnutls-trustfiles
-               (expand-file-name "~/.certs/ca-certificates.crt")))
+  (use-package gnutls
+    :defer t
+    :config
+    (add-to-list 'gnutls-trustfiles
+                 (expand-file-name "~/.certs/ca-certificates.crt")))
 #+end_src
 
 ** go-eldoc
 
 #+begin_src emacs-lisp
-(use-package go-eldoc
-  :ensure t
-  :defer t)
+  (use-package go-eldoc
+    :ensure t
+    :defer t)
 #+end_src
 
 ** go-mode
@@ -1210,61 +1210,61 @@ go get github.com/nsf/gocode
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package go-mode
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (setq gofmt-command "goimports")
+  (use-package go-mode
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq gofmt-command "goimports")
 
-    (defun my-go-mode-defaults ()
-      (local-set-key (kbd "M-.") 'godef-jump)
-      (set (make-local-variable 'company-backends) '(company-go))
-      (add-hook 'before-save-hook #'gofmt-before-save)
+      (defun my-go-mode-defaults ()
+        (local-set-key (kbd "M-.") 'godef-jump)
+        (set (make-local-variable 'company-backends) '(company-go))
+        (add-hook 'before-save-hook #'gofmt-before-save)
 
-      ;; El-doc for Go
-      (go-eldoc-setup)
+        ;; El-doc for Go
+        (go-eldoc-setup)
 
-      ;; CamelCase aware editing operations
-      (subword-mode +1))
-    (add-hook 'go-mode-hook #'my-go-mode-defaults)))
+        ;; CamelCase aware editing operations
+        (subword-mode +1))
+      (add-hook 'go-mode-hook #'my-go-mode-defaults)))
 #+end_src
 
 ** haskell-mode
 
 #+begin_src emacs-lisp
-(use-package haskell-mode
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (defun my-haskell-mode-defaults ()
-      (subword-mode +1)
-      (turn-on-haskell-doc-mode)
-      (turn-on-haskell-indentation)
-      (interactive-haskell-mode +1))
-    (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults)))
+  (use-package haskell-mode
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (defun my-haskell-mode-defaults ()
+        (subword-mode +1)
+        (turn-on-haskell-doc-mode)
+        (turn-on-haskell-indentation)
+        (interactive-haskell-mode +1))
+      (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults)))
 #+end_src
 
 ** helm
 
 #+begin_src emacs-lisp
-(use-package helm
-  :ensure t
-  :bind (("C-`" . helm-for-files)
-         ("C-c h f" . helm-firefox-bookmarks)
-         ("C-c h f" . helm-find-files)
-         ("C-c h g" . helm-git-grep-from-here)
-         ("C-c h p" . helm-projectile)
-         ("C-c h x" . helm-M-x)))
+  (use-package helm
+    :ensure t
+    :bind (("C-`" . helm-for-files)
+           ("C-c h f" . helm-firefox-bookmarks)
+           ("C-c h f" . helm-find-files)
+           ("C-c h g" . helm-git-grep-from-here)
+           ("C-c h p" . helm-projectile)
+           ("C-c h x" . helm-M-x)))
 #+end_src
 
 ** helm-projectile
 
 #+begin_src emacs-lisp
-(use-package helm-projectile
-  :ensure t
-  :defer t)
+  (use-package helm-projectile
+    :ensure t
+    :defer t)
 #+end_src
 
 ** hippie-exp
@@ -1273,140 +1273,140 @@ go get github.com/nsf/gocode
 http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
-(use-package hippie-exp
-  :bind (("M-/" . hippie-expand)))
+  (use-package hippie-exp
+    :bind (("M-/" . hippie-expand)))
 #+end_src
 
 ** hydra
 
 #+begin_src emacs-lisp
-(use-package hydra
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (global-set-key
-     (kbd "C-c t")
-     (defhydra hydra-toggle ()
-       "Toggle"
-       ("b" scroll-bar-mode "scroll-bar")
-       ("c" flycheck-mode "flycheck")
-       ("l" visual-line-mode "visual-line")
-       ("m" menu-bar-mode "menu-bar")
-       ("n" linum-mode "linum")
-       ("s" flyspell-mode "flyspell")
-       ("t" toggle-truncate-lines "trucate")
-       ("v" variable-pitch-mode "fixed-pitch")
-       ("w" whitespace-mode "whitespace")))
+  (use-package hydra
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (global-set-key
+       (kbd "C-c t")
+       (defhydra hydra-toggle ()
+         "Toggle"
+         ("b" scroll-bar-mode "scroll-bar")
+         ("c" flycheck-mode "flycheck")
+         ("l" visual-line-mode "visual-line")
+         ("m" menu-bar-mode "menu-bar")
+         ("n" linum-mode "linum")
+         ("s" flyspell-mode "flyspell")
+         ("t" toggle-truncate-lines "trucate")
+         ("v" variable-pitch-mode "fixed-pitch")
+         ("w" whitespace-mode "whitespace")))
 
-    (defhydra hydra-winner ()
-      "Winner"
-      ("w" winner-undo "back")
-      ("r" winner-redo "forward" :exit t))
-    (global-set-key (kbd "C-c w") 'hydra-winner/winner-undo)))
+      (defhydra hydra-winner ()
+        "Winner"
+        ("w" winner-undo "back")
+        ("r" winner-redo "forward" :exit t))
+      (global-set-key (kbd "C-c w") 'hydra-winner/winner-undo)))
 #+end_src
 
 ** ibuffer
 
 #+begin_src emacs-lisp
-(use-package ibuffer
-  :bind (("C-x C-b" . ibuffer)))
+  (use-package ibuffer
+    :bind (("C-x C-b" . ibuffer)))
 
 #+end_src
 
 ** ibuffer-tramp
 
 #+begin_src emacs-lisp
-(use-package ibuffer-tramp
-  :ensure t
-  :config
-  (progn
-    (add-hook 'ibuffer-hook
-              (lambda ()
-                (ibuffer-tramp-set-filter-groups-by-tramp-connection)
-                (ibuffer-do-sort-by-alphabetic)))))
+  (use-package ibuffer-tramp
+    :ensure t
+    :config
+    (progn
+      (add-hook 'ibuffer-hook
+                (lambda ()
+                  (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+                  (ibuffer-do-sort-by-alphabetic)))))
 #+end_src
 
 ** ido
 
 #+begin_src emacs-lisp
-(use-package ido
-  :init (ido-mode 1)
-  :config
-  (progn
-    (ido-everywhere)
-    (setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-default-file-method 'selected-window
-          ido-auto-merge-work-directories-length -1
-          ido-use-virtual-buffers t)
-    (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
+  (use-package ido
+    :init (ido-mode 1)
+    :config
+    (progn
+      (ido-everywhere)
+      (setq ido-enable-prefix nil
+            ido-enable-flex-matching t
+            ido-create-new-buffer 'always
+            ido-use-filename-at-point 'guess
+            ido-default-file-method 'selected-window
+            ido-auto-merge-work-directories-length -1
+            ido-use-virtual-buffers t)
+      (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
 #+end_src
 
 ** ido-ubiquitous
 
 #+begin_src emacs-lisp
-(use-package ido-ubiquitous
-  :ensure t
-  :init
-  (ido-ubiquitous-mode 1))
+  (use-package ido-ubiquitous
+    :ensure t
+    :init
+    (ido-ubiquitous-mode 1))
 #+end_src
 
 ** inf-ruby
 
 #+begin_src emacs-lisp
-(use-package inf-ruby
-  :ensure t
-  :defer t
-  :config
-  (defun my-inf-ruby-mode-setup ()
-    (setq comint-input-ring-file-name "~/.pry_history")
-    (when (ring-empty-p comint-input-ring)
-      (comint-read-input-ring t)))
-  (add-hook 'inf-ruby-mode-hook #'my-inf-ruby-mode-setup)
-  (setq inf-ruby-default-implementation "pry"))
+  (use-package inf-ruby
+    :ensure t
+    :defer t
+    :config
+    (defun my-inf-ruby-mode-setup ()
+      (setq comint-input-ring-file-name "~/.pry_history")
+      (when (ring-empty-p comint-input-ring)
+        (comint-read-input-ring t)))
+    (add-hook 'inf-ruby-mode-hook #'my-inf-ruby-mode-setup)
+    (setq inf-ruby-default-implementation "pry"))
 #+end_src
 
 ** jabber
 
 #+begin_src emacs-lisp sh
-(use-package jabber
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
+  (use-package jabber
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
 
-    (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
+      (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
 
-    (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
-                                         (:network-server . "talk.google.com")
-                                         (:connection-type . starttls))))
-    ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
-    ;; failed: The x509 certificate does not match "ciffer.net"’
-    (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
+      (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
+                                           (:network-server . "talk.google.com")
+                                           (:connection-type . starttls))))
+      ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
+      ;; failed: The x509 certificate does not match "ciffer.net"’
+      (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
 
-    (defvar hipchat-number "23430")
-    (defvar hipchat-nickname "Svend Sorensen")
-    (defvar hipchat-rooms '("ops" "ops-notifications" "outages" "release")
-      "List of hipchat rooms to auto-join")
+      (defvar hipchat-number "23430")
+      (defvar hipchat-nickname "Svend Sorensen")
+      (defvar hipchat-rooms '("ops" "ops-notifications" "outages" "release")
+        "List of hipchat rooms to auto-join")
 
-    (dolist (muc-room
-             (mapcar (lambda (room)
-                       (concat hipchat-number "_" room "@conf.hipchat.com"))
-                     hipchat-rooms))
-      (add-to-list 'jabber-muc-autojoin muc-room)
-      (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
+      (dolist (muc-room
+               (mapcar (lambda (room)
+                         (concat hipchat-number "_" room "@conf.hipchat.com"))
+                       hipchat-rooms))
+        (add-to-list 'jabber-muc-autojoin muc-room)
+        (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
 
-    (defun hipchat-join (room)
-      (interactive "sRoom name: ")
-      (jabber-muc-join
-       (jabber-read-account)
-       (concat hipchat-number "_" room "@conf.hipchat.com")
-       hipchat-nickname
-       t))))
+      (defun hipchat-join (room)
+        (interactive "sRoom name: ")
+        (jabber-muc-join
+         (jabber-read-account)
+         (concat hipchat-number "_" room "@conf.hipchat.com")
+         hipchat-nickname
+         t))))
 #+end_src
 
 ** json-mode
@@ -1414,206 +1414,206 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 Terraform state files are JSON.
 
 #+begin_src emacs-lisp
-(use-package json-mode
-  :ensure t
-  :defer t
-  :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
+  (use-package json-mode
+    :ensure t
+    :defer t
+    :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
 #+end_src
 
 ** ledger-mode
 
 #+begin_src emacs-lisp
-(use-package ledger-mode
-  :ensure t
-  :defer t)
+  (use-package ledger-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** lisp-mode
 
 #+begin_src emacs-lisp
-(use-package lisp-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (turn-on-eldoc-mode))))
+  (use-package lisp-mode
+    :config
+    (add-hook 'emacs-lisp-mode-hook
+              (lambda ()
+                (turn-on-eldoc-mode))))
 #+end_src
 
 ** lua-mode
 
 #+begin_src emacs-lisp
-(use-package lua-mode
-  :ensure t
-  :defer t)
+  (use-package lua-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** magit
 
 #+begin_src emacs-lisp
-(use-package magit
-  :ensure t
-  :bind (("C-c m" . magit-dispatch-popup))
-  :config
-  (progn
-    (setq magit-completing-read-function 'magit-ido-completing-read)
-    (setq magit-repository-directories '("~/src"))
-    ;; We have global-auto-revert mode enabled
-    (setq magit-auto-revert-mode nil)
-    (setq magit-save-repository-buffers 'dontask)
+  (use-package magit
+    :ensure t
+    :bind (("C-c m" . magit-dispatch-popup))
+    :config
+    (progn
+      (setq magit-completing-read-function 'magit-ido-completing-read)
+      (setq magit-repository-directories '("~/src"))
+      ;; We have global-auto-revert mode enabled
+      (setq magit-auto-revert-mode nil)
+      (setq magit-save-repository-buffers 'dontask)
 
-    ;; See https://github.com/magit/magit/issues/2265
-    ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
-    (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
-    (add-hook 'after-save-hook #'magit-after-save-refresh-status)))
+      ;; See https://github.com/magit/magit/issues/2265
+      ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
+      (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
+      (add-hook 'after-save-hook #'magit-after-save-refresh-status)))
 #+end_src
 
 ** markdown-mode
 
 #+begin_src emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :defer t
-  :mode ("README\\.md\\'" . gfm-mode))
+  (use-package markdown-mode
+    :ensure t
+    :defer t
+    :mode ("README\\.md\\'" . gfm-mode))
 #+end_src
 
 ** message
 
 #+begin_src emacs-lisp
-(use-package message
-  :defer t
-  :config
-  (progn
-    ;; Use MSMTP with auto-smtp selection
-    ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
-    ;;
-    ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
-    ;; (emacs >= 23.2+1-5)
-    (setq sendmail-program "/usr/bin/msmtp"
-          mail-specify-envelope-from t
-          mail-envelope-from 'header
-          message-sendmail-envelope-from 'header)
+  (use-package message
+    :defer t
+    :config
+    (progn
+      ;; Use MSMTP with auto-smtp selection
+      ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
+      ;;
+      ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
+      ;; (emacs >= 23.2+1-5)
+      (setq sendmail-program "/usr/bin/msmtp"
+            mail-specify-envelope-from t
+            mail-envelope-from 'header
+            message-sendmail-envelope-from 'header)
 
-    ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
-    ;; (setq send-mail-function 'sendmail-send-it)
+      ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+      ;; (setq send-mail-function 'sendmail-send-it)
 
-    ;; Internal SMTP library
-    (setq message-send-mail-function 'smtpmail-send-it
-          smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-          smtpmail-auth-credentials '(("smtp.gmail.com" 587
-                                       "svend@ciffer.net" nil))
-          smtpmail-default-smtp-server "smtp.gmail.com"
-          smtpmail-smtp-server "smtp.gmail.com"
-          smtpmail-smtp-service 587)
+      ;; Internal SMTP library
+      (setq message-send-mail-function 'smtpmail-send-it
+            smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+            smtpmail-auth-credentials '(("smtp.gmail.com" 587
+                                         "svend@ciffer.net" nil))
+            smtpmail-default-smtp-server "smtp.gmail.com"
+            smtpmail-smtp-server "smtp.gmail.com"
+            smtpmail-smtp-service 587)
 
-    ;; Enable gnus-alias
-    (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
-    (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
+      ;; Enable gnus-alias
+      (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
+      (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
-    ;; Enable notmuch-address completion
-    ;; (notmuch-address-message-insinuate)
+      ;; Enable notmuch-address completion
+      ;; (notmuch-address-message-insinuate)
 
-    (defun my-setup-message-mode ()
-      "My preferences for message mode"
-      (interactive)
+      (defun my-setup-message-mode ()
+        "My preferences for message mode"
+        (interactive)
 
-      ;; Enable bbdb completion
-      (bbdb-insinuate-message))
+        ;; Enable bbdb completion
+        (bbdb-insinuate-message))
 
-    (add-hook 'message-setup-hook #'my-setup-message-mode)))
+      (add-hook 'message-setup-hook #'my-setup-message-mode)))
 #+end_src
 
 ** monokai-theme
 
 #+begin_src emacs-lisp
-(use-package monokai-theme
-  :ensure t
-  :defer t)
+  (use-package monokai-theme
+    :ensure t
+    :defer t)
 #+end_src
 
 ** nginx-mode
 
 #+begin_src emacs-lisp
-(use-package nginx-mode
-  :ensure t
-  :defer t)
+  (use-package nginx-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** nim-mode
 
 #+begin_src emacs-lisp
-(use-package nim-mode
-  :ensure t
-  :defer t)
+  (use-package nim-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** nix-mode
 
 #+begin_src emacs-lisp
-(use-package nix-mode
-  :ensure t
-  :defer t)
+  (use-package nix-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** notmuch
 
 #+begin_src emacs-lisp
-(use-package notmuch
-  :ensure t
-  :defer t
-  :config
-  (progn
-    ;; notmuch-always-prompt-for-sender requires ido-mode
-    ;; Add (ido-mode t) to emacs configuration
-    (setq notmuch-always-prompt-for-sender t)
+  (use-package notmuch
+    :ensure t
+    :defer t
+    :config
+    (progn
+      ;; notmuch-always-prompt-for-sender requires ido-mode
+      ;; Add (ido-mode t) to emacs configuration
+      (setq notmuch-always-prompt-for-sender t)
 
-    ;; Use Bcc instead of Fcc
-    (setq notmuch-fcc-dirs nil)
+      ;; Use Bcc instead of Fcc
+      (setq notmuch-fcc-dirs nil)
 
-    (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-                                   ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
-                                   ("Action" . "tag:action")
-                                   ("Waiting" . "tag:waiting")
-                                   ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-                                   ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+      (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
+                                     ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+                                     ("Action" . "tag:action")
+                                     ("Waiting" . "tag:waiting")
+                                     ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+                                     ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
 
-    ;; Show newest mail first
-    (setq notmuch-search-oldest-first nil)
+      ;; Show newest mail first
+      (setq notmuch-search-oldest-first nil)
 
-    ;; Notmuch remote setup (on all hosts except garnet)
-    (when (not (string= system-name "garnet.ciffer.net"))
-      (setq notmuch-command "notmuch-remote"))
+      ;; Notmuch remote setup (on all hosts except garnet)
+      (when (not (string= system-name "garnet.ciffer.net"))
+        (setq notmuch-command "notmuch-remote"))
 
-    ;; Getting Things Done (GTD) keybindings
+      ;; Getting Things Done (GTD) keybindings
 
-    (setq notmuch-tag-macro-alist
-          (list
-           '("a" "+action" "-waiting" "-inbox")
-           '("w" "-action" "+waiting" "-inbox")
-           '("d" "-action" "-waiting" "-inbox")))
+      (setq notmuch-tag-macro-alist
+            (list
+             '("a" "+action" "-waiting" "-inbox")
+             '("w" "-action" "+waiting" "-inbox")
+             '("d" "-action" "-waiting" "-inbox")))
 
-    (defun notmuch-search-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-        (notmuch-search-tag (cdr macro))))
+      (defun notmuch-search-apply-tag-macro (key)
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-search-tag (cdr macro))))
 
-    (defun notmuch-show-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-        (notmuch-show-tag (cdr macro))))
+      (defun notmuch-show-apply-tag-macro (key)
+        (interactive "k")
+        (let ((macro (assoc key notmuch-tag-macro-alist)))
+          (notmuch-show-tag (cdr macro))))
 
-    (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
+      (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
+      (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
 
-    ;; Work around bug with notmuch and emacs-snapshot
-    ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
-    (require 'gnus-art)))
+      ;; Work around bug with notmuch and emacs-snapshot
+      ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
+      (require 'gnus-art)))
 #+end_src
 
 ** operate-on-number
 
 #+begin_src emacs-lisp
-(use-package operate-on-number
-  :ensure t
-  :defer t)
+  (use-package operate-on-number
+    :ensure t
+    :defer t)
 #+end_src
 
 ** org
@@ -1675,29 +1675,29 @@ Terraform state files are JSON.
 ** org-capture
 
 #+begin_src emacs-lisp
-(use-package org-capture
-  :bind (("C-c o c" . org-capture))
-  :config
-  (progn
-    (setq org-capture-templates
-          '(("t" "Task" entry (file "tasks.org")
-             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
+  (use-package org-capture
+    :bind (("C-c o c" . org-capture))
+    :config
+    (progn
+      (setq org-capture-templates
+            '(("t" "Task" entry (file "tasks.org")
+               "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
 #+end_src
 
 ** pass
 
 #+begin_src emacs-lisp
-(use-package pass
-  :ensure t
-  :defer t)
+  (use-package pass
+    :ensure t
+    :defer t)
 #+end_src
 
 ** password-store
 
 #+begin_src emacs-lisp
-(use-package password-store
-  :ensure t
-  :defer t)
+  (use-package password-store
+    :ensure t
+    :defer t)
 #+end_src
 
 ** pdf-tools
@@ -1714,37 +1714,37 @@ make melpa-build
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package pdf-tools
-  :ensure t
-  :init (pdf-tools-install)
-  :config
-  (progn
-    (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
-    (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window)))
+  (use-package pdf-tools
+    :ensure t
+    :init (pdf-tools-install)
+    :config
+    (progn
+      (add-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
+      (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window)))
 #+end_src
 
 ** projectile
 
 #+begin_src emacs-lisp
-(use-package projectile
-  :ensure t
-  :init (projectile-global-mode 1)
-  :config
-  (progn
-    ;; Mark projectile variables as safe
-    (seq-doseq (var '(projectile-project-compilation-cmd
-                      projectile-project-test-cmd
-                      projectile-project-run-cmd))
-      (put var 'safe-local-variable #'stringp))
+  (use-package projectile
+    :ensure t
+    :init (projectile-global-mode 1)
+    :config
+    (progn
+      ;; Mark projectile variables as safe
+      (seq-doseq (var '(projectile-project-compilation-cmd
+                        projectile-project-test-cmd
+                        projectile-project-run-cmd))
+        (put var 'safe-local-variable #'stringp))
 
-    (setq projectile-use-git-grep t)
-    (add-to-list 'projectile-project-root-files ".kitchen.yml")
-    ;; Omit project name for remote buffers
-    (setq projectile-mode-line
-          '(:eval (if (file-remote-p default-directory)
-                      " P"
-                    (format " P[%s]" (projectile-project-name)))))
-    (projectile-cleanup-known-projects)))
+      (setq projectile-use-git-grep t)
+      (add-to-list 'projectile-project-root-files ".kitchen.yml")
+      ;; Omit project name for remote buffers
+      (setq projectile-mode-line
+            '(:eval (if (file-remote-p default-directory)
+                        " P"
+                      (format " P[%s]" (projectile-project-name)))))
+      (projectile-cleanup-known-projects)))
 #+end_src
 
 ** python
@@ -1752,13 +1752,13 @@ make melpa-build
 Associate Nagios check-mk files with python.
 
 #+begin_src emacs-lisp
-(use-package python
-  :mode
-  (("\\.mk\\'" . python-mode))
-  :config
-  (progn
-    ;; PEP 8 compliant filling rules, 79 chars maximum
-    (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))))
+  (use-package python
+    :mode
+    (("\\.mk\\'" . python-mode))
+    :config
+    (progn
+      ;; PEP 8 compliant filling rules, 79 chars maximum
+      (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))))
 #+end_src
 
 ** quickrun
@@ -1766,74 +1766,74 @@ Associate Nagios check-mk files with python.
 Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
-(use-package quickrun
-  :ensure t
-  :bind (("C-c q a" . quickrun-with-arg)
-         ("C-c q q" . quickrun)
-         ("C-c q r" . quickrun-region)
-         ("C-c q s" . quickrun-shell))
-  :config
-  (progn
-    (setq quickrun-timeout-seconds 60)))
+  (use-package quickrun
+    :ensure t
+    :bind (("C-c q a" . quickrun-with-arg)
+           ("C-c q q" . quickrun)
+           ("C-c q r" . quickrun-region)
+           ("C-c q s" . quickrun-shell))
+    :config
+    (progn
+      (setq quickrun-timeout-seconds 60)))
 #+end_src
 
 ** racer
 
 #+begin_src emacs-lisp
-(use-package racer
-  :ensure t
-  :config
-  (progn
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'racer-mode-hook #'eldoc-mode)
-    (add-hook 'racer-mode-hook #'company-mode)
-    ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-    ;; (setq company-tooltip-align-annotations t)
-    ))
+  (use-package racer
+    :ensure t
+    :config
+    (progn
+      (add-hook 'rust-mode-hook #'racer-mode)
+      (add-hook 'racer-mode-hook #'eldoc-mode)
+      (add-hook 'racer-mode-hook #'company-mode)
+      ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+      ;; (setq company-tooltip-align-annotations t)
+      ))
 #+end_src
 
 ** recentf
 
 #+begin_src emacs-lisp
-(use-package recentf
-  :init (recentf-mode 1)
-  :config
-  (progn
-    ;; Enable recentf mode with ido-mode support
-    ;;
-    ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
+  (use-package recentf
+    :init (recentf-mode 1)
+    :config
+    (progn
+      ;; Enable recentf mode with ido-mode support
+      ;;
+      ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
 
-    ;; Increase size of recent file list
-    (setq recentf-max-saved-items 1000)
+      ;; Increase size of recent file list
+      (setq recentf-max-saved-items 1000)
 
-    ;; Ignore temporary notmuch ical files
-    (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
+      ;; Ignore temporary notmuch ical files
+      (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
 
-    (defun ido-recentf-open ()
-      "Use `ido-completing-read' to \\[find-file] a recent file"
-      (interactive)
-      (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-          (message "Opening file...")
-        (message "Aborting")))))
+      (defun ido-recentf-open ()
+        "Use `ido-completing-read' to \\[find-file] a recent file"
+        (interactive)
+        (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+            (message "Opening file...")
+          (message "Aborting")))))
 #+end_src
 
 ** restclient
 
 #+begin_src emacs-lisp
-(use-package restclient
-  :ensure t
-  :defer t)
+  (use-package restclient
+    :ensure t
+    :defer t)
 #+end_src
 
 ** robe
 
 #+begin_src emacs-lisp
-(use-package robe
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (add-hook 'ruby-mode-hook #'robe-mode)))
+  (use-package robe
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (add-hook 'ruby-mode-hook #'robe-mode)))
 #+end_src
 
 ** ruby-mode
@@ -1841,63 +1841,63 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
 
 #+begin_src emacs-lisp
-(use-package ruby-mode
-  :mode
-  (("\\.rake\\'" . ruby-mode)
-   ("Rakefile\\'" . ruby-mode)
-   ("\\.gemspec\\'" . ruby-mode)
-   ("\\.ru\\'" . ruby-mode)
-   ("Gemfile\\'" . ruby-mode)
-   ("Guardfile\\'" . ruby-mode)
-   ("Capfile\\'" . ruby-mode)
-   ("\\.thor\\'" . ruby-mode)
-   ("\\.rabl\\'" . ruby-mode)
-   ("Thorfile\\'" . ruby-mode)
-   ("Vagrantfile\\'" . ruby-mode)
-   ("\\.jbuilder\\'" . ruby-mode)
-   ("Podfile\\'" . ruby-mode)
-   ("\\.podspec\\'" . ruby-mode)
-   ("Puppetfile\\'" . ruby-mode)
-   ("Berksfile\\'" . ruby-mode)
-   ("Appraisals\\'" . ruby-mode))
-  :config
-  (progn
-    (defun my-ruby-mode-defaults ()
-      (inf-ruby-minor-mode +1)
-      (ruby-tools-mode +1)
-      ;; CamelCase aware editing operations
-      (subword-mode +1))
-    (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults)))
+  (use-package ruby-mode
+    :mode
+    (("\\.rake\\'" . ruby-mode)
+     ("Rakefile\\'" . ruby-mode)
+     ("\\.gemspec\\'" . ruby-mode)
+     ("\\.ru\\'" . ruby-mode)
+     ("Gemfile\\'" . ruby-mode)
+     ("Guardfile\\'" . ruby-mode)
+     ("Capfile\\'" . ruby-mode)
+     ("\\.thor\\'" . ruby-mode)
+     ("\\.rabl\\'" . ruby-mode)
+     ("Thorfile\\'" . ruby-mode)
+     ("Vagrantfile\\'" . ruby-mode)
+     ("\\.jbuilder\\'" . ruby-mode)
+     ("Podfile\\'" . ruby-mode)
+     ("\\.podspec\\'" . ruby-mode)
+     ("Puppetfile\\'" . ruby-mode)
+     ("Berksfile\\'" . ruby-mode)
+     ("Appraisals\\'" . ruby-mode))
+    :config
+    (progn
+      (defun my-ruby-mode-defaults ()
+        (inf-ruby-minor-mode +1)
+        (ruby-tools-mode +1)
+        ;; CamelCase aware editing operations
+        (subword-mode +1))
+      (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults)))
 #+end_src
 
 ** ruby-tools
 
 #+begin_src emacs-lisp
-(use-package ruby-tools
-  :ensure t
-  :defer t)
+  (use-package ruby-tools
+    :ensure t
+    :defer t)
 #+end_src
 
 ** rust-mode
 
 #+begin_src emacs-lisp
-(use-package rust-mode
-  :ensure t
-  :defer t)
+  (use-package rust-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** savehist
 
 #+begin_src emacs-lisp
-(use-package savehist
-  :init (savehist-mode 1))
+  (use-package savehist
+    :init (savehist-mode 1))
 #+end_src
 
 ** saveplace
 
 #+begin_src emacs-lisp
-(use-package saveplace
-  :init (save-place-mode))
+  (use-package saveplace
+    :init (save-place-mode))
 #+end_src
 
 ** scala-mode2
@@ -1905,15 +1905,15 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 Scala worksheets end in =.sc=.
 
 #+begin_src emacs-lisp
-(use-package scala-mode2
-  :ensure t
-  :mode
-  (("\\.sc\\'" . scala-mode))
-  :config
-  (progn
-    (defun my-scala-mode-defaults ()
-      (subword-mode +1))
-    (add-hook 'scala-mode-hook #'my-scala-mode-defaults)))
+  (use-package scala-mode2
+    :ensure t
+    :mode
+    (("\\.sc\\'" . scala-mode))
+    :config
+    (progn
+      (defun my-scala-mode-defaults ()
+        (subword-mode +1))
+      (add-hook 'scala-mode-hook #'my-scala-mode-defaults)))
 #+end_src
 
 ** server
@@ -1922,28 +1922,28 @@ Start Emacs server unless one is already running. =server-running-p=
 requires =server=.
 
 #+begin_src emacs-lisp
-(use-package server
-  :config
-  (unless (server-running-p)
-    (server-start)))
+  (use-package server
+    :config
+    (unless (server-running-p)
+      (server-start)))
 #+end_src
 
 ** sh-script
 
 #+begin_src emacs-lisp
-(use-package sh-script
-  :defer t
-  :config
-  (progn
-    (defun my-setup-sh-mode ()
-      "My preferences for sh-mode"
-      (interactive)
-      (setq sh-basic-offset 2)
-      (setq sh-indentation 2)
-      (setq sh-indent-for-case-alt '+)
-      (setq sh-indent-for-case-label 0))
+  (use-package sh-script
+    :defer t
+    :config
+    (progn
+      (defun my-setup-sh-mode ()
+        "My preferences for sh-mode"
+        (interactive)
+        (setq sh-basic-offset 2)
+        (setq sh-indentation 2)
+        (setq sh-indent-for-case-alt '+)
+        (setq sh-indent-for-case-label 0))
 
-    (add-hook 'sh-mode-hook #'my-setup-sh-mode)))
+      (add-hook 'sh-mode-hook #'my-setup-sh-mode)))
 #+end_src
 
 ** shell
@@ -1951,54 +1951,54 @@ requires =server=.
 See http://stackoverflow.com/a/11255996
 
 #+begin_src emacs-lisp
-(defun shell-mode-config ()
-  ;; company-mode
-  ;;
-  ;; Disable idle completion
-  (setq-local company-idle-delay nil)
-  ;; Tab to complete. Use company-complete-common instead of
-  ;; company-manual-begin to complete on tab.
-  (define-key shell-mode-map (kbd "TAB") #'company-complete-common)
+  (defun shell-mode-config ()
+    ;; company-mode
+    ;;
+    ;; Disable idle completion
+    (setq-local company-idle-delay nil)
+    ;; Tab to complete. Use company-complete-common instead of
+    ;; company-manual-begin to complete on tab.
+    (define-key shell-mode-map (kbd "TAB") #'company-complete-common)
 
-  ;; Do not store duplicate history entries
-  (setq comint-input-ignoredups t)
+    ;; Do not store duplicate history entries
+    (setq comint-input-ignoredups t)
 
-  ;; Use sh-mode syntax table (handles single quotes, back-ticks,
-  ;; etc.)
-  (require 'sh-script)
-  (set-syntax-table sh-mode-syntax-table))
+    ;; Use sh-mode syntax table (handles single quotes, back-ticks,
+    ;; etc.)
+    (require 'sh-script)
+    (set-syntax-table sh-mode-syntax-table))
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package shell
-  :config
-  (setq explicit-shell-file-name "bash")
-  ;; Do not try to colorize comments and strings in shell mode
-  (setq shell-font-lock-keywords nil)
-  ;; This seems to be slowing down shell buffers
-  ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
-  (add-hook 'shell-mode-hook #'shell-mode-config))
+  (use-package shell
+    :config
+    (setq explicit-shell-file-name "bash")
+    ;; Do not try to colorize comments and strings in shell mode
+    (setq shell-font-lock-keywords nil)
+    ;; This seems to be slowing down shell buffers
+    ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
+    (add-hook 'shell-mode-hook #'shell-mode-config))
 #+end_src
 
 To disable scroll to bottom:
 
 #+begin_src emacs-lisp :tangle no
-(remove-hook 'comint-output-filter-functions
-             'comint-postoutput-scroll-to-bottom)
+  (remove-hook 'comint-output-filter-functions
+               'comint-postoutput-scroll-to-bottom)
 #+end_src
 
 Changing directory generates a message with the new directory path. To
 disable this:
 
 #+begin_src emacs-lisp :tangle no
-(setq shell-dirtrack-verbose nil)
+  (setq shell-dirtrack-verbose nil)
 #+end_src
 
 To search history when you are at a command line using C-r (instead of
 M-r):
 
 #+begin_src emacs-lisp :tangle no
-(setq comint-history-isearch dwim)
+  (setq comint-history-isearch dwim)
 #+end_src
 
 ** slime
@@ -2006,127 +2006,127 @@ M-r):
 [[http://www.common-lisp.net/project/slime/doc/html/Installation.html#Installation][Slime Installation]]
 
 #+begin_src emacs-lisp
-(use-package slime
-  :ensure t
-  :defer t
-  :config
-  (setq inferior-lisp-program "sbcl"))
+  (use-package slime
+    :ensure t
+    :defer t
+    :config
+    (setq inferior-lisp-program "sbcl"))
 #+end_src
 
 ** smartparens
 
 #+begin_src emacs-lisp
-(use-package smartparens
-  :ensure t
-  :init (progn
-          (smartparens-global-mode t)
-          (require 'smartparens-config)
-          (sp-use-paredit-bindings)
-          ;; sp-paredit-bindings: ("M-r" . sp-splice-sexp-killing-around)
-          (define-key sp-keymap (kbd "M-r") nil)
-          (define-key sp-keymap (kbd "M-s") nil)
-          ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
-          (define-key sp-keymap (kbd "M-<backspace>") nil)))
+  (use-package smartparens
+    :ensure t
+    :init (progn
+            (smartparens-global-mode t)
+            (require 'smartparens-config)
+            (sp-use-paredit-bindings)
+            ;; sp-paredit-bindings: ("M-r" . sp-splice-sexp-killing-around)
+            (define-key sp-keymap (kbd "M-r") nil)
+            (define-key sp-keymap (kbd "M-s") nil)
+            ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
+            (define-key sp-keymap (kbd "M-<backspace>") nil)))
 #+end_src
 
 ** smex
 
 #+begin_src emacs-lisp
-(use-package smex
-  :ensure t
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c M-x" . execute-extended-command)))
+  (use-package smex
+    :ensure t
+    :bind (("M-x" . smex)
+           ("M-X" . smex-major-mode-commands)
+           ("C-c M-x" . execute-extended-command)))
 #+end_src
 
 ** smtpmail-multi
 
 #+begin_src emacs-lisp
-(use-package smtpmail-multi
-  :ensure t
-  :defer t)
+  (use-package smtpmail-multi
+    :ensure t
+    :defer t)
 #+end_src
 
 ** solarized-theme
 
 #+begin_src emacs-lisp
-(use-package solarized-theme
-  :ensure t
-  :defer t)
+  (use-package solarized-theme
+    :ensure t
+    :defer t)
 #+end_src
 
 ** swiper
 
 #+begin_src emacs-lisp
-(use-package swiper
-  :ensure t
-  :bind (("C-c s" . swiper)))
+  (use-package swiper
+    :ensure t
+    :bind (("C-c s" . swiper)))
 #+end_src
 
 ** tango-plus-theme
 
 #+begin_src emacs-lisp
-(use-package tango-plus-theme
-  :ensure t
-  :defer t)
+  (use-package tango-plus-theme
+    :ensure t
+    :defer t)
 #+end_src
 
 ** term
 
 #+begin_src emacs-lisp
-(defun my-setup-term-mode ()
-  "My preferences for term mode"
-  (interactive)
-  ;; Settings recommended in term.el
-  ;;
-  ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
-  (make-local-variable 'mouse-yank-at-point)
-  (setq mouse-yank-at-point t)
-  ;; End of recommended settings
+  (defun my-setup-term-mode ()
+    "My preferences for term mode"
+    (interactive)
+    ;; Settings recommended in term.el
+    ;;
+    ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
+    (make-local-variable 'mouse-yank-at-point)
+    (setq mouse-yank-at-point t)
+    ;; End of recommended settings
 
-  ;; Make term mode more term-like
+    ;; Make term mode more term-like
 
-  (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
-  (define-key term-raw-map (kbd "<C-S-backspace>") 'term-send-raw)
+    (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw)
+    (define-key term-raw-map (kbd "<C-S-backspace>") 'term-send-raw)
 
-  ;; Toogle between line and char mode in term-mode
-  (define-key term-raw-map (kbd "C-'") 'term-line-mode)
-  (define-key term-mode-map (kbd "C-'") 'term-char-mode)
+    ;; Toogle between line and char mode in term-mode
+    (define-key term-raw-map (kbd "C-'") 'term-line-mode)
+    (define-key term-mode-map (kbd "C-'") 'term-char-mode)
 
-  ;; Enable Emacs key bindings in term mode
-  (define-key term-raw-map (kbd "M-!") nil)
-  (define-key term-raw-map (kbd "M-&") nil)
-  (define-key term-raw-map (kbd "M-:") nil)
-  (define-key term-raw-map (kbd "M-x") nil)
+    ;; Enable Emacs key bindings in term mode
+    (define-key term-raw-map (kbd "M-!") nil)
+    (define-key term-raw-map (kbd "M-&") nil)
+    (define-key term-raw-map (kbd "M-:") nil)
+    (define-key term-raw-map (kbd "M-x") nil)
 
-  ;; Paste key bindings for Mac keyboards with no insert
-  (define-key term-raw-map (kbd "C-c y") 'term-paste)
-  (define-key term-raw-map (kbd "s-v") 'term-paste)
+    ;; Paste key bindings for Mac keyboards with no insert
+    (define-key term-raw-map (kbd "C-c y") 'term-paste)
+    (define-key term-raw-map (kbd "s-v") 'term-paste)
 
-  ;; Enable address links in term mode
-  (goto-address-mode))
+    ;; Enable address links in term mode
+    (goto-address-mode))
 
-(use-package term
-  :config
-  (progn
-    (setq-default term-buffer-maximum-size 10000)
-    (add-hook 'term-mode-hook #'my-setup-term-mode)))
+  (use-package term
+    :config
+    (progn
+      (setq-default term-buffer-maximum-size 10000)
+      (add-hook 'term-mode-hook #'my-setup-term-mode)))
 #+end_src
 
 ** terraform-mode
 
 #+begin_src emacs-lisp
-(use-package terraform-mode
-  :ensure t
-  :defer t)
+  (use-package terraform-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** toml-mode
 
 #+begin_src emacs-lisp
-(use-package toml-mode
-  :ensure t
-  :defer t)
+  (use-package toml-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** tramp
@@ -2147,20 +2147,20 @@ ControlPersist 60m
 #+end_example
 
 #+begin_src emacs-lisp
-(use-package tramp
-  :defer t
-  :config
-  (progn
-    ;; Frequently Asked Questions: How could I speed up tramp?
-    ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
-    (setq vc-ignore-dir-regexp
-          (format "\\(%s\\)\\|\\(%s\\)"
-                  vc-ignore-dir-regexp
-                  tramp-file-name-regexp))
+  (use-package tramp
+    :defer t
+    :config
+    (progn
+      ;; Frequently Asked Questions: How could I speed up tramp?
+      ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+      (setq vc-ignore-dir-regexp
+            (format "\\(%s\\)\\|\\(%s\\)"
+                    vc-ignore-dir-regexp
+                    tramp-file-name-regexp))
 
-    (setq tramp-use-ssh-controlmaster-options nil)
-    ;; Tramp sets HISTFILE so bash history on remote shells does not work.
-    (setq tramp-histfile-override nil)))
+      (setq tramp-use-ssh-controlmaster-options nil)
+      ;; Tramp sets HISTFILE so bash history on remote shells does not work.
+      (setq tramp-histfile-override nil)))
 #+end_src
 
 Default value of explicit-bash-args is =("--noediting" "-i")=. We want
@@ -2171,69 +2171,69 @@ Attempt to start or reattach to a dtach session and fall back to a
 bash shell.
 
 #+begin_src emacs-lisp
-(setq explicit-bash-args
-      '("-c" "dtach -A \"$HOME/.dtach-$(hostname -f)-ssorensen\" -z bash --noediting --login -i 2>/dev/null || bash --noediting --login -i"))
+  (setq explicit-bash-args
+        '("-c" "dtach -A \"$HOME/.dtach-$(hostname -f)-ssorensen\" -z bash --noediting --login -i 2>/dev/null || bash --noediting --login -i"))
 #+end_src
 
 #+begin_src emacs-lisp
-(require 'tramp)
+  (require 'tramp)
 
-(defun ssh-host-completing-read ()
-  (completing-read
-   "Open ssh connection to [user@]host: "
-   (completion-table-dynamic
-    (lambda (str)
-      (tramp-completion-handle-file-name-all-completions str "/")))))
+  (defun ssh-host-completing-read ()
+    (completing-read
+     "Open ssh connection to [user@]host: "
+     (completion-table-dynamic
+      (lambda (str)
+        (tramp-completion-handle-file-name-all-completions str "/")))))
 
-(defun ssh-shell-2 (host)
-  "Open SSH connection to HOST."
-  (interactive "f")
-  (let ((default-directory host))
-    ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
-    ;; file first seems to fix this.
-    ;;
-    ;; Cannot read shell history file when using with-current-buffer.
-    (find-file-noselect default-directory)
-    (shell (format "*shell*<%s>" host))))
+  (defun ssh-shell-2 (host)
+    "Open SSH connection to HOST."
+    (interactive "f")
+    (let ((default-directory host))
+      ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
+      ;; file first seems to fix this.
+      ;;
+      ;; Cannot read shell history file when using with-current-buffer.
+      (find-file-noselect default-directory)
+      (shell (format "*shell*<%s>" host))))
 
-(defun ssh-shell (host)
-  "Open SSH connection to HOST."
-  (interactive (list (ssh-host-completing-read)))
-  (let* ((host (if (string-suffix-p ":" host)
-                   host
-                 (format  "%s:" host)))
-         (default-directory (format  "/%s" host)))
-    ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
-    ;; file first seems to fix this.
-    ;;
-    ;; Cannot read shell history file when using with-current-buffer.
-    (find-file-noselect default-directory)
-    (shell (format "*shell*<%s>" host))))
+  (defun ssh-shell (host)
+    "Open SSH connection to HOST."
+    (interactive (list (ssh-host-completing-read)))
+    (let* ((host (if (string-suffix-p ":" host)
+                     host
+                   (format  "%s:" host)))
+           (default-directory (format  "/%s" host)))
+      ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
+      ;; file first seems to fix this.
+      ;;
+      ;; Cannot read shell history file when using with-current-buffer.
+      (find-file-noselect default-directory)
+      (shell (format "*shell*<%s>" host))))
 
-(defun dtach-shell (socket)
-  "Attach to specified dtach SOCKET or create it if it does not exist"
-  (interactive "F")
-  (let ((explicit-shell-file-name "dtach")
-        (explicit-dtach-args `("-A" ,socket "-z" "bash" "--noediting" "--login" "-i")))
-    (shell (format "*dtach*<%s>" socket))))
+  (defun dtach-shell (socket)
+    "Attach to specified dtach SOCKET or create it if it does not exist"
+    (interactive "F")
+    (let ((explicit-shell-file-name "dtach")
+          (explicit-dtach-args `("-A" ,socket "-z" "bash" "--noediting" "--login" "-i")))
+      (shell (format "*dtach*<%s>" socket))))
 #+end_src
 
 #+begin_src emacs-lisp
-(defun tramp-comint-read-input-ring ()
-  "Read remote bash_history file into comint input ring."
-  (interactive)
-  (when (tramp-tramp-file-p default-directory)
-    (tramp-set-comint-input-ring-file)
-    (when (ring-empty-p comint-input-ring)
-      (comint-read-input-ring t))))
+  (defun tramp-comint-read-input-ring ()
+    "Read remote bash_history file into comint input ring."
+    (interactive)
+    (when (tramp-tramp-file-p default-directory)
+      (tramp-set-comint-input-ring-file)
+      (when (ring-empty-p comint-input-ring)
+        (comint-read-input-ring t))))
 
-(defun tramp-set-comint-input-ring-file ()
-  "Set the name of the remote comint-input-ring-file."
-  (when (tramp-tramp-file-p default-directory)
-    (setq comint-input-ring-file-name (format "%s~/.bash_history" default-directory))))
+  (defun tramp-set-comint-input-ring-file ()
+    "Set the name of the remote comint-input-ring-file."
+    (when (tramp-tramp-file-p default-directory)
+      (setq comint-input-ring-file-name (format "%s~/.bash_history" default-directory))))
 
-(add-hook 'shell-mode-hook #'tramp-set-comint-input-ring-file)
-(add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
+  (add-hook 'shell-mode-hook #'tramp-set-comint-input-ring-file)
+  (add-hook 'shell-mode-hook #'tramp-comint-read-input-ring)
 #+end_src
 
 ** winner
@@ -2242,16 +2242,16 @@ The winner-mode package provides a way to restore previous window
 layouts.
 
 #+begin_src emacs-lisp
-(use-package winner
-  :init (winner-mode))
+  (use-package winner
+    :init (winner-mode))
 #+end_src
 
 ** yaml-mode
 
 #+begin_src emacs-lisp
-(use-package yaml-mode
-  :ensure t
-  :defer t)
+  (use-package yaml-mode
+    :ensure t
+    :defer t)
 #+end_src
 
 ** yasnippet
@@ -2259,11 +2259,11 @@ layouts.
 Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289][capitaomorte/yasnippet#289]].
 
 #+begin_src emacs-lisp
-(use-package yasnippet
-  :ensure t
-  :init (yas-global-mode)
-  :config (progn
-	    (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))))
+  (use-package yasnippet
+    :ensure t
+    :init (yas-global-mode)
+    :config (progn
+              (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))))
 #+end_src
 
 ** zoom-frm
@@ -2273,12 +2273,12 @@ text-scale-adjust, which only scale the text for a single buffer. Both
 are useful.)
 
 #+begin_src emacs-lisp
-(use-package zoom-frm
-  :ensure t
-  :bind (("C-c C-+" . zoom-in/out)
-         ("C-c C--" . zoom-in/out)
-         ("C-c C-0" . zoom-in/out)
-         ("C-c C-=" . zoom-in/out)))
+  (use-package zoom-frm
+    :ensure t
+    :bind (("C-c C-+" . zoom-in/out)
+           ("C-c C--" . zoom-in/out)
+           ("C-c C-0" . zoom-in/out)
+           ("C-c C-=" . zoom-in/out)))
 #+end_src
 
 * External config
@@ -2286,8 +2286,8 @@ are useful.)
 Load load config stored outside =~/.emacs.d=.
 
 #+begin_src emacs-lisp
-(when (file-exists-p "~/.emacs.d/local.el")
-  (load-file "~/.emacs.d/local.el"))
+  (when (file-exists-p "~/.emacs.d/local.el")
+    (load-file "~/.emacs.d/local.el"))
 #+end_src
 
 * Easy Customization
@@ -2295,6 +2295,6 @@ Load load config stored outside =~/.emacs.d=.
 Save customization in =conf/emacs-custom.el= instead of =init.el=.
 
 #+begin_src emacs-lisp
-(setq custom-file "~/.emacs.d/conf/emacs-custom.el")
-(load custom-file)
+  (setq custom-file "~/.emacs.d/conf/emacs-custom.el")
+  (load custom-file)
 #+end_src
