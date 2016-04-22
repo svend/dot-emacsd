@@ -1628,9 +1628,9 @@ Terraform state files are JSON.
     (progn
       (defun org-babel-temp-file (prefix &optional suffix)
         "Create a temporary file in the `org-babel-temporary-directory'.
-  Passes PREFIX and SUFFIX directly to `make-temp-file' with the
-  value of `temporary-file-directory' temporarily set to the value
-  of `org-babel-temporary-directory'."
+    Passes PREFIX and SUFFIX directly to `make-temp-file' with the
+    value of `temporary-file-directory' temporarily set to the value
+    of `org-babel-temporary-directory'."
         (if (file-remote-p default-directory)
             (let ((prefix
                    (concat (file-remote-p default-directory)
@@ -1646,6 +1646,7 @@ Terraform state files are JSON.
 
       (add-hook 'org-mode-hook #'auto-fill-mode)
       (add-hook 'org-mode-hook #'org-babel-result-hide-all)
+      (setq org-babel-python-command "python3")
       (setq org-completion-use-ido t)
       (setq org-ellipsis "…")
       (setq org-refile-targets '((nil :maxlevel . 9)))
