@@ -370,12 +370,6 @@ Press =C-c C-h= to show all of these.
   (bind-key "C-c r" 'revert-buffer)
 #+end_src
 
-** Truncate lines
-
-#+begin_src emacs-lisp
-  (setq-default truncate-lines t)
-#+end_src
-
 ** Space as control key
 
 Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on OS X.
@@ -849,9 +843,7 @@ Change scrolling behavior for comint modes.
     ;; ("If the value is greater than 100, redisplay will never recenter
     ;; point, but will always scroll just enough text to bring point
     ;; into view, even if you move far away.")
-    (setq-local scroll-conservatively 101)
-    ;; Wrap lines (truncate-lines is turned on globally)
-    (setq truncate-lines nil))
+    (setq-local scroll-conservatively 101))
 
   (add-hook 'comint-mode-hook #'comint-mode-config)
 #+end_src
