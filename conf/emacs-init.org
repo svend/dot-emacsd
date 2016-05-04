@@ -1069,6 +1069,16 @@ Disable ido faces to see flx highlights.
     :defer t)
 #+end_src
 
+** flycheck-rust
+
+#+begin_src emacs-lisp
+  (use-package flycheck-rust
+    :ensure t
+    :config
+    (progn
+      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+#+end_src
+
 ** git
 
 #+begin_src emacs-lisp
