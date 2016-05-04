@@ -1383,9 +1383,10 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
       (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
 
-      (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
-                                           (:network-server . "talk.google.com")
-                                           (:connection-type . starttls))))
+      ;; jabber-jid-user: Wrong type argument: stringp, ("svend@ciffer.net/emacs" (:network-server . "talk.google.com") (:connection-type . starttls))
+      ;; (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
+      ;;                                      (:network-server . "talk.google.com")
+      ;;                                      (:connection-type . starttls))))
       ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
       ;; failed: The x509 certificate does not match "ciffer.net"’
       (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
