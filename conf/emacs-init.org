@@ -1054,29 +1054,20 @@ Disable ido faces to see flx highlights.
 #+begin_src emacs-lisp
   (use-package flycheck
     :ensure t
+    :init
+    (use-package flycheck-ledger
+      :ensure t
+      :defer t)
+    (use-package flycheck-rust
+      :ensure t
+      :config
+      (progn
+        (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
     :config
     (progn
       ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
       (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
       (add-hook 'after-init-hook #'global-flycheck-mode)))
-#+end_src
-
-** flycheck-ledger
-
-#+begin_src emacs-lisp
-  (use-package flycheck-ledger
-    :ensure t
-    :defer t)
-#+end_src
-
-** flycheck-rust
-
-#+begin_src emacs-lisp
-  (use-package flycheck-rust
-    :ensure t
-    :config
-    (progn
-      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 #+end_src
 
 ** git
