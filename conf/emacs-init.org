@@ -693,9 +693,7 @@ disabling second while.
 #+begin_src emacs-lisp
   (use-package ace-window
     :ensure t
-    :bind (("C-x o" . ace-window))
-    :config (progn
-              (setq aw-swap-invert t)))
+    :bind (("C-x o" . ace-window)))
 #+end_src
 
 ** ag
