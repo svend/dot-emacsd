@@ -2123,7 +2123,9 @@ M-r):
 #+begin_src emacs-lisp
   (use-package toml-mode
     :ensure t
-    :defer t)
+    :defer t
+    :mode
+    (("Cargo\\.lock\\'" . toml-mode)))
 #+end_src
 
 ** tramp
