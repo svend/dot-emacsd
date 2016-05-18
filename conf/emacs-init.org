@@ -709,7 +709,10 @@ disabling second while.
 #+begin_src emacs-lisp
   (use-package aggressive-indent
     :ensure t
-    :config (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
+    :config
+    (progn
+      (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
+      (add-to-list 'aggressive-indent-excluded-modes 'rust-mode))
     :init (global-aggressive-indent-mode 1))
 #+end_src
 
@@ -1880,7 +1883,8 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 #+begin_src emacs-lisp
   (use-package rust-mode
     :ensure t
-    :defer t)
+    :defer t
+    :config (setq rust-format-on-save t))
 #+end_src
 
 ** savehist
