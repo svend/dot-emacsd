@@ -1454,8 +1454,6 @@ Terraform state files are JSON.
 
       ;; We have global-auto-revert mode enabled
       (setq magit-auto-revert-mode nil)
-      ;; For some reason, magit-auto-revert still gets enabled unless I set this:
-      (setq magit-revert-buffers nil)
 
       (setq magit-save-repository-buffers 'dontask)
 
