@@ -1,3 +1,7 @@
+(define-derived-mode ansible-playbook-mode
+  yaml-mode "Ansible Playbook"
+  "Major mode for Ansible playbooks.")
+
 (require 'ob)
 
 (defun org-babel-execute:ansible-playbook (body params)
