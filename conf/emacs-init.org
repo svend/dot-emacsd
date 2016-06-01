@@ -1067,6 +1067,7 @@ Disable ido faces to see flx highlights.
     :config
     (progn
       ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+      (flycheck-add-mode #'yaml-ruby #'ansible-playbook-mode)
       (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
       (add-hook 'after-init-hook #'global-flycheck-mode)))
 #+end_src
