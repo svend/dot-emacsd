@@ -1650,6 +1650,7 @@ Terraform state files are JSON.
       (setq org-refile-targets '((nil :maxlevel . 9)))
       (setq org-src-fontify-natively t)
       (setq org-use-speed-commands t)
+      (setq org-src-preserve-indentation t)
       (setq org-capture-templates
             '(("t" "Task" entry (file "tasks.org")
                "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
