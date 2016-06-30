@@ -881,7 +881,6 @@ Change scrolling behavior for comint modes.
     (setq jedi:use-shortcuts t)))
 #+end_src
 
-
 ** csv-mode
 
 #+begin_src emacs-lisp
