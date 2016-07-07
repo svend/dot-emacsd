@@ -827,6 +827,9 @@ Catch OpenStack openrc password prompt.
               ;; OpenStack
               "Please enter your OpenStack Password:"
               "\\|"
+              ;; curl
+              "Enter host password for user '[^']':"
+              "\\|"
               ;; Ansible
               "SUDO password:"
               "\\|"
