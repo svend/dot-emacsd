@@ -117,12 +117,11 @@ Display date in 24 hour format in mode line.
 
 ** Fonts
 
-Linux: User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
+*** Linux
 
-*** DejaVu
+User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
 
-The [[http://dejavu-fonts.org/][DejaVu font family]] is a free font that has good Unicode coverage.
-On OS X, use homebrew to install.
+*** OS X
 
 Install homebrew-cask and caskroom-fonts.
 
@@ -136,6 +135,8 @@ Install fonts.
 #+begin_src sh
 brew cask install font-dejavu-sans
 #+end_src
+
+*** Fixed pitch mode
 
 #+begin_src emacs-lisp
 (require 'face-remap)
@@ -153,15 +154,10 @@ brew cask install font-dejavu-sans
   '(diminish 'buffer-face-mode))
 #+end_src
 
-*** Input
-
-[[http://input.fontbureau.com/][Input]] is a non-free font that is good variable pitch font for
-programming.
-
 * Emacs themes
 
-Disable current theme before loading new theme. This prevents
-artifacts from the old theme.
+Disable current theme before loading new theme. This prevents artifacts from the
+old theme.
 
 [[https://stackoverflow.com/questions/22866733/emacs-disable-theme-after-loading-a-different-one-themes-conflict?noredirect%3D1#comment34887344_22866733][Emacs disable-theme after loading a different one (Stack Overflow)]]
 
@@ -227,9 +223,9 @@ Scroll one line at a time with mouse
 (setq mouse-wheel-scroll-amount '(1))
 #+end_src
 
-** Hilight current line
+** Highlight current line
 
-Hilight the current line.
+Highlight the current line. Highlight line in inactive windows.
 
 #+begin_src emacs-lisp
 (setq global-hl-line-sticky-flag t)
