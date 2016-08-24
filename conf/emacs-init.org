@@ -1054,14 +1054,14 @@ Disable ido faces to see flx highlights.
 (use-package flycheck
   :ensure t
   :init
-  (use-package flycheck-ledger
-    :ensure t
-    :defer t)
-  (use-package flycheck-rust
-    :ensure t
+  (progn
+    (use-package flycheck-ledger
+      :ensure t
+      :defer t)
+    (use-package flycheck-rust
+      :ensure t)
     :config
-    (progn
-      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   :config
   (progn
     ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
