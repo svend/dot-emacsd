@@ -154,6 +154,14 @@ brew cask install font-dejavu-sans
   '(diminish 'buffer-face-mode))
 #+end_src
 
+*** Disable pager
+
+Set PAGER to cat to disable less in async buffers.
+
+#+begin_src emacs-lisp
+(setenv "PAGER" "cat")
+#+end_src
+
 * Emacs themes
 
 Disable current theme before loading new theme. This prevents artifacts from the
