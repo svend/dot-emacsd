@@ -571,6 +571,13 @@ http://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
  split-width-threshold 150)
 #+end_src
 
+** Scratch buffer
+
+#+begin_src emacs-lisp
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message "#+TITLE: Scratch Buffer\n\n")
+#+end_src
+
 * User defined functions
 
 Hacked version of balance-windows which only balances windows
