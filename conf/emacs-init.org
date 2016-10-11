@@ -567,8 +567,7 @@ http://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
 
 #+begin_src emacs-lisp
 (setq-default
- split-height-threshold 0
- split-width-threshold 150)
+ split-height-threshold 0)
 #+end_src
 
 ** Scratch buffer
@@ -844,7 +843,10 @@ Add more password prompts.
               ;; Ansible
               "SUDO password:"
               "\\|"
-              "Vault password:"))
+              "Vault password:"
+              "\\|"
+              ;; collins-shell (https://tumblr.github.io/collins/tools.html#collins%20shell)
+              "Enter your password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
