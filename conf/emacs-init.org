@@ -1276,6 +1276,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        "Toggle"
        ("b" scroll-bar-mode "scroll-bar")
        ("c" flycheck-mode "flycheck")
+       ("h" global-hl-line-mode "hl-line")
        ("l" visual-line-mode "visual-line")
        ("m" menu-bar-mode "menu-bar")
        ("n" linum-mode "linum")
