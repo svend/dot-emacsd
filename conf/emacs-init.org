@@ -1954,12 +1954,7 @@ See http://stackoverflow.com/a/11255996
   (define-key shell-mode-map (kbd "TAB") #'company-complete-common)
 
   ;; Do not store duplicate history entries
-  (setq comint-input-ignoredups t)
-
-  ;; Use sh-mode syntax table (handles single quotes, back-ticks,
-  ;; etc.)
-  (require 'sh-script)
-  (set-syntax-table sh-mode-syntax-table))
+  (setq comint-input-ignoredups t))
 #+end_src
 
 #+begin_src emacs-lisp
