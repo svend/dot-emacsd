@@ -306,7 +306,7 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 (defun my-prog-mode-hook()
   (flyspell-prog-mode)
   (goto-address-prog-mode)
-  (linum-mode)
+  (nlinum-mode)
   (setq show-trailing-whitespace t))
 
 (add-hook 'prog-mode-hook #'my-prog-mode-hook)
@@ -435,10 +435,10 @@ Misc settings.
 (show-paren-mode)
 #+end_src
 
-Wrap lines at 80 columns instead of 70.
+Wrap lines at N columns instead of 70.
 
 #+begin_src emacs-lisp
-(setq-default fill-column 80)
+(setq-default fill-column 100)
 #+end_src
 
 Open a new window for asynchronous commands without prompting.
@@ -1276,13 +1276,14 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        "Toggle"
        ("b" scroll-bar-mode "scroll-bar")
        ("c" flycheck-mode "flycheck")
+       ("f" variable-pitch-mode "fixed-pitch")
        ("h" global-hl-line-mode "hl-line")
        ("l" visual-line-mode "visual-line")
        ("m" menu-bar-mode "menu-bar")
-       ("n" linum-mode "linum")
+       ("n" nlinum-mode "linum")
        ("s" flyspell-mode "flyspell")
        ("t" toggle-truncate-lines "trucate")
-       ("v" variable-pitch-mode "fixed-pitch")
+       ("v" visual-fill-column-mode "visual-fill-column")
        ("w" whitespace-mode "whitespace")))
 
     (defhydra hydra-winner ()
@@ -1541,6 +1542,13 @@ Terraform state files are JSON.
 (use-package nix-mode
   :ensure t
   :defer t)
+#+end_src
+
+** nlinum
+
+#+begin_src emacs-lisp
+(use-package nlinum
+  :ensure t)
 #+end_src
 
 ** notmuch
