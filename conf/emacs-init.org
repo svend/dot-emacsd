@@ -2239,15 +2239,16 @@ bash shell.
 #+begin_src emacs-lisp
 (use-package visual-fill-column
   :ensure t
-  :init
-  (dolist (hook '(visual-line-mode-hook
-                  prog-mode-hook
-                  text-mode-hook))
-    (add-hook hook #'visual-fill-column-mode))
+  :init (dolist (hook '(visual-line-mode-hook
+                        comint-mode-hook
+                        dired-mode-hook
+                        prog-mode-hook
+                        text-mode-hook))
+          (add-hook hook #'visual-fill-column-mode))
   :config (progn
             (setq-default visual-fill-column-center-text t
                           visual-fill-column-fringes-outside-margins nil)
-            (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly))))
+            (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly)))
 #+end_src
 
 ** winner
