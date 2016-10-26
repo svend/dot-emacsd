@@ -761,13 +761,6 @@ horizontally.
 #+begin_src emacs-lisp
 (use-package bbdb
   :ensure t
-  :defer t)
-#+end_src
-
-** bbdb
-
-#+begin_src emacs-lisp
-(use-package bbdb
   :bind (("C-c b" . bbdb))
   :config
   (progn
