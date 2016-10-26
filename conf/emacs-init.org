@@ -1231,27 +1231,6 @@ go get github.com/nsf/gocode
     (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults)))
 #+end_src
 
-** helm
-
-#+begin_src emacs-lisp
-(use-package helm
-  :ensure t
-  :bind (("C-`" . helm-for-files)
-         ("C-c h f" . helm-firefox-bookmarks)
-         ("C-c h f" . helm-find-files)
-         ("C-c h g" . helm-git-grep-from-here)
-         ("C-c h p" . helm-projectile)
-         ("C-c h x" . helm-M-x)))
-#+end_src
-
-** helm-projectile
-
-#+begin_src emacs-lisp
-(use-package helm-projectile
-  :ensure t
-  :defer t)
-#+end_src
-
 ** hippie-exp
 
 [[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
