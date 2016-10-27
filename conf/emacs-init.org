@@ -1942,7 +1942,7 @@ See http://stackoverflow.com/a/11255996
   :config
   (progn
     (add-to-list 'display-buffer-alist
-                 '("^\\*shell\\*$" . (display-buffer-same-window)))
+                 '("^\\*shell\\*" . (display-buffer-same-window)))
     (setq explicit-shell-file-name "bash")
     ;; Do not try to colorize comments and strings in shell mode
     (setq shell-font-lock-keywords nil)
