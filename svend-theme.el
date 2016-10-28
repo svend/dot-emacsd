@@ -15,7 +15,6 @@
  ;; ;; Default mode line foreground and background
  ;; '(mode-line ((t (:background "grey75" :foreground "black"))))
  ;; '(mode-line-inactive ((t (:background "grey90" :foreground "grey20" :box (:line-width -1 :color "grey75" :style nil)))))
- '(comint-highlight-prompt ((t (:weight bold))))
  '(markdown-pre-face ((t (:inherit fixed-pitch))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
