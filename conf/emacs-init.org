@@ -2221,7 +2221,7 @@ bash shell.
                         compilation-mode-hook
                         comint-mode-hook
                         dired-mode-hook
-                        eww-mode
+                        eww-mode-hook
                         prog-mode-hook
                         text-mode-hook))
           (add-hook hook #'visual-fill-column-mode))
