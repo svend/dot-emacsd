@@ -873,6 +873,14 @@ Change scrolling behavior for comint modes.
   :defer t)
 #+end_src
 
+** debbugs
+
+#+begin_src emacs-lisp
+(use-package debbugs
+  :ensure t
+  :defer t)
+#+end_src
+
 ** desktop
 
 #+begin_src emacs-lisp
