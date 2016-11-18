@@ -1,4 +1,4 @@
-;;; watch.el --- Display output of command at a regular interval
+;;; watch.el --- Periodically display the output of a command
 
 ;; Copyright (C) 2016 Svend Sorensen <svend@ciffer.net>
 
@@ -22,7 +22,7 @@
 
 ;;; Commentary:
 
-;; This package shows the output of a command run periodically, similar to the
+;; This package periodically displays the output of a command, similar to the
 ;; watch command line utility.
 
 ;;; Code:
@@ -33,7 +33,7 @@
   "Name of the watch buffer.")
 
 (defvar watch-timer nil
-  "Timer for rerunning watched command.")
+  "Timer for the watched command.")
 
 (defvar watch-command nil
   "Watched command.")
@@ -45,17 +45,17 @@
 The output appears in the buffer `watch-buffer-name'."
   (interactive
    (list
-    (read-shell-command "Shell command: " nil nil)
+    (read-shell-command "Watched command: " nil nil)
     (when current-prefix-arg
       (abs (prefix-numeric-value current-prefix-arg)))))
   (unless interval (setq interval 2))
   (setq watch-command command)
+
   (watch-stop)
+  (display-buffer (get-buffer-create watch-buffer-name)
+                  '(nil (allow-no-window . t)))
   (setq watch-timer
-        (run-at-time t interval 'watch-run))
-  (get-buffer-create watch-buffer-name)
-  (display-buffer watch-buffer-name '(nil (allow-no-window . t)))
-  (watch-run))
+        (run-at-time nil interval 'watch-run)))
 
 (defun watch-run ()
   "Run the watched command, or cancel it if the buffer does not exist."
