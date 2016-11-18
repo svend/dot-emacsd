@@ -22,8 +22,8 @@
 
 ;;; Commentary:
 
-;; This package shows the output of a command run at regular intervals, similar
-;; to the watch command line utility.
+;; This package shows the output of a command run periodically, similar to the
+;; watch command line utility.
 
 ;;; Code:
 
