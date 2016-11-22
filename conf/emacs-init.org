@@ -1219,6 +1219,21 @@ go get -u github.com/nsf/gocode
     (add-hook 'go-mode-hook #'my-go-mode-defaults)))
 #+end_src
 
+** groovy-mode
+
+#+begin_src emacs-lisp
+(use-package groovy-mode
+  :ensure t
+  :config
+  (progn
+    (defun my-groovy-mode-hook ()
+      ;; Indent groovy code four spaces instead of two
+      (setq c-basic-offset 4))
+    (add-hook 'groovy-mode-hook #'my-groovy-mode-hook))
+  :mode
+  (("Jenkinsfile\\'" . groovy-mode)))
+#+end_src
+
 ** haskell-mode
 
 #+begin_src emacs-lisp
