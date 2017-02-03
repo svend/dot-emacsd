@@ -756,6 +756,18 @@ horizontally.
   ('bash-completion-setup))
 #+end_src
 
+** plantuml-mode
+
+#+begin_src emacs-lisp
+(use-package plantuml-mode
+  :ensure t
+  :bind (("C-c b" . bbdb))
+  :config
+  (progn
+    (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")))
+#+end_src
+
+
 ** bbdb
 
 #+begin_src emacs-lisp
