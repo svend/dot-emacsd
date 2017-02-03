@@ -829,7 +829,10 @@ Add more password prompts.
               "Enter your password:"
               "\\|"
               ;; openssl pkcs12 -nocerts -nodesopenssl
-              "Enter Import Password:"))
+              "Enter Import Password:"
+              "\\|"
+              ;; sshuttle
+              "[local sudo] Password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
