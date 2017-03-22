@@ -51,12 +51,12 @@ This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b
 * Initialize exec-path-from-shell
 
 Function that gets environmental variables from bash. This uses printenv from
-nixpkgs on MacOS.
+nixpkgs on macOS.
 
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
   "Return a list of env variables.
-  This requires the nixpkgs coreutils package on MacOS."
+  This requires the nixpkgs coreutils package on macOS."
   (let ((printenv (if (eq window-system 'ns)
                       (expand-file-name "~/.nix-profile/bin/printenv")
                     "printenv")))
@@ -121,7 +121,7 @@ Display date in 24 hour format in mode line.
 
 User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
 
-*** MacOS
+*** macOS
 
 Install homebrew-cask and caskroom-fonts.
 
@@ -278,9 +278,9 @@ This is now disabled.
         upcase-initials-region))
 #+end_src
 
-** MacOS specific configuration
+** macOS specific configuration
 
-Turn on menu bar, since it does not use any extra space on MacOS.
+Turn on menu bar, since it does not use any extra space on macOS.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
@@ -376,7 +376,7 @@ Press =C-c C-h= to show all of these.
 
 ** Space as control key
 
-Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on MacOS.
+Use space as control key using [[https://github.com/alols/xcape][xcape]] on Linux and [[https://pqrs.org/osx/karabiner/][Karabiner]] on macOS.
 
 xcape:
 
@@ -406,7 +406,7 @@ Karabiner:
 (bind-key "C-x M-SPC" 'pop-global-mark)
 (bind-key "M-SPC" 'set-mark-command)
 (bind-key "M-s-SPC" 'mark-sexp)
-(bind-key "M-s- " 'mark-sexp)           ; MacOS
+(bind-key "M-s- " 'mark-sexp)           ; macOS
 (bind-key "s-SPC" 'just-one-space)
 #+end_src
 
