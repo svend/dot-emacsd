@@ -881,6 +881,14 @@ Change scrolling behavior for comint modes.
     (setq jedi:use-shortcuts t)))
 #+end_src
 
+** counsel
+
+#+begin_src emacs-lisp
+(use-package smex
+  :ensure t
+  :bind (("M-x" . counsel-M-x)))
+#+end_src
+
 ** csv-mode
 
 #+begin_src emacs-lisp
@@ -1055,17 +1063,6 @@ Change scrolling behavior for comint modes.
   :defer t)
 #+end_src
 
-** flx-ido
-
-Disable ido faces to see flx highlights.
-
-#+begin_src emacs-lisp
-(use-package flx-ido
-  :ensure t
-  :init (flx-ido-mode 1)
-  :config (setq ido-use-face nil))
-#+end_src
-
 ** flycheck
 
 #+begin_src emacs-lisp
@@ -1086,6 +1083,19 @@ Disable ido faces to see flx highlights.
     (flycheck-add-mode #'yaml-ruby #'ansible-playbook-mode)
     (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
     (add-hook 'after-init-hook #'global-flycheck-mode)))
+#+end_src
+
+** ivy
+
+#+begin_src emacs-lisp
+(use-package ivy
+  :ensure t
+  :config (progn
+            (setq ivy-re-builders-alist
+                  '((t . ivy--regex-fuzzy)))
+
+            )
+  :init (ivy-mode 1))
 #+end_src
 
 ** git
@@ -1336,33 +1346,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
                 (ibuffer-do-sort-by-alphabetic)))))
 #+end_src
 
-** ido
-
-#+begin_src emacs-lisp
-(use-package ido
-  :init (ido-mode 1)
-  :config
-  (progn
-    (ido-everywhere)
-    (setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-default-file-method 'selected-window
-          ido-auto-merge-work-directories-length -1
-          ido-use-virtual-buffers t)
-    (add-to-list 'ido-ignore-buffers "\\`*tramp/")))
-#+end_src
-
-** ido-ubiquitous
-
-#+begin_src emacs-lisp
-(use-package ido-ubiquitous
-  :ensure t
-  :init
-  (ido-ubiquitous-mode 1))
-#+end_src
-
 ** inf-ruby
 
 #+begin_src emacs-lisp
@@ -1468,7 +1451,7 @@ Terraform state files are JSON.
     (setq magit-auto-revert-mode nil))
   :config
   (progn
-    (setq magit-completing-read-function 'magit-ido-completing-read)
+    (setq magit-completing-read-function 'ivy-completing-read)
     (setq magit-repository-directories '("~/src"))
 
     (setq magit-save-repository-buffers 'dontask)
@@ -1667,7 +1650,6 @@ Terraform state files are JSON.
     (add-hook 'org-mode-hook #'auto-fill-mode)
     (add-hook 'org-mode-hook #'org-babel-result-hide-all)
     (setq org-babel-python-command "python3")
-    (setq org-completion-use-ido t)
     (setq org-ellipsis "…")
     ;; brew install plantuml
     (setq org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
@@ -1767,6 +1749,7 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 
     (setq projectile-use-git-grep t)
     (add-to-list 'projectile-project-root-files ".kitchen.yml")
+    (setq projectile-completion-system 'ivy)
     ;; Omit project name for remote buffers
     (setq projectile-mode-line
           '(:eval (if (file-remote-p default-directory)
@@ -1835,14 +1818,7 @@ Increase timeout to 60 seconds from the default of 10 seconds.
     (setq recentf-max-saved-items 1000)
 
     ;; Ignore temporary notmuch ical files
-    (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")
-
-    (defun ido-recentf-open ()
-      "Use `ido-completing-read' to \\[find-file] a recent file"
-      (interactive)
-      (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-          (message "Opening file...")
-        (message "Aborting")))))
+    (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")))
 #+end_src
 
 ** restclient
@@ -2054,16 +2030,6 @@ M-r):
           (define-key sp-keymap (kbd "M-s") nil)
           ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
-#+end_src
-
-** smex
-
-#+begin_src emacs-lisp
-(use-package smex
-  :ensure t
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)
-         ("C-c M-x" . execute-extended-command)))
 #+end_src
 
 ** smtpmail-multi
