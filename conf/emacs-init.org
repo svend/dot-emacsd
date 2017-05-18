@@ -1809,10 +1809,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
   :init (recentf-mode 1)
   :config
   (progn
-    ;; Enable recentf mode with ido-mode support
-    ;;
-    ;; http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/
-
     ;; Increase size of recent file list
     (setq recentf-max-saved-items 1000)
 
