@@ -1090,11 +1090,10 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package ivy
   :ensure t
-  :config (progn
-            (setq ivy-re-builders-alist
-                  '((t . ivy--regex-fuzzy)))
-
-            )
+  :config
+  (progn
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    (setq ivy-use-virtual-buffers t))
   :init (ivy-mode 1))
 #+end_src
 
