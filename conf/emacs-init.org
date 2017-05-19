@@ -1092,7 +1092,8 @@ Change scrolling behavior for comint modes.
   :ensure t
   :config
   (progn
-    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                  (t . ivy--regex-fuzzy)))
     (setq ivy-use-virtual-buffers t))
   :init (ivy-mode 1))
 #+end_src
