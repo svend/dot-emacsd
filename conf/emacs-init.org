@@ -1090,7 +1090,7 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package ivy
   :ensure t
-  :bind (("C-s" . swiper)))
+  :bind (("C-s" . swiper))
   :config
   (progn
     (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
