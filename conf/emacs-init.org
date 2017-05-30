@@ -461,9 +461,16 @@ Prefer newer files.
 (setq load-prefer-newer t)
 #+end_src
 
-Add option to revert buffer when prompting to save modified buffers.
+Add options to kill or revert buffer when prompting to save modified buffers.
 
 #+begin_src emacs-lisp
+(add-to-list
+ 'save-some-buffers-action-alist
+ '(?k
+   (lambda (buf)
+     (kill-buffer buf))
+   "kill this buffer"))
+
 (add-to-list
  'save-some-buffers-action-alist
  '(?r
