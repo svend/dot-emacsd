@@ -26,6 +26,7 @@
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))
  '(org-table ((t (:inherit fixed-pitch))))
- '(org-verbatim ((t (:inherit fixed-pitch)))))
+ '(org-verbatim ((t (:inherit fixed-pitch))))
+ '(sh-heredoc ((t (:inherit font-lock-string-face)))))
 
 (provide-theme 'svend)
