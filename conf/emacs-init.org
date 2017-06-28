@@ -711,7 +711,6 @@ horizontally.
   :config
   (progn
     (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
     (add-to-list 'aggressive-indent-excluded-modes 'rust-mode))
   :init (global-aggressive-indent-mode 1))
 #+end_src
@@ -1106,7 +1105,8 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package ivy
   :ensure t
-  :bind (("C-s" . swiper))
+  :bind (("C-s" . swiper)
+         ("C-c y" . counsel-yank-pop))
   :config
   (progn
     (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
