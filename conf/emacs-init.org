@@ -1111,7 +1111,8 @@ Change scrolling behavior for comint modes.
   (progn
     (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
                                   (t . ivy--regex-fuzzy)))
-    (setq ivy-use-virtual-buffers t))
+    (setq ivy-use-virtual-buffers t)
+    (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
   :init (ivy-mode 1))
 #+end_src
 
