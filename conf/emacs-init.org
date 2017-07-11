@@ -670,15 +670,6 @@ horizontally.
 
 * Packages
 
-** kubernetes
-
-#+begin_src emacs-lisp
-(use-package kubernetes
-  :ensure t
-  :defer t
-  :commands (kubernetes-use-context))
-#+end_src
-
 ** ace-link
 
 #+begin_src emacs-lisp
@@ -770,15 +761,20 @@ horizontally.
   ('bash-completion-setup))
 #+end_src
 
-** plantuml-mode
+** bash-completion
 
 #+begin_src emacs-lisp
-(use-package plantuml-mode
+(use-package bash-completion
   :ensure t
-  :bind (("C-c b" . bbdb))
   :config
   (progn
-    (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")))
+    (setq bash-completion-prog "bash")
+    (autoload 'bash-completion-dynamic-complete
+      "bash-completion"
+      "BASH completion hook")
+    (add-hook 'shell-dynamic-complete-functions
+              'bash-completion-dynamic-complete)
+    )))
 #+end_src
 
 ** bbdb
@@ -1100,22 +1096,6 @@ Change scrolling behavior for comint modes.
     (add-hook 'after-init-hook #'global-flycheck-mode)))
 #+end_src
 
-** ivy
-
-#+begin_src emacs-lisp
-(use-package ivy
-  :ensure t
-  :bind (("C-s" . swiper)
-         ("C-c y" . counsel-yank-pop))
-  :config
-  (progn
-    (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                  (t . ivy--regex-fuzzy)))
-    (setq ivy-use-virtual-buffers t)
-    (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
-  :init (ivy-mode 1))
-#+end_src
-
 ** git
 
 #+begin_src emacs-lisp
@@ -1379,6 +1359,22 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   (setq inf-ruby-default-implementation "pry"))
 #+end_src
 
+** ivy
+
+#+begin_src emacs-lisp
+(use-package ivy
+  :ensure t
+  :bind (("C-s" . swiper)
+         ("C-c y" . counsel-yank-pop))
+  :config
+  (progn
+    (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                  (t . ivy--regex-fuzzy)))
+    (setq ivy-use-virtual-buffers t)
+    (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
+  :init (ivy-mode 1))
+#+end_src
+
 ** jabber
 
 #+begin_src emacs-lisp sh
@@ -1429,6 +1425,15 @@ Terraform state files are JSON.
   :ensure t
   :defer t
   :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
+#+end_src
+
+** kubernetes
+
+#+begin_src emacs-lisp
+(use-package kubernetes
+  :ensure t
+  :defer t
+  :commands (kubernetes-use-context))
 #+end_src
 
 ** ledger-mode
@@ -1749,6 +1754,17 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
     ;; pdf-view-set-slice-from-bounding-box (s b).
     ;; (add3-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
     (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window)))
+#+end_src
+
+** plantuml-mode
+
+#+begin_src emacs-lisp
+(use-package plantuml-mode
+  :ensure t
+  :bind (("C-c b" . bbdb))
+  :config
+  (progn
+    (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")))
 #+end_src
 
 ** projectile
