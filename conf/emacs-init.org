@@ -756,15 +756,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package bash-completion
-  :disabled t
-  :init
-  ('bash-completion-setup))
-#+end_src
-
-** bash-completion
-
-#+begin_src emacs-lisp
-(use-package bash-completion
   :ensure t
   :config
   (progn
@@ -773,8 +764,7 @@ horizontally.
       "bash-completion"
       "BASH completion hook")
     (add-hook 'shell-dynamic-complete-functions
-              'bash-completion-dynamic-complete)
-    )))
+              'bash-completion-dynamic-complete)))
 #+end_src
 
 ** bbdb
