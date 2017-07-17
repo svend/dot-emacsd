@@ -759,7 +759,7 @@ horizontally.
   :ensure t
   :config
   (progn
-    (setq bash-completion-args "--noediting --login")
+    (setq bash-completion-args '("--noediting" "--login"))
     (setq bash-completion-prog "bash")
     (autoload 'bash-completion-dynamic-complete
       "bash-completion"
