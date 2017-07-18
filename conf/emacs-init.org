@@ -306,7 +306,11 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 (defun my-prog-mode-hook()
   (flyspell-prog-mode)
   (goto-address-prog-mode)
-  (nlinum-mode)
+
+  (if (< emacs-major-version 26)
+      (nlinum-mode)
+    (setq display-line-numbers t))
+
   (setq show-trailing-whitespace t))
 
 (add-hook 'prog-mode-hook #'my-prog-mode-hook)
@@ -626,6 +630,14 @@ horizontally.
 #+end_src
 
 #+begin_src emacs-lisp
+(defun my-toggle-line-numbers()
+  (interactive)
+  (if (< emacs-major-version 26)
+      (nlinum-mode)
+    (toggle-display-line-numbers)))
+#+end_src
+
+#+begin_src emacs-lisp
 (defun my-shell-cd ()
   "Switch to shell buffer and change directory to `default-directory'."
   (interactive)
@@ -712,7 +724,7 @@ horizontally.
 (use-package alert
   :ensure t
   :defer t
-  :config
+  :init
   (progn
     (defun comint-alert-on-prompt (string)
       "Send alert when prompt is detected."
@@ -727,12 +739,12 @@ horizontally.
       (make-local-variable 'comint-output-filter-functions)
       (if (member 'comint-alert-on-prompt comint-output-filter-functions)
           (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
-        (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt)))
-
-    (setq alert-default-style
-          (if (eq window-system 'ns)
-              'notifier
-            'notifications))))
+        (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt))))
+  :config
+  (setq alert-default-style
+        (if (eq window-system 'ns)
+            'notifier
+          'notifications)))
 #+end_src
 
 ** auth-password-store
@@ -1301,7 +1313,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
        ("h" global-hl-line-mode "hl-line")
        ("l" visual-line-mode "visual-line")
        ("m" menu-bar-mode "menu-bar")
-       ("n" nlinum-mode "linum")
+       ("n" my-toggle-line-numbers "line-numbers")
        ("s" flyspell-mode "flyspell")
        ("t" toggle-truncate-lines "trucate")
        ("v" visual-fill-column-mode "visual-fill-column")
