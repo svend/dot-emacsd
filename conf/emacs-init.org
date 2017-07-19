@@ -1004,22 +1004,6 @@ Change scrolling behavior for comint modes.
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo))
 #+end_src
 
-** elfeed
-
-#+begin_src emacs-lisp
-(use-package elfeed
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (setq elfeed-feeds
-          '("http://git-annex.branchable.com/devblog/index.atom"
-            "http://planet.emacsen.org/atom.xml"
-            "http://www.reddit.com/r/emacs/.rss"
-            "http://www.reddit.com/r/ruby/.rss"
-            "http://planet.debian.org/atom.xml"))))
-#+end_src
-
 ** ensime
 
 #+begin_src emacs-lisp
