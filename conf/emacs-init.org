@@ -2230,7 +2230,7 @@ bash shell.
   (let* ((host (if (string-suffix-p ":" host)
                    host
                  (format  "%s:" host)))
-         (default-directory (format  "/%s" host)))
+         (default-directory (format  "/ssh:%s" host)))
     ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
     ;; file first seems to fix this.
     ;;
