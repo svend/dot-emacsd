@@ -1702,7 +1702,7 @@ Terraform state files are JSON.
        (python . t)
        (ruby . t)
        (scala . t)
-       (sh . t)))))
+       (shell . t)))))
 #+end_src
 
 ** org-capture
