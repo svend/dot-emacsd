@@ -1199,7 +1199,7 @@ pass show imap.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
   :defer t
   :config
   (add-to-list 'gnutls-trustfiles
-               (expand-file-name "~/.certs/ca-certificates.crt")))
+               (expand-file-name "~/.certs/ca-bundle.crt")))
 #+end_src
 
 ** go-eldoc
