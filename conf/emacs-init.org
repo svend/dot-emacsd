@@ -1770,7 +1770,7 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 #+begin_src emacs-lisp
 (use-package projectile
   :ensure t
-  :init (projectile-global-mode 1)
+  :init (projectile-mode)
   :config
   (progn
     ;; Mark projectile variables as safe
@@ -1779,14 +1779,9 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
                       projectile-project-run-cmd))
       (put var 'safe-local-variable #'stringp))
 
+    (setq projectile-completion-system 'ivy)
     (setq projectile-use-git-grep t)
     (add-to-list 'projectile-project-root-files ".kitchen.yml")
-    (setq projectile-completion-system 'ivy)
-    ;; Omit project name for remote buffers
-    (setq projectile-mode-line
-          '(:eval (if (file-remote-p default-directory)
-                      " P"
-                    (format " P[%s]" (projectile-project-name)))))
     (projectile-cleanup-known-projects)))
 #+end_src
 
