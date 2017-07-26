@@ -1135,6 +1135,15 @@ gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";p
 : machine imap.gmail.com login EMAIL password PASSWORD port imaps
 : machine smtp.gmail.com login EMAIL password PASSWORD port 587
 
+#+begin_src sh :results output
+pass show imap.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
+#+end_src
+
+#+RESULTS:
+: PASSWORD
+: user: EMAIL
+: port: imaps
+
 #+begin_src emacs-lisp
 (use-package gnus
   :config
