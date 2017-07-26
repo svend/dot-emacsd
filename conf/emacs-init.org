@@ -750,9 +750,11 @@ horizontally.
 ** auth-password-store
 
 #+begin_src emacs-lisp
-(use-package auth-password-store
-  :ensure t
-  :init (auth-pass-enable))
+(if (< emacs-major-version 26)
+    (use-package auth-password-store
+      :ensure t
+      :init (auth-pass-enable))
+  (auth-source-pass-enable))
 #+end_src
 
 ** avy
