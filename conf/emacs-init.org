@@ -750,11 +750,11 @@ horizontally.
 ** auth-password-store
 
 #+begin_src emacs-lisp
-(if (< emacs-major-version 26)
-    (use-package auth-password-store
-      :ensure t
-      :init (auth-pass-enable))
-  (auth-source-pass-enable))
+(use-package auth-password-store
+  :if (< emacs-major-version 26)
+  :ensure t
+  :init (auth-pass-enable))
+    (auth-source-pass-enable))
 #+end_src
 
 ** avy
@@ -2307,9 +2307,8 @@ Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289
 
 ** zoom-frm
 
-The zoom-frm package allows scaling all text. (As opposed to
-text-scale-adjust, which only scale the text for a single buffer. Both
-are useful.)
+The zoom-frm package allows scaling all text. (As opposed to text-scale-adjust,
+which only scale the text for a single buffer. Both are useful.)
 
 #+begin_src emacs-lisp
 (use-package zoom-frm
