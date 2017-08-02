@@ -1151,10 +1151,10 @@ pass show imap.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
     ;; Use secondary-select-methods
     (setq gnus-select-method '(nnnil ""))
 
-    ;; Gmane
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nntp "gmane"
-                        (nntp-address "news.gmane.org")))
+    ;; ;; Gmane
+    ;; (add-to-list 'gnus-secondary-select-methods
+    ;;              '(nntp "gmane"
+    ;;                     (nntp-address "news.gmane.org")))
 
     ;; Gmail
     (add-to-list 'gnus-secondary-select-methods
@@ -1574,6 +1574,7 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package nlinum
+  :if (< emacs-major-version 26)
   :ensure t)
 #+end_src
 
