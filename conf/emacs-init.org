@@ -2354,6 +2354,7 @@ Load load config stored outside =~/.emacs.d=.
 #+begin_src emacs-lisp
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
+(load-file "~/.emacs.d/conf/ob-ansible-playbook.el")
 #+end_src
 
 * Easy Customization
