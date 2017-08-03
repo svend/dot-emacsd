@@ -1484,9 +1484,11 @@ Terraform state files are JSON.
 
     (setq magit-save-repository-buffers 'dontask)
 
-    ;; See https://github.com/magit/magit/issues/2265
-    ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
-    (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t))
+    (if (< emacs-major-version 26)
+        ;; See https://github.com/magit/magit/issues/2265
+        ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
+        (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t)))
+
     (add-hook 'after-save-hook #'magit-after-save-refresh-status)))
 #+end_src
 
