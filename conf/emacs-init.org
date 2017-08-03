@@ -754,6 +754,8 @@ horizontally.
   :if (< emacs-major-version 26)
   :ensure t
   :init (auth-pass-enable))
+
+(if (< emacs-major-version 26)
     (auth-source-pass-enable))
 #+end_src
 
