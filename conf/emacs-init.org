@@ -754,9 +754,14 @@ horizontally.
   :if (< emacs-major-version 26)
   :ensure t
   :init (auth-pass-enable))
+#+end_src
 
-(if (< emacs-major-version 26)
-    (auth-source-pass-enable))
+** auth-source-pass
+
+#+begin_src emacs-lisp
+(use-package auth-source-pass
+  :if (>= emacs-major-version 26)
+  :init (auth-source-pass-enable))
 #+end_src
 
 ** avy
