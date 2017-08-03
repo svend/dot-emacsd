@@ -11,20 +11,22 @@
 
 #+begin_src emacs-lisp
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
+;; Add nix elpa directory
+(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
 #+end_src
 
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 
 #+begin_src emacs-lisp
-(require 'package)
-;; Add nix elpa directory
-(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(require 'package) ;; You might already have this line
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
 #+end_src
 
 * Initialize use-package
