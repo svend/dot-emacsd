@@ -2065,6 +2065,15 @@ M-r):
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
 #+end_src
 
+** smex
+
+=counsel-M-x= will use smex if it is installed.
+
+#+begin_src emacs-lisp
+(use-package smex
+  :ensure t)
+#+end_src
+
 ** smtpmail-multi
 
 #+begin_src emacs-lisp
