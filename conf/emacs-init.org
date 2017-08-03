@@ -10,6 +10,7 @@
 * Initialize package.el
 
 #+begin_src emacs-lisp
+(require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
 ;; Add nix elpa directory
 (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
@@ -1644,6 +1645,13 @@ Terraform state files are JSON.
     (require 'gnus-art)))
 #+end_src
 
+** ob-rust
+
+#+begin_src emacs-lisp
+(use-package ob-rust
+  :ensure t)
+#+end_src
+
 ** operate-on-number
 
 #+begin_src emacs-lisp
@@ -2346,7 +2354,6 @@ Load load config stored outside =~/.emacs.d=.
 #+begin_src emacs-lisp
 (when (file-exists-p "~/.emacs.d/local.el")
   (load-file "~/.emacs.d/local.el"))
-(load-file "~/.emacs.d/conf/ob-rust.el")
 #+end_src
 
 * Easy Customization
