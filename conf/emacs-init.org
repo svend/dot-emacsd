@@ -448,12 +448,6 @@ Wrap lines at N columns instead of 70.
 (setq-default fill-column 80)
 #+end_src
 
-Open a new window for asynchronous commands without prompting.
-
-#+begin_src emacs-lisp
-(setq async-shell-command-buffer 'new-buffer)
-#+end_src
-
 Add timezones for =display-time-world=.
 
 #+begin_src emacs-lisp
@@ -699,14 +693,6 @@ horizontally.
 (use-package ace-window
   :ensure t
   :bind (("C-x o" . ace-window)))
-#+end_src
-
-** ag
-
-#+begin_src emacs-lisp
-(use-package ag
-  :ensure t
-  :defer t)
 #+end_src
 
 ** aggressive-indent
