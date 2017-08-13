@@ -769,7 +769,7 @@ horizontally.
   :ensure t
   :config
   (progn
-    (defun bash-completion-dynamic-complete-local()
+    (defun my-bash-completion-dynamic-complete-local()
       "Returns the completion table for bash command at point if the buffer is not remote."
       (unless (file-remote-p default-directory)
         (bash-completion-dynamic-complete)))
