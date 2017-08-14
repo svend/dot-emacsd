@@ -1164,16 +1164,20 @@ upass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
     (setq gnus-select-method '(nnnil ""))
 
     ;; ;; Gmane
-    ;; (add-to-list 'gnus-secondary-select-methods
-    ;;              '(nntp "gmane"
-    ;;                     (nntp-address "news.gmane.org")))
+    (add-to-list 'gnus-secondary-select-methods
+                 '(nntp "gmane"
+                        (nntp-address "news.gmane.org")))
 
     ;; Gmail
     (add-to-list 'gnus-secondary-select-methods
-                 '(nnimap "gmail"
-                          (nnimap-address "imap.gmail.com")
-                          (nnimap-server-port 993)
-                          (nnimap-stream ssl)))
+                 '(nnimap "imap.gmail.com"))
+
+    ;; (add-to-list 'gnus-secondary-select-methods
+    ;;              '(nnimap "imap.gmail.com"
+    ;;                       (nnimap-address "imap.gmail.com")
+    ;;                       ;; (nnimap-server-port 993)
+    ;;                       ;; (nnimap-stream ssl)
+    ;;                       ))
 
     ;; ;; Record all IMAP commands in the ‘"*imap log*"’
     ;; (setq nnimap-record-commands t)
