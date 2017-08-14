@@ -1146,6 +1146,16 @@ pass show imap.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 : user: EMAIL
 : port: imaps
 
+#+begin_src sh :results output
+upass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
+#+end_src
+
+#+RESULTS:
+: PASSWORD
+: user: EMAIL
+: port: 587
+
+
 #+begin_src emacs-lisp
 (use-package gnus
   :config
