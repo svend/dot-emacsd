@@ -17,6 +17,7 @@
  ;; '(mode-line ((t (:background "grey75" :foreground "black"))))
  ;; '(mode-line-inactive ((t (:background "grey90" :foreground "grey20" :box (:line-width -1 :color "grey75" :style nil)))))
  '(markdown-pre-face ((t (:inherit fixed-pitch))))
+ '(nobreak-space ((t (:underline nil))))
  '(org-block ((t (:inherit fixed-pitch))))
  '(org-block-background ((t (:inherit fixed-pitch))))
  '(org-checkbox ((t (:inherit fixed-pitch))))

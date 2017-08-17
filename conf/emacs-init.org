@@ -1994,6 +1994,7 @@ requires =server=.
       (interactive)
       (setq sh-basic-offset 2)
       (setq sh-indentation 2)
+      (setq sh-indent-after-continuation 'always)
       (setq sh-indent-for-case-alt '+)
       (setq sh-indent-for-case-label 0))
 
