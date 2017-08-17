@@ -281,6 +281,12 @@ This is now disabled.
         upcase-initials-region))
 #+end_src
 
+Disable keyboard shortcut to print buffer.
+
+#+begin_src emacs-lisp
+(global-unset-key (kbd "s-p"))
+#+end_src
+
 ** macOS specific configuration
 
 Turn on menu bar, since it does not use any extra space on macOS.
