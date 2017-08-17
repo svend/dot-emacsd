@@ -1014,6 +1014,16 @@ Change scrolling behavior for comint modes.
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo))
 #+end_src
 
+** edit-indirect
+
+This is used to edit code blocks in markdown-mode.
+
+#+begin_src emacs-lisp
+(use-package edit-indirect
+  :ensure t
+  :defer t)
+#+end_src
+
 ** ensime
 
 #+begin_src emacs-lisp
