@@ -24,6 +24,7 @@
  '(org-code ((t (:inherit fixed-pitch))))
  '(org-date ((t (:inherit fixed-pitch))))
  '(org-document-title ((t (:weight bold :height 1.4))))
+ '(org-ellipsis ((t (:underline nil))))
  '(org-level-1 ((t (:height 1.3))))
  '(org-level-2 ((t (:height 1.2))))
  '(org-level-3 ((t (:height 1.1))))

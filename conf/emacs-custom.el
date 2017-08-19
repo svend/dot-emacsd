@@ -25,7 +25,7 @@
  '(org-src-window-setup (quote other-window))
  '(package-selected-packages
    (quote
-    (ereader package-lint dired-collapse eink-theme counsel pdf-tools zoom-frm yaml-mode use-package toml-mode terraform-mode tango-plus-theme swiper solarized-theme smtpmail-multi smex smartparens slime scala-mode2 ruby-tools robe racer quickrun pass operate-on-number ob-restclient notmuch nix-mode nim-mode nginx-mode monokai-theme markdown-mode magit lua-mode ledger-mode json-mode jabber ido-ubiquitous ibuffer-tramp hydra haskell-mode go-eldoc gnus-alias gnuplot gitignore-mode gitconfig-mode git flycheck-rust flycheck-ledger flx-ido exec-path-from-shell erlang ensime elfeed dockerfile-mode docker-tramp csv-mode company-jedi company-go color-theme-sanityinc-tomorrow calfw bbdb auth-password-store alert aggressive-indent ag ace-window ace-link)))
+    (o-blog ereader package-lint dired-collapse eink-theme counsel pdf-tools zoom-frm yaml-mode use-package toml-mode terraform-mode tango-plus-theme swiper solarized-theme smtpmail-multi smex smartparens slime scala-mode2 ruby-tools robe racer quickrun pass operate-on-number ob-restclient notmuch nix-mode nim-mode nginx-mode monokai-theme markdown-mode magit lua-mode ledger-mode json-mode jabber ido-ubiquitous ibuffer-tramp hydra haskell-mode go-eldoc gnus-alias gnuplot gitignore-mode gitconfig-mode git flycheck-rust flycheck-ledger flx-ido exec-path-from-shell erlang ensime elfeed dockerfile-mode docker-tramp csv-mode company-jedi company-go color-theme-sanityinc-tomorrow calfw bbdb auth-password-store alert aggressive-indent ag ace-window ace-link)))
  '(reb-re-syntax (quote string))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
