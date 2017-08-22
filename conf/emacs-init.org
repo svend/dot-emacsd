@@ -195,6 +195,7 @@ Treat all themes as safe.
 
 #+begin_src emacs-lisp
 (setq custom-safe-themes t)
+(setq custom-theme-directory "~/.emacs.d/conf/")
 #+end_src
 
 * Emacs settings
