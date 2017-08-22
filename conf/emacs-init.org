@@ -784,6 +784,18 @@ horizontally.
     (setq bbdb-auto-revert-p t)))
 #+end_src
 
+** bpr
+
+#+begin_src emacs-lisp
+(use-package bpr
+  :ensure t
+  :bind (("M-&" . bpr-spawn))
+  :config (progn
+            (setq bpr-colorize-output t
+                  bpr-show-progress nil
+                  bpr-use-projectile nil)))
+#+end_src
+
 ** calfw
 
 #+begin_src emacs-lisp
@@ -2101,17 +2113,6 @@ M-r):
   :ensure t
   :defer t)
 #+end_src
-
-** bpr
-
-#+begin_src emacs-lisp
-(use-package bpr
-  :ensure t
-  :bind (("M-&" . bpr-spawn))
-  :config (progn
-            (setq bpr-show-progress nil)))
-#+end_src
-
 
 ** swiper
 
