@@ -14,6 +14,9 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
 ;; Add nix elpa directory
 (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+
+;; Do not write installed packages to package-selected-packages in custom-file
+(defun package--save-selected-packages (&rest opt) nil)
 #+end_src
 
 From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
@@ -961,7 +964,7 @@ Change scrolling behavior for comint modes.
                  '(shell-mode . my-shell-restore-desktop-buffer))
     (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
 
-    (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*")
+    (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*\\|\\*shell\\*<")
 
     ;; Do not load encrypted files when Emacs starts.
     (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
@@ -1009,9 +1012,7 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package ediff
-  :defer t
-  :config
-  (add-hook 'ediff-after-quit-hook-internal 'winner-undo))
+  :defer t)
 #+end_src
 
 ** edit-indirect
@@ -1181,8 +1182,7 @@ upass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 
     ;; ;; Gmane
     (add-to-list 'gnus-secondary-select-methods
-                 '(nntp "gmane"
-                        (nntp-address "news.gmane.org")))
+                 '(nntp "news.gmane.org"))
 
     ;; Gmail
     (add-to-list 'gnus-secondary-select-methods
