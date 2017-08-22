@@ -2124,6 +2124,17 @@ M-r):
   :defer t)
 #+end_src
 
+** bpr
+
+#+begin_src emacs-lisp
+(use-package bpr
+  :ensure t
+  :bind (("M-&" . bpr-spawn))
+  :config (progn
+            (setq bpr-show-progress nil)))
+#+end_src
+
+
 ** swiper
 
 #+begin_src emacs-lisp
