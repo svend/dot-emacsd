@@ -665,28 +665,6 @@ horizontally.
          (insert (format-time-string "%F-%H%M%S")))))
 #+end_src
 
-#+begin_src emacs-lisp
-(defun my-switch-to-term ()
-  "Switch to term running in the default-directory,
-  otherwise start a new ansi-term"
-  (interactive)
-  (let (found-buffer
-        (directory (expand-file-name default-directory))
-        (buffers (buffer-list)))
-    (while (and (not found-buffer)
-                buffers)
-      (with-current-buffer (car buffers)
-        (when (and (string= major-mode "term-mode")
-                   (string= default-directory directory))
-          (setq found-buffer (car buffers)))
-        (setq buffers (cdr buffers))))
-    ;; If we found a term, switch to it, otherwise start a term
-    (if (and found-buffer
-             (not (eq found-buffer (current-buffer))))
-        (switch-to-buffer found-buffer)
-      (ansi-term "bash"))))
-#+end_src
-
 * Packages
 
 ** ace-link
