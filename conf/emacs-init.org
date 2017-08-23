@@ -787,12 +787,16 @@ horizontally.
 ** bpr
 
 #+begin_src emacs-lisp
+(defun my-bpr-on-start (process)
+  (set-process-filter process 'comint-output-filter))
+
 (use-package bpr
   :ensure t
   :bind (("M-&" . bpr-spawn))
   :config (progn
             (setq bpr-colorize-output t
                   bpr-show-progress nil
+                  bpr-on-start #'my-bpr-on-start
                   bpr-use-projectile nil)))
 #+end_src
 
