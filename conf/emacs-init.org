@@ -1113,6 +1113,13 @@ This is used to edit code blocks in markdown-mode.
         (git-clone url)))))
 #+end_src
 
+** git-commit
+
+#+begin_src emacs-lisp
+(use-package git-commit
+  :ensure t)
+#+end_src
+
 ** gitconfig-mode
 
 #+begin_src emacs-lisp
