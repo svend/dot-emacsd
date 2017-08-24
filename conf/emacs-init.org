@@ -291,6 +291,12 @@ Disable keyboard shortcut to print buffer.
 (global-unset-key (kbd "s-p"))
 #+end_src
 
+** Enable delete-selection-mode
+
+#+begin_src emacs-lisp
+(delete-selection-mode)
+#+end_src
+
 ** macOS specific configuration
 
 Turn on menu bar, since it does not use any extra space on macOS.
