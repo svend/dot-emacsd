@@ -1077,6 +1077,14 @@ This is used to edit code blocks in markdown-mode.
   :defer t)
 #+end_src
 
+** expand-region
+
+#+begin_src emacs-lisp
+(use-package expand-region
+  :ensure t
+  :bind (("M-S-SPC" . er/expand-region)))
+#+end_src
+
 ** flycheck
 
 #+begin_src emacs-lisp
