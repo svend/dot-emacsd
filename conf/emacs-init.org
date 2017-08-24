@@ -4,7 +4,7 @@
 
 #+begin_src emacs-lisp
 (setq user-full-name "Svend Sorensen")
-(setq user-mail-address "svend@ciffer.net")
+(setq user-mail-address "svend@svends.net")
 #+end_src
 
 * Initialize package.el
