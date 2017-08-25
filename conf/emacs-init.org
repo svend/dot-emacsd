@@ -800,8 +800,7 @@ horizontally.
   :ensure t
   :bind (("M-&" . bpr-spawn))
   :config (progn
-            (setq bpr-colorize-output t
-                  bpr-show-progress nil
+            (setq bpr-show-progress nil
                   bpr-on-start #'my-bpr-on-start
                   bpr-use-projectile nil)))
 #+end_src
