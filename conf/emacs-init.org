@@ -1769,6 +1769,14 @@ Terraform state files are JSON.
              "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
 #+end_src
 
+** package-lint
+
+#+begin_src emacs-lisp
+(use-package package-lint
+  :ensure t
+  :defer t)
+#+end_src
+
 ** pass
 
 #+begin_src emacs-lisp
@@ -2331,6 +2339,7 @@ bash shell.
                         comint-mode-hook
                         dired-mode-hook
                         eww-mode-hook
+                        package-menu-mode
                         prog-mode-hook
                         text-mode-hook))
           (add-hook hook #'visual-fill-column-mode))
