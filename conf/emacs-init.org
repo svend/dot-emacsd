@@ -793,6 +793,10 @@ horizontally.
 ** bpr
 
 #+begin_src emacs-lisp
+(define-derived-mode bpr-shell-mode
+            shell-mode "BPR"
+            "Major mode for BPR process buffers.")
+
 (defun my-bpr-on-start (process)
   (set-process-filter process 'comint-output-filter))
 
@@ -802,6 +806,7 @@ horizontally.
   :config (progn
             (setq bpr-show-progress nil
                   bpr-on-start #'my-bpr-on-start
+                  bpr-process-mode #'bpr-shell-mode
                   bpr-use-projectile nil)))
 #+end_src
 
@@ -966,10 +971,14 @@ Change scrolling behavior for comint modes.
 
     (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*\\|\\*shell\\*<")
 
-    ;; Do not load encrypted files when Emacs starts.
+    ;; Do not save GPG-encrypted files to the desktop
     (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
+    ;; Do not save BPR shell buffers
+    (setq desktop-modes-not-to-save '(tags-table-mode bpr-shell-mode))
+    ;; Load 20 buffers on start, then lazily restore emaining buffer
     (setq desktop-restore-eager 20)
 
+    ;; Periodically save desktop
     (defun my-setup-desktop-auto-save ()
       (setq my-save-desktop-timer
             (run-with-idle-timer
@@ -1179,14 +1188,13 @@ pass show imap.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 : port: imaps
 
 #+begin_src sh :results output
-upass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
+pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 #+end_src
 
 #+RESULTS:
 : PASSWORD
 : user: EMAIL
-: port: 587
-
+: port: smtp
 
 #+begin_src emacs-lisp
 (use-package gnus
