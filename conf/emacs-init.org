@@ -2346,9 +2346,9 @@ bash shell.
                         compilation-mode-hook
                         comint-mode-hook
                         dired-mode-hook
-                        eww-mode-hook
                         package-menu-mode
                         prog-mode-hook
+                        special-mode-hook
                         text-mode-hook))
           (add-hook hook #'visual-fill-column-mode))
   :config (progn
