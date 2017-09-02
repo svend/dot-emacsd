@@ -730,6 +730,13 @@ horizontally.
           'notifications)))
 #+end_src
 
+** amx
+
+#+begin_src emacs-lisp
+(use-package amx
+  :bind (("M-x" . amx)))
+#+end_src
+
 ** auth-password-store
 
 #+begin_src emacs-lisp
@@ -918,7 +925,7 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package counsel
   :ensure t
-  :bind (("M-x" . counsel-M-x)))
+  :defer t)
 #+end_src
 
 ** csv-mode
@@ -2127,15 +2134,6 @@ M-r):
           (define-key sp-keymap (kbd "M-s") nil)
           ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
-#+end_src
-
-** smex
-
-=counsel-M-x= will use smex if it is installed.
-
-#+begin_src emacs-lisp
-(use-package smex
-  :ensure t)
 #+end_src
 
 ** smtpmail-multi
