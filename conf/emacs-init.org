@@ -734,6 +734,7 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package amx
+  :bind (("M-X" . amx-major-mode-commands))
   :init (amx-mode))
 #+end_src
 
