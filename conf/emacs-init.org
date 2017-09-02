@@ -734,7 +734,7 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package amx
-  :bind (("M-x" . amx)))
+  :init (amx-mode))
 #+end_src
 
 ** auth-password-store
