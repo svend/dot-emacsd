@@ -2346,7 +2346,7 @@ bash shell.
                         compilation-mode-hook
                         comint-mode-hook
                         dired-mode-hook
-                        package-menu-mode
+                        package-menu-mode-hook
                         prog-mode-hook
                         special-mode-hook
                         text-mode-hook))
