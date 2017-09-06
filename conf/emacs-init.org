@@ -1695,6 +1695,16 @@ Terraform state files are JSON.
     (require 'gnus-art)))
 #+end_src
 
+** nov
+
+EPUB reader package.
+
+#+begin_src emacs-lisp
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
+#+end_src
+
 ** ob-rust
 
 #+begin_src emacs-lisp
