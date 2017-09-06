@@ -2346,6 +2346,9 @@ bash shell.
                         compilation-mode-hook
                         comint-mode-hook
                         dired-mode-hook
+                        gnus-article-mode-hook
+                        gnus-group-mode-hook
+                        gnus-summary-mode-hook
                         package-menu-mode-hook
                         prog-mode-hook
                         special-mode-hook
