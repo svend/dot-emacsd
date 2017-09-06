@@ -1309,6 +1309,17 @@ go get -u github.com/kisielk/errcheck
     (add-hook 'go-mode-hook #'my-go-mode-defaults)))
 #+end_src
 
+** dired
+
+#+begin_src emacs-lisp
+(use-package dired
+  :config
+  (progn
+    (defun my-dired-mode-hook ()
+      (setq truncate-lines t))
+    (add-hook 'dired-mode-hook #'my-dired-mode-hook)))
+#+end_src
+
 ** groovy-mode
 
 #+begin_src emacs-lisp
