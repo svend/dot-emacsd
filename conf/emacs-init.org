@@ -303,10 +303,7 @@ Turn on menu bar, since it does not use any extra space on macOS.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
-  (menu-bar-mode 1)
-  ;; TODO: default value of epg-gpg-program is being modified to gpg. Perhaps
-  ;; gpg2 is not in the path when epg is getting loaded.
-  (setq epg-gpg-program "gpg2"))
+  (menu-bar-mode 1))
 #+end_src
 
 ** Programming modes
@@ -730,6 +727,14 @@ horizontally.
           'notifications)))
 #+end_src
 
+** amx
+
+#+begin_src emacs-lisp
+(use-package amx
+  :bind (("M-X" . amx-major-mode-commands))
+  :init (amx-mode))
+#+end_src
+
 ** auth-password-store
 
 #+begin_src emacs-lisp
@@ -918,7 +923,7 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package counsel
   :ensure t
-  :bind (("M-x" . counsel-M-x)))
+  :defer t)
 #+end_src
 
 ** csv-mode
@@ -1171,7 +1176,7 @@ This is used to edit code blocks in markdown-mode.
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
 
 #+begin_src sh :results output
-gpg2 --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";print}'
+gpg --batch -d ~/.authinfo.gpg | awk '/\.gmail\.com/{$4="EMAIL";$6="PASSWORD";print}'
 #+end_src
 
 #+RESULTS:
@@ -2127,15 +2132,6 @@ M-r):
           (define-key sp-keymap (kbd "M-s") nil)
           ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
           (define-key sp-keymap (kbd "M-<backspace>") nil)))
-#+end_src
-
-** smex
-
-=counsel-M-x= will use smex if it is installed.
-
-#+begin_src emacs-lisp
-(use-package smex
-  :ensure t)
 #+end_src
 
 ** smtpmail-multi
