@@ -806,9 +806,17 @@ horizontally.
 (defun my-bpr-on-start (process)
   (set-process-filter process 'comint-output-filter))
 
+(defun my-bpr-spawn (open-buffer)
+  "Run 'bpr-spawn'.
+If OPEN-BUFFER is set, open the new buffer."
+  (interactive "P")
+  (call-interactively #'bpr-spawn)
+  (if open-buffer
+      (bpr-open-last-buffer)))
+
 (use-package bpr
   :ensure t
-  :bind (("M-&" . bpr-spawn))
+  :bind (("M-&" . my-bpr-spawn))
   :config (progn
             (setq bpr-show-progress nil
                   bpr-on-start #'my-bpr-on-start
