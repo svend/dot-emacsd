@@ -1221,6 +1221,9 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
     (add-to-list 'gnus-secondary-select-methods
                  '(nntp "news.gmane.org"))
 
+    ;; Fastmail
+    (add-to-list 'gnus-secondary-select-methods
+                 '(nnimap "imap.fastmail.com"))
     ;; Gmail
     (add-to-list 'gnus-secondary-select-methods
                  '(nnimap "imap.gmail.com"))
@@ -1252,13 +1255,11 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
   :defer t
   :config
   (setq gnus-alias-identity-alist
-        '(("default" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
-          ("uw" nil "Svend Sorensen <svends@uw.edu>" nil (("Bcc" . "svends@uw.edu")) nil nil)
+        '(("fastmail" nil "Svend Sorensen <svend@svends.net>" nil (("Bcc" . "svend@svends.net")) nil)
+          ("gmail" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
           ("wp" nil "Svend Sorensen <ssorensen@whitepages.com>" nil (("Bcc" . "ssorensen@whitepages.com")) nil nil)))
-  (setq gnus-alias-default-identity "default")
-  (setq gnus-alias-identity-rules
-        '(("to-uw" ("any" "svends@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw")
-          ("from-uw" ("from" "@\\(uw.edu\\|u\\.washington.edu\\|washington\\.edu\\)" both) "uw"))))
+  (setq gnus-alias-default-identity "fastmail")
+  (setq gnus-alias-identity-rules '()))
 #+end_src
 
 ** gnutls
@@ -1596,11 +1597,11 @@ Terraform state files are JSON.
 
     ;; Internal SMTP library
     (setq message-send-mail-function 'smtpmail-send-it
-          smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-          smtpmail-auth-credentials '(("smtp.gmail.com" 587
-                                       "svend@ciffer.net" nil))
-          smtpmail-default-smtp-server "smtp.gmail.com"
-          smtpmail-smtp-server "smtp.gmail.com"
+          smtpmail-starttls-credentials '(("smtp.fastmail.com" 587 nil nil))
+          smtpmail-auth-credentials '(("smtp.fastmail.com" 587
+                                       "svend@svends.net" nil))
+          smtpmail-default-smtp-server "smtp.fastmail.com"
+          smtpmail-smtp-server "smtp.fastmail.com"
           smtpmail-smtp-service 587)
 
     ;; Enable gnus-alias
@@ -1685,9 +1686,9 @@ Terraform state files are JSON.
     ;; Show newest mail first
     (setq notmuch-search-oldest-first nil)
 
-    ;; Notmuch remote setup (on all hosts except garnet)
-    (when (not (string= system-name "garnet.ciffer.net"))
-      (setq notmuch-command "notmuch-remote"))
+    ;; ;; Notmuch remote setup (on all hosts except garnet)
+    ;; (when (not (string= system-name "garnet.ciffer.net"))
+    ;;   (setq notmuch-command "notmuch-remote"))
 
     ;; Getting Things Done (GTD) keybindings
 
@@ -1708,11 +1709,7 @@ Terraform state files are JSON.
         (notmuch-show-tag (cdr macro))))
 
     (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)
-
-    ;; Work around bug with notmuch and emacs-snapshot
-    ;; http://notmuchmail.org/pipermail/notmuch/2012/008405.html
-    (require 'gnus-art)))
+    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)))
 #+end_src
 
 ** nov
