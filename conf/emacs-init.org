@@ -644,7 +644,7 @@ horizontally.
   (interactive)
   (if (< emacs-major-version 26)
       (nlinum-mode)
-    (toggle-display-line-numbers)))
+    (call-interactively #'display-line-numbers-mode)))
 #+end_src
 
 #+begin_src emacs-lisp
