@@ -2380,7 +2380,7 @@ bash shell.
   :config (progn
             (setq-default visual-fill-column-center-text t
                           visual-fill-column-fringes-outside-margins nil
-                          visual-fill-column-width 120)
+                          visual-fill-column-width 100)
             (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly)))
 #+end_src
 
