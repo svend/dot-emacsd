@@ -704,10 +704,10 @@ horizontally.
 (use-package aggressive-indent
   :ensure t
   :config
-  (progn
-    (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'rust-mode))
-  :init (global-aggressive-indent-mode 1))
+  (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'rust-mode)
+  :init
+  (global-aggressive-indent-mode 1))
 #+end_src
 
 ** alert
@@ -717,21 +717,20 @@ horizontally.
   :ensure t
   :defer t
   :init
-  (progn
-    (defun comint-alert-on-prompt (string)
-      "Send alert when prompt is detected."
-      (when (let ((case-fold-search t))
-              (string-match comint-prompt-regexp string))
-        (alert (format "Prompt: %s" string)))
-      string)
+  (defun comint-alert-on-prompt (string)
+    "Send alert when prompt is detected."
+    (when (let ((case-fold-search t))
+            (string-match comint-prompt-regexp string))
+      (alert (format "Prompt: %s" string)))
+    string)
 
-    (defun comint-toggle-alert ()
-      "Toggle alert on prompt for current buffer"
-      (interactive)
-      (make-local-variable 'comint-output-filter-functions)
-      (if (member 'comint-alert-on-prompt comint-output-filter-functions)
-          (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
-        (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt))))
+  (defun comint-toggle-alert ()
+    "Toggle alert on prompt for current buffer"
+    (interactive)
+    (make-local-variable 'comint-output-filter-functions)
+    (if (member 'comint-alert-on-prompt comint-output-filter-functions)
+        (remove-hook 'comint-output-filter-functions 'comint-alert-on-prompt)
+      (add-hook 'comint-output-filter-functions #'comint-alert-on-prompt)))
   :config
   (setq alert-default-style
         (if (eq window-system 'ns)
@@ -780,20 +779,19 @@ horizontally.
 (use-package bash-completion
   :ensure t
   :config
-  (progn
-    (defun my-bash-completion-dynamic-complete-local()
-      "Returns the completion table for bash command at point if the buffer is not remote."
-      (unless (file-remote-p default-directory)
-        (bash-completion-dynamic-complete)))
+  (defun my-bash-completion-dynamic-complete-local()
+    "Returns the completion table for bash command at point if the buffer is not remote."
+    (unless (file-remote-p default-directory)
+      (bash-completion-dynamic-complete)))
 
-    ;; My bash-completion is loaded by .bash_profile, which is only sourced by a
-    ;; login shell
-    (setq bash-completion-args '("--noediting" "--login"))
-    ;; I use nixpkgs bash, which puts bash in my PATH
-    (setq bash-completion-prog "bash")
+  ;; My bash-completion is loaded by .bash_profile, which is only sourced by a
+  ;; login shell
+  (setq bash-completion-args '("--noediting" "--login"))
+  ;; I use nixpkgs bash, which puts bash in my PATH
+  (setq bash-completion-prog "bash")
 
-    (add-hook 'shell-dynamic-complete-functions
-              'my-bash-completion-dynamic-complete-local)))
+  (add-hook 'shell-dynamic-complete-functions
+            'my-bash-completion-dynamic-complete-local))
 #+end_src
 
 ** bbdb
@@ -803,9 +801,8 @@ horizontally.
   :ensure t
   :bind (("C-c b" . bbdb))
   :config
-  (progn
-    (setq bbdb-file "~/.config/bbdb/.bbdb")
-    (setq bbdb-auto-revert-p t)))
+  (setq bbdb-file "~/.config/bbdb/.bbdb"
+        bbdb-auto-revert-p t))
 #+end_src
 
 ** bpr
@@ -829,11 +826,11 @@ If OPEN-BUFFER is set, open the new buffer."
 (use-package bpr
   :ensure t
   :bind (("M-&" . my-bpr-spawn))
-  :config (progn
-            (setq bpr-show-progress nil
-                  bpr-on-start #'my-bpr-on-start
-                  bpr-process-mode #'bpr-shell-mode
-                  bpr-use-projectile nil)))
+  :config
+  (setq bpr-show-progress nil
+        bpr-on-start #'my-bpr-on-start
+        bpr-process-mode #'bpr-shell-mode
+        bpr-use-projectile nil))
 #+end_src
 
 ** calfw
@@ -843,15 +840,14 @@ If OPEN-BUFFER is set, open the new buffer."
   :ensure t
   :defer t
   :config
-  (progn
-    (setq cfw:fchar-junction ?╋
-          cfw:fchar-vertical-line ?┃
-          cfw:fchar-horizontal-line ?━
-          cfw:fchar-left-junction ?┣
-          cfw:fchar-right-junction ?┫
-          cfw:fchar-top-junction ?┯
-          cfw:fchar-top-left-corner ?┏
-          cfw:fchar-top-right-corner ?┓)))
+  (setq cfw:fchar-junction ?╋
+        cfw:fchar-vertical-line ?┃
+        cfw:fchar-horizontal-line ?━
+        cfw:fchar-left-junction ?┣
+        cfw:fchar-right-junction ?┫
+        cfw:fchar-top-junction ?┯
+        cfw:fchar-top-left-corner ?┏
+        cfw:fchar-top-right-corner ?┓))
 #+end_src
 
 ** color-theme-sanityinc-tomorrow
@@ -912,12 +908,12 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package company
   :ensure t
-  :init (global-company-mode)
+  :init
+  (global-company-mode)
   :config
-  (progn
-    (setq company-lighter-base "Co")
-    (setq company-show-numbers t)
-    (setq company-minimum-prefix-length 2)))
+  (setq company-lighter-base "Co"
+        company-show-numbers t
+        company-minimum-prefix-length 2))
 #+end_src
 
 ** company-go
@@ -935,8 +931,7 @@ Change scrolling behavior for comint modes.
   :ensure t
   ;; :init (add-hook 'python-mode-hook 'jedi:setup)
   :config
-  (progn
-    (setq jedi:use-shortcuts t)))
+  (setq jedi:use-shortcuts t))
 #+end_src
 
 ** counsel
@@ -968,53 +963,52 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package desktop
   :config
-  (progn
-    (defun my-shell-save-desktop-data (desktop-dirname)
-      "Extra info for shell-mode buffers to be saved in the desktop file."
-      (list default-directory comint-input-ring))
+  (defun my-shell-save-desktop-data (desktop-dirname)
+    "Extra info for shell-mode buffers to be saved in the desktop file."
+    (list default-directory comint-input-ring))
 
-    (defun my-shell-restore-desktop-buffer
-        (desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
-      "Restore a shell buffer's state from the desktop file."
-      (let ((dir (nth 0 desktop-buffer-misc))
-            (ring (nth 1 desktop-buffer-misc)))
-        (when desktop-buffer-name
-          (set-buffer (get-buffer-create desktop-buffer-name))
-          (when dir
-            (setq default-directory dir))
-          (shell desktop-buffer-name)
-          (when ring
-            (setq comint-input-ring ring))
-          (current-buffer))))
+  (defun my-shell-restore-desktop-buffer
+      (desktop-buffer-file-name desktop-buffer-name desktop-buffer-misc)
+    "Restore a shell buffer's state from the desktop file."
+    (let ((dir (nth 0 desktop-buffer-misc))
+          (ring (nth 1 desktop-buffer-misc)))
+      (when desktop-buffer-name
+        (set-buffer (get-buffer-create desktop-buffer-name))
+        (when dir
+          (setq default-directory dir))
+        (shell desktop-buffer-name)
+        (when ring
+          (setq comint-input-ring ring))
+        (current-buffer))))
 
-    (defun my-shell-setup-desktop ()
-      "Sets up a shell buffer to have its state saved in the desktop file."
-      (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
+  (defun my-shell-setup-desktop ()
+    "Sets up a shell buffer to have its state saved in the desktop file."
+    (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
 
-    (add-to-list 'desktop-buffer-mode-handlers
-                 '(shell-mode . my-shell-restore-desktop-buffer))
-    (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
+  (add-to-list 'desktop-buffer-mode-handlers
+               '(shell-mode . my-shell-restore-desktop-buffer))
+  (add-hook 'shell-mode-hook #'my-shell-setup-desktop)
 
-    (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*\\|\\*shell\\*<")
+  (setq desktop-buffers-not-to-save "\\*Async Shell Command\\*\\|\\*shell\\*<")
 
-    ;; Do not save GPG-encrypted files to the desktop
-    (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
-    ;; Do not save BPR shell buffers
-    (setq desktop-modes-not-to-save '(tags-table-mode bpr-shell-mode))
-    ;; Load 20 buffers on start, then lazily restore emaining buffer
-    (setq desktop-restore-eager 20)
-    ;; Do not save frame and window configuration (saving these leaves artifacts
-    ;; from loaded themes)
-    (setq desktop-restore-frames nil)
+  ;; Do not save GPG-encrypted files to the desktop
+  (setq desktop-files-not-to-save "\\(^/[^/:]*:\\|(ftp)$\\|\\.gpg$\\)")
+  ;; Do not save BPR shell buffers
+  (setq desktop-modes-not-to-save '(tags-table-mode bpr-shell-mode))
+  ;; Load 20 buffers on start, then lazily restore emaining buffer
+  (setq desktop-restore-eager 20)
+  ;; Do not save frame and window configuration (saving these leaves artifacts
+  ;; from loaded themes)
+  (setq desktop-restore-frames nil)
 
-    ;; Periodically save desktop
-    (defun my-setup-desktop-auto-save ()
-      (setq my-save-desktop-timer
-            (run-with-idle-timer
-             5 t
-             (lambda ()
-               (desktop-save desktop-dirname)))))
-    (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save))
+  ;; Periodically save desktop
+  (defun my-setup-desktop-auto-save ()
+    (setq my-save-desktop-timer
+          (run-with-idle-timer
+           5 t
+           (lambda ()
+             (desktop-save desktop-dirname)))))
+  (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save)
   :init
   (desktop-save-mode 1))
 #+end_src
@@ -1025,9 +1019,8 @@ Change scrolling behavior for comint modes.
 (use-package dns-mode
   :defer t
   :config
-  (progn
-    ;; Do not auto increment serial (C-c C-s to increment)
-    (setq dns-mode-soa-auto-increment-serial nil)))
+  ;; Do not auto increment serial (C-c C-s to increment)
+  (setq dns-mode-soa-auto-increment-serial nil))
 #+end_src
 
 ** docker-tramp
@@ -1079,24 +1072,23 @@ This is used to edit code blocks in markdown-mode.
 (use-package erc
   :defer t
   :config
-  (progn
-    (erc-services-mode 1)
-    (erc-spelling-mode 1)
+  (erc-services-mode 1)
+  (erc-spelling-mode 1)
 
-    (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
+  (setq erc-hide-list '("JOIN" "MODE" "PART" "QUIT"))
 
-    ;; Nickserv configuration
-    (setq erc-nick "svend")
-    (setq erc-prompt-for-nickserv-password nil)
-    (let ((bitlbee-username (password-store-get "bitlbee-username"))
-          (bitlbee-password (password-store-get "bitlbee-password"))
-          (freenode-username (password-store-get "freenode/username"))
-          (freenode-password (password-store-get "freenode/password")))
-      (setq erc-nickserv-passwords
-            `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
-              ((freenode ((,freenode-username . ,freenode-password)))))))
+  ;; Nickserv configuration
+  (setq erc-nick "svend")
+  (setq erc-prompt-for-nickserv-password nil)
+  (let ((bitlbee-username (password-store-get "bitlbee-username"))
+        (bitlbee-password (password-store-get "bitlbee-password"))
+        (freenode-username (password-store-get "freenode/username"))
+        (freenode-password (password-store-get "freenode/password")))
+    (setq erc-nickserv-passwords
+          `((BitlBee ((,bitlbee-username . ,bitlbee-password)))
+            ((freenode ((,freenode-username . ,freenode-password)))))))
 
-    (setq erc-autojoin-channels-alist '(("freenode.net" "#nixos" "##nix-darwin" "#org-mode" "#emacs")))))
+  (setq erc-autojoin-channels-alist '(("freenode.net" "#nixos" "##nix-darwin" "#org-mode" "#emacs"))))
 #+end_src
 
 ** erc-track
@@ -1105,11 +1097,10 @@ This is used to edit code blocks in markdown-mode.
 (use-package erc-track
   :defer t
   :config
-  (progn
-    ;; Do not notify for join, part, or quit
-    (add-to-list 'erc-track-exclude-types "JOIN")
-    (add-to-list 'erc-track-exclude-types "PART")
-    (add-to-list 'erc-track-exclude-types "QUIT")))
+  ;; Do not notify for join, part, or quit
+  (add-to-list 'erc-track-exclude-types "JOIN")
+  (add-to-list 'erc-track-exclude-types "PART")
+  (add-to-list 'erc-track-exclude-types "QUIT"))
 #+end_src
 
 ** erlang
@@ -1134,20 +1125,18 @@ This is used to edit code blocks in markdown-mode.
 (use-package flycheck
   :ensure t
   :init
-  (progn
-    (use-package flycheck-ledger
-      :ensure t
-      :defer t)
-    (use-package flycheck-rust
-      :ensure t)
+  (use-package flycheck-ledger
+    :ensure t
+    :defer t)
+  (use-package flycheck-rust
+    :ensure t
     :config
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   :config
-  (progn
-    ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
-    (flycheck-add-mode #'yaml-ruby #'ansible-playbook-mode)
-    (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
-    (add-hook 'after-init-hook #'global-flycheck-mode)))
+  ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+  (flycheck-add-mode #'yaml-ruby #'ansible-playbook-mode)
+  (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 #+end_src
 
 ** git
@@ -1157,11 +1146,10 @@ This is used to edit code blocks in markdown-mode.
   :ensure t
   :defer t
   :config
-  (progn
-    (defun my-git-clone (url)
-      (interactive "sGit repository URL: ")
-      (let ((git-repo "~/src"))
-        (git-clone url)))))
+  (defun my-git-clone (url)
+    (interactive "sGit repository URL: ")
+    (let ((git-repo "~/src"))
+      (git-clone url))))
 #+end_src
 
 ** git-commit
@@ -1228,38 +1216,37 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 #+begin_src emacs-lisp
 (use-package gnus
   :config
-  (progn
-    ;; Use secondary-select-methods
-    (setq gnus-select-method '(nnnil ""))
+  ;; Use secondary-select-methods
+  (setq gnus-select-method '(nnnil ""))
 
-    ;; ;; Gmane
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nntp "news.gmane.org"))
+  ;; ;; Gmane
+  (add-to-list 'gnus-secondary-select-methods
+               '(nntp "news.gmane.org"))
 
-    ;; Fastmail
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nnimap "imap.fastmail.com"))
-    ;; Gmail
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nnimap "imap.gmail.com"))
+  ;; Fastmail
+  (add-to-list 'gnus-secondary-select-methods
+               '(nnimap "imap.fastmail.com"))
+  ;; Gmail
+  (add-to-list 'gnus-secondary-select-methods
+               '(nnimap "imap.gmail.com"))
 
-    ;; (add-to-list 'gnus-secondary-select-methods
-    ;;              '(nnimap "imap.gmail.com"
-    ;;                       (nnimap-address "imap.gmail.com")
-    ;;                       ;; (nnimap-server-port 993)
-    ;;                       ;; (nnimap-stream ssl)
-    ;;                       ))
+  ;; (add-to-list 'gnus-secondary-select-methods
+  ;;              '(nnimap "imap.gmail.com"
+  ;;                       (nnimap-address "imap.gmail.com")
+  ;;                       ;; (nnimap-server-port 993)
+  ;;                       ;; (nnimap-stream ssl)
+  ;;                       ))
 
-    ;; ;; Record all IMAP commands in the ‘"*imap log*"’
-    ;; (setq nnimap-record-commands t)
+  ;; ;; Record all IMAP commands in the ‘"*imap log*"’
+  ;; (setq nnimap-record-commands t)
 
-    ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
-    (setq gnus-always-read-dribble-file t)
-    ;; Mark sent messages as read
-    (setq gnus-gcc-mark-as-read t)
-    (setq gnus-inhibit-startup-message t)
-    ;; Do not take over the entire frame
-    (setq gnus-use-full-window nil)))
+  ;; Skip prompt: "Gnus auto-save file exists. Do you want to read it?"
+  (setq gnus-always-read-dribble-file t
+        ;; Mark sent messages as read
+        gnus-gcc-mark-as-read t
+        gnus-inhibit-startup-message t
+        ;; Do not take over the entire frame
+        gnus-use-full-window nil))
 #+end_src
 
 ** gnus-alias
@@ -1318,20 +1305,19 @@ go get -u github.com/kisielk/errcheck
   :ensure t
   :defer t
   :config
-  (progn
-    (setq gofmt-command "goimports")
+  (setq gofmt-command "goimports")
 
-    (defun my-go-mode-defaults ()
-      (local-set-key (kbd "M-.") 'godef-jump)
-      (set (make-local-variable 'company-backends) '(company-go))
-      (add-hook 'before-save-hook #'gofmt-before-save)
+  (defun my-go-mode-defaults ()
+    (local-set-key (kbd "M-.") 'godef-jump)
+    (set (make-local-variable 'company-backends) '(company-go))
+    (add-hook 'before-save-hook #'gofmt-before-save)
 
-      ;; El-doc for Go
-      (go-eldoc-setup)
+    ;; El-doc for Go
+    (go-eldoc-setup)
 
-      ;; CamelCase aware editing operations
-      (subword-mode +1))
-    (add-hook 'go-mode-hook #'my-go-mode-defaults)))
+    ;; CamelCase aware editing operations
+    (subword-mode +1))
+  (add-hook 'go-mode-hook #'my-go-mode-defaults))
 #+end_src
 
 ** dired
@@ -1339,10 +1325,9 @@ go get -u github.com/kisielk/errcheck
 #+begin_src emacs-lisp
 (use-package dired
   :config
-  (progn
-    (defun my-dired-mode-hook ()
-      (setq truncate-lines t))
-    (add-hook 'dired-mode-hook #'my-dired-mode-hook)))
+  (defun my-dired-mode-hook ()
+    (setq truncate-lines t))
+  (add-hook 'dired-mode-hook #'my-dired-mode-hook))
 #+end_src
 
 ** groovy-mode
@@ -1351,11 +1336,10 @@ go get -u github.com/kisielk/errcheck
 (use-package groovy-mode
   :ensure t
   :config
-  (progn
-    (defun my-groovy-mode-hook ()
-      ;; Indent groovy code four spaces instead of two
-      (setq c-basic-offset 4))
-    (add-hook 'groovy-mode-hook #'my-groovy-mode-hook))
+  (defun my-groovy-mode-hook ()
+    ;; Indent groovy code four spaces instead of two
+    (setq c-basic-offset 4))
+  (add-hook 'groovy-mode-hook #'my-groovy-mode-hook)
   :mode
   (("Jenkinsfile\\'" . groovy-mode)))
 #+end_src
@@ -1367,13 +1351,12 @@ go get -u github.com/kisielk/errcheck
   :ensure t
   :defer t
   :config
-  (progn
-    (defun my-haskell-mode-defaults ()
-      (subword-mode +1)
-      (turn-on-haskell-doc-mode)
-      (turn-on-haskell-indentation)
-      (interactive-haskell-mode +1))
-    (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults)))
+  (defun my-haskell-mode-defaults ()
+    (subword-mode +1)
+    (turn-on-haskell-doc-mode)
+    (turn-on-haskell-indentation)
+    (interactive-haskell-mode +1))
+  (add-hook 'haskell-mode-hook #'my-haskell-mode-defaults))
 #+end_src
 
 ** hippie-exp
@@ -1393,28 +1376,27 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :ensure t
   :defer t
   :config
-  (progn
-    (global-set-key
-     (kbd "C-c t")
-     (defhydra hydra-toggle ()
-       "Toggle"
-       ("b" scroll-bar-mode "scroll-bar")
-       ("c" flycheck-mode "flycheck")
-       ("f" variable-pitch-mode "fixed-pitch")
-       ("h" global-hl-line-mode "hl-line")
-       ("l" visual-line-mode "visual-line")
-       ("m" menu-bar-mode "menu-bar")
-       ("n" my-toggle-line-numbers "line-numbers")
-       ("s" flyspell-mode "flyspell")
-       ("t" toggle-truncate-lines "trucate")
-       ("v" visual-fill-column-mode "visual-fill-column")
-       ("w" whitespace-mode "whitespace")))
+  (global-set-key
+   (kbd "C-c t")
+   (defhydra hydra-toggle ()
+     "Toggle"
+     ("b" scroll-bar-mode "scroll-bar")
+     ("c" flycheck-mode "flycheck")
+     ("f" variable-pitch-mode "fixed-pitch")
+     ("h" global-hl-line-mode "hl-line")
+     ("l" visual-line-mode "visual-line")
+     ("m" menu-bar-mode "menu-bar")
+     ("n" my-toggle-line-numbers "line-numbers")
+     ("s" flyspell-mode "flyspell")
+     ("t" toggle-truncate-lines "trucate")
+     ("v" visual-fill-column-mode "visual-fill-column")
+     ("w" whitespace-mode "whitespace")))
 
-    (defhydra hydra-winner ()
-      "Winner"
-      ("w" winner-undo "back")
-      ("r" winner-redo "forward" :exit t))
-    (global-set-key (kbd "C-c w") 'hydra-winner/winner-undo)))
+  (defhydra hydra-winner ()
+    "Winner"
+    ("w" winner-undo "back")
+    ("r" winner-redo "forward" :exit t))
+  (global-set-key (kbd "C-c w") 'hydra-winner/winner-undo))
 #+end_src
 
 ** ibuffer
@@ -1431,11 +1413,10 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 (use-package ibuffer-tramp
   :ensure t
   :config
-  (progn
-    (add-hook 'ibuffer-hook
-              (lambda ()
-                (ibuffer-tramp-set-filter-groups-by-tramp-connection)
-                (ibuffer-do-sort-by-alphabetic)))))
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+              (ibuffer-do-sort-by-alphabetic))))
 #+end_src
 
 ** inf-ruby
@@ -1461,12 +1442,12 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :bind (("C-s" . swiper)
          ("C-c y" . counsel-yank-pop))
   :config
-  (progn
-    (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                  (t . ivy--regex-fuzzy)))
-    (setq ivy-use-virtual-buffers t)
-    (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
-  :init (ivy-mode 1))
+  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy)))
+  (setq ivy-use-virtual-buffers t)
+  (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s .")
+  :init
+  (ivy-mode 1))
 #+end_src
 
 ** jabber
@@ -1476,38 +1457,37 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :ensure t
   :defer t
   :config
-  (progn
-    (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
+  (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
 
-    (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
+  (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
 
-    ;; jabber-jid-user: Wrong type argument: stringp, ("svend@ciffer.net/emacs" (:network-server . "talk.google.com") (:connection-type . starttls))
-    ;; (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
-    ;;                                      (:network-server . "talk.google.com")
-    ;;                                      (:connection-type . starttls))))
-    ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
-    ;; failed: The x509 certificate does not match "ciffer.net"’
-    (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
+  ;; jabber-jid-user: Wrong type argument: stringp, ("svend@ciffer.net/emacs" (:network-server . "talk.google.com") (:connection-type . starttls))
+  ;; (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
+  ;;                                      (:network-server . "talk.google.com")
+  ;;                                      (:connection-type . starttls))))
+  ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
+  ;; failed: The x509 certificate does not match "ciffer.net"’
+  (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
 
-    (defvar hipchat-number "23430")
-    (defvar hipchat-nickname "Svend Sorensen")
-    (defvar hipchat-rooms '("ops" "ops-notifications" "outages" "release")
-      "List of hipchat rooms to auto-join")
+  (defvar hipchat-number "23430")
+  (defvar hipchat-nickname "Svend Sorensen")
+  (defvar hipchat-rooms '("ops" "ops-notifications" "outages" "release")
+    "List of hipchat rooms to auto-join")
 
-    (dolist (muc-room
-             (mapcar (lambda (room)
-                       (concat hipchat-number "_" room "@conf.hipchat.com"))
-                     hipchat-rooms))
-      (add-to-list 'jabber-muc-autojoin muc-room)
-      (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
+  (dolist (muc-room
+           (mapcar (lambda (room)
+                     (concat hipchat-number "_" room "@conf.hipchat.com"))
+                   hipchat-rooms))
+    (add-to-list 'jabber-muc-autojoin muc-room)
+    (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
 
-    (defun hipchat-join (room)
-      (interactive "sRoom name: ")
-      (jabber-muc-join
-       (jabber-read-account)
-       (concat hipchat-number "_" room "@conf.hipchat.com")
-       hipchat-nickname
-       t))))
+  (defun hipchat-join (room)
+    (interactive "sRoom name: ")
+    (jabber-muc-join
+     (jabber-read-account)
+     (concat hipchat-number "_" room "@conf.hipchat.com")
+     hipchat-nickname
+     t)))
 #+end_src
 
 ** json-mode
@@ -1563,22 +1543,20 @@ Terraform state files are JSON.
   :ensure t
   :bind (("C-c m" . magit-dispatch-popup))
   :init
-  (progn
-    ;; We have global-auto-revert mode enabled
-    (setq magit-auto-revert-mode nil))
+  ;; We have global-auto-revert mode enabled
+  (setq magit-auto-revert-mode nil)
   :config
-  (progn
-    (setq magit-completing-read-function 'ivy-completing-read)
-    (setq magit-repository-directories '("~/src"))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (setq magit-repository-directories '("~/src"))
 
-    (setq magit-save-repository-buffers 'dontask)
+  (setq magit-save-repository-buffers 'dontask)
 
-    (if (< emacs-major-version 26)
-        ;; See https://github.com/magit/magit/issues/2265
-        ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
-        (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t)))
+  (if (< emacs-major-version 26)
+      ;; See https://github.com/magit/magit/issues/2265
+      ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
+      (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t)))
 
-    (add-hook 'after-save-hook #'magit-after-save-refresh-status)))
+  (add-hook 'after-save-hook #'magit-after-save-refresh-status))
 #+end_src
 
 ** markdown-mode
@@ -1596,44 +1574,43 @@ Terraform state files are JSON.
 (use-package message
   :defer t
   :config
-  (progn
-    ;; Use MSMTP with auto-smtp selection
-    ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
-    ;;
-    ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
-    ;; (emacs >= 23.2+1-5)
-    (setq sendmail-program "/usr/bin/msmtp"
-          mail-specify-envelope-from t
-          mail-envelope-from 'header
-          message-sendmail-envelope-from 'header)
+  ;; Use MSMTP with auto-smtp selection
+  ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
+  ;;
+  ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
+  ;; (emacs >= 23.2+1-5)
+  (setq sendmail-program "/usr/bin/msmtp"
+        mail-specify-envelope-from t
+        mail-envelope-from 'header
+        message-sendmail-envelope-from 'header)
 
-    ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
-    ;; (setq send-mail-function 'sendmail-send-it)
+  ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
+  ;; (setq send-mail-function 'sendmail-send-it)
 
-    ;; Internal SMTP library
-    (setq message-send-mail-function 'smtpmail-send-it
-          smtpmail-starttls-credentials '(("smtp.fastmail.com" 587 nil nil))
-          smtpmail-auth-credentials '(("smtp.fastmail.com" 587
-                                       "svend@svends.net" nil))
-          smtpmail-default-smtp-server "smtp.fastmail.com"
-          smtpmail-smtp-server "smtp.fastmail.com"
-          smtpmail-smtp-service 587)
+  ;; Internal SMTP library
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-starttls-credentials '(("smtp.fastmail.com" 587 nil nil))
+        smtpmail-auth-credentials '(("smtp.fastmail.com" 587
+                                     "svend@svends.net" nil))
+        smtpmail-default-smtp-server "smtp.fastmail.com"
+        smtpmail-smtp-server "smtp.fastmail.com"
+        smtpmail-smtp-service 587)
 
-    ;; Enable gnus-alias
-    (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
-    (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
+  ;; Enable gnus-alias
+  (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
+  (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
 
-    ;; Enable notmuch-address completion
-    ;; (notmuch-address-message-insinuate)
+  ;; Enable notmuch-address completion
+  ;; (notmuch-address-message-insinuate)
 
-    (defun my-setup-message-mode ()
-      "My preferences for message mode"
-      (interactive)
+  (defun my-setup-message-mode ()
+    "My preferences for message mode"
+    (interactive)
 
-      ;; Enable bbdb completion
-      (bbdb-insinuate-message))
+    ;; Enable bbdb completion
+    (bbdb-insinuate-message))
 
-    (add-hook 'message-setup-hook #'my-setup-message-mode)))
+  (add-hook 'message-setup-hook #'my-setup-message-mode))
 #+end_src
 
 ** monokai-theme
@@ -1683,48 +1660,47 @@ Terraform state files are JSON.
   :ensure t
   :defer t
   :config
-  (progn
-    ;; notmuch-always-prompt-for-sender requires ido-mode
-    ;; Add (ido-mode t) to emacs configuration
-    (setq notmuch-always-prompt-for-sender t)
+  ;; notmuch-always-prompt-for-sender requires ido-mode
+  ;; Add (ido-mode t) to emacs configuration
+  (setq notmuch-always-prompt-for-sender t)
 
-    ;; Use Bcc instead of Fcc
-    (setq notmuch-fcc-dirs nil)
+  ;; Use Bcc instead of Fcc
+  (setq notmuch-fcc-dirs nil)
 
-    (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-                                   ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
-                                   ("Action" . "tag:action")
-                                   ("Waiting" . "tag:waiting")
-                                   ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-                                   ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
+  (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
+                                 ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+                                 ("Action" . "tag:action")
+                                 ("Waiting" . "tag:waiting")
+                                 ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
+                                 ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
 
-    ;; Show newest mail first
-    (setq notmuch-search-oldest-first nil)
+  ;; Show newest mail first
+  (setq notmuch-search-oldest-first nil)
 
-    ;; ;; Notmuch remote setup (on all hosts except garnet)
-    ;; (when (not (string= system-name "garnet.ciffer.net"))
-    ;;   (setq notmuch-command "notmuch-remote"))
+  ;; ;; Notmuch remote setup (on all hosts except garnet)
+  ;; (when (not (string= system-name "garnet.ciffer.net"))
+  ;;   (setq notmuch-command "notmuch-remote"))
 
-    ;; Getting Things Done (GTD) keybindings
+  ;; Getting Things Done (GTD) keybindings
 
-    (setq notmuch-tag-macro-alist
-          (list
-           '("a" "+action" "-waiting" "-inbox")
-           '("w" "-action" "+waiting" "-inbox")
-           '("d" "-action" "-waiting" "-inbox")))
+  (setq notmuch-tag-macro-alist
+        (list
+         '("a" "+action" "-waiting" "-inbox")
+         '("w" "-action" "+waiting" "-inbox")
+         '("d" "-action" "-waiting" "-inbox")))
 
-    (defun notmuch-search-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-        (notmuch-search-tag (cdr macro))))
+  (defun notmuch-search-apply-tag-macro (key)
+    (interactive "k")
+    (let ((macro (assoc key notmuch-tag-macro-alist)))
+      (notmuch-search-tag (cdr macro))))
 
-    (defun notmuch-show-apply-tag-macro (key)
-      (interactive "k")
-      (let ((macro (assoc key notmuch-tag-macro-alist)))
-        (notmuch-show-tag (cdr macro))))
+  (defun notmuch-show-apply-tag-macro (key)
+    (interactive "k")
+    (let ((macro (assoc key notmuch-tag-macro-alist)))
+      (notmuch-show-tag (cdr macro))))
 
-    (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
-    (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro)))
+  (define-key notmuch-search-mode-map "`" 'notmuch-search-apply-tag-macro)
+  (define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro))
 #+end_src
 
 ** nov
@@ -1761,55 +1737,54 @@ EPUB reader package.
          ("C-c o b" . org-iswitchb)
          ("C-c o l" . org-store-link))
   :config
-  (progn
-    (defun org-babel-temp-file (prefix &optional suffix)
-      "Create a temporary file in the `org-babel-temporary-directory'.
+  (defun org-babel-temp-file (prefix &optional suffix)
+    "Create a temporary file in the `org-babel-temporary-directory'.
     Passes PREFIX and SUFFIX directly to `make-temp-file' with the
     value of `temporary-file-directory' temporarily set to the value
     of `org-babel-temporary-directory'."
-      (if (file-remote-p default-directory)
-          (let ((prefix
-                 (concat (file-remote-p default-directory)
-                         ;; Replace temporary-file-directory with "/tmp"
-                         (expand-file-name prefix "/tmp"))))
-            (make-temp-file prefix nil suffix))
-        (let ((temporary-file-directory
-               (or (and (boundp 'org-babel-temporary-directory)
-                        (file-exists-p org-babel-temporary-directory)
-                        org-babel-temporary-directory)
-                   temporary-file-directory)))
-          (make-temp-file prefix nil suffix))))
+    (if (file-remote-p default-directory)
+        (let ((prefix
+               (concat (file-remote-p default-directory)
+                       ;; Replace temporary-file-directory with "/tmp"
+                       (expand-file-name prefix "/tmp"))))
+          (make-temp-file prefix nil suffix))
+      (let ((temporary-file-directory
+             (or (and (boundp 'org-babel-temporary-directory)
+                      (file-exists-p org-babel-temporary-directory)
+                      org-babel-temporary-directory)
+                 temporary-file-directory)))
+        (make-temp-file prefix nil suffix))))
 
-    (add-hook 'org-mode-hook #'auto-fill-mode)
-    (add-hook 'org-mode-hook #'org-babel-result-hide-all)
-    (setq org-babel-python-command "python3")
-    (setq org-ellipsis "…")
-    ;; brew install plantuml
-    (setq org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
-    (setq org-refile-targets '((nil :maxlevel . 9)))
-    (setq org-src-fontify-natively t)
-    (setq org-use-speed-commands t)
-    (setq org-src-preserve-indentation t)
-    (setq org-capture-templates
-          '(("t" "Task" entry (file "tasks.org")
-             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
+  (add-hook 'org-mode-hook #'auto-fill-mode)
+  (add-hook 'org-mode-hook #'org-babel-result-hide-all)
+  (setq org-babel-python-command "python3")
+  (setq org-ellipsis "…")
+  ;; brew install plantuml
+  (setq org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
+  (setq org-refile-targets '((nil :maxlevel . 9)))
+  (setq org-src-fontify-natively t)
+  (setq org-use-speed-commands t)
+  (setq org-src-preserve-indentation t)
+  (setq org-capture-templates
+        '(("t" "Task" entry (file "tasks.org")
+           "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
 
-    ;; Lower case all org template block headers
-    (mapc (lambda (asc)
-            (let ((org-sce-dc (downcase (nth 1 asc))))
-              (setf (nth 1 asc) org-sce-dc)))
-          org-structure-template-alist)
+  ;; Lower case all org template block headers
+  (mapc (lambda (asc)
+          (let ((org-sce-dc (downcase (nth 1 asc))))
+            (setf (nth 1 asc) org-sce-dc)))
+        org-structure-template-alist)
 
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((calc . t)
-       (emacs-lisp . t)
-       (perl . t)
-       (plantuml . t)
-       (python . t)
-       (ruby . t)
-       (scala . t)
-       (shell . t)))))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((calc . t)
+     (emacs-lisp . t)
+     (perl . t)
+     (plantuml . t)
+     (python . t)
+     (ruby . t)
+     (scala . t)
+     (shell . t))))
 #+end_src
 
 ** org-capture
@@ -1818,10 +1793,9 @@ EPUB reader package.
 (use-package org-capture
   :bind (("C-c o c" . org-capture))
   :config
-  (progn
-    (setq org-capture-templates
-          '(("t" "Task" entry (file "tasks.org")
-             "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))))
+  (setq org-capture-templates
+        '(("t" "Task" entry (file "tasks.org")
+           "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t))))
 #+end_src
 
 ** package-lint
@@ -1864,14 +1838,14 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 #+begin_src emacs-lisp
 (use-package pdf-tools
   :ensure t
-  :init (pdf-tools-install)
+  :init
+  (pdf-tools-install)
   :config
-  (progn
-    ;; pdf-view-auto-slice-minor-mode shows more of the main text, but looks
-    ;; ugly because page margins are cut. Instead, run
-    ;; pdf-view-set-slice-from-bounding-box (s b).
-    ;; (add3-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
-    (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window)))
+  ;; pdf-view-auto-slice-minor-mode shows more of the main text, but looks
+  ;; ugly because page margins are cut. Instead, run
+  ;; pdf-view-set-slice-from-bounding-box (s b).
+  ;; (add3-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window))
 #+end_src
 
 ** plantuml-mode
@@ -1879,10 +1853,8 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 #+begin_src emacs-lisp
 (use-package plantuml-mode
   :ensure t
-  :bind (("C-c b" . bbdb))
   :config
-  (progn
-    (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")))
+  (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"))
 #+end_src
 
 ** projectile
@@ -1892,17 +1864,16 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
   :ensure t
   :init (projectile-mode)
   :config
-  (progn
-    ;; Mark projectile variables as safe
-    (seq-doseq (var '(projectile-project-compilation-cmd
-                      projectile-project-test-cmd
-                      projectile-project-run-cmd))
-      (put var 'safe-local-variable #'stringp))
+  ;; Mark projectile variables as safe
+  (seq-doseq (var '(projectile-project-compilation-cmd
+                    projectile-project-test-cmd
+                    projectile-project-run-cmd))
+    (put var 'safe-local-variable #'stringp))
 
-    (setq projectile-completion-system 'ivy)
-    (setq projectile-use-git-grep t)
-    (add-to-list 'projectile-project-root-files ".kitchen.yml")
-    (projectile-cleanup-known-projects)))
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-use-git-grep t)
+  (add-to-list 'projectile-project-root-files ".kitchen.yml")
+  (projectile-cleanup-known-projects))
 #+end_src
 
 ** python
@@ -1914,9 +1885,8 @@ Associate Nagios check-mk files with python.
   :mode
   (("\\.mk\\'" . python-mode))
   :config
-  (progn
-    ;; PEP 8 compliant filling rules, 79 chars maximum
-    (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))))
+  ;; PEP 8 compliant filling rules, 79 chars maximum
+  (add-hook 'python-mode-hook (lambda () (setq fill-column 79))))
 #+end_src
 
 ** quickrun
@@ -1931,8 +1901,7 @@ Increase timeout to 60 seconds from the default of 10 seconds.
          ("C-c q r" . quickrun-region)
          ("C-c q s" . quickrun-shell))
   :config
-  (progn
-    (setq quickrun-timeout-seconds 60)))
+  (setq quickrun-timeout-seconds 60))
 #+end_src
 
 ** racer
@@ -1941,13 +1910,12 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 (use-package racer
   :ensure t
   :config
-  (progn
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'racer-mode-hook #'eldoc-mode)
-    (add-hook 'racer-mode-hook #'company-mode)
-    ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-    ;; (setq company-tooltip-align-annotations t)
-    ))
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode)
+  ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+  ;; (setq company-tooltip-align-annotations t)
+  )
 #+end_src
 
 ** recentf
@@ -1956,12 +1924,11 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 (use-package recentf
   :init (recentf-mode 1)
   :config
-  (progn
-    ;; Increase size of recent file list
-    (setq recentf-max-saved-items 1000)
+  ;; Increase size of recent file list
+  (setq recentf-max-saved-items 1000)
 
-    ;; Ignore temporary notmuch ical files
-    (add-to-list 'recentf-exclude "^/tmp/notmuch-ical")))
+  ;; Ignore temporary notmuch ical files
+  (add-to-list 'recentf-exclude "^/tmp/notmuch-ical"))
 #+end_src
 
 ** restclient
@@ -1977,10 +1944,8 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 #+begin_src emacs-lisp
 (use-package robe
   :ensure t
-  :defer t
   :config
-  (progn
-    (add-hook 'ruby-mode-hook #'robe-mode)))
+  (add-hook 'ruby-mode-hook #'robe-mode))
 #+end_src
 
 ** ruby-mode
@@ -2008,13 +1973,12 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
    ("Berksfile\\'" . ruby-mode)
    ("Appraisals\\'" . ruby-mode))
   :config
-  (progn
-    (defun my-ruby-mode-defaults ()
-      (inf-ruby-minor-mode +1)
-      (ruby-tools-mode +1)
-      ;; CamelCase aware editing operations
-      (subword-mode +1))
-    (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults)))
+  (defun my-ruby-mode-defaults ()
+    (inf-ruby-minor-mode +1)
+    (ruby-tools-mode +1)
+    ;; CamelCase aware editing operations
+    (subword-mode +1))
+  (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults))
 #+end_src
 
 ** ruby-tools
@@ -2058,10 +2022,9 @@ Scala worksheets end in =.sc=.
   :mode
   (("\\.sc\\'" . scala-mode))
   :config
-  (progn
-    (defun my-scala-mode-defaults ()
-      (subword-mode +1))
-    (add-hook 'scala-mode-hook #'my-scala-mode-defaults)))
+  (defun my-scala-mode-defaults ()
+    (subword-mode +1))
+  (add-hook 'scala-mode-hook #'my-scala-mode-defaults))
 #+end_src
 
 ** server
@@ -2082,17 +2045,16 @@ requires =server=.
 (use-package sh-script
   :defer t
   :config
-  (progn
-    (defun my-setup-sh-mode ()
-      "My preferences for sh-mode"
-      (interactive)
-      (setq sh-basic-offset 2)
-      (setq sh-indentation 2)
-      (setq sh-indent-after-continuation 'always)
-      (setq sh-indent-for-case-alt '+)
-      (setq sh-indent-for-case-label 0))
+  (defun my-setup-sh-mode ()
+    "My preferences for sh-mode"
+    (interactive)
+    (setq sh-basic-offset 2)
+    (setq sh-indentation 2)
+    (setq sh-indent-after-continuation 'always)
+    (setq sh-indent-for-case-alt '+)
+    (setq sh-indent-for-case-label 0))
 
-    (add-hook 'sh-mode-hook #'my-setup-sh-mode)))
+  (add-hook 'sh-mode-hook #'my-setup-sh-mode))
 #+end_src
 
 ** shell
@@ -2116,15 +2078,14 @@ See http://stackoverflow.com/a/11255996
 #+begin_src emacs-lisp
 (use-package shell
   :config
-  (progn
-    (add-to-list 'display-buffer-alist
-                 '("^\\*shell\\*" . ((display-buffer-reuse-window display-buffer-same-window))))
-    (setq explicit-shell-file-name "bash")
-    ;; Do not try to colorize comments and strings in shell mode
-    (setq shell-font-lock-keywords nil)
-    ;; This seems to be slowing down shell buffers
-    ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
-    (add-hook 'shell-mode-hook #'shell-mode-config)))
+  (add-to-list 'display-buffer-alist
+               '("^\\*shell\\*" . ((display-buffer-reuse-window display-buffer-same-window))))
+  (setq explicit-shell-file-name "bash")
+  ;; Do not try to colorize comments and strings in shell mode
+  (setq shell-font-lock-keywords nil)
+  ;; This seems to be slowing down shell buffers
+  ;; (remove-hook 'shell-mode-hook 'goto-address-mode)
+  (add-hook 'shell-mode-hook #'shell-mode-config))
 #+end_src
 
 To disable scroll to bottom:
@@ -2165,15 +2126,15 @@ M-r):
 #+begin_src emacs-lisp
 (use-package smartparens
   :ensure t
-  :init (progn
-          (smartparens-global-mode t)
-          (require 'smartparens-config)
-          (sp-use-paredit-bindings)
-          ;; sp-paredit-bindings: ("M-r" . sp-splice-sexp-killing-around)
-          (define-key sp-keymap (kbd "M-r") nil)
-          (define-key sp-keymap (kbd "M-s") nil)
-          ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
-          (define-key sp-keymap (kbd "M-<backspace>") nil)))
+  :init
+  (smartparens-global-mode t)
+  (require 'smartparens-config)
+  (sp-use-paredit-bindings)
+  ;; sp-paredit-bindings: ("M-r" . sp-splice-sexp-killing-around)
+  (define-key sp-keymap (kbd "M-r") nil)
+  (define-key sp-keymap (kbd "M-s") nil)
+  ;; sp-smartparens-bindings: ("M-<backspace>" . sp-backward-unwrap-sexp)
+  (define-key sp-keymap (kbd "M-<backspace>") nil))
 #+end_src
 
 ** smtpmail-multi
@@ -2245,9 +2206,8 @@ M-r):
 
 (use-package term
   :config
-  (progn
-    (setq-default term-buffer-maximum-size 10000)
-    (add-hook 'term-mode-hook #'my-setup-term-mode)))
+  (setq-default term-buffer-maximum-size 10000)
+  (add-hook 'term-mode-hook #'my-setup-term-mode))
 #+end_src
 
 ** terraform-mode
@@ -2289,17 +2249,16 @@ ControlPersist 60m
 (use-package tramp
   :defer t
   :config
-  (progn
-    ;; Frequently Asked Questions: How could I speed up tramp?
-    ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
-    (setq vc-ignore-dir-regexp
-          (format "\\(%s\\)\\|\\(%s\\)"
-                  vc-ignore-dir-regexp
-                  tramp-file-name-regexp))
+  ;; Frequently Asked Questions: How could I speed up tramp?
+  ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+  (setq vc-ignore-dir-regexp
+        (format "\\(%s\\)\\|\\(%s\\)"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp))
 
-    (setq tramp-use-ssh-controlmaster-options nil)
-    ;; Tramp sets HISTFILE so bash history on remote shells does not work.
-    (setq tramp-histfile-override nil)))
+  (setq tramp-use-ssh-controlmaster-options nil
+        ;; Tramp sets HISTFILE so bash history on remote shells does not work.
+        tramp-histfile-override nil))
 #+end_src
 
 Default value of explicit-bash-args is =("--noediting" "-i")=. We want
@@ -2380,23 +2339,24 @@ bash shell.
 #+begin_src emacs-lisp
 (use-package visual-fill-column
   :ensure t
-  :init (dolist (hook '(visual-line-mode-hook
-                        compilation-mode-hook
-                        comint-mode-hook
-                        dired-mode-hook
-                        gnus-article-mode-hook
-                        gnus-group-mode-hook
-                        gnus-summary-mode-hook
-                        package-menu-mode-hook
-                        prog-mode-hook
-                        special-mode-hook
-                        text-mode-hook))
-          (add-hook hook #'visual-fill-column-mode))
-  :config (progn
-            (setq-default visual-fill-column-center-text t
-                          visual-fill-column-fringes-outside-margins nil
-                          visual-fill-column-width 100)
-            (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly)))
+  :init
+  (dolist (hook '(visual-line-mode-hook
+                  compilation-mode-hook
+                  comint-mode-hook
+                  dired-mode-hook
+                  gnus-article-mode-hook
+                  gnus-group-mode-hook
+                  gnus-summary-mode-hook
+                  package-menu-mode-hook
+                  prog-mode-hook
+                  special-mode-hook
+                  text-mode-hook))
+    (add-hook hook #'visual-fill-column-mode))
+  :config
+  (setq-default visual-fill-column-center-text t
+                visual-fill-column-fringes-outside-margins nil
+                visual-fill-column-width 100)
+  (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly))
 #+end_src
 
 ** winner
@@ -2424,9 +2384,10 @@ Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
-  :init (yas-global-mode)
-  :config (progn
-            (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))))
+  :init
+  (yas-global-mode)
+  :config
+  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
 #+end_src
 
 ** zoom-frm
