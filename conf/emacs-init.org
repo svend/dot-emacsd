@@ -54,6 +54,12 @@ This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b
 (require 'bind-key)
 #+end_src
 
+Install all packages.
+
+#+begin_src emacs-lisp
+(setq use-package-always-ensure t)
+#+end_src
+
 * Initialize exec-path-from-shell
 
 Function that gets environmental variables from bash. This uses printenv from
@@ -83,7 +89,6 @@ This needs to come before anything that uses PATH (e.g. executable-find).
 
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
-  :ensure t
   :if window-system
   :init (setq exec-path-from-shell-variables (bash-shell-variables))
   :config (exec-path-from-shell-initialize))
@@ -686,7 +691,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package ace-link
-  :ensure t
   :init (ace-link-setup-default))
 #+end_src
 
@@ -694,7 +698,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package ace-window
-  :ensure t
   :bind (("C-x o" . ace-window)))
 #+end_src
 
@@ -702,7 +705,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package aggressive-indent
-  :ensure t
   :config
   (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'rust-mode)
@@ -714,7 +716,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package alert
-  :ensure t
   :defer t
   :init
   (defun comint-alert-on-prompt (string)
@@ -742,7 +743,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package amx
-  :ensure t
   :bind (("M-X" . amx-major-mode-commands))
   :init (amx-mode))
 #+end_src
@@ -752,7 +752,6 @@ horizontally.
 #+begin_src emacs-lisp
 (use-package auth-password-store
   :if (< emacs-major-version 26)
-  :ensure t
   :init (auth-pass-enable))
 #+end_src
 
@@ -768,7 +767,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package avy
-  :ensure t
   :bind (("C-c a" . avy-goto-char-timer)
          ("M-g M-g" . avy-goto-line)))
 #+end_src
@@ -777,7 +775,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package bash-completion
-  :ensure t
   :config
   (defun my-bash-completion-dynamic-complete-local()
     "Returns the completion table for bash command at point if the buffer is not remote."
@@ -798,7 +795,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package bbdb
-  :ensure t
   :bind (("C-c b" . bbdb))
   :config
   (setq bbdb-file "~/.config/bbdb/.bbdb"
@@ -824,7 +820,6 @@ If OPEN-BUFFER is set, open the new buffer."
       (bpr-open-last-buffer)))
 
 (use-package bpr
-  :ensure t
   :bind (("M-&" . my-bpr-spawn))
   :config
   (setq bpr-show-progress nil
@@ -837,7 +832,6 @@ If OPEN-BUFFER is set, open the new buffer."
 
 #+begin_src emacs-lisp
 (use-package calfw
-  :ensure t
   :defer t
   :config
   (setq cfw:fchar-junction ?╋
@@ -854,7 +848,6 @@ If OPEN-BUFFER is set, open the new buffer."
 
 #+begin_src emacs-lisp
 (use-package color-theme-sanityinc-tomorrow
-  :ensure t
   :defer t)
 #+end_src
 
@@ -907,7 +900,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package company
-  :ensure t
   :init
   (global-company-mode)
   :config
@@ -920,7 +912,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package company-go
-  :ensure t
   :defer t)
 #+end_src
 
@@ -928,7 +919,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package company-jedi
-  :ensure t
   ;; :init (add-hook 'python-mode-hook 'jedi:setup)
   :config
   (setq jedi:use-shortcuts t))
@@ -938,7 +928,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package counsel
-  :ensure t
   :defer t)
 #+end_src
 
@@ -946,7 +935,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package csv-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -954,7 +942,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package debbugs
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1027,7 +1014,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package docker-tramp
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1035,7 +1021,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1052,7 +1037,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package edit-indirect
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1060,7 +1044,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package ensime
-  :ensure t
   :defer t
   :config
   (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
@@ -1095,6 +1078,7 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package erc-track
+  :ensure nil
   :defer t
   :config
   ;; Do not notify for join, part, or quit
@@ -1107,7 +1091,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package erlang
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1115,7 +1098,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package expand-region
-  :ensure t
   :bind (("M-S-SPC" . er/expand-region)))
 #+end_src
 
@@ -1123,13 +1105,10 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package flycheck
-  :ensure t
   :init
   (use-package flycheck-ledger
-    :ensure t
     :defer t)
   (use-package flycheck-rust
-    :ensure t
     :config
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   :config
@@ -1143,7 +1122,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package git
-  :ensure t
   :defer t
   :config
   (defun my-git-clone (url)
@@ -1155,15 +1133,13 @@ This is used to edit code blocks in markdown-mode.
 ** git-commit
 
 #+begin_src emacs-lisp
-(use-package git-commit
-  :ensure t)
+(use-package git-commit)
 #+end_src
 
 ** gitconfig-mode
 
 #+begin_src emacs-lisp
 (use-package gitconfig-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1171,7 +1147,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package gitignore-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1179,7 +1154,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package gnuplot
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1253,7 +1227,6 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 
 #+begin_src emacs-lisp
 (use-package gnus-alias
-  :ensure t
   :defer t
   :config
   (setq gnus-alias-identity-alist
@@ -1278,7 +1251,6 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 
 #+begin_src emacs-lisp
 (use-package go-eldoc
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1302,7 +1274,6 @@ go get -u github.com/kisielk/errcheck
 
 #+begin_src emacs-lisp
 (use-package go-mode
-  :ensure t
   :defer t
   :config
   (setq gofmt-command "goimports")
@@ -1334,7 +1305,6 @@ go get -u github.com/kisielk/errcheck
 
 #+begin_src emacs-lisp
 (use-package groovy-mode
-  :ensure t
   :config
   (defun my-groovy-mode-hook ()
     ;; Indent groovy code four spaces instead of two
@@ -1348,7 +1318,6 @@ go get -u github.com/kisielk/errcheck
 
 #+begin_src emacs-lisp
 (use-package haskell-mode
-  :ensure t
   :defer t
   :config
   (defun my-haskell-mode-defaults ()
@@ -1373,7 +1342,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package hydra
-  :ensure t
   :defer t
   :config
   (global-set-key
@@ -1411,7 +1379,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ibuffer-tramp
-  :ensure t
   :config
   (add-hook 'ibuffer-hook
             (lambda ()
@@ -1423,7 +1390,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package inf-ruby
-  :ensure t
   :defer t
   :config
   (defun my-inf-ruby-mode-setup ()
@@ -1438,7 +1404,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ivy
-  :ensure t
   :bind (("C-s" . swiper)
          ("C-c y" . counsel-yank-pop))
   :config
@@ -1454,7 +1419,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp sh
 (use-package jabber
-  :ensure t
   :defer t
   :config
   (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
@@ -1496,7 +1460,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package json-mode
-  :ensure t
   :defer t
   :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
 #+end_src
@@ -1505,7 +1468,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package kubernetes
-  :ensure t
   :defer t
   :commands (kubernetes-use-context))
 #+end_src
@@ -1514,7 +1476,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package ledger-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1532,7 +1493,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package lua-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1540,7 +1500,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package magit
-  :ensure t
   :bind (("C-c m" . magit-dispatch-popup))
   :init
   ;; We have global-auto-revert mode enabled
@@ -1563,7 +1522,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package markdown-mode
-  :ensure t
   :defer t
   :mode ("README\\.md\\'" . gfm-mode))
 #+end_src
@@ -1617,7 +1575,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package monokai-theme
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1625,7 +1582,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package nginx-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1633,7 +1589,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package nim-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1641,7 +1596,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package nix-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1649,15 +1603,13 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package nlinum
-  :if (< emacs-major-version 26)
-  :ensure t)
+  :if (< emacs-major-version 26))
 #+end_src
 
 ** notmuch
 
 #+begin_src emacs-lisp
 (use-package notmuch
-  :ensure t
   :defer t
   :config
   ;; notmuch-always-prompt-for-sender requires ido-mode
@@ -1709,22 +1661,19 @@ EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package nov
-  :ensure t
   :mode ("\\.epub\\'" . nov-mode))
 #+end_src
 
 ** ob-rust
 
 #+begin_src emacs-lisp
-(use-package ob-rust
-  :ensure t)
+(use-package ob-rust)
 #+end_src
 
 ** operate-on-number
 
 #+begin_src emacs-lisp
 (use-package operate-on-number
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1802,7 +1751,6 @@ EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package package-lint
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1810,7 +1758,6 @@ EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package pass
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1818,7 +1765,6 @@ EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package password-store
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1837,7 +1783,6 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 
 #+begin_src emacs-lisp
 (use-package pdf-tools
-  :ensure t
   :init
   (pdf-tools-install)
   :config
@@ -1852,7 +1797,6 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 
 #+begin_src emacs-lisp
 (use-package plantuml-mode
-  :ensure t
   :config
   (setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"))
 #+end_src
@@ -1861,7 +1805,6 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
 
 #+begin_src emacs-lisp
 (use-package projectile
-  :ensure t
   :init (projectile-mode)
   :config
   ;; Mark projectile variables as safe
@@ -1895,7 +1838,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
 (use-package quickrun
-  :ensure t
   :bind (("C-c q a" . quickrun-with-arg)
          ("C-c q q" . quickrun)
          ("C-c q r" . quickrun-region)
@@ -1908,7 +1850,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
 (use-package racer
-  :ensure t
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
@@ -1935,7 +1876,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
 (use-package restclient
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1943,7 +1883,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
 (use-package robe
-  :ensure t
   :config
   (add-hook 'ruby-mode-hook #'robe-mode))
 #+end_src
@@ -1985,7 +1924,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package ruby-tools
-  :ensure t
   :defer t)
 #+end_src
 
@@ -1993,7 +1931,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package rust-mode
-  :ensure t
   :defer t
   :config (setq rust-format-on-save t))
 #+end_src
@@ -2018,7 +1955,6 @@ Scala worksheets end in =.sc=.
 
 #+begin_src emacs-lisp
 (use-package scala-mode
-  :ensure t
   :mode
   (("\\.sc\\'" . scala-mode))
   :config
@@ -2115,7 +2051,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package slime
-  :ensure t
   :defer t
   :config
   (setq inferior-lisp-program "sbcl"))
@@ -2125,7 +2060,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package smartparens
-  :ensure t
   :init
   (smartparens-global-mode t)
   (require 'smartparens-config)
@@ -2141,7 +2075,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package smtpmail-multi
-  :ensure t
   :defer t)
 #+end_src
 
@@ -2149,7 +2082,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package solarized-theme
-  :ensure t
   :defer t)
 #+end_src
 
@@ -2157,7 +2089,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package swiper
-  :ensure t
   :bind (("C-c s" . swiper)))
 #+end_src
 
@@ -2165,7 +2096,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package tango-plus-theme
-  :ensure t
   :init (load-theme 'tango-plus t))
 #+end_src
 
@@ -2214,7 +2144,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package terraform-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -2222,7 +2151,6 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package toml-mode
-  :ensure t
   :defer t
   :mode
   (("Cargo\\.lock\\'" . toml-mode)))
@@ -2338,7 +2266,6 @@ bash shell.
 
 #+begin_src emacs-lisp
 (use-package visual-fill-column
-  :ensure t
   :init
   (dolist (hook '(visual-line-mode-hook
                   compilation-mode-hook
@@ -2373,7 +2300,6 @@ layouts.
 
 #+begin_src emacs-lisp
 (use-package yaml-mode
-  :ensure t
   :defer t)
 #+end_src
 
@@ -2383,7 +2309,6 @@ Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289
 
 #+begin_src emacs-lisp
 (use-package yasnippet
-  :ensure t
   :init
   (yas-global-mode)
   :config
@@ -2397,7 +2322,6 @@ which only scale the text for a single buffer. Both are useful.)
 
 #+begin_src emacs-lisp
 (use-package zoom-frm
-  :ensure t
   :bind (("C-c C-+" . zoom-in/out)
          ("C-c C--" . zoom-in/out)
          ("C-c C-0" . zoom-in/out)
