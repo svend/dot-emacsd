@@ -129,8 +129,9 @@ Display date in 24 hour format in mode line.
 Make the cursor a bar instead of a filled box.
 
 #+begin_src emacs-lisp
-(setq cursor-type 'bar)
+(setq-default cursor-type 'bar)
 #+end_src
+
 ** Fonts
 
 *** Linux
@@ -1483,6 +1484,7 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package lisp-mode
+  :ensure nil
   :config
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
@@ -1530,6 +1532,7 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package message
+  :ensure nil
   :defer t
   :config
   ;; Use MSMTP with auto-smtp selection
@@ -1759,6 +1762,7 @@ fn main() {
 
 #+begin_src emacs-lisp
 (use-package org-capture
+  :ensure nil
   :bind (("C-c o c" . org-capture))
   :config
   (setq org-capture-templates
