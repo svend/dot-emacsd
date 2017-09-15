@@ -10,7 +10,6 @@
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(eww-search-prefix "https://duckduckgo.com/html/?kd=-1&q=")
  '(history-length 10000)
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
