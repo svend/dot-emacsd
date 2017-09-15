@@ -121,6 +121,11 @@ Display date in 24 hour format in mode line.
 (setq display-time-24hr-format t)
 #+end_src
 
+Make the cursor a bar instead of a filled box.
+
+#+begin_src emacs-lisp
+(setq cursor-type 'bar)
+#+end_src
 ** Fonts
 
 *** Linux

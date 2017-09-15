@@ -6,7 +6,6 @@
  '(comint-input-ignoredups t)
  '(comint-input-ring-size 10000)
  '(confirm-kill-processes nil)
- '(cursor-type (quote bar))
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
