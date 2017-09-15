@@ -198,6 +198,13 @@ Treat all themes as safe.
 (setq custom-theme-directory "~/.emacs.d/conf/")
 #+end_src
 
+Load my basic themes.
+
+#+begin_src emacs-lisp
+(load-theme 'svend 't)
+(load-theme 'svend-font-dejavu t)
+#+end_src
+
 * Emacs settings
 
 ** Bell
@@ -991,6 +998,9 @@ Change scrolling behavior for comint modes.
     (setq desktop-modes-not-to-save '(tags-table-mode bpr-shell-mode))
     ;; Load 20 buffers on start, then lazily restore emaining buffer
     (setq desktop-restore-eager 20)
+    ;; Do not save frame and window configuration (saving these leaves artifacts
+    ;; from loaded themes)
+    (setq desktop-restore-frames nil)
 
     ;; Periodically save desktop
     (defun my-setup-desktop-auto-save ()
@@ -2190,7 +2200,7 @@ M-r):
 #+begin_src emacs-lisp
 (use-package tango-plus-theme
   :ensure t
-  :defer t)
+  :init (load-theme 'tango-plus t))
 #+end_src
 
 ** term
