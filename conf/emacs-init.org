@@ -1666,6 +1666,25 @@ EPUB reader package.
 
 ** ob-rust
 
+Requires cargo-script.
+
+#+begin_src sh
+cargo install cargo-script
+#+end_src
+
+#+begin_src rust
+fn main() {
+    for count in 0..3 {
+        println!("{}. Hello World!", count);
+    }
+}
+#+end_src
+
+#+RESULTS:
+: 0. Hello World!
+: 1. Hello World!
+: 2. Hello World!
+
 #+begin_src emacs-lisp
 (use-package ob-rust)
 #+end_src
