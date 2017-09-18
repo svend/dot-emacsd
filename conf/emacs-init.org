@@ -1838,17 +1838,14 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
   ;; Patch to fix https://github.com/bbatsov/projectile/issues/1171
   (defun projectile-project-root ()
     "Retrieves the root directory of a project if available.
- The current directory is assumed to be the project's root otherwise."
+The current directory is assumed to be the project's root otherwise."
     ;; the cached value will be 'none in the case of no project root (this is to
     ;; ensure it is not reevaluated each time when not inside a project) so use
     ;; cl-subst to replace this 'none value with nil so a nil value is used
     ;; instead
     (or (cl-subst nil 'none
-                  ;; BEGIN
-                  ;; (or (and (equal projectile-cached-buffer-file-name buffer-file-name)
                   (or (and projectile-cached-buffer-file-name
                            (equal projectile-cached-buffer-file-name buffer-file-name)
-                           ;; END
                            projectile-cached-project-root)
                       (progn
                         (setq projectile-cached-buffer-file-name buffer-file-name)
@@ -1884,11 +1881,8 @@ zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
   (defun projectile-project-name ()
     "Return project name."
     (or projectile-project-name
-        ;; BEGIN
-        ;; (and (equal projectile-cached-buffer-file-name buffer-file-name)
         (and projectile-cached-buffer-file-name
              (equal projectile-cached-buffer-file-name buffer-file-name)
-             ;; END
              projectile-cached-project-name)
         (progn
           (setq projectile-cached-buffer-file-name buffer-file-name)
