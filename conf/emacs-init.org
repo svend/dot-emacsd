@@ -1666,7 +1666,9 @@ EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package nov
-  :mode ("\\.epub\\'" . nov-mode))
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (setq nov-save-place-file (expand-file-name "nov-save-place" user-emacs-directory)))
 #+end_src
 
 ** ob-rust
