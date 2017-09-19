@@ -2381,6 +2381,7 @@ bash shell.
                   gnus-article-mode-hook
                   gnus-group-mode-hook
                   gnus-summary-mode-hook
+                  Info-mode-hook
                   package-menu-mode-hook
                   prog-mode-hook
                   special-mode-hook
