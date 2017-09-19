@@ -135,10 +135,13 @@ Make the cursor a bar instead of a filled box.
 ** Scrolling
 
 Enable smooth scrolling.
+Horizontally scroll current line.
 
 #+begin_src emacs-lisp
 (pixel-scroll-mode)
+(setq auto-hscroll-mode 'current-line)
 #+end_src
+
 ** Fonts
 
 *** Linux
