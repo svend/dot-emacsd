@@ -132,6 +132,8 @@ Make the cursor a bar instead of a filled box.
 (setq-default cursor-type 'bar)
 #+end_src
 
+** Scrolling
+
 Enable smooth scrolling.
 
 #+begin_src emacs-lisp
