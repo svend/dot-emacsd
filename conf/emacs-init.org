@@ -1464,7 +1464,13 @@ Terraform state files are JSON.
 #+begin_src emacs-lisp
 (use-package json-mode
   :defer t
-  :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'"))
+  :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'")
+  :config
+  ;; Two-space indentation for JSON (default if 4)
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (make-local-variable 'js-indent-level)
+              (setq js-indent-level 2))))
 #+end_src
 
 ** kubernetes
