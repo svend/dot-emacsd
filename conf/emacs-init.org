@@ -132,6 +132,11 @@ Make the cursor a bar instead of a filled box.
 (setq-default cursor-type 'bar)
 #+end_src
 
+Enable smooth scrolling.
+
+#+begin_src emacs-lisp
+(pixel-scroll-mode)
+#+end_src
 ** Fonts
 
 *** Linux
@@ -248,12 +253,6 @@ in Emacs 24.
 
 #+begin_src emacs-lisp
 (setq mouse-drag-copy-region t)
-#+end_src
-
-Scroll one line at a time with mouse
-
-#+begin_src emacs-lisp
-(setq mouse-wheel-scroll-amount '(1))
 #+end_src
 
 ** Highlight current line
@@ -1467,6 +1466,7 @@ Terraform state files are JSON.
   :mode ("\\.tfstate\\'" "\\.tfstate\\.backup\\'")
   :config
   ;; Two-space indentation for JSON (default if 4)
+  (setq json-reformat:indent-width 2)
   (add-hook 'json-mode-hook
             (lambda ()
               (make-local-variable 'js-indent-level)
