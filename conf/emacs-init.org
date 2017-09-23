@@ -2377,6 +2377,7 @@ bash shell.
   (dolist (hook '(visual-line-mode-hook
                   compilation-mode-hook
                   comint-mode-hook
+                  conf-mode-hook
                   dired-mode-hook
                   gnus-article-mode-hook
                   gnus-group-mode-hook
