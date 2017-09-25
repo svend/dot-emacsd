@@ -1548,6 +1548,13 @@ Terraform state files are JSON.
   :ensure nil
   :defer t
   :config
+  ;; Internal SMTP library
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-smtp-server "smtp.fastmail.com"
+        smtpmail-smtp-service 587)
+
+  ;; OR
+
   ;; Use MSMTP with auto-smtp selection
   ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
   ;;
@@ -1558,14 +1565,6 @@ Terraform state files are JSON.
         mail-envelope-from 'header
         message-sendmail-envelope-from 'header)
 
-  ;; ;; send-mail-function's default value changed to sendmail-query-once in Emacs 24
-  ;; (setq send-mail-function 'sendmail-send-it)
-
-  ;; Internal SMTP library
-  (setq message-send-mail-function 'smtpmail-send-it
-        smtpmail-smtp-server "smtp.fastmail.com"
-        smtpmail-smtp-service 587)
-
   ;; Enable gnus-alias
   (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
   (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
@@ -1575,8 +1574,6 @@ Terraform state files are JSON.
 
   (defun my-setup-message-mode ()
     "My preferences for message mode"
-    (interactive)
-
     ;; Enable bbdb completion
     (bbdb-insinuate-message))
 
