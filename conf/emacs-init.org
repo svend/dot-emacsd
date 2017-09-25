@@ -796,16 +796,6 @@ horizontally.
             'my-bash-completion-dynamic-complete-local))
 #+end_src
 
-** bbdb
-
-#+begin_src emacs-lisp
-(use-package bbdb
-  :bind (("C-c b" . bbdb))
-  :config
-  (setq bbdb-file "~/.config/bbdb/.bbdb"
-        bbdb-auto-revert-p t))
-#+end_src
-
 ** bpr
 
 #+begin_src emacs-lisp
@@ -1558,8 +1548,6 @@ Terraform state files are JSON.
   ;; Use MSMTP with auto-smtp selection
   ;; http://www.emacswiki.org/emacs/GnusMSMTP#toc3
   ;;
-  ;; 'message-sendmail-f-is-evil nil' is the default on Debian squeeze
-  ;; (emacs >= 23.2+1-5)
   (setq sendmail-program "/usr/bin/msmtp"
         mail-specify-envelope-from t
         mail-envelope-from 'header
@@ -1571,13 +1559,6 @@ Terraform state files are JSON.
 
   ;; Enable notmuch-address completion
   ;; (notmuch-address-message-insinuate)
-
-  (defun my-setup-message-mode ()
-    "My preferences for message mode"
-    ;; Enable bbdb completion
-    (bbdb-insinuate-message))
-
-  (add-hook 'message-setup-hook #'my-setup-message-mode))
 #+end_src
 
 ** monokai-theme
