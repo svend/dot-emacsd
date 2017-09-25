@@ -1563,10 +1563,6 @@ Terraform state files are JSON.
 
   ;; Internal SMTP library
   (setq message-send-mail-function 'smtpmail-send-it
-        smtpmail-starttls-credentials '(("smtp.fastmail.com" 587 nil nil))
-        smtpmail-auth-credentials '(("smtp.fastmail.com" 587
-                                     "svend@svends.net" nil))
-        smtpmail-default-smtp-server "smtp.fastmail.com"
         smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-smtp-service 587)
 
