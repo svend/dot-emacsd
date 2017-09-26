@@ -1553,12 +1553,12 @@ Terraform state files are JSON.
         mail-envelope-from 'header
         message-sendmail-envelope-from 'header)
 
-  ;; Enable gnus-alias
-  (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
-  (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity)
-
   ;; Enable notmuch-address completion
   ;; (notmuch-address-message-insinuate)
+
+  ;; Enable gnus-alias
+  (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
+  (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity))
 #+end_src
 
 ** monokai-theme
