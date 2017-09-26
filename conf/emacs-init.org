@@ -806,13 +806,21 @@ horizontally.
 (defun my-bpr-on-start (process)
   (set-process-filter process 'comint-output-filter))
 
+;;;###autoload
+(defun my-bpr-switch-to-last-buffer ()
+  "Opens the buffer of the last spawned process."
+  (interactive)
+  (if (buffer-live-p bpr-last-buffer)
+      (switch-to-buffer bpr-last-buffer)
+    (message "Can't find last used buffer")))
+
 (defun my-bpr-spawn (open-buffer)
   "Run 'bpr-spawn'.
 If OPEN-BUFFER is set, open the new buffer."
   (interactive "P")
   (call-interactively #'bpr-spawn)
   (if open-buffer
-      (bpr-open-last-buffer)))
+      (my-bpr-switch-to-last-buffer)))
 
 (use-package bpr
   :bind (("M-&" . my-bpr-spawn))
