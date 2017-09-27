@@ -2409,7 +2409,7 @@ Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289
 ** zoom-frm
 
 The zoom-frm package allows scaling all text. (As opposed to text-scale-adjust,
-which only scale the text for a single buffer. Both are useful.)
+which only scales the text for a single buffer. Both are useful.)
 
 #+begin_src emacs-lisp
 (use-package zoom-frm
