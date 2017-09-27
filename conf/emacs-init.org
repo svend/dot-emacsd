@@ -523,7 +523,6 @@ Add options to kill or revert buffer when prompting to save modified buffers.
 (setq compilation-scroll-output 'first-error)
 (defun my-colorize-compilation-buffer ()
   "Colorize a compilation mode buffer."
-  (interactive)
   ;; we don't want to mess with child modes such as grep-mode, ack, ag, etc
   (when (eq major-mode 'compilation-mode)
     (let ((inhibit-read-only t))
@@ -2069,9 +2068,7 @@ requires =server=.
   :config
   (defun my-setup-sh-mode ()
     "My preferences for sh-mode"
-    (interactive)
     (setq sh-basic-offset 2)
-    (setq sh-indentation 2)
     (setq sh-indent-after-continuation 'always)
     (setq sh-indent-for-case-alt '+)
     (setq sh-indent-for-case-label 0))
@@ -2191,7 +2188,6 @@ M-r):
 #+begin_src emacs-lisp
 (defun my-setup-term-mode ()
   "My preferences for term mode"
-  (interactive)
   ;; Settings recommended in term.el
   ;;
   ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
@@ -2336,7 +2332,6 @@ bash shell.
 #+begin_src emacs-lisp
 (defun tramp-comint-read-input-ring ()
   "Read remote bash_history file into comint input ring."
-  (interactive)
   (when (tramp-tramp-file-p default-directory)
     (tramp-set-comint-input-ring-file)
     (when (ring-empty-p comint-input-ring)
