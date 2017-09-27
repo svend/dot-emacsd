@@ -2372,14 +2372,10 @@ layouts.
 
 ** yasnippet
 
-Yas issue with ansi-term: [[https://github.com/capitaomorte/yasnippet/issues/289][capitaomorte/yasnippet#289]].
-
 #+begin_src emacs-lisp
 (use-package yasnippet
   :init
-  (yas-global-mode)
-  :config
-  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
+  (yas-global-mode))
 #+end_src
 
 ** zoom-frm
