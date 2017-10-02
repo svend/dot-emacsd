@@ -2367,7 +2367,25 @@ layouts.
 
 #+begin_src emacs-lisp
 (use-package yaml-mode
-  :defer t)
+  :defer t
+  :config
+  (defconst yaml-outline-regex
+    (concat "\\(?:^\\(?:--- \\)?\\|{\\|\\(?:[-,] +\\)+\\)\\( *\\)"
+            "\\(?:" yaml-tag-re " +\\)?"
+            "\\(" yaml-bare-scalar-re "\\) *:"
+            "\\(?: +\\|$\\)")
+    "Regexp matching a single YAML hash key. This is adds a capture group to `yaml-scalar-context-re' for the indentation.")
+
+  (defun yaml-outline-level ()
+    "Return the depth to which a statement is nested in the outline."
+    (len (- (match-end 1) (match-beginning 1))))
+
+  (defun my-yaml-mode-hook()
+    (outline-minor-mode)
+    (define-key yaml-mode-map (kbd "<backtab>") 'outline-toggle-children)
+    (setq-local outline-regexp my-yaml-hash-key-re)
+    (setq-local outline-level my-yaml-hash-key-re)
+    (add-hook 'yaml-mode-hook #'my-yaml-mode-hook))
 #+end_src
 
 ** yasnippet
