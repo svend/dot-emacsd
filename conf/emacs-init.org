@@ -2356,3 +2356,9 @@ Save customization in =conf/emacs-custom.el= instead of =init.el=.
 (setq custom-file "~/.emacs.d/conf/emacs-custom.el")
 (load custom-file)
 #+end_src
+
+* Full screen
+
+#+begin_src emacs-lisp
+(toggle-frame-fullscreen)
+#+end_src
