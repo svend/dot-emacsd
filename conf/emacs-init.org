@@ -1334,8 +1334,10 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
          ("C-c y" . counsel-yank-pop))
   :config
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy)))
-  (setq ivy-use-virtual-buffers t)
+                                (t . ivy--regex-fuzzy))
+        ivy-magic-tilde nil
+        ivy-use-virtual-buffers t)
+
   (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s .")
   :init
   (ivy-mode 1))
