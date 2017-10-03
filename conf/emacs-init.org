@@ -1408,7 +1408,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ivy
-  :bind (("C-s" . swiper)
+  :bind (("C-c s" . swiper)
          ("C-c y" . counsel-yank-pop))
   :config
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
