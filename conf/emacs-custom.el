@@ -18,7 +18,6 @@
  '(org-default-notes-file "~/doc/org/notes.org")
  '(org-directory "~/doc/org")
  '(org-reverse-note-order t)
- '(org-src-window-setup (quote other-window))
  '(reb-re-syntax (quote string))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces

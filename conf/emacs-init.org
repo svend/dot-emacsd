@@ -1714,6 +1714,7 @@ fn main() {
   (setq org-refile-targets '((nil :maxlevel . 9)))
   (setq org-use-speed-commands t)
   (setq org-src-preserve-indentation t)
+  (setq org-src-window-setup 'current-window)
   (setq org-capture-templates
         '(("t" "Task" entry (file "tasks.org")
            "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
@@ -2336,6 +2337,7 @@ bash shell.
                   compilation-mode-hook
                   comint-mode-hook
                   conf-mode-hook
+                  custom-mode-hook
                   dired-mode-hook
                   gnus-article-mode-hook
                   gnus-group-mode-hook
