@@ -1707,17 +1707,17 @@ fn main() {
   :config
   (add-hook 'org-mode-hook #'auto-fill-mode)
   (add-hook 'org-mode-hook #'org-babel-result-hide-all)
-  (setq org-babel-python-command "python3")
-  (setq org-ellipsis "…")
-  ;; brew install plantuml
-  (setq org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
-  (setq org-refile-targets '((nil :maxlevel . 9)))
-  (setq org-use-speed-commands t)
-  (setq org-src-preserve-indentation t)
-  (setq org-src-window-setup 'current-window)
-  (setq org-capture-templates
-        '(("t" "Task" entry (file "tasks.org")
-           "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t)))
+
+  (setq org-babel-python-command "python3"
+        org-capture-templates  '(("t" "Task" entry (file "tasks.org")
+                                  "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t))
+        org-ellipsis "…"
+        org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar" ;; brew install plantuml
+        org-refile-targets '((nil :maxlevel . 9))
+        org-src-ask-before-returning-to-edit-buffer nil
+        org-src-preserve-indentation t
+        org-src-window-setup 'current-window
+        org-use-speed-commands t)
 
   ;; Lower case all org template block headers
   (mapc (lambda (asc)
