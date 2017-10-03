@@ -852,7 +852,11 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package counsel
-  :defer t)
+  :bind (("C-c y" . counsel-yank-pop)
+         ("C-x C-f" . counsel-find-file))
+  :config
+  (setq counsel-find-file-at-point t
+        counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
 #+end_src
 
 ** csv-mode
@@ -1330,15 +1334,12 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ivy
-  :bind (("C-c s" . swiper)
-         ("C-c y" . counsel-yank-pop))
+  :bind (("C-c s" . swiper))
   :config
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy))
         ivy-magic-tilde nil
         ivy-use-virtual-buffers t)
-
-  (setq counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s .")
   :init
   (ivy-mode 1))
 #+end_src
