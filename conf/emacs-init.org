@@ -856,7 +856,7 @@ Change scrolling behavior for comint modes.
          ("C-x C-f" . counsel-find-file))
   :config
   (setq counsel-find-file-at-point t
-        counsel-rg-base-command "rg -S --no-heading --line-number --max-columns 150 --color never %s ."))
+        counsel-rg-base-command "rg --smart-case --no-heading --line-number --max-columns 150 --color never %s ."))
 #+end_src
 
 ** csv-mode
