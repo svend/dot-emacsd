@@ -1460,7 +1460,8 @@ Terraform state files are JSON.
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :defer t
-  :mode ("README\\.md\\'" . gfm-mode))
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("CHANGELOG\\.md\\'" . markdown-mode)))
 #+end_src
 
 ** message
