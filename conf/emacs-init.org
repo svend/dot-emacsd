@@ -1442,10 +1442,10 @@ Terraform state files are JSON.
   ;; We have global-auto-revert mode enabled
   (setq magit-auto-revert-mode nil)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  (setq magit-repository-directories '("~/src"))
-
-  (setq magit-save-repository-buffers 'dontask)
+  (setq magit-completing-read-function 'ivy-completing-read
+        magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
+        magit-repository-directories '("~/src")
+        magit-save-repository-buffers 'dontask)
 
   (if (< emacs-major-version 26)
       ;; See https://github.com/magit/magit/issues/2265
