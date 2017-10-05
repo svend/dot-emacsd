@@ -410,6 +410,7 @@ Press =C-c C-h= to show all of these.
 - http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
 
 #+begin_src emacs-lisp
+(bind-key "C-c b" 'browse-url-at-point)
 (bind-key "C-c d" 'my-insert-date)
 (bind-key "C-c e" 'eww)
 (bind-key "C-c j" 'dired-jump)
