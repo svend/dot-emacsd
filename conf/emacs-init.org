@@ -1644,6 +1644,7 @@ fn main() {
         org-src-ask-before-returning-to-edit-buffer nil
         org-src-preserve-indentation t
         org-src-window-setup 'current-window
+        org-startup-with-inline-images t
         org-use-speed-commands t)
 
   ;; Lower case all org template block headers
