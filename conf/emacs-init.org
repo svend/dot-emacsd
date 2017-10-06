@@ -1639,7 +1639,7 @@ fn main() {
         org-capture-templates  '(("t" "Task" entry (file "tasks.org")
                                   "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t))
         org-ellipsis "…"
-        org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar" ;; brew install plantuml
+        org-plantuml-jar-path (expand-file-name "~/.nix-profile/lib/plantuml.jar")
         org-refile-targets '((nil :maxlevel . 9))
         org-src-ask-before-returning-to-edit-buffer nil
         org-src-preserve-indentation t
