@@ -1590,6 +1590,27 @@ EPUB reader package.
   (setq nov-save-place-file (expand-file-name "nov-save-place" user-emacs-directory)))
 #+end_src
 
+** ob-go
+
+Requires cargo-script.
+
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, world")
+}
+#+end_src
+
+#+RESULTS:
+: Hello, world
+
+#+begin_src emacs-lisp
+(use-package ob-go)
+#+end_src
+
 ** ob-rust
 
 Requires cargo-script.
