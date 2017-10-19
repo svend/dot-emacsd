@@ -1185,15 +1185,13 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 
 ** go-mode
 
-- godoc (for =godoc=)
 - gocode (for =go-eldoc=)
 - godef (for go-mode's =godef-*= commands)
 - goimports (for =gofmt-command=)
-- golint (used with flycheck)
+- golint (used by flycheck)
 - errcheck (used by flycheck)
 
 #+begin_src sh
-go get -u golang.org/x/tools/cmd/godoc
 go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
 go get -u github.com/golang/lint/golint
