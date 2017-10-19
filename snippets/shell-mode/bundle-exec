@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: bundle-exec
-# key: be
-# binding: direct-keybinding
-# --
-bundle exec 
