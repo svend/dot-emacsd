@@ -1719,17 +1719,6 @@ fn main() {
 
 ** pdf-tools
 
-#+begin_src sh
-brew install poppler
-#+end_src
-
-#+begin_src sh
-cd ~/.emacs.d/elpa/pdf-tools-*/build
-zlib_CFLAGS=-I/usr/include zlib_LIBS='-L/usr/lib -lz' \
-           PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig \
-           make melpa-build
-#+end_src
-
 #+begin_src emacs-lisp
 (use-package pdf-tools
   :init
