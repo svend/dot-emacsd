@@ -1812,11 +1812,6 @@ The current directory is assumed to be the project's root otherwise."
     (put var 'safe-local-variable #'stringp))
 
   (setq projectile-completion-system 'ivy)
-  ;; Work around
-  ;; https://github.com/bbatsov/projectile/issues/1183
-  (setq projectile-mode-line
-        '(:eval (format " Projectile[%s]"
-                        (projectile-project-name))))
   (setq projectile-use-git-grep t)
   (add-to-list 'projectile-project-root-files ".kitchen.yml")
   (projectile-cleanup-known-projects))
