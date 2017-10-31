@@ -2282,6 +2282,7 @@ bash shell.
                   package-menu-mode-hook
                   prog-mode-hook
                   special-mode-hook
+                  term-mode-hook
                   text-mode-hook))
     (add-hook hook #'visual-fill-column-mode))
   :config
