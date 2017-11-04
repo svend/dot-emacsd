@@ -769,6 +769,18 @@ If OPEN-BUFFER is set, open the new buffer."
         cfw:fchar-top-right-corner ?┓))
 #+end_src
 
+** cider-mode
+
+#+begin_src emacs-lisp
+(use-package cider
+  :ensure t
+  :config
+  (setq cider-repl-history-file "~/.emacs.d/cider-history")
+  (setq cider-repl-use-pretty-printing t)
+  (setq cider-show-error-buffer nil)
+  (add-hook 'cider-mode-hook #'eldoc-mode))
+#+end_src
+
 ** color-theme-sanityinc-tomorrow
 
 #+begin_src emacs-lisp
@@ -927,6 +939,17 @@ Change scrolling behavior for comint modes.
   (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save)
   :init
   (desktop-save-mode 1))
+#+end_src
+
+** dired
+
+#+begin_src emacs-lisp
+(use-package dired
+  :ensure nil
+  :config
+  (defun my-dired-mode-hook ()
+    (setq truncate-lines t))
+  (add-hook 'dired-mode-hook #'my-dired-mode-hook))
 #+end_src
 
 ** dns-mode
@@ -1216,17 +1239,6 @@ go get -u github.com/kisielk/errcheck
     ;; CamelCase aware editing operations
     (subword-mode +1))
   (add-hook 'go-mode-hook #'my-go-mode-defaults))
-#+end_src
-
-** dired
-
-#+begin_src emacs-lisp
-(use-package dired
-  :ensure nil
-  :config
-  (defun my-dired-mode-hook ()
-    (setq truncate-lines t))
-  (add-hook 'dired-mode-hook #'my-dired-mode-hook))
 #+end_src
 
 ** groovy-mode
@@ -2270,6 +2282,7 @@ bash shell.
 (use-package visual-fill-column
   :init
   (dolist (hook '(visual-line-mode-hook
+                  cider-repl-mode-hook
                   compilation-mode-hook
                   comint-mode-hook
                   conf-mode-hook
