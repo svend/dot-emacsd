@@ -775,6 +775,7 @@ If OPEN-BUFFER is set, open the new buffer."
 (use-package cider
   :ensure t
   :config
+  (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
   (setq cider-repl-use-pretty-printing t)
   (setq cider-show-error-buffer nil)
