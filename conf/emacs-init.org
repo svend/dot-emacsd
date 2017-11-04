@@ -356,6 +356,10 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 (add-hook 'yaml-mode-hook #'my-fixed-pitch-mode)
 #+end_src
 
+#+begin_src emacs-lisp
+(global-eldoc-mode)
+#+end_src
+
 ** Auto modes
 
 =bash-fc-*= are bash command editing temporary files (=fc= built-in).
@@ -769,7 +773,16 @@ If OPEN-BUFFER is set, open the new buffer."
         cfw:fchar-top-right-corner ?┓))
 #+end_src
 
-** cider-mode
+** clojure-mode
+
+#+begin_src emacs-lisp
+(use-package clojure-mode
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'smartparens-strict-mode))
+#+end_src
+
+** cider
 
 #+begin_src emacs-lisp
 (use-package cider
@@ -779,7 +792,7 @@ If OPEN-BUFFER is set, open the new buffer."
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
   (setq cider-repl-use-pretty-printing t)
   (setq cider-show-error-buffer nil)
-  (add-hook 'cider-mode-hook #'eldoc-mode))
+  (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode))
 #+end_src
 
 ** color-theme-sanityinc-tomorrow
@@ -1356,45 +1369,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   (ivy-mode 1))
 #+end_src
 
-** jabber
-
-#+begin_src emacs-lisp sh
-(use-package jabber
-  :defer t
-  :config
-  (add-hook 'jabber-chat-mode-hook #'visual-line-mode)
-
-  (add-to-list 'jabber-account-list '("23430_935967@chat.hipchat.com"))
-
-  ;; jabber-jid-user: Wrong type argument: stringp, ("svend@ciffer.net/emacs" (:network-server . "talk.google.com") (:connection-type . starttls))
-  ;; (add-to-list 'jabber-account-list '(("svend@ciffer.net/emacs"
-  ;;                                      (:network-server . "talk.google.com")
-  ;;                                      (:connection-type . starttls))))
-  ;; FIXME: svend@ciffer.net/emacs: connection lost: ‘STARTTLS negotiation
-  ;; failed: The x509 certificate does not match "ciffer.net"’
-  (add-to-list 'jabber-invalid-certificate-servers "ciffer.net")
-
-  (defvar hipchat-number "23430")
-  (defvar hipchat-nickname "Svend Sorensen")
-  (defvar hipchat-rooms '("ops" "ops-notifications" "outages" "release")
-    "List of hipchat rooms to auto-join")
-
-  (dolist (muc-room
-           (mapcar (lambda (room)
-                     (concat hipchat-number "_" room "@conf.hipchat.com"))
-                   hipchat-rooms))
-    (add-to-list 'jabber-muc-autojoin muc-room)
-    (add-to-list 'jabber-muc-default-nicknames  `(,muc-room . ,hipchat-nickname)))
-
-  (defun hipchat-join (room)
-    (interactive "sRoom name: ")
-    (jabber-muc-join
-     (jabber-read-account)
-     (concat hipchat-number "_" room "@conf.hipchat.com")
-     hipchat-nickname
-     t)))
-#+end_src
-
 ** json-mode
 
 Terraform state files are JSON.
@@ -1435,7 +1409,7 @@ Terraform state files are JSON.
   :config
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
-              (turn-on-eldoc-mode))))
+              (smartparens-global-strict-mode))))
 #+end_src
 
 ** lua-mode
@@ -1863,7 +1837,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 (use-package racer
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode)
   ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
   ;; (setq company-tooltip-align-annotations t)
