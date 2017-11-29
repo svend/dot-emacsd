@@ -854,6 +854,7 @@ Change scrolling behavior for comint modes.
   :init
   (global-company-mode)
   :config
+  (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
   (setq company-lighter-base "Co"
         company-show-numbers t
         company-minimum-prefix-length 2))
@@ -1409,7 +1410,7 @@ Terraform state files are JSON.
   :config
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
-              (smartparens-global-strict-mode))))
+              (smartparens-strict-mode))))
 #+end_src
 
 ** lua-mode
@@ -1706,7 +1707,7 @@ fn main() {
 
 ** pdf-tools
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package pdf-tools
   :init
   (pdf-tools-install)
@@ -1746,13 +1747,11 @@ fn main() {
 
 ** python
 
-Associate Nagios check-mk files with python.
-
 #+begin_src emacs-lisp
 (use-package python
-  :mode
-  (("\\.mk\\'" . python-mode))
   :config
+  (setq python-shell-interpreter "pipenv"
+        python-shell-interpreter-args "run python -i")
   ;; PEP 8 compliant filling rules, 79 chars maximum
   (add-hook 'python-mode-hook (lambda () (setq fill-column 79))))
 #+end_src
@@ -1777,7 +1776,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 (use-package racer
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
   ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
   ;; (setq company-tooltip-align-annotations t)
   )
