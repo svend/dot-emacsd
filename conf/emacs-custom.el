@@ -9,6 +9,7 @@
  '(dired-dwim-target t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ffap-machine-p-known (quote reject))
  '(history-length 10000)
  '(jabber-alert-presence-hooks nil)
  '(jabber-auto-reconnect t)
