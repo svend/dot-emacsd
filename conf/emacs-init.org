@@ -54,12 +54,6 @@ This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b
 (require 'bind-key)
 #+end_src
 
-Install all packages.
-
-#+begin_src emacs-lisp
-(setq use-package-always-ensure t)
-#+end_src
-
 * Initialize exec-path-from-shell
 
 Function that gets environmental variables from bash. This uses printenv from
@@ -777,7 +771,6 @@ If OPEN-BUFFER is set, open the new buffer."
 
 #+begin_src emacs-lisp
 (use-package clojure-mode
-  :ensure t
   :config
   (add-hook 'clojure-mode-hook #'smartparens-strict-mode))
 #+end_src
@@ -786,7 +779,6 @@ If OPEN-BUFFER is set, open the new buffer."
 
 #+begin_src emacs-lisp
 (use-package cider
-  :ensure t
   :config
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/cider-history")
@@ -960,7 +952,6 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package dired
-  :ensure nil
   :config
   (defun my-dired-mode-hook ()
     (setq truncate-lines t))
@@ -1045,7 +1036,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package erc-track
-  :ensure nil
   :defer t
   :config
   ;; Do not notify for join, part, or quit
@@ -1326,7 +1316,6 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ibuffer
-  :ensure nil
   :bind (("C-x C-b" . ibuffer)))
 
 #+end_src
@@ -1406,7 +1395,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package lisp-mode
-  :ensure nil
   :config
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
@@ -1455,7 +1443,6 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package message
-  :ensure nil
   :defer t
   :config
   ;; Internal SMTP library
@@ -1633,7 +1620,6 @@ fn main() {
 
 #+begin_src emacs-lisp
 (use-package org
-  :ensure nil
   :bind (("C-c c" . org-capture)
          ("C-c o a" . org-agenda)
          ("C-c o b" . org-iswitchb)
@@ -1676,7 +1662,6 @@ fn main() {
 
 #+begin_src emacs-lisp
 (use-package org-capture
-  :ensure nil
   :bind (("C-c o c" . org-capture))
   :config
   (setq org-capture-templates
@@ -1785,7 +1770,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 
 #+begin_src emacs-lisp
 (use-package recentf
-  :ensure nil
   :init (recentf-mode 1)
   :config
   ;; Increase size of recent file list
@@ -1862,7 +1846,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package savehist
-  :ensure nil
   :init (savehist-mode 1))
 #+end_src
 
@@ -1870,7 +1853,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 
 #+begin_src emacs-lisp
 (use-package saveplace
-  :ensure nil
   :init (save-place-mode))
 #+end_src
 
@@ -1895,7 +1877,6 @@ requires =server=.
 
 #+begin_src emacs-lisp
 (use-package server
-  :ensure nil
   :config
   (unless (server-running-p)
     (server-start)))
@@ -1905,7 +1886,6 @@ requires =server=.
 
 #+begin_src emacs-lisp
 (use-package sh-script
-  :ensure nil
   :defer t
   :config
   (defun my-setup-sh-mode ()
@@ -1938,7 +1918,6 @@ See http://stackoverflow.com/a/11255996
 
 #+begin_src emacs-lisp
 (use-package shell
-  :ensure nil
   :config
   (add-to-list 'display-buffer-alist
                '("^\\*shell\\*" . ((display-buffer-reuse-window display-buffer-same-window))))
@@ -2060,7 +2039,6 @@ M-r):
   (goto-address-mode))
 
 (use-package term
-  :ensure nil
   :config
   (setq-default term-buffer-maximum-size 10000)
   (add-hook 'term-mode-hook #'my-setup-term-mode))
@@ -2110,7 +2088,6 @@ ControlPersist 60m
 
 #+begin_src emacs-lisp
 (use-package tramp
-  :ensure nil
   :defer t
   :config
   ;; Frequently Asked Questions: How could I speed up tramp?
