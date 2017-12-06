@@ -1654,7 +1654,7 @@ fn main() {
      (plantuml . t)
      (python . t)
      (ruby . t)
-     (scala . t)
+     ;; (scala . t)
      (shell . t))))
 #+end_src
 
