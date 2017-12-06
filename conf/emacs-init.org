@@ -35,7 +35,7 @@ From [[http://melpa.org/#/getting-started][MELPA - Getting Started]].
 
 * Initialize use-package
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun my-require-package (package)
   "Install PACKAGE unless already installed."
   (unless (package-installed-p package)
