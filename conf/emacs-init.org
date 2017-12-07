@@ -628,9 +628,6 @@ horizontally.
 
 #+begin_src emacs-lisp
 (use-package aggressive-indent
-  :config
-  (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'rust-mode)
   :init
   (global-aggressive-indent-mode 1))
 #+end_src
@@ -749,22 +746,6 @@ If OPEN-BUFFER is set, open the new buffer."
         bpr-use-projectile nil))
 #+end_src
 
-** calfw
-
-#+begin_src emacs-lisp
-(use-package calfw
-  :defer t
-  :config
-  (setq cfw:fchar-junction ?╋
-        cfw:fchar-vertical-line ?┃
-        cfw:fchar-horizontal-line ?━
-        cfw:fchar-left-junction ?┣
-        cfw:fchar-right-junction ?┫
-        cfw:fchar-top-junction ?┯
-        cfw:fchar-top-left-corner ?┏
-        cfw:fchar-top-right-corner ?┓))
-#+end_src
-
 ** clojure-mode
 
 #+begin_src emacs-lisp
@@ -783,13 +764,6 @@ If OPEN-BUFFER is set, open the new buffer."
   (setq cider-repl-use-pretty-printing t)
   (setq cider-show-error-buffer nil)
   (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode))
-#+end_src
-
-** color-theme-sanityinc-tomorrow
-
-#+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
-  :defer t)
 #+end_src
 
 ** comint-mode
@@ -850,13 +824,6 @@ Change scrolling behavior for comint modes.
         company-minimum-prefix-length 2))
 #+end_src
 
-** company-go
-
-#+begin_src emacs-lisp
-(use-package company-go
-  :defer t)
-#+end_src
-
 ** company-jedi
 
 #+begin_src emacs-lisp
@@ -875,20 +842,6 @@ Change scrolling behavior for comint modes.
   :config
   (setq counsel-find-file-at-point t
         counsel-rg-base-command "rg --smart-case --no-heading --line-number --max-columns 150 --color never %s ."))
-#+end_src
-
-** csv-mode
-
-#+begin_src emacs-lisp
-(use-package csv-mode
-  :defer t)
-#+end_src
-
-** debbugs
-
-#+begin_src emacs-lisp
-(use-package debbugs
-  :defer t)
 #+end_src
 
 ** desktop
@@ -966,36 +919,6 @@ Change scrolling behavior for comint modes.
   (setq dns-mode-soa-auto-increment-serial nil))
 #+end_src
 
-** docker-tramp
-
-#+begin_src emacs-lisp
-(use-package docker-tramp
-  :defer t)
-#+end_src
-
-** dockerfile-mode
-
-#+begin_src emacs-lisp
-(use-package dockerfile-mode
-  :defer t)
-#+end_src
-
-** ediff
-
-#+begin_src emacs-lisp
-(use-package ediff
-  :defer t)
-#+end_src
-
-** edit-indirect
-
-This is used to edit code blocks in markdown-mode.
-
-#+begin_src emacs-lisp
-(use-package edit-indirect
-  :defer t)
-#+end_src
-
 ** ensime
 
 #+begin_src emacs-lisp
@@ -1042,13 +965,6 @@ This is used to edit code blocks in markdown-mode.
   (add-to-list 'erc-track-exclude-types "QUIT"))
 #+end_src
 
-** erlang
-
-#+begin_src emacs-lisp
-(use-package erlang
-  :defer t)
-#+end_src
-
 ** expand-region
 
 #+begin_src emacs-lisp
@@ -1089,27 +1005,6 @@ This is used to edit code blocks in markdown-mode.
 
 #+begin_src emacs-lisp
 (use-package git-commit)
-#+end_src
-
-** gitconfig-mode
-
-#+begin_src emacs-lisp
-(use-package gitconfig-mode
-  :defer t)
-#+end_src
-
-** gitignore-mode
-
-#+begin_src emacs-lisp
-(use-package gitignore-mode
-  :defer t)
-#+end_src
-
-** gnuplot
-
-#+begin_src emacs-lisp
-(use-package gnuplot
-  :defer t)
 #+end_src
 
 ** gnus
@@ -1200,13 +1095,6 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
   :config
   (add-to-list 'gnutls-trustfiles
                (expand-file-name "~/.certs/ca-bundle.crt")))
-#+end_src
-
-** go-eldoc
-
-#+begin_src emacs-lisp
-(use-package go-eldoc
-  :defer t)
 #+end_src
 
 ** go-mode
@@ -1382,13 +1270,6 @@ Terraform state files are JSON.
   :commands (kubernetes-use-context))
 #+end_src
 
-** ledger-mode
-
-#+begin_src emacs-lisp
-(use-package ledger-mode
-  :defer t)
-#+end_src
-
 ** lisp-mode
 
 #+begin_src emacs-lisp
@@ -1397,13 +1278,6 @@ Terraform state files are JSON.
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
               (smartparens-strict-mode))))
-#+end_src
-
-** lua-mode
-
-#+begin_src emacs-lisp
-(use-package lua-mode
-  :defer t)
 #+end_src
 
 ** magit
@@ -1464,34 +1338,6 @@ Terraform state files are JSON.
   ;; Enable gnus-alias
   (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
   (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity))
-#+end_src
-
-** monokai-theme
-
-#+begin_src emacs-lisp
-(use-package monokai-theme
-  :defer t)
-#+end_src
-
-** nginx-mode
-
-#+begin_src emacs-lisp
-(use-package nginx-mode
-  :defer t)
-#+end_src
-
-** nim-mode
-
-#+begin_src emacs-lisp
-(use-package nim-mode
-  :defer t)
-#+end_src
-
-** nix-mode
-
-#+begin_src emacs-lisp
-(use-package nix-mode
-  :defer t)
 #+end_src
 
 ** nlinum
@@ -1607,13 +1453,6 @@ fn main() {
 (use-package ob-rust)
 #+end_src
 
-** operate-on-number
-
-#+begin_src emacs-lisp
-(use-package operate-on-number
-  :defer t)
-#+end_src
-
 ** org
 
 #+begin_src emacs-lisp
@@ -1665,27 +1504,6 @@ fn main() {
   (setq org-capture-templates
         '(("t" "Task" entry (file "tasks.org")
            "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t))))
-#+end_src
-
-** package-lint
-
-#+begin_src emacs-lisp
-(use-package package-lint
-  :defer t)
-#+end_src
-
-** pass
-
-#+begin_src emacs-lisp
-(use-package pass
-  :defer t)
-#+end_src
-
-** password-store
-
-#+begin_src emacs-lisp
-(use-package password-store
-  :defer t)
 #+end_src
 
 ** pdf-tools
@@ -1777,13 +1595,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
   (add-to-list 'recentf-exclude "^/tmp/notmuch-ical"))
 #+end_src
 
-** restclient
-
-#+begin_src emacs-lisp
-(use-package restclient
-  :defer t)
-#+end_src
-
 ** robe
 
 #+begin_src emacs-lisp
@@ -1823,13 +1634,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
     ;; CamelCase aware editing operations
     (subword-mode +1))
   (add-hook 'ruby-mode-hook #'my-ruby-mode-defaults))
-#+end_src
-
-** ruby-tools
-
-#+begin_src emacs-lisp
-(use-package ruby-tools
-  :defer t)
 #+end_src
 
 ** rust-mode
@@ -1974,20 +1778,6 @@ M-r):
   (define-key sp-keymap (kbd "M-<backspace>") nil))
 #+end_src
 
-** smtpmail-multi
-
-#+begin_src emacs-lisp
-(use-package smtpmail-multi
-  :defer t)
-#+end_src
-
-** solarized-theme
-
-#+begin_src emacs-lisp
-(use-package solarized-theme
-  :defer t)
-#+end_src
-
 ** swiper
 
 #+begin_src emacs-lisp
@@ -2040,13 +1830,6 @@ M-r):
   :config
   (setq-default term-buffer-maximum-size 10000)
   (add-hook 'term-mode-hook #'my-setup-term-mode))
-#+end_src
-
-** terraform-mode
-
-#+begin_src emacs-lisp
-(use-package terraform-mode
-  :defer t)
 #+end_src
 
 ** toml-mode
