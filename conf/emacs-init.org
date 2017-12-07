@@ -12,8 +12,6 @@
 #+begin_src emacs-lisp
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
-;; Add nix elpa directory
-(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
 
 ;; Do not write installed packages to package-selected-packages in custom-file
 (defun package--save-selected-packages (&rest opt) nil)
