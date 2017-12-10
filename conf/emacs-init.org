@@ -245,8 +245,8 @@ Reduce bell noise for common actions (e.g. =C-g=).
 
 ** Mouse
 
-Copy test selected by the mouse to the kill ring. This was turned off
-in Emacs 24.
+Copy test selected by the mouse to the kill ring. This was turned off in
+Emacs 24.
 
 #+begin_src emacs-lisp
 (setq mouse-drag-copy-region t)
@@ -367,8 +367,8 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 
 http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html
 
-Locks are created in the same directory as the file being
-edited. They can be disabled as of 24.3.
+Locks are created in the same directory as the file being edited. They can be
+disabled as of 24.3.
 
 http://lists.gnu.org/archive/html/emacs-devel/2011-07/msg01020.html
 
@@ -1846,8 +1846,8 @@ M-r):
 #+begin_src emacs-lisp
 (use-package super-save
   :init (super-save-mode +1)
+  :diminish super-save-mode
   :config (setq super-save-auto-save-when-idle t))
-
 #+end_src
 
 ** tramp
