@@ -211,9 +211,10 @@ Treat all themes as safe.
 (setq custom-theme-directory "~/.emacs.d/conf/")
 #+end_src
 
-Load my basic themes.
+Load themes.
 
 #+begin_src emacs-lisp
+(load-theme 'tao-yang)
 (load-theme 'svend 't)
 (load-theme 'svend-font-dejavu t)
 #+end_src
@@ -1508,7 +1509,7 @@ fn main() {
 
 ** pdf-tools
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package pdf-tools
   :init
   (pdf-tools-install)
@@ -1783,13 +1784,6 @@ M-r):
 #+begin_src emacs-lisp
 (use-package swiper
   :bind (("C-c s" . swiper)))
-#+end_src
-
-** tango-plus-theme
-
-#+begin_src emacs-lisp
-(use-package tango-plus-theme
-  :init (load-theme 'tango-plus t))
 #+end_src
 
 ** term
