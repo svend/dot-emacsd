@@ -1533,7 +1533,7 @@ fn main() {
 
 #+begin_src emacs-lisp
 (use-package projectile
-  :init (projectile-mode)
+  :init (projectile-global-mode)
   :config
   ;; Mark projectile variables as safe
   (seq-doseq (var '(projectile-project-compilation-cmd
