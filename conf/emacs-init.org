@@ -630,7 +630,10 @@ horizontally.
 #+begin_src emacs-lisp
 (use-package aggressive-indent
   :init
-  (global-aggressive-indent-mode 1))
+  (global-aggressive-indent-mode 1)
+  :config
+  (add-to-list 'aggressive-indent-excluded-modes
+               'nix-mode))
 #+end_src
 
 ** alert
