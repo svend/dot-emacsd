@@ -214,7 +214,7 @@ Treat all themes as safe.
 Load themes.
 
 #+begin_src emacs-lisp
-(load-theme 'tao-yang)
+(load-theme 'tango-plus)
 (load-theme 'svend 't)
 (load-theme 'svend-font-dejavu t)
 #+end_src
