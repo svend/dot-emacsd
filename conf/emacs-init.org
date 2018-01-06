@@ -10,6 +10,7 @@
 * Initialize package.el
 
 #+begin_src emacs-lisp
+(setq package-archives '())
 (package-initialize) ;; You might already have this line
 #+end_src
 
