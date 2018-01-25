@@ -110,11 +110,9 @@ Make the cursor a bar instead of a filled box.
 ** Scrolling
 
 - Enable smooth scrolling.
-- Horizontally scroll current line.
 
 #+begin_src emacs-lisp
 (pixel-scroll-mode)
-(setq auto-hscroll-mode 'current-line)
 #+end_src
 
 ** Fonts
@@ -248,8 +246,7 @@ Highlight the current line. Highlight line in inactive windows.
 To disable for a mode, add this to the mode hook:
 
 #+begin_src emacs-lisp :tangle no
-(make-local-variable 'global-hl-line-mode)
-(setq global-hl-line-mode nil)
+(setq-local global-hl-line-mode nil)
 #+end_src
 
 ** Y/N answers
@@ -793,7 +790,8 @@ Change scrolling behavior for comint modes.
   ;; ("If the value is greater than 100, redisplay will never recenter
   ;; point, but will always scroll just enough text to bring point
   ;; into view, even if you move far away.")
-  (setq-local scroll-conservatively 101))
+  (setq-local scroll-conservatively 101)
+  (setq-local auto-hscroll-mode 'current-line))
 
 (add-hook 'comint-mode-hook #'comint-mode-config)
 #+end_src
@@ -856,7 +854,7 @@ Change scrolling behavior for comint modes.
 
   (defun my-shell-setup-desktop ()
     "Sets up a shell buffer to have its state saved in the desktop file."
-    (set (make-local-variable 'desktop-save-buffer) #'my-shell-save-desktop-data))
+    (set-local desktop-save-buffer #'my-shell-save-desktop-data))
 
   (add-to-list 'desktop-buffer-mode-handlers
                '(shell-mode . my-shell-restore-desktop-buffer))
@@ -1108,7 +1106,7 @@ go get -u github.com/kisielk/errcheck
 
   (defun my-go-mode-defaults ()
     (local-set-key (kbd "M-.") 'godef-jump)
-    (set (make-local-variable 'company-backends) '(company-go))
+    (set-local company-backends '(company-go))
     (add-hook 'before-save-hook #'gofmt-before-save)
 
     ;; El-doc for Go
@@ -1245,8 +1243,7 @@ Terraform state files are JSON.
   (setq json-reformat:indent-width 2)
   (add-hook 'json-mode-hook
             (lambda ()
-              (make-local-variable 'js-indent-level)
-              (setq js-indent-level 2))))
+              (setq-local js-indent-level 2))))
 #+end_src
 
 ** kubernetes
@@ -1780,8 +1777,7 @@ M-r):
   ;; Settings recommended in term.el
   ;;
   ;; http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/term.el?id=c720ef1329232c76d14a0c39daa00e37279aa818#n179
-  (make-local-variable 'mouse-yank-at-point)
-  (setq mouse-yank-at-point t)
+  (setq-local mouse-yank-at-point t)
   ;; End of recommended settings
 
   ;; Make term mode more term-like
