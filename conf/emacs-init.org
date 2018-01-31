@@ -298,7 +298,10 @@ Turn on menu bar, since it does not use any extra space on macOS.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
-  (menu-bar-mode 1))
+  (menu-bar-mode 1)
+  ;; Unset TERM_PROGRAM=Apple_Terminal, which will be set if GUI Emacs was
+  ;; launched from a terminal
+  (setenv "TERM_PROGRAM" nil))
 #+end_src
 
 ** Programming modes
