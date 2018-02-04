@@ -857,7 +857,7 @@ Change scrolling behavior for comint modes.
 
   (defun my-shell-setup-desktop ()
     "Sets up a shell buffer to have its state saved in the desktop file."
-    (set-local desktop-save-buffer #'my-shell-save-desktop-data))
+    (setq-local desktop-save-buffer #'my-shell-save-desktop-data))
 
   (add-to-list 'desktop-buffer-mode-handlers
                '(shell-mode . my-shell-restore-desktop-buffer))
@@ -1109,7 +1109,7 @@ go get -u github.com/kisielk/errcheck
 
   (defun my-go-mode-defaults ()
     (local-set-key (kbd "M-.") 'godef-jump)
-    (set-local company-backends '(company-go))
+    (setq-local company-backends '(company-go))
     (add-hook 'before-save-hook #'gofmt-before-save)
 
     ;; El-doc for Go
