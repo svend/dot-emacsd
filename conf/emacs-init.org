@@ -1226,7 +1226,8 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
   :bind (("C-c s" . swiper))
   :config
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy))
+                                (amx . ivy--regex-fuzzy)
+                                (t . ivy--regex-plus))
         ivy-magic-tilde nil
         ivy-use-virtual-buffers t)
   :init
