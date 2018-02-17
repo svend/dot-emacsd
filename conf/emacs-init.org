@@ -9,6 +9,13 @@
 
 * Initialize package.el
 
+Remove Nix system site-lisp from load path, since this contains an old version
+of nix-mode. https://github.com/NixOS/nix/pull/1529
+
+#+begin_src emacs-lisp
+(delete "/run/current-system/sw/share/emacs/site-lisp/" load-path)
+#+end_src
+
 #+begin_src emacs-lisp
 (setq package-archives '())
 (package-initialize) ;; You might already have this line
