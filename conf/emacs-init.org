@@ -1635,8 +1635,9 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 #+begin_src emacs-lisp
 (use-package rust-mode
   :defer t
-  :mode (("\\.crs\\'" . rust-mode))
-  :config (setq rust-format-on-save t))
+  :config
+  (setq rust-format-on-save t)
+  (add-to-list 'interpreter-mode-alist '("run-cargo-script" . rust-mode)))
 #+end_src
 
 ** savehist
