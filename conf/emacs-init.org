@@ -1541,8 +1541,13 @@ fn main() {
   :config
   (setq python-shell-interpreter "pipenv"
         python-shell-interpreter-args "run python -i")
-  ;; PEP 8 compliant filling rules, 79 chars maximum
-  (add-hook 'python-mode-hook (lambda () (setq fill-column 79)))
+
+  (defun my-python-mode-defaults ()
+    ;; PEP 8 compliant filling rules, 79 chars maximum
+    (setq fill-column 79)
+    (add-hook 'before-save-hook #'py-isort-before-save))
+
+  (add-hook 'python-mode-hook #'my-python-mode-defaults)
 
   (defun my-inferior-python-mode-setup ()
     (setq comint-input-ring-file-name "~/.python_history")
