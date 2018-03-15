@@ -1545,7 +1545,8 @@ fn main() {
   (defun my-python-mode-defaults ()
     ;; PEP 8 compliant filling rules, 79 chars maximum
     (setq fill-column 79)
-    (add-hook 'before-save-hook #'py-isort-before-save))
+    ;; (add-hook 'before-save-hook #'py-isort-before-save)
+    )
 
   (add-hook 'python-mode-hook #'my-python-mode-defaults)
 
