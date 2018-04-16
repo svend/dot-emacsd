@@ -1993,6 +1993,7 @@ layouts.
 #+begin_src emacs-lisp
 (use-package yaml-mode
   :defer t
+  :mode (("_helpers\\.tpl\\'" . yaml-mode))           ; Kubernetes Helm
   :config
   (defconst yaml-outline-regex
     (concat "\\( *\\)\\(?:\\(?:--- \\)?\\|{\\|\\(?:[-,] +\\)+\\) *"
