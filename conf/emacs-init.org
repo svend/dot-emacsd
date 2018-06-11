@@ -972,6 +972,8 @@ Change scrolling behavior for comint modes.
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   :config
   ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+  (setq flycheck-python-flake8-executable "python3"
+        flycheck-python-pylint-executable "python3")
   (flycheck-add-mode #'yaml-ruby #'ansible-playbook-mode)
   (flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
   (add-hook 'after-init-hook #'global-flycheck-mode))
