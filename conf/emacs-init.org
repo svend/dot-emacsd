@@ -2027,19 +2027,6 @@ layouts.
   (yas-global-mode))
 #+end_src
 
-** zoom-frm
-
-The zoom-frm package allows scaling all text. (As opposed to text-scale-adjust,
-which only scales the text for a single buffer. Both are useful.)
-
-#+begin_src emacs-lisp
-(use-package zoom-frm
-  :bind (("C-c C-+" . zoom-in/out)
-         ("C-c C--" . zoom-in/out)
-         ("C-c C-0" . zoom-in/out)
-         ("C-c C-=" . zoom-in/out)))
-#+end_src
-
 * External config
 
 Load load config stored outside =~/.emacs.d=.
