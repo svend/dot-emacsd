@@ -1763,6 +1763,7 @@ M-r):
 
 #+begin_src emacs-lisp
 (use-package smartparens
+  :diminish smartparens-mode
   :init
   (smartparens-global-mode t)
   (require 'smartparens-config)
