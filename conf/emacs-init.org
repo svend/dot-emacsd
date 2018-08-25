@@ -71,6 +71,12 @@ This needs to come before anything that uses PATH (e.g. executable-find).
 
 * Emacs UI
 
+Make the cursor a bar instead of a filled box.
+
+#+begin_src emacs-lisp
+(setq-default cursor-type 'bar)
+#+end_src
+
 ** Chrome
 
 - Disable welcome screen
@@ -85,26 +91,10 @@ This needs to come before anything that uses PATH (e.g. executable-find).
 
 ** Mode line
 
-- Display clock in the status bar
-- Display column number in mode-line (line number is displayed by
-  default)
+- Display column number in mode-line (line number is displayed by default)
 
 #+begin_src emacs-lisp
-(display-time-mode t)
 (column-number-mode t)
-#+end_src
-
-Display date in 24 hour format in mode line.
-
-#+begin_src emacs-lisp
-(setq display-time-day-and-date t)
-(setq display-time-24hr-format t)
-#+end_src
-
-Make the cursor a bar instead of a filled box.
-
-#+begin_src emacs-lisp
-(setq-default cursor-type 'bar)
 #+end_src
 
 ** Scrolling
@@ -467,9 +457,10 @@ Wrap lines at N columns instead of 70.
 Add timezones for =display-time-world=.
 
 #+begin_src emacs-lisp
-(add-to-list 'zoneinfo-style-world-list '("UTC" "UTC"))
-(add-to-list 'zoneinfo-style-world-list '("Europe/Budapest" "Budapest"))
-(add-to-list 'zoneinfo-style-world-list '("America/Chicago" "Chicago"))
+;; FIXME: not defined
+;;(add-to-list 'zoneinfo-style-world-list '("UTC" "UTC"))
+;;(add-to-list 'zoneinfo-style-world-list '("Europe/Budapest" "Budapest"))
+;;(add-to-list 'zoneinfo-style-world-list '("America/Chicago" "Chicago"))
 #+end_src
 
 Prefer newer files.
