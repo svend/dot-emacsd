@@ -794,12 +794,12 @@ Change scrolling behavior for comint modes.
 
 #+begin_src emacs-lisp
 (use-package company
+  :diminish company-mode
   :init
   (global-company-mode)
   :config
   (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-  (setq company-lighter-base "Co"
-        company-show-numbers t
+  (setq company-show-numbers t
         company-minimum-prefix-length 2))
 #+end_src
 
