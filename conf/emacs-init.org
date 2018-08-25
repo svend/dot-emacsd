@@ -1225,6 +1225,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package ivy
+  :diminish ivy-mode
   :bind (("C-c s" . swiper))
   :config
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
@@ -2023,8 +2024,8 @@ layouts.
 
 #+begin_src emacs-lisp
 (use-package yasnippet
-  :init
-  (yas-global-mode))
+  :diminish yas-minor-mode
+  :init (yas-global-mode))
 #+end_src
 
 * External config
