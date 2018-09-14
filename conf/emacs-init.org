@@ -1969,7 +1969,7 @@ bash shell.
   :config
   (setq-default visual-fill-column-center-text t
                 visual-fill-column-fringes-outside-margins nil
-                visual-fill-column-width 100)
+                visual-fill-column-width 110)
   (setq split-window-preferred-function #'visual-fill-column-split-window-sensibly))
 #+end_src
 
