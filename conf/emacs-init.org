@@ -1893,18 +1893,6 @@ bash shell.
    (completion-table-dynamic
     (lambda (str)
       (tramp-completion-handle-file-name-all-completions str "/")))))
-
-(defun ssh-shell-2 (host)
-  "Open SSH connection to HOST."
-  (interactive "f")
-  (let ((default-directory host))
-    ;; Opening the shell occasionally hangs and locks up Emacs. Opening a remote
-    ;; file first seems to fix this.
-    ;;
-    ;; Cannot read shell history file when using with-current-buffer.
-    (find-file-noselect default-directory)
-    (shell (format "*shell*<%s>" host))))
-
 (defun ssh-shell (host)
   "Open SSH connection to HOST."
   (interactive (list (ssh-host-completing-read)))
