@@ -1944,6 +1944,7 @@ bash shell.
                   conf-mode-hook
                   custom-mode-hook
                   dired-mode-hook
+                  erc-mode-hook
                   gnus-article-mode-hook
                   gnus-group-mode-hook
                   gnus-summary-mode-hook
