@@ -1167,6 +1167,7 @@ http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
      ("l" visual-line-mode "visual-line")
      ("m" menu-bar-mode "menu-bar")
      ("n" my-toggle-line-numbers "line-numbers")
+     ("o" overwrite-mode "overwrite")
      ("s" flyspell-mode "flyspell")
      ("t" toggle-truncate-lines "trucate")
      ("v" visual-fill-column-mode "visual-fill-column")
