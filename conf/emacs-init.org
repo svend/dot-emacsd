@@ -310,10 +310,7 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 (defun my-prog-mode-hook()
   (flyspell-prog-mode)
   (goto-address-prog-mode)
-
-  (if (< emacs-major-version 26)
-      (nlinum-mode)
-    (setq display-line-numbers t))
+  (nlinum-mode))
 
   (setq show-trailing-whitespace t))
 
@@ -557,9 +554,7 @@ horizontally.
 #+begin_src emacs-lisp
 (defun my-toggle-line-numbers()
   (interactive)
-  (if (< emacs-major-version 26)
-      (nlinum-mode)
-    (call-interactively #'display-line-numbers-mode)))
+  (nlinum-mode)))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -645,19 +640,10 @@ horizontally.
   :init (amx-mode))
 #+end_src
 
-** auth-password-store
-
-#+begin_src emacs-lisp
-(use-package auth-password-store
-  :if (< emacs-major-version 26)
-  :init (auth-pass-enable))
-#+end_src
-
 ** auth-source-pass
 
 #+begin_src emacs-lisp
 (use-package auth-source-pass
-  :if (>= emacs-major-version 26)
   :init (auth-source-pass-enable))
 #+end_src
 
@@ -1277,11 +1263,6 @@ Terraform state files are JSON.
         magit-repository-directories '("~/src")
         magit-save-repository-buffers 'dontask)
 
-  (if (< emacs-major-version 26)
-      ;; See https://github.com/magit/magit/issues/2265
-      ;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=7847
-      (when (eq window-system 'ns) (setq magit-revision-use-gravatar-kludge t)))
-
   (add-hook 'after-save-hook #'magit-after-save-refresh-status))
 #+end_src
 
@@ -1321,13 +1302,6 @@ Terraform state files are JSON.
   ;; Enable gnus-alias
   (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
   (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity))
-#+end_src
-
-** nlinum
-
-#+begin_src emacs-lisp
-(use-package nlinum
-  :if (< emacs-major-version 26))
 #+end_src
 
 ** notmuch
