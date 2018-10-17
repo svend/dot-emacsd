@@ -310,8 +310,8 @@ Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
 (defun my-prog-mode-hook()
   (flyspell-prog-mode)
   (goto-address-prog-mode)
-  (nlinum-mode)
-  (setq show-trailing-whitespace t))
+  (setq display-line-numbers t
+        show-trailing-whitespace t))
 
 (add-hook 'prog-mode-hook #'my-prog-mode-hook)
 (add-hook 'yaml-mode-hook #'my-prog-mode-hook)
@@ -553,7 +553,7 @@ horizontally.
 #+begin_src emacs-lisp
 (defun my-toggle-line-numbers()
   (interactive)
-  (nlinum-mode))
+  (call-interactively #'display-line-numbers-mode))
 #+end_src
 
 #+begin_src emacs-lisp
