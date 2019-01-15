@@ -1537,6 +1537,10 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 #+begin_src emacs-lisp
 (use-package racer
   :config
+  ;; Use default src path detection
+  (setq racer-rust-src-path nil)
+  (setenv "RUST_SRC_PATH" "")
+
   (add-hook 'rust-mode-hook #'racer-mode)
   ;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
   ;; (setq company-tooltip-align-annotations t)
