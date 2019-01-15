@@ -1467,13 +1467,7 @@ fn main() {
 #+begin_src emacs-lisp
 (use-package pdf-tools
   :init
-  (pdf-tools-install)
-  :config
-  ;; pdf-view-auto-slice-minor-mode shows more of the main text, but looks
-  ;; ugly because page margins are cut. Instead, run
-  ;; pdf-view-set-slice-from-bounding-box (s b).
-  ;; (add3-to-list 'pdf-tools-enabled-modes 'pdf-view-auto-slice-minor-mode)
-  (add-hook 'pdf-view-mode-hook #'pdf-view-fit-page-to-window))
+  (pdf-tools-install))
 #+end_src
 
 ** plantuml-mode
