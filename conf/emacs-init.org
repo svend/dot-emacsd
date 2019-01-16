@@ -1482,8 +1482,9 @@ fn main() {
 
 #+begin_src emacs-lisp
 (use-package projectile
-  :init (projectile-global-mode)
+  :init (projectile-mode)
   :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;; Mark projectile variables as safe
   (seq-doseq (var '(projectile-project-compilation-cmd
                     projectile-project-test-cmd
@@ -1491,8 +1492,7 @@ fn main() {
     (put var 'safe-local-variable #'stringp))
 
   (setq projectile-completion-system 'ivy)
-  (setq projectile-use-git-grep t)
-  (projectile-cleanup-known-projects))
+  (setq projectile-use-git-grep t))
 #+end_src
 
 ** python
