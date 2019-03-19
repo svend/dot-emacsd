@@ -107,6 +107,10 @@ Make the cursor a bar instead of a filled box.
 
 ** Fonts
 
+#+begin_src emacs-lisp
+(setq-default line-spacing 0.1)
+#+end_src
+
 *** Linux
 
 User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
@@ -144,7 +148,7 @@ brew cask install font-dejavu-sans
   '(diminish 'buffer-face-mode))
 #+end_src
 
-*** Disable pager
+** Disable pager
 
 Set PAGER to cat to disable less in async buffers.
 
