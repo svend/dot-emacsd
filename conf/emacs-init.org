@@ -108,7 +108,7 @@ Make the cursor a bar instead of a filled box.
 ** Fonts
 
 #+begin_src emacs-lisp
-(setq-default line-spacing 0.1)
+(setq-default line-spacing 0.15)
 #+end_src
 
 *** Linux
