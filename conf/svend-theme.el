@@ -13,7 +13,6 @@
  '(font-lock-doc-face ((t (:inherit variable-pitch))))
  `(fringe ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow)))))
  `(line-number ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :inherit (fixed-pitch shadow default)))))
- `(linum ((t (:background ,(face-background 'default) :foreground ,(face-foreground 'shadow) :weight light :inherit (fixed-pitch shadow default)))))
  '(markdown-pre-face ((t (:inherit fixed-pitch))))
  '(nobreak-space ((t (:underline nil))))
  '(org-block ((t (:inherit fixed-pitch))))

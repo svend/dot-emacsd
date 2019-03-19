@@ -308,7 +308,8 @@ Turn on flyspell and goto-address for all text buffers.
 (add-hook 'text-mode-hook #'variable-pitch-mode)
 #+end_src
 
-Turn on flyspell, goto-address, linum, and whitespace for programming buffers.
+Turn on flyspell, goto-address, line numbers, and whitespace for programming
+buffers.
 
 #+begin_src emacs-lisp
 (defun my-prog-mode-hook()
