@@ -176,7 +176,7 @@ old theme.
   (disable-all-themes)
   (call-interactively 'load-theme)
   (load-theme 'svend t)
-  (load-theme 'svend-font-dejavu t))
+  (load-theme 'svend-font-source-pro t))
 #+end_src
 
 Treat all themes as safe.
@@ -951,6 +951,7 @@ Change scrolling behavior for comint modes.
     :defer t)
   (use-package flycheck-rust
     :config
+    (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup)
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
   :config
   ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
@@ -1075,14 +1076,14 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 - godef (for go-mode's =godef-*= commands)
 - goimports (for =gofmt-command=)
 - golint (used by flycheck)
-- errcheck (used by flycheck)
+- golangci-lint (used by flycheck-golangci-lint)
 
 #+begin_src sh
 go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
 go get -u github.com/golang/lint/golint
-go get -u github.com/nsf/gocode
-go get -u github.com/kisielk/errcheck
+go get -u github.com/stamblerre/gocode
+brew install golangci-lint
 #+end_src
 
 #+begin_src emacs-lisp
