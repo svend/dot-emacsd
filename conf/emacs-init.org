@@ -415,7 +415,7 @@ xcape -e "$spare_modifier=space"
 Karabiner: 
 
 - Change Space Key
-  - Space to Control_L (+ When you type Space only, send Space)
+- Space to Control_L (+ When you type Space only, send Space)
 
 #+begin_src emacs-lisp
 (bind-key "C-x M-SPC" 'pop-global-mark)
@@ -951,8 +951,10 @@ Change scrolling behavior for comint modes.
     :defer t)
   (use-package flycheck-rust
     :config
-    (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup)
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  (use-package flycheck-golangci-lint
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
   :config
   ;; (add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
   (setq flycheck-python-flake8-executable "python3"
@@ -1134,8 +1136,8 @@ brew install golangci-lint
 
 ** hippie-exp
 
-[[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
-http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
+- [[info:autotype#Hippie%20Expand][info:autotype#Hippie Expand]]
+- http://www.gnu.org/software/emacs/manual/html_node/autotype/Hippie-Expand.html
 
 #+begin_src emacs-lisp
 (use-package hippie-exp
