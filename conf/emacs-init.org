@@ -1214,8 +1214,7 @@ brew install golangci-lint
   :diminish ivy-mode
   :bind (("C-c s" . swiper))
   :config
-  ;; FIXME: not working https://github.com/abo-abo/swiper/issues/2144
-  (setq ivy-re-builders-alist '((amx . ivy--regex-fuzzy)
+  (setq ivy-re-builders-alist '((amx-completing-read-ivy . ivy--regex-fuzzy)
                                 (t . ivy--regex-plus))
         ivy-magic-tilde nil
         ivy-use-virtual-buffers t)
