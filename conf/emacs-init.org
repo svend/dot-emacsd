@@ -761,7 +761,10 @@ Add more password prompts.
               "Enter Import Password:"
               "\\|"
               ;; sshuttle
-              "[local sudo] Password:"))
+              "[local sudo] Password:"
+              "\\|"
+              ;; Java keytool
+              "Enter keystore password:"))
 #+end_src
 
 Change scrolling behavior for comint modes.
