@@ -563,12 +563,24 @@ horizontally.
 #+end_src
 
 #+begin_src emacs-lisp
+(defun my-save-buffer-to-clipboard()
+  "Save contents of buffer to clipboard."
+  (interactive)
+  (clipboard-kill-ring-save (point-min) (point-max)))
+
+(define-minor-mode my-edit-clipboard-mode
+  "Minor mode for my-edit-edit-keyboard."
+  :init-value nil
+  :keymap
+  `((,(kbd "C-c C-c") . my-save-buffer-to-clipboard)))
+
 (defun my-edit-clipboard()
   "Switch to a buffer that contains the contents of the clipboard."
   (interactive)
   (let ((buf (generate-new-buffer "*clipboard*")))
     (switch-to-buffer buf)
-    (clipboard-yank)))
+    (clipboard-yank)
+    (my-edit-clipboard-mode)))
 #+end_src
 
 #+begin_src emacs-lisp
