@@ -563,6 +563,15 @@ horizontally.
 #+end_src
 
 #+begin_src emacs-lisp
+(defun my-edit-clipboard()
+  "Switch to a buffer that contains the contents of the clipboard."
+  (interactive)
+  (let ((buf (generate-new-buffer "*clipboard*")))
+    (switch-to-buffer buf)
+    (clipboard-yank)))
+#+end_src
+
+#+begin_src emacs-lisp
 (defun my-shell-cd ()
   "Switch to shell buffer and change directory to `default-directory'."
   (interactive)
