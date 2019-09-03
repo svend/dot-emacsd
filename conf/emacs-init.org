@@ -736,14 +736,6 @@ If OPEN-BUFFER is set, open the new buffer."
         bpr-use-projectile nil))
 #+end_src
 
-** clojure-mode
-
-#+begin_src emacs-lisp
-(use-package clojure-mode
-  :config
-  (add-hook 'clojure-mode-hook #'smartparens-strict-mode))
-#+end_src
-
 ** cider
 
 #+begin_src emacs-lisp
@@ -754,6 +746,14 @@ If OPEN-BUFFER is set, open the new buffer."
   (setq cider-repl-use-pretty-printing t)
   (setq cider-show-error-buffer nil)
   (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode))
+#+end_src
+
+** clojure-mode
+
+#+begin_src emacs-lisp
+(use-package clojure-mode
+  :config
+  (add-hook 'clojure-mode-hook #'smartparens-strict-mode))
 #+end_src
 
 ** comint-mode
@@ -1778,6 +1778,15 @@ M-r):
   (define-key sp-keymap (kbd "M-<backspace>") nil))
 #+end_src
 
+** super-save
+
+#+begin_src emacs-lisp
+(use-package super-save
+  :init (super-save-mode +1)
+  :diminish super-save-mode
+  :config (setq super-save-auto-save-when-idle t))
+#+end_src
+
 ** swiper
 
 #+begin_src emacs-lisp
@@ -1831,15 +1840,6 @@ M-r):
   :defer t
   :mode
   (("Cargo\\.lock\\'" . toml-mode)))
-#+end_src
-
-** super-save
-
-#+begin_src emacs-lisp
-(use-package super-save
-  :init (super-save-mode +1)
-  :diminish super-save-mode
-  :config (setq super-save-auto-save-when-idle t))
 #+end_src
 
 ** tramp
