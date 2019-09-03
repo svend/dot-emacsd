@@ -1098,7 +1098,6 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
 
 ** go-mode
 
-- gocode (for =go-eldoc=)
 - godef (for go-mode's =godef-*= commands)
 - goimports (for =gofmt-command=)
 - golint (used by flycheck)
@@ -1119,12 +1118,7 @@ brew install golangci-lint
   (setq gofmt-command "goimports")
 
   (defun my-go-mode-defaults ()
-    (local-set-key (kbd "M-.") 'godef-jump)
-    (setq-local company-backends '(company-go))
     (add-hook 'before-save-hook #'gofmt-before-save)
-
-    ;; El-doc for Go
-    (go-eldoc-setup)
 
     ;; CamelCase aware editing operations
     (subword-mode +1))
@@ -1287,7 +1281,8 @@ Terraform state files are JSON.
   :hook
   (go-mode . lsp-deferred)
   (rust-mode . lsp-deferred)
-  :config (setq lsp-auto-guess-root t)
+  :config (setq lsp-auto-guess-root t
+                lsp-restart 'auto-restart)
   :commands lsp)
 #+end_src
 
