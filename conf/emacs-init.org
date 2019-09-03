@@ -1555,8 +1555,8 @@ fn main() {
 #+begin_src emacs-lisp
 (use-package python
   :config
-  (setq python-shell-interpreter "pipenv"
-        python-shell-interpreter-args "run python -i")
+  (setq python-shell-interpreter "pipenv-try"
+        python-shell-interpreter-args "python3 -i")
 
   (defun my-python-mode-defaults ()
     ;; PEP 8 compliant filling rules, 79 chars maximum
