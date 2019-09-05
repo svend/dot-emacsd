@@ -128,6 +128,7 @@ Install fonts.
 
 #+begin_src sh
 brew cask install font-dejavu-sans
+brew cask install font-source-code-pro
 #+end_src
 
 *** Fixed pitch mode
@@ -176,7 +177,7 @@ old theme.
   (disable-all-themes)
   (call-interactively 'load-theme)
   (load-theme 'svend t)
-  (load-theme 'svend-font-source-pro t))
+  (load-theme 'svend-font-dejavu t))
 #+end_src
 
 Treat all themes as safe.
