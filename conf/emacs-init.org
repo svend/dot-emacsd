@@ -914,6 +914,20 @@ Change scrolling behavior for comint modes.
   (setq dns-mode-soa-auto-increment-serial nil))
 #+end_src
 
+** eglot
+
+#+begin_src emacs-lisp
+(use-package eglot
+  :bind
+  (("C-c h" . eglot-help-at-point))
+  :hook
+  (go-mode . eglot-ensure)
+  (rust-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs '(go-mode . ("gopls"))))
+#+end_src
+
+
 ** ensime
 
 #+begin_src emacs-lisp
@@ -1279,10 +1293,11 @@ Terraform state files are JSON.
 
 #+begin_src emacs-lisp
 (use-package lsp-mode
-  :hook
-  (go-mode . lsp-deferred)
-  (rust-mode . lsp-deferred)
+  ;; :hook
+  ;; (go-mode . lsp-deferred)
+  ;; (rust-mode . lsp-deferred)
   :config (setq lsp-auto-guess-root t
+                lsp-clients-python-command "pyls-pipenv"
                 lsp-restart 'auto-restart)
   :commands lsp)
 #+end_src
