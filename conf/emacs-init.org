@@ -1134,7 +1134,10 @@ brew install golangci-lint
   (("go.mod\\'" . fundamental-mode)
    ("go.sum\\'" . fundamental-mode))
   :config
+  (setq gofmt-command "goimports")
+
   (defun my-go-mode-defaults ()
+    (add-hook 'before-save-hook #'gofmt-before-save)
     ;; CamelCase aware editing operations
     (subword-mode +1))
   (add-hook 'go-mode-hook #'my-go-mode-defaults))
