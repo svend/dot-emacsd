@@ -920,9 +920,9 @@ Change scrolling behavior for comint modes.
 (use-package eglot
   :bind
   (("C-c h" . eglot-help-at-point))
-  :hook
-  (go-mode . eglot-ensure)
-  (rust-mode . eglot-ensure)
+  ; :hook
+  ;(go-mode . eglot-ensure)
+  ;(rust-mode . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs '(go-mode . ("gopls"))))
 #+end_src
