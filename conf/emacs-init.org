@@ -1509,12 +1509,6 @@ fn main() {
         org-startup-with-inline-images t
         org-use-speed-commands t)
 
-  ;; Lower case all org template block headers
-  (mapc (lambda (asc)
-          (let ((org-sce-dc (downcase (nth 1 asc))))
-            (setf (nth 1 asc) org-sce-dc)))
-        org-structure-template-alist)
-
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((calc . t)
