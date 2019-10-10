@@ -16,16 +16,6 @@
 
 * Initialize use-package
 
-#+begin_src emacs-lisp :tangle no
-(defun my-require-package (package)
-  "Install PACKAGE unless already installed."
-  (unless (package-installed-p package)
-    (package-refresh-contents)
-    (package-install package)))
-
-(my-require-package 'use-package)
-#+end_src
-
 This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b3c7e207257c81ba/README.md#use-packageel-is-no-longer-needed-at-runtime][required]] before any use-package forms.
 
 #+begin_src emacs-lisp
@@ -250,19 +240,6 @@ Enable y/n answers.
 
 #+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-** Balance windows
-
-Balance windows horizontally automatically.
-
-This is now disabled.
-
-#+begin_src emacs-lisp :tangle no
-(advice-add 'split-window-below :after #'balance-windows-horizontally)
-(advice-add 'split-window-right :after #'balance-windows-horizontally)
-;; (advice-add 'split-window :after #'balance-windows-horizontally)
-(advice-add 'delete-window :after #'balance-windows-horizontally)
 #+end_src
 
 ** Disabled commands
