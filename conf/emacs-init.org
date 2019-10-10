@@ -413,7 +413,7 @@ xmodmap -e "keycode any = space"
 xcape -e "$spare_modifier=space"
 #+end_src
 
-Karabiner: 
+Karabiner:
 
 - Change Space Key
 - Space to Control_L (+ When you type Space only, send Space)
@@ -1291,7 +1291,7 @@ Terraform state files are JSON.
               (smartparens-strict-mode))))
 #+end_src
 
-**  lsp-mode
+** lsp-mode
 
 #+begin_src emacs-lisp
 (use-package lsp-mode
@@ -1432,8 +1432,6 @@ EPUB reader package.
 #+end_src
 
 ** ob-go
-
-Requires cargo-script.
 
 #+begin_src go
 package main
