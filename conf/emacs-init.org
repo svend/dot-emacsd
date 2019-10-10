@@ -753,9 +753,6 @@ Add more password prompts.
               "\\|"
               "Vault password:"
               "\\|"
-              ;; collins-shell (https://tumblr.github.io/collins/tools.html#collins%20shell)
-              "Enter your password:"
-              "\\|"
               ;; openssl pkcs12 -nocerts -nodesopenssl
               "Enter Import Password:"
               "\\|"
