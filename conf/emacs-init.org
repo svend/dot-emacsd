@@ -927,7 +927,6 @@ Change scrolling behavior for comint modes.
   (add-to-list 'eglot-server-programs '(go-mode . ("gopls"))))
 #+end_src
 
-
 ** ensime
 
 #+begin_src emacs-lisp
@@ -935,6 +934,15 @@ Change scrolling behavior for comint modes.
   :defer t
   :config
   (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
+#+end_src
+
+** epresent
+
+#+begin_src emacs-lisp
+(use-package epresent
+  :defer t
+  :config
+  (setq epresent-face-attributes '((default :height 300))))
 #+end_src
 
 ** erc
@@ -1488,7 +1496,6 @@ fn main() {
          ("C-c o l" . org-store-link))
   :config
   (add-hook 'org-mode-hook #'auto-fill-mode)
-  (add-hook 'org-mode-hook #'org-babel-result-hide-all)
 
   (setq org-babel-python-command "python3"
         org-capture-templates  '(("t" "Task" entry (file "tasks.org")
