@@ -927,15 +927,6 @@ Change scrolling behavior for comint modes.
   (add-to-list 'eglot-server-programs '(go-mode . ("gopls"))))
 #+end_src
 
-** ensime
-
-#+begin_src emacs-lisp
-(use-package ensime
-  :defer t
-  :config
-  (add-hook 'scala-mode-hook #'ensime-scala-mode-hook))
-#+end_src
-
 ** epresent
 
 #+begin_src emacs-lisp
@@ -1517,7 +1508,6 @@ fn main() {
      (plantuml . t)
      (python . t)
      (ruby . t)
-     ;; (scala . t)
      (shell . t))))
 #+end_src
 
@@ -1678,20 +1668,6 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 #+begin_src emacs-lisp
 (use-package saveplace
   :init (save-place-mode))
-#+end_src
-
-** scala-mode2
-
-Scala worksheets end in =.sc=.
-
-#+begin_src emacs-lisp
-(use-package scala-mode
-  :mode
-  (("\\.sc\\'" . scala-mode))
-  :config
-  (defun my-scala-mode-defaults ()
-    (subword-mode +1))
-  (add-hook 'scala-mode-hook #'my-scala-mode-defaults))
 #+end_src
 
 ** server
