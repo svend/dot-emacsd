@@ -907,7 +907,10 @@ Change scrolling behavior for comint modes.
 (use-package epresent
   :defer t
   :config
-  (setq epresent-face-attributes '((default :height 300))))
+  (setq epresent-face-attributes '((default :height 300)))
+  (defun my-epresent-hook ()
+    (setq-local global-hl-line-mode nil))
+  (add-hook epresent-start-presentation-hook #'my-epresent-hook))
 #+end_src
 
 ** erc
@@ -1161,7 +1164,7 @@ brew install golangci-lint
   :config
   (global-set-key
    (kbd "C-c t")
-   (defhydra hydra-toggle ()
+   (defhydra hydra-toggle (:timout 10)
      "Toggle"
      ("b" scroll-bar-mode "scroll-bar")
      ("c" flycheck-mode "flycheck")
