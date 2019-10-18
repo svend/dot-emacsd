@@ -855,15 +855,9 @@ Change scrolling behavior for comint modes.
   ;; Do not save frame and window configuration (saving these leaves artifacts
   ;; from loaded themes)
   (setq desktop-restore-frames nil)
+  ;; Auto-save desktop periodically
+  (setq desktop-auto-save-timeout 10)
 
-  ;; Periodically save desktop
-  (defun my-setup-desktop-auto-save ()
-    (setq my-save-desktop-timer
-          (run-with-idle-timer
-           5 t
-           (lambda ()
-             (desktop-save desktop-dirname)))))
-  (add-hook 'desktop-after-read-hook #'my-setup-desktop-auto-save)
   :init
   (desktop-save-mode 1))
 #+end_src
