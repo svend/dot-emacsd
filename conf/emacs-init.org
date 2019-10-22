@@ -107,11 +107,11 @@ User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
 
 *** macOS
 
-Install homebrew-cask and caskroom-fonts.
+Install homebrew and the cask-fonts tap.
 
 #+begin_src sh
 brew tap caskroom/cask
-brew tap caskroom/font
+brew tap homebrew/cask-fonts
 #+end_src
 
 Install fonts.
