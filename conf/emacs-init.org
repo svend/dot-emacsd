@@ -888,7 +888,7 @@ Change scrolling behavior for comint modes.
 (use-package eglot
   :bind
   (("C-c h" . eglot-help-at-point))
-  ; :hook
+  :hook
   (go-mode . eglot-ensure)
   (rust-mode . eglot-ensure)
   :config
