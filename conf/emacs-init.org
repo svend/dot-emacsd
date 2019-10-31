@@ -270,6 +270,9 @@ Turn on menu bar, since it does not use any extra space on macOS.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
+  ;; Stop commant+t from popping up font selection window
+  (global-unset-key (kbd "s-t"))
+  ;; Menu bar auto-hides on macOS
   (menu-bar-mode 1)
   ;; Unset TERM_PROGRAM=Apple_Terminal, which will be set if GUI Emacs was
   ;; launched from a terminal
