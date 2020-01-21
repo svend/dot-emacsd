@@ -908,7 +908,7 @@ Change scrolling behavior for comint modes.
   (setq epresent-face-attributes '((default :height 300)))
   (defun my-epresent-hook ()
     (setq-local global-hl-line-mode nil))
-  (add-hook epresent-start-presentation-hook #'my-epresent-hook))
+  (add-hook 'epresent-start-presentation-hook #'my-epresent-hook))
 #+end_src
 
 ** erc
