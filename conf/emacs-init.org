@@ -437,13 +437,13 @@ Wrap lines at N columns instead of 70.
 (setq-default fill-column 80)
 #+end_src
 
-Add timezones for =display-time-world=.
+Set timezones for =display-time-world=.
 
 #+begin_src emacs-lisp
-;; FIXME: not defined
-;;(add-to-list 'zoneinfo-style-world-list '("UTC" "UTC"))
-;;(add-to-list 'zoneinfo-style-world-list '("Europe/Budapest" "Budapest"))
-;;(add-to-list 'zoneinfo-style-world-list '("America/Chicago" "Chicago"))
+(setq zoneinfo-style-world-list
+      '(("UTC" "UTC")
+        ("America/Los_Angeles" "Seattle")
+        ("Europe/Budapest" "Budapest")))
 #+end_src
 
 Prefer newer files.
