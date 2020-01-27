@@ -893,7 +893,7 @@ Change scrolling behavior for comint modes.
   (("C-c h" . eglot-help-at-point))
   :config
   ;; Use rust-analyzer instead of rls
-  ;; (add-to-list 'eglot-server-programs '(rust-mode "ra_lsp_server"))
+  (add-to-list 'eglot-server-programs '(rust-mode "ra_lsp_server"))
   :hook
   (go-mode . eglot-ensure)
   (rust-mode . eglot-ensure))
