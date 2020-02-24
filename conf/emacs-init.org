@@ -492,8 +492,8 @@ Add options to kill or revert buffer when prompting to save modified buffers.
 ** Scratch buffer
 
 #+begin_src emacs-lisp
-(setq initial-major-mode 'org-mode)
-(setq initial-scratch-message "#+TITLE: Scratch Buffer\n\n")
+(setq initial-major-mode 'fundamental-mode)
+(setq initial-scratch-message "Scratch Buffer\n\n")
 #+end_src
 
 * User defined functions
@@ -893,10 +893,12 @@ Change scrolling behavior for comint modes.
   (("C-c h" . eglot-help-at-point))
   :config
   ;; Use rust-analyzer instead of rls
-  (add-to-list 'eglot-server-programs '(rust-mode "ra_lsp_server"))
+  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '(terraform-mode "terraform-lsp"))
   :hook
   (go-mode . eglot-ensure)
-  (rust-mode . eglot-ensure))
+  (rust-mode . eglot-ensure)
+  (terraform-mode . eglot-ensure))
 #+end_src
 
 ** epresent
