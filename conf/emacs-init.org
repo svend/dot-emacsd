@@ -433,6 +433,16 @@ Misc settings.
 (show-paren-mode)
 #+end_src
 
+Pulled these from emacs-custom.el.
+
+#+begin_src emacs-lisp
+(setq ediff-split-window-function (quote split-window-horizontally))
+(setq ediff-window-setup-function (quote ediff-setup-windows-plain))
+;; (setq ffap-machine-p-known 'reject)
+;; (setq ns-pop-up-frames nil)
+(setq reb-re-syntax 'string)
+#+end_src
+
 Wrap lines at N columns instead of 70.
 
 #+begin_src emacs-lisp
