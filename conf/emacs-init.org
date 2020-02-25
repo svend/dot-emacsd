@@ -742,7 +742,9 @@ If OPEN-BUFFER is set, open the new buffer."
 Add more password prompts.
 
 #+begin_src emacs-lisp
-(setq comint-password-prompt-regexp
+(setq comint-input-ignoredups t
+      comint-input-ring-size 10000
+      comint-password-prompt-regexp
       (concat comint-password-prompt-regexp
               "\\|"
               ;; OpenStack
@@ -870,6 +872,7 @@ Change scrolling behavior for comint modes.
 #+begin_src emacs-lisp
 (use-package dired
   :config
+  (setq dired-dwim-target t)
   (defun my-dired-mode-hook ()
     (setq truncate-lines t))
   (add-hook 'dired-mode-hook #'my-dired-mode-hook))
@@ -1466,9 +1469,12 @@ fn main() {
   (setq org-babel-python-command "python3"
         org-capture-templates  '(("t" "Task" entry (file "tasks.org")
                                   "* TODO %?\n   SCHEDULED: %T\n\n%a" :prepend t))
+        org-default-notes-file "~/doc/org/notes.org"
+        org-directory "~/doc/org"
         org-ellipsis "…"
         org-plantuml-jar-path (expand-file-name "~/.nix-profile/lib/plantuml.jar")
         org-refile-targets '((nil :maxlevel . 9))
+        org-reverse-note-order t
         org-src-ask-before-returning-to-edit-buffer nil
         org-src-preserve-indentation t
         org-src-window-setup 'current-window
