@@ -910,6 +910,10 @@ Change scrolling behavior for comint modes.
   ;; Use rust-analyzer instead of rls
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(terraform-mode "terraform-lsp"))
+  (defun my-eglot-hook()
+    (if (eglot-managed-p)
+        (add-hook 'before-save-hook #'eglot-format-buffer)))
+  (add-hook 'eglot-managed-mode-hook #'my-eglot-hook)
   :hook
   (go-mode . eglot-ensure)
   (rust-mode . eglot-ensure)
@@ -1128,7 +1132,8 @@ brew install golangci-lint
   (setq gofmt-command "goimports")
 
   (defun my-go-mode-defaults ()
-    (add-hook 'before-save-hook #'gofmt-before-save)
+    ;; Use eglot-format-buffer hook
+    ;; (add-hook 'before-save-hook #'gofmt-before-save)
     ;; CamelCase aware editing operations
     (subword-mode +1))
   (add-hook 'go-mode-hook #'my-go-mode-defaults))
@@ -1606,6 +1611,15 @@ Increase timeout to 60 seconds from the default of 10 seconds.
   (add-hook 'ruby-mode-hook #'robe-mode))
 #+end_src
 
+** gnuplot-mode
+
+#+begin_src emacs-lisp
+(use-package gnuplot-mode
+  :mode
+  (("\\.gnuplot\\'" . gnuplot-mode)
+   ("\\.gp\\'" . gnuplot-mode)))
+#+end_src
+
 ** ruby-mode
 
 Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e4057a55ac2d17cc0cd073cc93eb7214ce8/modules/prelude-ruby.el#L39][prelude]].
@@ -1645,7 +1659,8 @@ Ruby auto-modes. These are from [[https://github.com/bbatsov/prelude/blob/0a1e8e
 (use-package rust-mode
   :defer t
   :config
-  (setq rust-format-on-save t)
+  ;; Use eglot-format-buffer hook
+  ;; (setq rust-format-on-save t)
   (add-to-list 'interpreter-mode-alist '("run-cargo-script" . rust-mode)))
 #+end_src
 
@@ -1776,7 +1791,9 @@ M-r):
 (use-package super-save
   :init (super-save-mode +1)
   :diminish super-save-mode
-  :config (setq super-save-auto-save-when-idle t))
+  :config
+  (add-to-list 'super-save-triggers #'ace-window)
+  (setq super-save-auto-save-when-idle t))
 #+end_src
 
 ** swiper
