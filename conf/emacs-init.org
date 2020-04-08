@@ -1016,6 +1016,15 @@ Change scrolling behavior for comint modes.
 (use-package git-commit)
 #+end_src
 
+** gnuplot-mode
+
+#+begin_src emacs-lisp
+(use-package gnuplot-mode
+  :mode
+  (("\\.gnuplot\\'" . gnuplot-mode)
+   ("\\.gp\\'" . gnuplot-mode)))
+#+end_src
+
 ** gnus
 
 Sanitized version of .authinfo.gpg for Gmail IMAP and SMTP.
@@ -1368,6 +1377,24 @@ Terraform state files are JSON.
   (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity))
 #+end_src
 
+** native-completion
+
+May switch from bash-completion to this. Needs more work.
+
+#+begin_src emacs-lisp :tangle no
+(use-package native-complete
+  :config
+  (setq shell-file-name "bash")
+  (setq explicit-bash-args '("--login" "-i"))
+  (with-eval-after-load 'shell
+    (native-complete-setup-bash))
+
+  (defun my-shell-hook ()
+    (setq completion-at-point-functions '(native-complete-at-point)))
+
+  (add-hook 'shell-mode-hook #'my-shell-hook))
+#+end_src
+
 ** notmuch
 
 #+begin_src emacs-lisp
@@ -1609,15 +1636,6 @@ Increase timeout to 60 seconds from the default of 10 seconds.
 (use-package robe
   :config
   (add-hook 'ruby-mode-hook #'robe-mode))
-#+end_src
-
-** gnuplot-mode
-
-#+begin_src emacs-lisp
-(use-package gnuplot-mode
-  :mode
-  (("\\.gnuplot\\'" . gnuplot-mode)
-   ("\\.gp\\'" . gnuplot-mode)))
 #+end_src
 
 ** ruby-mode
