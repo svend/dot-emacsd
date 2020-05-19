@@ -677,7 +677,9 @@ horizontally.
 
 ** bash-completion
 
-#+begin_src emacs-lisp
+FIXME: Disabled while switching to native-complete
+
+#+begin_src emacs-lisp :tangle no
 (use-package bash-completion
   :config
   (defun my-bash-completion-dynamic-complete-local()
@@ -1378,15 +1380,19 @@ Terraform state files are JSON.
   (define-key message-mode-map (kbd "C-c C-p") 'gnus-alias-select-identity))
 #+end_src
 
-** native-completion
+** native-complete
 
 May switch from bash-completion to this. Needs more work.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package native-complete
   :config
   (setq shell-file-name "bash")
   (setq explicit-bash-args '("--login" "-i"))
+
+  ;; Add = to enable completion for --option= flags
+  (setq native-complete-exclude-regex "[^$(-/_~=[:alnum:]]")
+
   (with-eval-after-load 'shell
     (native-complete-setup-bash))
 
@@ -1910,7 +1916,9 @@ shells, however it does increase the start-up time for local shells.
 Attempt to start or reattach to a dtach session and fall back to a
 bash shell.
 
-#+begin_src emacs-lisp
+FIXME: Disabled while switching to native-complete
+
+#+begin_src emacs-lisp :tangle no
 (setq explicit-bash-args
       '("-c" "dtach -A \"$HOME/.dtach-$(hostname -f 2>/dev/null || hostname)-ssorensen\" -z bash --noediting --login -i 2>/dev/null || bash --noediting --login -i"))
 #+end_src
