@@ -1982,7 +1982,7 @@ bash shell.
                   Info-mode-hook
                   package-menu-mode-hook
                   prog-mode-hook
-                  special-mode-hook
+                  ;; special-mode-hook ;; Text is chopped off in pdf-view mode
                   term-mode-hook
                   text-mode-hook))
     (add-hook hook #'visual-fill-column-mode))
