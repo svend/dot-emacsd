@@ -2072,3 +2072,49 @@ Save customization in =conf/emacs-custom.el= instead of =init.el=.
 #+begin_src emacs-lisp
 (toggle-frame-fullscreen)
 #+end_src
+
+* FIXME: project.el fix
+
+Version 0.1.2 of project module has broken git project detection. Add the fixed
+version of =project-try-vc= until nixpkgs get project >= 0.1.3.
+
+#+begin_src emacs-lisp
+(when (and (package-installed-p 'project)
+           (not (package-installed-p 'project '(0 1 3))))
+  ;; emacs commit 1fc4e3fb3f6caba6a4ca69060c7992ea5d24ff36
+  (defun project-try-vc (dir)
+    (let* ((backend (ignore-errors (vc-responsible-backend dir)))
+           (root
+            (pcase backend
+              ('Git
+               ;; Don't stop at submodule boundary.
+               ;; Note: It's not necessarily clear-cut what should be
+               ;; considered a "submodule" in the sense that some users
+               ;; may setup things equivalent to "git-submodule"s using
+               ;; "git worktree" instead (for example).
+               ;; FIXME: Also it may be the case that some users would consider
+               ;; a submodule as its own project.  So there's a good chance
+               ;; we will need to let the user tell us what is their intention.
+               (or (vc-file-getprop dir 'project-git-root)
+                   (let* ((root (vc-call-backend backend 'root dir))
+                          (gitfile (expand-file-name ".git" root)))
+                     (vc-file-setprop
+                      dir 'project-git-root
+                      (cond
+                       ((file-directory-p gitfile)
+                        root)
+                       ((with-temp-buffer
+                          (insert-file-contents gitfile)
+                          (goto-char (point-min))
+                          ;; Kind of a hack to distinguish a submodule from
+                          ;; other cases of .git files pointing elsewhere.
+                          (looking-at "gitdir: [./]+/\\.git/modules/"))
+                        (let* ((parent (file-name-directory
+                                        (directory-file-name root))))
+                          (vc-call-backend backend 'root parent)))
+                       (t root)))
+                     )))
+              ('nil nil)
+              (_ (ignore-errors (vc-call-backend backend 'root dir))))))
+      (and root (cons 'vc root)))))
+#+end_src
