@@ -1382,8 +1382,6 @@ Terraform state files are JSON.
 
 ** native-complete
 
-May switch from bash-completion to this. Needs more work.
-
 #+begin_src emacs-lisp
 (use-package native-complete
   :config
@@ -1400,6 +1398,35 @@ May switch from bash-completion to this. Needs more work.
     (setq completion-at-point-functions '(native-complete-at-point)))
 
   (add-hook 'shell-mode-hook #'my-shell-hook))
+#+end_src
+
+Notes for testing native-complete.
+
+Good tips here:
+https://github.com/CeleritasCelery/emacs-native-shell-complete/issues/3#issuecomment-572810792
+
+Start Emacs
+
+#+begin_example
+open -a ~/.nix-profile/Applications/Emacs.app --new --args -q
+# or
+open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs-native-shell-complete/native-complete.el
+#+end_example
+
+#+begin_src emacs-lisp :tangle no
+(package-initialize)
+(setq shell-file-name "bash") ;; Its value is "/bin/bash"; Original value was "/bin/sh"
+(setq explicit-bash-args '("--login" "-i")) ;; Its value is ("--noediting" "-i")
+;; Enable completion for --opt=val flags
+(setq native-complete-exclude-regex "[^$(-/_~=[:alnum:]]")
+
+(with-eval-after-load 'shell
+  (native-complete-setup-bash))
+
+(defun my-shell-hook ()
+  (setq completion-at-point-functions '(native-complete-at-point)))
+
+(add-hook 'shell-mode-hook #'my-shell-hook)
 #+end_src
 
 ** notmuch
