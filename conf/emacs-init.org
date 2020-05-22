@@ -675,28 +675,6 @@ horizontally.
          ("M-g M-g" . avy-goto-line)))
 #+end_src
 
-** bash-completion
-
-FIXME: Disabled while switching to native-complete
-
-#+begin_src emacs-lisp :tangle no
-(use-package bash-completion
-  :config
-  (defun my-bash-completion-dynamic-complete-local()
-    "Returns the completion table for bash command at point if the buffer is not remote."
-    (unless (file-remote-p default-directory)
-      (bash-completion-dynamic-complete)))
-
-  ;; My bash-completion is loaded by .bash_profile, which is only sourced by a
-  ;; login shell
-  (setq bash-completion-args '("--noediting" "--login"))
-  ;; I use nixpkgs bash, which puts bash in my PATH
-  (setq bash-completion-prog "bash")
-
-  (add-hook 'shell-dynamic-complete-functions
-            'my-bash-completion-dynamic-complete-local))
-#+end_src
-
 ** bpr
 
 #+begin_src emacs-lisp
