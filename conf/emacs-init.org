@@ -1102,9 +1102,7 @@ pass show smtp.gmail.com | sed -e '1s/.*/PASSWORD/' -e '/user:/s/[^ ]*$/EMAIL/'
   :defer t
   :config
   (setq gnus-alias-identity-alist
-        '(("fastmail" nil "Svend Sorensen <svend@svends.net>" nil (("Bcc" . "svend@svends.net")) nil)
-          ("gmail" nil "Svend Sorensen <svend@ciffer.net>" nil nil nil)
-          ("wp" nil "Svend Sorensen <ssorensen@whitepages.com>" nil (("Bcc" . "ssorensen@whitepages.com")) nil nil)))
+        '(("fastmail" nil "Svend Sorensen <svend@svends.net>" nil (("Bcc" . "svend@svends.net")) nil)))
   (setq gnus-alias-default-identity "fastmail")
   (setq gnus-alias-identity-rules '()))
 #+end_src
@@ -1439,8 +1437,7 @@ open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs
   ;; Use Bcc instead of Fcc
   (setq notmuch-fcc-dirs nil)
 
-  (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and not tag:uw and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-                                 ("UW Inbox" . "tag:inbox and tag:uw and (not tag:lists or (tag:lists::cirg-adm or tag:lists::cirg-adm-alerts or tag:lists::cirg-core tag:lists::kenyaemr-developers)) and not (from:root or (tag:nagios and not tag:lists))")
+  (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
                                  ("Action" . "tag:action")
                                  ("Waiting" . "tag:waiting")
                                  ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
