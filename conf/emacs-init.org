@@ -1385,9 +1385,6 @@ Terraform state files are JSON.
 #+begin_src emacs-lisp
 (use-package native-complete
   :config
-  (setq shell-file-name "bash")
-  (setq explicit-bash-args '("--login" "-i"))
-
   ;; Add = to enable completion for --option= flags
   (setq native-complete-exclude-regex "[^$(-/_~=[:alnum:]]")
 
@@ -1416,7 +1413,6 @@ open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs
 #+begin_src emacs-lisp :tangle no
 (package-initialize)
 (setq shell-file-name "bash") ;; Its value is "/bin/bash"; Original value was "/bin/sh"
-(setq explicit-bash-args '("--login" "-i")) ;; Its value is ("--noediting" "-i")
 ;; Enable completion for --opt=val flags
 (setq native-complete-exclude-regex "[^$(-/_~=[:alnum:]]")
 
@@ -1781,6 +1777,9 @@ See http://stackoverflow.com/a/11255996
   :config
   (add-to-list 'display-buffer-alist
                '("^\\*shell\\*" . ((display-buffer-reuse-window display-buffer-same-window))))
+  ;; bash-completion only loaded for login shells; note that "--login" must come
+  ;; before short options like "-i"
+  (add-to-list 'explicit-bash-args "--login")
   (setq explicit-shell-file-name "bash")
   ;; Do not try to colorize comments and strings in shell mode
   (setq shell-font-lock-keywords nil)
