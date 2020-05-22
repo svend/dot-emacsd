@@ -1474,7 +1474,7 @@ open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs
 
 ** nov
 
-EPUB reader package.
+nov.el (clever name) is an EPUB reader package.
 
 #+begin_src emacs-lisp
 (use-package nov
