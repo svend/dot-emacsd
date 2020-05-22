@@ -9,14 +9,16 @@
 
 * Initialize package.el
 
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html#Package-Installation][Emacs Package Installation]]
+
 #+begin_src emacs-lisp
-(setq package-archives '())
-(package-initialize) ;; You might already have this line
+(setq package-archives '()) ;; All packages are installed through nixpkgs
+(package-initialize)
 #+end_src
 
 * Initialize use-package
 
-This is [[https://github.com/jwiegley/use-package/blob/4f6e0e6a18adc196abaff990b3c7e207257c81ba/README.md#use-packageel-is-no-longer-needed-at-runtime][required]] before any use-package forms.
+This is [[https://github.com/jwiegley/use-package/blob/d2640fec376a8458a669e7526e63e5870d875118/README.md#use-packageel-is-no-longer-needed-at-runtime][required]] before any use-package forms.
 
 #+begin_src emacs-lisp
 (eval-when-compile
@@ -97,28 +99,47 @@ Make the cursor a bar instead of a filled box.
 
 ** Fonts
 
+*** Line spacing
+
+Add additional spacing between lines.
+
 #+begin_src emacs-lisp
 (setq-default line-spacing 0.15)
 #+end_src
 
+To see how different values look, press =C-x C-e= at the end of these lines:
+
+#+begin_src emacs-lisp :tangle no
+(setq line-spacing nil)
+(setq line-spacing 0.05)
+(setq line-spacing 0.10)
+(setq line-spacing 0.15)
+(setq line-spacing 0.20)
+#+end_src
+
 *** Linux
 
-User fonts go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
+I install fonts through nixpkgs.
+
+User fonts can also go in =$XDG_DATA_HOME/fonts/= (=~/.local/share/fonts=).
 
 *** macOS
 
-Install homebrew and the cask-fonts tap.
+On macOS, I install fonts through nixpkgs, then sync them using a script.
 
-#+begin_src sh
-brew tap caskroom/cask
-brew tap homebrew/cask-fonts
-#+end_src
+#+begin_src sh :tangle no
+#!/bin/sh
+set -e
 
-Install fonts.
+FONT_DIR="$HOME"/Library/Fonts
 
-#+begin_src sh
-brew cask install font-dejavu-sans
-brew cask install font-source-code-pro
+[ -d "$FONT_DIR" ] || exit 1
+
+rsync -av \
+  --copy-links \
+  --delete \
+  "$HOME"/.nix-profile/share/fonts/*/ \
+  "$HOME"/Library/Fonts
 #+end_src
 
 *** Fixed pitch mode
@@ -141,7 +162,7 @@ brew cask install font-source-code-pro
 
 ** Disable pager
 
-Set PAGER to cat to disable less in async buffers.
+Set PAGER to cat to disable =less= in async buffers.
 
 #+begin_src emacs-lisp
 (setenv "PAGER" "cat")
@@ -221,7 +242,7 @@ Emacs 24.
 
 ** Highlight current line
 
-Highlight the current line. Highlight line in inactive windows.
+Highlight the current line, including in inactive windows.
 
 #+begin_src emacs-lisp
 (setq global-hl-line-sticky-flag t)
@@ -244,6 +265,8 @@ Enable y/n answers.
 
 ** Disabled commands
 
+Enable some disabled commands.
+
 #+begin_src emacs-lisp
 (mapc (lambda (command) (put command 'disabled nil))
       '(erase-buffer
@@ -260,13 +283,13 @@ Disable keyboard shortcut to print buffer.
 
 ** Enable delete-selection-mode
 
+This replaces the selection.
+
 #+begin_src emacs-lisp
 (delete-selection-mode)
 #+end_src
 
 ** macOS specific configuration
-
-Turn on menu bar, since it does not use any extra space on macOS.
 
 #+begin_src emacs-lisp
 (when (eq window-system 'ns)
