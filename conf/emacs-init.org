@@ -39,12 +39,15 @@ nixpkgs on macOS.
   (let ((printenv (if (eq window-system 'ns)
                       (expand-file-name "~/.nix-profile/bin/printenv")
                     "printenv")))
-    (mapcar (lambda (s) (car (split-string s "=")))
-            (split-string
-             (shell-command-to-string
-              (format
-               "bash -l -c \"%s --null\" 2>/dev/null" printenv))
-             (char-to-string ?\x0) t))))
+    ;; Remove "_" to avoid warning: You appear to be setting environment variables
+    ;; ("_") in your .bashrc or .zshrc
+    (remove "_"
+            (mapcar (lambda (s) (car (split-string s "=")))
+                    (split-string
+                     (shell-command-to-string
+                      (format
+                       "bash -l -c \"%s --null\" 2>/dev/null" printenv))
+                     (char-to-string ?\x0) t)))))
 
 (defun my-exec-path-from-shell-initialize ()
   "Initialize environment with all shell variables."
