@@ -24,6 +24,7 @@
  '(org-code ((t (:inherit fixed-pitch))))
  '(org-date ((t (:inherit fixed-pitch))))
  '(org-ellipsis ((t (:underline nil))))
+ '(org-link ((t (:inherit fixed-pitch link))))
  '(org-table ((t (:inherit fixed-pitch))))
  '(org-verbatim ((t (:inherit fixed-pitch))))
 
