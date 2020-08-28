@@ -1914,6 +1914,13 @@ M-r):
   (add-hook 'term-mode-hook #'my-setup-term-mode))
 #+end_src
 
+** terraform-mode
+
+#+begin_src emacs-lisp
+(use-package terraform-mode
+  :config (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode))
+#+end_src
+
 ** toml-mode
 
 #+begin_src emacs-lisp
