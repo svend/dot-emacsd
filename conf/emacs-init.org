@@ -2038,6 +2038,7 @@ FIXME: Disabled while switching to native-complete
                   custom-mode-hook
                   dired-mode-hook
                   erc-mode-hook
+                  eww-mode
                   gnus-article-mode-hook
                   gnus-group-mode-hook
                   gnus-summary-mode-hook
