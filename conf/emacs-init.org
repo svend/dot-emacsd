@@ -883,6 +883,23 @@ Change scrolling behavior for comint modes.
   (setq desktop-auto-save-timeout 10)
 
   :init
+  (defun my-desktop-remove-stale-lock (&optional dirname)
+    "Remove stale desktop lock file in DIRNAME.
+DIRNAME omitted or nil means use `desktop-dirname'."
+    ;; (require 'desktop)
+    (let ((pid (desktop-owner dirname)))
+      (when pid
+        (let ((infile nil)
+              (destination nil)
+              (display nil))
+          (unless (= (call-process "ps" infile destination display "-p"
+                                   (number-to-string pid)) 0)
+            (let ((lock-name (desktop-full-lock-name dirname)))
+              (message "removing stale lock: %s, pid: %s" lock-name pid)
+              (delete-file lock-name)))))))
+
+  (add-hook 'desktop-save-mode-hook (lambda () (my-desktop-remove-stale-lock "~/.emacs.d")))
+
   (desktop-save-mode 1))
 #+end_src
 
