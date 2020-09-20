@@ -1440,12 +1440,6 @@ open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs
   ;; Use Bcc instead of Fcc
   (setq notmuch-fcc-dirs nil)
 
-  (setq notmuch-saved-searches '(("Personal Inbox" . "tag:inbox and (not tag:lists or (tag:lists::wallop_2012 or tag:lists::cheastyboys))")
-                                 ("Action" . "tag:action")
-                                 ("Waiting" . "tag:waiting")
-                                 ("Secondary Lists" . "tag:inbox and (tag:lists::notmuch or tag:lists::vcs-home or tag:lists::techsupport)")
-                                 ("Debian Security Inbox" . "tag:inbox and tag:lists::debian-security-announce")))
-
   ;; Show newest mail first
   (setq notmuch-search-oldest-first nil)
 
