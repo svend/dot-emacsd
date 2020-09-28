@@ -34,20 +34,11 @@ nixpkgs on macOS.
 
 #+begin_src emacs-lisp
 (defun bash-shell-variables()
-  "Return a list of env variables.
-  This requires the nixpkgs coreutils package on macOS."
-  (let ((printenv (if (eq window-system 'ns)
-                      (expand-file-name "~/.nix-profile/bin/printenv")
-                    "printenv")))
-    ;; Remove "_" to avoid warning: You appear to be setting environment variables
-    ;; ("_") in your .bashrc or .zshrc
-    (remove "_"
-            (mapcar (lambda (s) (car (split-string s "=")))
-                    (split-string
-                     (shell-command-to-string
-                      (format
-                       "bash -l -c \"%s --null\" 2>/dev/null" printenv))
-                     (char-to-string ?\x0) t)))))
+  "Return a list of env variable names."
+  (mapcar (lambda (s) (car (split-string (string-remove-prefix "declare -x " s) "=")))
+          (split-string
+           (shell-command-to-string "bash -l -c \"declare -x\" 2>/dev/null")
+           "\n" t)))
 
 (defun my-exec-path-from-shell-initialize ()
   "Initialize environment with all shell variables."
