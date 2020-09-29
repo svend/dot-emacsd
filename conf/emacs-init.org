@@ -1435,6 +1435,14 @@ open -a ~/.nix-profile/Applications/Emacs.app --new --args -q --load ~/src/emacs
 (add-hook 'shell-mode-hook #'my-shell-hook)
 #+end_src
 
+** nix-mode
+
+#+begin_src emacs-lisp
+(use-package nix-mode
+  :config
+  (setq nix-nixfmt-bin "nixpkgs-fmt"))
+#+end_src
+
 ** notmuch
 
 #+begin_src emacs-lisp
