@@ -1333,8 +1333,6 @@ Terraform state files are JSON.
   :commands lsp-ui-mode)
 #+end_src
 
-#+end_src
-
 ** magit
 
 #+begin_src emacs-lisp
